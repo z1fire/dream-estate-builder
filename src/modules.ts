@@ -17,6 +17,8 @@ import { exteriorWallSnap } from './buildings/wallSnap';
 import { InteriorSystem } from './interiors/InteriorSystem';
 import { FloorPlanTool } from './interiors/FloorPlanTool';
 import { FurnishTool } from './interiors/FurnishTool';
+import { FarmSystem } from './farming/FarmSystem';
+import { FieldTool, PastureTool, SquareTool, registerFarmInspectors } from './farming/FarmTools';
 import { MoatTool, PondTool, StreamTool, registerWaterInspectors } from './water/WaterTools';
 
 export interface ModuleHooks {
@@ -36,6 +38,7 @@ export interface Systems {
   buildings: BuildingSystem;
   walls: CurtainWallSystem;
   interior: InteriorSystem;
+  farm: FarmSystem;
 }
 
 /** Registers feature modules (systems + tools). Each phase adds its module here. */
@@ -81,6 +84,13 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   app.registerTool(new FloorPlanTool(app, interior));
   app.registerTool(new FurnishTool(app, interior));
 
-  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior } };
+  // --- Phase 6: village & farming ---
+  const farm = app.addSystem(new FarmSystem(app), 'farming') as FarmSystem;
+  app.registerTool(new FieldTool(app));
+  app.registerTool(new PastureTool(app));
+  app.registerTool(new SquareTool(app));
+  registerFarmInspectors(app);
+
+  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior, farm } };
   return hooks;
 }
