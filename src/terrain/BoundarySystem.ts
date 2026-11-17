@@ -76,7 +76,7 @@ export class BoundarySystem implements System {
     this.stakes.count = this.flags.count = Math.min(256, b.length);
     this.stakes.instanceMatrix.needsUpdate = this.flags.instanceMatrix.needsUpdate = true;
     // labels
-    const labels: { text: string; pos: THREE.Vector3; cls?: string; maxDist?: number }[] = [];
+    const labels: { text: string; pos: THREE.Vector3; cls?: string; maxDist?: number; minDist?: number }[] = [];
     for (let i = 0; i < b.length; i++) {
       const a = b[i], c = b[(i + 1) % b.length];
       const mx = (a[0] + c[0]) / 2, mz = (a[1] + c[1]) / 2;

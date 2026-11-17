@@ -9,7 +9,8 @@
     "preview": "vite preview --port 4173 --strictPort",
     "lint": "eslint src scripts tests tools",
     "test:e2e": "playwright test",
-    "build:assets": "node scripts/build-assets.mjs"
+    "build:assets": "node scripts/build-assets.mjs",
+    "check": "npm run build && npm run lint"
   },
   "dependencies": {
     "fflate": "^0.8.3",
