@@ -68,7 +68,8 @@ export class LightManager {
     this.pool.forEach((l, i) => {
       const s = this.assigned[i];
       if (!s) return;
-      const k = s.interior ? 0.35 + 0.65 * night : night;
+      // physically-based point lights need a boost to read well in stylised scenes; interiors glow a little by day too
+      const k = (s.interior ? 0.6 + 1.6 * night : night * 1.6) * 2.5;
       const flick = s.flicker === false ? 1 : 0.88 + 0.12 * Math.sin(t * 9 + i * 1.7) * Math.sin(t * 5.3 + i);
       l.intensity = s.intensity * k * flick;
     });

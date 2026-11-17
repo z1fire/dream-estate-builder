@@ -111,6 +111,8 @@ async function boot() {
     tour: () => mods.tour?.(),
   });
   app.ui = ui;
+  ui.onEnterBuilding = (id) => mods.systems.interior.enter(id);
+  (app as any).__interior = mods.systems.interior; // test/debug hook
   autosave.onState = (s) => ui.setSaveState(s);
 
   frameEstate();

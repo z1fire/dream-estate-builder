@@ -166,6 +166,8 @@ export class BuildingSystem implements System {
       e.m.roof.visible = !on;
       for (const [lvl, g] of e.m.levels) {
         g.visible = !on || lvl <= c!.level;
+        // the ceiling of the level you're looking into would block the view from above
+        g.traverse((o) => { if ((o as THREE.Mesh).isMesh && o.userData.role === 'ceiling') o.visible = !on || lvl < c!.level; });
         // x-ray: exterior walls of the cut level become see-through
         g.traverse((o) => {
           const m = o as THREE.Mesh;

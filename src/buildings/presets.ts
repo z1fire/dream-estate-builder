@@ -150,9 +150,9 @@ function stairsFor(b: BuildingDef, spec: Spec, f: FloorDef, isTop: boolean): Sta
   return [{ id: uid('st'), kind: 'straight', pos: [-b.width / 2 + inner + 0.75, -b.depth / 2 + inner + 0.2], rotY: 0, from: f.level, width: 1.1 }];
 }
 
-/** Starter furniture per room type (building-local, at floor base). */
-const ROOM_FURNITURE: Partial<Record<RoomType, [string, number, number, number][]>> = {
-  hall: [['long_table', 0, 0, 0], ['bench_long', 0, -1, 0], ['bench_long', 0, 1, Math.PI], ['chandelier', 0, 0, 0], ['banner_red', 0, -0.45, 0]],
+/** Starter furniture per room type: [id, x fraction, z fraction, rotY, x metres offset?, z metres offset?] (building-local). */
+const ROOM_FURNITURE: Partial<Record<RoomType, [string, number, number, number, number?, number?][]>> = {
+  hall: [['long_table', 0, 0, 0], ['bench_long', 0, 0, 0, 0, -0.95], ['bench_long', 0, 0, Math.PI, 0, 0.95], ['chandelier', 0, 0, 0], ['banner_red', 0, -0.45, 0], ['fireplace', 0.42, 0, -Math.PI / 2]],
   throne: [['throne', 0, -0.35, 0], ['rug_runner', 0, 0.05, 0], ['armor_stand', -0.3, -0.3, 0], ['armor_stand', 0.3, -0.3, 0], ['chandelier', 0, 0, 0]],
   bedroom: [['bed_fourposter', -0.25, -0.25, 0], ['wardrobe', 0.3, -0.38, 0], ['chest_large', -0.25, 0.1, Math.PI], ['rug_red', 0.1, 0.15, 0], ['candle_stand', 0.3, 0.2, 0]],
   library: [['bookshelf', -0.3, -0.38, 0], ['bookshelf', 0.1, -0.38, 0], ['writing_desk', 0.2, 0.2, Math.PI], ['chair', 0.2, 0.32, Math.PI], ['lectern', -0.25, 0.2, 0], ['candle_stand', 0, 0, 0]],
@@ -195,8 +195,8 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
       const list = ROOM_FURNITURE[r.type];
       if (!list) continue;
       const y = levelBase(b, f.level) + 0.03;
-      for (const [id, fx, fz, rot] of list) {
-        const x = fx * 2 * hw * 0.92, z = fz * 2 * hd * 0.92;
+      for (const [id, fx, fz, rot, ox = 0, oz = 0] of list) {
+        const x = fx * 2 * hw * 0.92 + ox, z = fz * 2 * hd * 0.92 + oz;
         // keep clear of the stairwell
         if (f.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2) || b.floors.find((g) => g.level === f.level - 1)?.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2)) continue;
         if (b.shape === 'round' && Math.hypot(x, z) > hw - 0.8) continue;

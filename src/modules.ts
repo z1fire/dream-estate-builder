@@ -13,6 +13,10 @@ import { WaterSystem } from './water/WaterSystem';
 import { BuildingSystem } from './buildings/BuildingSystem';
 import { CurtainWallSystem } from './buildings/CurtainWallSystem';
 import { BuildingTool, CurtainTool, registerBuildingInspectors } from './buildings/BuildingTools';
+import { exteriorWallSnap } from './buildings/wallSnap';
+import { InteriorSystem } from './interiors/InteriorSystem';
+import { FloorPlanTool } from './interiors/FloorPlanTool';
+import { FurnishTool } from './interiors/FurnishTool';
 import { MoatTool, PondTool, StreamTool, registerWaterInspectors } from './water/WaterTools';
 
 export interface ModuleHooks {
@@ -31,6 +35,7 @@ export interface Systems {
   fences: FenceSystem;
   buildings: BuildingSystem;
   walls: CurtainWallSystem;
+  interior: InteriorSystem;
 }
 
 /** Registers feature modules (systems + tools). Each phase adds its module here. */
@@ -68,7 +73,14 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   app.registerTool(new CurtainTool(app));
   for (const g of ['castle', 'village', 'farm'] as const) app.registerTool(new BuildingTool(app, g));
   registerBuildingInspectors(app, water);
+  // outdoor wall-mounted items (torches, banners) snap to facades and curtain walls
+  for (const f of ['castle', 'village', 'farm', 'garden']) app.registerTool(new PlaceTool(app, f, (ev, item) => exteriorWallSnap(app, ev, item)));
 
-  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls } };
+  // --- Phase 5: interiors ---
+  const interior = app.addSystem(new InteriorSystem(app, buildings, props)) as InteriorSystem;
+  app.registerTool(new FloorPlanTool(app, interior));
+  app.registerTool(new FurnishTool(app, interior));
+
+  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior } };
   return hooks;
 }

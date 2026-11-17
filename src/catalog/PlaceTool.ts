@@ -10,6 +10,7 @@ import { CATALOG, catalogItem, type CatalogItem } from './catalog';
 import { instantiate } from './loader';
 
 export const PLACE_FILTERS: Record<string, { label: string; categories: string[] }> = {
+  interior: { label: 'Furnish', categories: ['furniture', 'lighting', 'decor', 'props', 'chapel', 'castle', 'farm'] },
   nature: { label: 'Trees & nature', categories: ['trees', 'shrubs', 'flowers', 'rocks'] },
   garden: { label: 'Garden ornaments', categories: ['garden', 'flowers', 'lighting'] },
   castle: { label: 'Castle kit & props', categories: ['castle', 'siege', 'lighting', 'props'] },
@@ -25,14 +26,14 @@ export class PlaceTool extends Tool {
   readonly id: string;
   readonly name: string;
   hint = 'Click to place · <kbd>Q</kbd>/<kbd>E</kbd> rotate 15° · <kbd>Shift</kbd>-click keeps random rotation · <kbd>Esc</kbd> to stop';
-  private selected = new Set<string>();
+  protected selected = new Set<string>();
   private ghost: THREE.Object3D | null = null;
   private ghostFor = '';
   private rot = 0;
   private lastHit: PlacementHit | null = null;
-  private categories: string[];
+  protected categories: string[];
 
-  constructor(app: App, filter: string, private resolve?: (ev: ToolEvent, item: CatalogItem) => PlacementHit | null) {
+  constructor(app: App, filter: string, private resolve?: (ev: ToolEvent, item: CatalogItem) => PlacementHit | null, private exclusive = false) {
     super(app);
     this.id = `place:${filter}`;
     this.name = PLACE_FILTERS[filter]?.label ?? 'Place';
@@ -48,7 +49,7 @@ export class PlaceTool extends Tool {
   deactivate() { this.clearGhost(); }
 
   private clearGhost() { if (this.ghost) { this.app.scene.remove(this.ghost); this.ghost = null; this.ghostFor = ''; } }
-  private ensureGhost() {
+  protected ensureGhost() {
     const it = this.item;
     if (!it || this.ghostFor === it.id) return;
     this.clearGhost();
@@ -75,7 +76,7 @@ export class PlaceTool extends Tool {
     if (!it) return null;
     const custom = this.resolve?.(ev, it);
     if (custom) return custom;
-    if (!ev.ground) return null;
+    if (this.exclusive || !ev.ground) return null;
     const p = ev.ground.clone();
     const s = this.app.store.doc.settings;
     if (s.snap || it.snap === 'grid') {
@@ -104,7 +105,7 @@ export class PlaceTool extends Tool {
     if (!it || !hit) return;
     let rotY = (hit.rotY ?? 0) + this.rot;
     if (ev.e.shiftKey) rotY = Math.random() * Math.PI * 2;
-    const o: PlacedObject = { id: uid('obj'), catalogId: it.id, pos: [hit.pos.x, 0, hit.pos.z], rotY, scale: 1 };
+    const o: PlacedObject = { id: uid('obj'), catalogId: it.id, pos: [hit.pos.x, Math.max(0, hit.pos.y - this.app.terrain.heightAt(hit.pos.x, hit.pos.z)), hit.pos.z], rotY, scale: 1 };
     if (hit.buildingId && hit.local) {
       o.buildingId = hit.buildingId; o.floor = hit.floor; o.pos = [hit.local.x, hit.local.y, hit.local.z];
       const b = this.app.store.get('buildings', hit.buildingId);

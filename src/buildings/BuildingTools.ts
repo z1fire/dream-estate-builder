@@ -185,25 +185,33 @@ export function wallBuildings(app: App, w: CurtainWallDef): { buildings: Buildin
   return { buildings, objects };
 }
 
-/** Rebuild the floor list of a building to `count` storeys of height h (keeps basements). */
+/** Set the number of storeys above ground (keeps basements, existing floors' rooms/walls/stairs). */
 export function setFloors(b: BuildingDef, count: number, h?: number) {
   const above = b.floors.filter((f) => f.level >= 0).sort((a, c) => a.level - c.level);
   const tmpl = above[above.length - 1] ?? above[0];
+  const template = above.find((f) => f.stairs.length)?.stairs[0];
   const out: FloorDef[] = b.floors.filter((f) => f.level < 0);
   for (let i = 0; i < count; i++) {
-    const src = above[i] ?? tmpl;
-    out.push({ ...clone(src), level: i, height: h ?? src.height, stairs: [] });
+    const existing = above[i];
+    if (existing) { out.push({ ...clone(existing), height: h ?? existing.height }); continue; }
+    out.push({
+      ...clone(tmpl), level: i, height: h ?? tmpl.height, walls: [], stairs: [],
+      rooms: tmpl.rooms.slice(0, 1).map((r) => ({ ...clone(r), id: uid('rm') })),
+    });
   }
-  // stairs: reuse the first floor's stair layout for every floor but the top
-  const st = above.find((f) => f.stairs.length)?.stairs[0];
-  for (const f of out) if (f.level >= 0 && f.level < count - 1 && st) f.stairs = [{ ...st, id: uid('st'), from: f.level, rotY: st.kind === 'spiral' ? f.level * 1.3 : st.rotY }];
+  const top = count - 1;
+  for (const f of out) {
+    if (f.level === top) f.stairs = [];
+    else if (f.level >= 0 && !f.stairs.length && template) f.stairs = [{ ...template, id: uid('st'), from: f.level, rotY: template.kind === 'spiral' ? f.level * 1.3 : template.rotY }];
+  }
   b.floors = out;
-  // windows on new floors: copy level-1 pattern (or level-0 non-door openings)
+  // windows on new floors: copy the first-floor (or ground-floor window) pattern
   const pattern = b.openings.filter((o) => o.floor === 1 || (o.floor === 0 && !o.kind.startsWith('door') && o.kind !== 'archway'));
+  const src = pattern.some((x) => x.floor === 1) ? 1 : 0;
   b.openings = b.openings.filter((o) => o.floor < count);
   for (let lv = 1; lv < count; lv++) {
     if (b.openings.some((o) => o.floor === lv)) continue;
-    for (const o of pattern.filter((p) => p.floor === (pattern.some((x) => x.floor === 1) ? 1 : 0))) b.openings.push({ ...o, id: uid('op'), floor: lv });
+    for (const o of pattern.filter((p) => p.floor === src)) b.openings.push({ ...o, id: uid('op'), floor: lv });
   }
 }
 
