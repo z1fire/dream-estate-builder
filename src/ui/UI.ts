@@ -203,7 +203,6 @@ export class UI {
   setMode(id: string, toolId?: string) {
     const m = MODES.find((x) => x.id === id);
     if (!m) return;
-    if (this.app.walking && id !== 'walk') this.app.getTool('walk')?.deactivate();
     this.mode = m;
     this.modebar.querySelectorAll('.mode-btn').forEach((b) => b.classList.toggle('on', (b as HTMLElement).dataset.mode === id));
     const t = toolId ?? this.toolIds.get(id) ?? m.tools[0].id;

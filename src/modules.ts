@@ -22,6 +22,8 @@ import { FieldTool, PastureTool, SquareTool, registerFarmInspectors } from './fa
 import { AnimalSystem } from './animals/AnimalSystem';
 import { BirdSystem } from './animals/Birds';
 import { HerdTool, registerAnimalInspector } from './animals/HerdTool';
+import { WalkController } from './camera/WalkController';
+import { Minimap, PhotoMode, Viewpoints, linkEnvironment } from './camera/Experience';
 import { MoatTool, PondTool, StreamTool, registerWaterInspectors } from './water/WaterTools';
 
 export interface ModuleHooks {
@@ -101,6 +103,13 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   app.registerTool(new HerdTool(app));
   registerAnimalInspector(app);
 
-  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior, farm, animals } };
+  // --- Phase 8: experience ---
+  app.registerTool(new WalkController(app));
+  linkEnvironment(app);
+  new Minimap(app);
+  const photo = new PhotoMode(app);
+  const viewpoints = new Viewpoints(app);
+
+  const hooks: ModuleHooks & { systems: Systems } = { photo: () => photo.toggle(), tour: () => viewpoints.tour(), systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior, farm, animals } };
   return hooks;
 }
