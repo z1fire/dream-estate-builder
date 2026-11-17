@@ -1,0 +1,9 @@
+node_modules/
+dist/
+assets-raw/
+test-results/
+playwright-report/
+tests/screenshots/*.png
+!tests/screenshots/.gitkeep
+*.log
+.DS_Store
