@@ -24,6 +24,7 @@ export class PolylineDraw {
   private line: THREE.Line;
   private dots: THREE.InstancedMesh;
   private dragging = false;
+  private dragAdded = 0;
   active = false;
 
   constructor(private app: App, public opts: DrawOptions) {
@@ -70,7 +71,7 @@ export class PolylineDraw {
       if (pxDist < 12) { this.finish(); return; }
     }
     this.pts.push(p);
-    if (this.opts.freehand) this.dragging = true;
+    if (this.opts.freehand) { this.dragging = true; this.dragAdded = 0; }
     this.opts.onChange?.(this.pts);
     this.redraw();
   }
@@ -80,6 +81,7 @@ export class PolylineDraw {
       const last = this.pts[this.pts.length - 1];
       if (Math.hypot(this.hover[0] - last[0], this.hover[1] - last[1]) >= (this.opts.freehandStep ?? 4)) {
         this.pts.push(this.hover);
+        this.dragAdded++;
         this.opts.onChange?.(this.pts);
       }
     }
@@ -88,7 +90,8 @@ export class PolylineDraw {
   up() {
     if (this.dragging) {
       this.dragging = false;
-      if (this.opts.freehand && this.pts.length >= this.opts.minPoints) this.finish();
+      // a real freehand drag finishes on release; plain clicks keep adding points
+      if (this.opts.freehand && this.dragAdded >= 3 && this.pts.length >= this.opts.minPoints) this.finish();
     }
   }
   dblclick() {

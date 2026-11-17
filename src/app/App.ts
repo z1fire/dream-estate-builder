@@ -11,6 +11,7 @@ import { Quality, detectQuality, type QualityLevel } from './quality';
 import type { Selection } from '../editing/Selection';
 import type { Labels } from '../ui/Labels';
 import type { UI } from '../ui/UI';
+import type { WaterSystem } from '../water/WaterSystem';
 
 THREE.Mesh.prototype.raycast = acceleratedRaycast;
 (THREE.BufferGeometry.prototype as any).computeBoundsTree = computeBoundsTree;
@@ -61,6 +62,12 @@ export class App {
   ui!: UI;
   /** builds the viewpoints/tour popover (camera module) */
   viewpointsPanel?: (close: () => void) => HTMLElement;
+  water?: WaterSystem;
+  /** pick flat ground-level entities (paths, fields…) by proximity to the ground hit */
+  readonly groundPickers: ((x: number, z: number) => { kind: string; id: string } | null)[] = [];
+  /** predicates marking ground as occupied (buildings, roads, fields…) for scatter/animals */
+  readonly blockers: ((x: number, z: number) => boolean)[] = [];
+  isBlocked(x: number, z: number) { for (const b of this.blockers) if (b(x, z)) return true; return false; }
   /** whether a vegetation kind / catalog id counts as a tree (for stats) */
   isTreeKind?: (id: string) => boolean;
   /** kind -> world bounding box of an entity (for selection highlight / focus) */
@@ -181,6 +188,12 @@ export class App {
       }
       if (filter && !filter(p)) continue;
       return { kind: p.kind, id: p.id, object: o, point: h.point, instanceId: h.instanceId };
+    }
+    if (groundHit) {
+      for (const gp of this.groundPickers) {
+        const r = gp(groundHit.x, groundHit.z);
+        if (r && (!filter || filter(r))) return { kind: r.kind, id: r.id, object: this.terrain.group, point: groundHit };
+      }
     }
     return null;
   }

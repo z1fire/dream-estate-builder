@@ -52,6 +52,8 @@ export interface FenceDef {
   height: number;
   /** segment indices that contain a gate at their midpoint */
   gates: number[];
+  /** fences generated together (e.g. a hedge maze) share a group and are selected together */
+  group?: string;
 }
 
 export interface RetainingWallDef {

@@ -146,8 +146,11 @@ export class SelectTool extends Tool {
     const p = ev.pick;
     if (!p) { if (!ev.e.shiftKey) this.app.selection.clear(); return; }
     const it = { kind: p.kind, id: p.id };
-    if (ev.e.shiftKey || ev.e.ctrlKey) this.app.selection.toggle(it);
-    else this.app.selection.set([it]);
+    // grouped entities (e.g. hedge maze walls) are selected together
+    const grp = (entity(this.app, p.kind, p.id) as { group?: string } | undefined)?.group;
+    const items = grp ? ((this.app.store.doc as any)[p.kind] as { id: string; group?: string }[]).filter((e) => e.group === grp).map((e) => ({ kind: p.kind, id: e.id })) : [it];
+    if (ev.e.shiftKey || ev.e.ctrlKey) items.forEach((x) => this.app.selection.toggle(x));
+    else this.app.selection.set(items);
   }
   dblclick(ev: ToolEvent) {
     const p = ev.pick;

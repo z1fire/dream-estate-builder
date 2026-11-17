@@ -91,11 +91,10 @@ export function applyPaint(doc: EstateDoc, layer: number, x: number, z: number, 
   return r;
 }
 
-/** Set splat weights for a cell directly to a single layer with given amount (used by paths/fields/moats). */
-export function paintCell(doc: EstateDoc, cx: number, cz: number, layer: number, amount: number) {
-  if (cx < 0 || cz < 0 || cx >= GRID || cz >= GRID) return;
+/** Blend a cell's splat weights toward a single layer by `amount` (used by paths/fields/moats features). */
+export function paintCell(s: Uint8Array, cx: number, cz: number, layer: number, amount: number) {
+  if (cx < 0 || cz < 0 || cx >= GRID || cz >= GRID || amount <= 0) return;
   const PLANE = GRID * GRID * 4;
-  const s = doc.splat;
   const base = (cz * GRID + cx) * 4;
   let tot = 0;
   const w = new Array<number>(10);

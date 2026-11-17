@@ -143,7 +143,7 @@ export class TerrainSystem {
     this.group.add(this.outer);
     this.computeSdf();
     store.subscribe((c) => {
-      if (c.type === 'terrain') this.recompute(c.rect, true, false);
+      if (c.type === 'terrain') { this.recompute(c.rect, true, false); this.scheduleBaseDeps(); }
       else if (c.type === 'splat') this.recompute(c.rect, false, true);
       else if (c.type === 'boundary') this.computeSdf();
       else if (c.type === 'doc') this.reload();
@@ -152,6 +152,13 @@ export class TerrainSystem {
         if (ps.length) this.refreshFeatures(ps);
       }
     });
+  }
+
+  private baseTimer = 0;
+  /** Features derived from the base terrain (roads, streams, terraces) re-profile after sculpting settles. */
+  private scheduleBaseDeps() {
+    clearTimeout(this.baseTimer);
+    this.baseTimer = window.setTimeout(() => this.refreshFeatures(this.providers), 700);
   }
 
   addProvider(p: FeatureProvider) {

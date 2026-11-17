@@ -26,13 +26,19 @@ function append(el: Node, children: Child[]) {
 export function clear(el: HTMLElement) { while (el.firstChild) el.removeChild(el.firstChild); return el; }
 
 /** Labeled range slider. */
-export function slider(label: string, min: number, max: number, step: number, value: number, onInput: (v: number) => void, fmt: (v: number) => string = (v) => String(v)) {
+export function slider(label: string, min: number, max: number, step: number, value: number, onInput: (v: number) => void, fmt: (v: number) => string = (v) => String(v), onCommit?: (v: number) => void) {
   const out = h('span', { class: 'val' }, fmt(value));
   const input = h('input', { type: 'range', min, max, step, value: String(value) }) as HTMLInputElement;
   input.addEventListener('input', () => { const v = Number(input.value); out.textContent = fmt(v); onInput(v); });
+  if (onCommit) input.addEventListener('change', () => onCommit(Number(input.value)));
   const row = h('label', { class: 'field slider' }, h('span', { class: 'lbl' }, label), input, out);
   (row as any).set = (v: number) => { input.value = String(v); out.textContent = fmt(v); };
   return row as HTMLLabelElement & { set(v: number): void };
+}
+
+/** Slider that only commits (one undo step) when released. */
+export function editSlider(label: string, min: number, max: number, step: number, value: number, commit: (v: number) => void, fmt?: (v: number) => string) {
+  return slider(label, min, max, step, value, () => {}, fmt, commit);
 }
 
 export function select<T extends string>(label: string, options: [T, string][], value: T, onChange: (v: T) => void) {

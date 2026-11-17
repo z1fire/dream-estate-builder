@@ -33,7 +33,8 @@ export function pivotOf(app: App, kind: string, e: AnyEnt): THREE.Vector3 {
       const b = entity(app, 'buildings', o.buildingId) as BuildingDef | undefined;
       if (b) return buildingToWorld(b, new THREE.Vector3(...o.pos));
     }
-    return new THREE.Vector3(...o.pos);
+    // free-standing objects store their height as an offset above the ground
+    return new THREE.Vector3(o.pos[0], app.terrain.heightAt(o.pos[0], o.pos[2]) + o.pos[1], o.pos[2]);
   }
   if (kind === 'buildings') return new THREE.Vector3(...(e as BuildingDef).pos);
   if (kind === 'animals') { const p = e.pos as V2; return new THREE.Vector3(p[0], app.terrain.heightAt(p[0], p[1]), p[1]); }
@@ -66,14 +67,13 @@ export function applyDelta(app: App, kind: string, before: AnyEnt, d: Delta): An
     const o = e as PlacedObject;
     const w = pivotOf(app, kind, before);
     const [nx, nz] = tx(w.x, w.z);
-    let ny = d.freeY ? w.y + d.offset.y : app.terrain.heightAt(nx, nz) + (w.y - app.terrain.heightAt(w.x, w.z));
-    if (!o.buildingId && !d.freeY && Math.abs(w.y - app.terrain.heightAt(w.x, w.z)) < 0.05) ny = app.terrain.heightAt(nx, nz);
-    const nw = new THREE.Vector3(nx, ny, nz);
+    const dy = d.freeY ? d.offset.y : 0;
     if (o.buildingId) {
       const b = entity(app, 'buildings', o.buildingId) as BuildingDef | undefined;
+      const nw = new THREE.Vector3(nx, w.y + dy, nz);
       const l = b ? worldToBuilding(b, nw) : nw;
-      o.pos = [l.x, d.freeY ? l.y : o.pos[1], l.z];
-    } else o.pos = [nw.x, nw.y, nw.z];
+      o.pos = [l.x, l.y, l.z];
+    } else o.pos = [nx, (before as PlacedObject).pos[1] + dy, nz];
     o.rotY = before.rotY + d.rot;
     o.scale = Math.max(0.05, before.scale * d.scale);
   } else if (kind === 'buildings') {
