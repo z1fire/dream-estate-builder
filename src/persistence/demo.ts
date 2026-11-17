@@ -255,14 +255,14 @@ function scatterVegetation(app: App, doc: EstateDoc, r: () => number) {
       put(kinds[Math.floor(r() * kinds.length)], x, z, sMin + r() * (sMax - sMin));
     }
   };
-  area(-250, -255, 120, -205, 260, ['pine', 'pine_tall', 'spruce', 'fir', 'pine_small'], 0.75, 1.3, 4.5); // northern pine forest
-  area(-275, -200, -200, -90, 150, ['oak', 'birch', 'tree_leafy', 'tree_round', 'poplar'], 0.75, 1.25, 5); // western woodland
+  area(-250, -255, 120, -205, 260, ['pine', 'pine_tall', 'spruce', 'q_pine_1', 'q_pine_3', 'q_pine_4', 'pine_small'], 0.75, 1.3, 4.5); // northern pine forest
+  area(-275, -200, -200, -90, 150, ['oak', 'q_common_1', 'q_common_3', 'q_common_4', 'birch', 'tree_round', 'poplar', 'q_fern'], 0.75, 1.25, 5); // western woodland
   area(-275, -200, -200, -90, 120, ['bush', 'fern', 'bush_small', 'mushrooms'], 0.7, 1.3, 1.5);
   area(150, -230, 260, -120, 90, ['pine', 'spruce', 'birch_q', 'boulder', 'rock_tall', 'boulder3'], 0.7, 1.3, 5); // NE hill
-  area(120, 160, 230, 240, 900, ['flower_red', 'flower_yellow', 'flower_purple', 'flower_group', 'grass_tall', 'grass_tuft'], 0.7, 1.3, 0.5); // wildflower meadow
+  area(120, 160, 230, 240, 900, ['flower_red', 'flower_yellow', 'q_flower_clump1', 'q_flower_clump4', 'q_flower_clump5', 'flower_group', 'q_grass_wispy', 'grass_tuft'], 0.7, 1.3, 0.5); // wildflower meadow
   area(-250, 180, -80, 245, 60, ['oak', 'tree_broad', 'willow', 'birch'], 0.8, 1.2, 8);
   area(-20, -80, 80, 40, 40, ['oak', 'tree_round', 'birch', 'poplar'], 0.8, 1.2, 10); // parkland below the castle
-  area(150, 0, 260, 120, 45, ['oak', 'tree_leafy', 'birch', 'bush_large'], 0.8, 1.2, 8);
+  area(150, 0, 260, 120, 45, ['oak', 'q_maple_1', 'q_birch_2', 'q_twisted_2', 'bush_large'], 0.8, 1.2, 8);
   // waterside reeds & lilies around the pond and stream
   for (let i = 0; i < 700; i++) {
     const x = 60 + r() * 200, z = -200 + r() * 180;

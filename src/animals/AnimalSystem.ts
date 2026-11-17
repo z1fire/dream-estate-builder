@@ -14,7 +14,7 @@ export const SPECIES: { id: Species; label: string; variants: [string, string][]
   { id: 'chicken', label: 'Chicken', variants: [['chicken', 'Hen'], ['chick', 'Chick']], speed: 0.6, roam: 7 },
   { id: 'duck', label: 'Duck', variants: [['duck', 'Mallard']], speed: 0.5, roam: 10 },
   { id: 'dog', label: 'Dog', variants: [['dog', 'Hound'], ['husky', 'Wolfhound'], ['shiba', 'Terrier']], speed: 1.5, roam: 25 },
-  { id: 'deer', label: 'Deer', variants: [['deer', 'Doe'], ['stag', 'Stag'], ['fox', 'Fox']], speed: 1.3, roam: 30 },
+  { id: 'deer', label: 'Deer', variants: [['deer', 'Doe'], ['stag', 'Stag'], ['fox', 'Fox'], ['wolf', 'Wolf']], speed: 1.3, roam: 30 },
 ];
 export const speciesInfo = (s: Species) => SPECIES.find((x) => x.id === s)!;
 export const modelOf = (a: AnimalDef) => a.variant ?? speciesInfo(a.species).variants[0][0];

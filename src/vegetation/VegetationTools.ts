@@ -21,6 +21,13 @@ export const PRESETS: { id: string; label: string; kinds: string[]; density: num
   { id: 'shrubs', label: 'Shrubs & ferns', kinds: ['bush', 'bush_small', 'bush_detailed', 'fern', 'bush_flowers'], density: 5, scale: [0.7, 1.3] },
   { id: 'reeds', label: 'Waterside reeds', kinds: ['reeds', 'grass_tall', 'grass_wild'], density: 25, scale: [0.8, 1.4], waterside: true },
   { id: 'rocks', label: 'Boulders & rocks', kinds: ['boulder', 'boulder2', 'boulder3', 'rock', 'rock2', 'stone_flat'], density: 0.8, scale: [0.6, 1.5] },
+  // detailed (textured) Quaternius nature packs
+  { id: 'q_woodland', label: 'Detailed woodland', kinds: ['q_common_1', 'q_common_2', 'q_common_3', 'q_common_4', 'q_common_5', 'q_bush', 'q_fern', 'q_grass_short'], density: 1.2, scale: [0.8, 1.2] },
+  { id: 'q_pines', label: 'Detailed pine forest', kinds: ['q_pine_1', 'q_pine_2', 'q_pine_3', 'q_pine_4', 'q_pine_5', 'q_fern'], density: 1.3, scale: [0.8, 1.25] },
+  { id: 'q_autumn', label: 'Autumn grove', kinds: ['q_maple_1', 'q_maple_2', 'q_maple_3', 'q_maple_5', 'q_birch_1', 'q_birch_2', 'q_birch_3', 'q_twisted_2'], density: 1.0, scale: [0.8, 1.2] },
+  { id: 'q_meadow', label: 'Detailed meadow', kinds: ['q_flower_clump1', 'q_flower_clump2', 'q_flower_clump3', 'q_flower_clump4', 'q_flower_clump5', 'q_grass_short', 'q_grass_wispy', 'q_grass_small', 'q_clover'], density: 20, scale: [0.75, 1.3] },
+  { id: 'q_floor', label: 'Woodland floor', kinds: ['q_fern', 'q_grass_wispy', 'q_mushroom', 'q_plant', 'q_groundcover', 'q_clover2'], density: 6, scale: [0.7, 1.3] },
+  { id: 'q_deadwood', label: 'Dead wood & rocks', kinds: ['q_deadtree_1', 'q_deadtree_2', 'q_snag', 'q_dead_stump', 'q_rock1', 'q_rock2', 'q_rock3'], density: 0.5, scale: [0.7, 1.2] },
 ];
 
 /** Minimum spacing (m) between instances of a kind. */

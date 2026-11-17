@@ -30,7 +30,7 @@ export interface CatalogItem {
 export const CATEGORY_LABELS: Record<string, string> = {
   trees: 'Trees', shrubs: 'Shrubs', flowers: 'Flowers', rocks: 'Rocks', castle: 'Castle', siege: 'Siege', lighting: 'Lighting',
   furniture: 'Furniture', chapel: 'Chapel', props: 'Props', village: 'Village', garden: 'Garden', farm: 'Farm', animals: 'Animals',
-  boats: 'Boats & Bridges', decor: 'Decor',
+  boats: 'Boats & Bridges', decor: 'Decor', building_kit: 'Building Kit',
 };
 
 export const CATALOG: CatalogItem[] = (data as { items: CatalogItem[] }).items;

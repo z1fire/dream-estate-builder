@@ -40,10 +40,10 @@ Repo: github.com/z1fire/dream-estate-builder (public). There is no backend. Read
 See the README section "Adding a new model". For packs: unzip into `assets-raw/<pack>/`, add a group to `scripts/asset-selection.mjs` (file, id, name, real-world height, extras), then run `node scripts/build-assets.mjs --skip-download --skip-blender`.
 
 ## Status (2026-11-17)
-All phases are complete and deployed: 0 scaffold, 1 asset pipeline (273 models), 2 terrain + UI + persistence, 3 water and landscaping, 4 castle, 5 interiors, 6 village and farming, 7 animals, 8 walk mode, day/night, seasons, weather, minimap, photo, tour, 9 demo estate "Ravensmoor Castle" + README.
+All phases are complete and deployed: 0 scaffold, 1 asset pipeline (406 models), 2 terrain + UI + persistence, 3 water and landscaping, 4 castle, 5 interiors, 6 village and farming, 7 animals, 8 walk mode, day/night, seasons, weather, minimap, photo, tour, 9 demo estate "Ravensmoor Castle" + README.
 
 ### Known gaps / next steps
-- Quaternius' full packs (Medieval Village MegaKit, Stylized Nature MegaKit, full Ultimate Animated Animals) are itch.io / Google Drive downloads that can't be scripted. Only individual poly.pizza models are in. If the user downloads them, add groups to `asset-selection.mjs`.
+- Quaternius' full packs are manual downloads (itch.io / Google Drive). They're unzipped in `assets-raw/Quaternius */` and used as groups `QN`, `QU`, `QV`, `QA` in `asset-selection.mjs`: 133 models, ids prefixed `q_` (nature) and `mv_` (Medieval Village, category `building_kit`), plus `wolf`. A fresh clone without them just reports those sources as missing.
 - Rooms are rectangles; interior wall surfaces use the floor's wall material (rooms don't override wall material).
 - Walk collision uses raycasts at two heights against nearby meshes; furniture is solid but there's no crouching or swimming.
 - Test FPS is meaningless (SwiftShader). Profile on a real GPU before deep optimisation.

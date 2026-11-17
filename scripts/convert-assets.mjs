@@ -82,11 +82,15 @@ for (const group of GROUPS) {
       if (remap && src.includes('kenney') && !m.getBaseColorTexture()) m.setBaseColorFactor([...hexLinear(remap), 1]);
       if (m.getMetallicFactor() > 0.5 && !/metal|iron|gold|steel/i.test(m.getName())) m.setMetallicFactor(0);
       m.setRoughnessFactor(Math.max(0.55, m.getRoughnessFactor()));
+      // foliage: alpha-blended leaves sort badly when instanced → alpha-test instead
+      if (group.alphaMask && m.getAlphaMode() === 'BLEND') { m.setAlphaMode('MASK'); m.setAlphaCutoff(0.5); }
     }
     // measure before quantization (quantize re-encodes skinned meshes, which skews getBounds)
     const measured = getBounds(scene);
     await doc.transform(
       dedup(), prune(), weld(), resample(),
+      // detail maps at 256 px, colour at 512 px (the textured Quaternius packs embed trim sheets in every piece)
+      textureCompress({ encoder: sharp, targetFormat: 'webp', slots: /^(normal|occlusion|metallicRoughness)/, resize: [256, 256] }),
       textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [512, 512] }),
       quantize(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }),
     );
@@ -106,11 +110,11 @@ for (const group of GROUPS) {
       height: r2(b.max[1] - b.min[1]),
       snap: extra.snap ?? group.snap,
       thumb: `thumbs/${id}.webp`,
-      ...(extra.roomTypes ? { roomTypes: extra.roomTypes } : {}),
+      ...((extra.roomTypes ?? group.roomTypes) ? { roomTypes: extra.roomTypes ?? group.roomTypes } : {}),
       ...(extra.light ? { light: extra.light } : {}),
       ...(anims.length ? { animations: anims } : {}),
       ...(extra.hidden ? { hidden: true } : {}),
-      source: src.includes('kenney') ? 'Kenney' : src.includes('quaternius') ? 'Quaternius' : 'Blender (this repo)',
+      source: src.includes('kenney') ? 'Kenney' : /quaternius/i.test(src) ? 'Quaternius' : 'Blender (this repo)',
     };
     byId.set(id, { ...byId.get(id), ...entry });
     done++;

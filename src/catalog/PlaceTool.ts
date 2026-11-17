@@ -10,11 +10,11 @@ import { CATALOG, catalogItem, type CatalogItem } from './catalog';
 import { instantiate } from './loader';
 
 export const PLACE_FILTERS: Record<string, { label: string; categories: string[] }> = {
-  interior: { label: 'Furnish', categories: ['furniture', 'lighting', 'decor', 'props', 'chapel', 'castle', 'farm'] },
+  interior: { label: 'Furnish', categories: ['furniture', 'lighting', 'decor', 'props', 'chapel', 'castle', 'farm', 'building_kit'] },
   nature: { label: 'Trees & nature', categories: ['trees', 'shrubs', 'flowers', 'rocks'] },
   garden: { label: 'Garden ornaments', categories: ['garden', 'flowers', 'lighting'] },
-  castle: { label: 'Castle kit & props', categories: ['castle', 'siege', 'lighting', 'props'] },
-  village: { label: 'Village props', categories: ['village', 'props', 'lighting', 'garden', 'boats', 'chapel', 'decor'] },
+  castle: { label: 'Castle kit & props', categories: ['castle', 'building_kit', 'siege', 'lighting', 'props'] },
+  village: { label: 'Village props', categories: ['village', 'building_kit', 'props', 'lighting', 'garden', 'boats', 'chapel', 'decor'] },
   farm: { label: 'Farm props', categories: ['farm', 'props', 'village'] },
 };
 

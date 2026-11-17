@@ -7,6 +7,14 @@ const K = (kit) => `kenney/${kit}/Models/GLB format`;
 const KN = 'kenney/nature-kit/Models/GLTF format';
 const KF = 'kenney/furniture-kit/Models/GLTF format';
 const B = (cat) => `blender/${cat}`;
+// Quaternius packs (downloaded by hand from quaternius.com / itch.io; CC0)
+const QN = 'Quaternius Stylized Nature MegaKit/glTF';
+const QU = 'Quaternius Stylized Nature MegaKit/Ultimate Stylized Nature - May 2022/glTF';
+const QV = 'Quaternius Medieval Village MegaKit/Medieval Village MegaKit[Standard]/glTF';
+const QA = 'Quaternius Ultimate Animated Animals/Ultimate Animated Animals - July 2021/glTF';
+const roman = ['I', 'II', 'III', 'IV', 'V'];
+/** numbered series: series('CommonTree_', 'q_common', 'Common Tree', [h1..h5]) → 5 items */
+const series = (file, id, name, heights, nums = [1, 2, 3, 4, 5]) => nums.map((n, i) => [file + n, `${id}_${n}`, `${name} ${roman[i]}`, heights[i]]);
 
 export const GROUPS = [
   // ---------------- nature ----------------
@@ -187,6 +195,94 @@ export const GROUPS = [
   { src: B('animals'), category: 'animals', snap: 'ground', tags: ['animal'], items: [
     ['duck', 'duck', 'Duck', null], ['goat', 'goat', 'Goat', null],
   ] },
+  // ---------------- Quaternius Stylized Nature MegaKit + Ultimate Stylized Nature (textured, alpha-masked leaves) ----------------
+  { src: QN, category: 'trees', snap: 'ground', tags: ['tree', 'textured'], alphaMask: true, items: [
+    ...series('CommonTree_', 'q_common', 'Common Tree', [8, 8.5, 10, 10, 7.5]),
+    ...series('Pine_', 'q_pine', 'Scots Pine', [11, 11, 12, 14, 12]),
+    ...series('TwistedTree_', 'q_twisted', 'Copper Beech', [13, 14, 12.5, 14, 12]),
+    ...series('DeadTree_', 'q_deadtree', 'Dead Tree', [8, 9, 10, 10, 12]),
+  ] },
+  { src: QU, category: 'trees', snap: 'ground', tags: ['tree', 'textured'], alphaMask: true, items: [
+    ...series('BirchTree_', 'q_birch', 'Golden Birch', [9, 12, 10, 7.5, 9.5]),
+    ...series('MapleTree_', 'q_maple', 'Red Maple', [10, 10, 11, 5.5, 11]),
+    ['DeadTree_1', 'q_snag', 'Snag', 7], ['DeadTree_8', 'q_dead_spread', 'Dead Spreading Tree', 7.5], ['DeadTree_5', 'q_dead_stump', 'Broken Stump', 2.6],
+  ] },
+  { src: QN, category: 'shrubs', snap: 'ground', tags: ['bush', 'textured'], alphaMask: true, items: [
+    ['Bush_Common', 'q_bush', 'Hawthorn Bush', 1.5], ['Bush_Common_Flowers', 'q_bush_flowers', 'Flowering Hawthorn', 1.5],
+    ['Fern_1', 'q_fern', 'Bracken Fern', 0.8], ['Clover_1', 'q_clover', 'Clover', 0.3], ['Clover_2', 'q_clover2', 'Clover Patch', 0.32],
+    ['Plant_1', 'q_plant', 'Hosta', 0.6], ['Plant_1_Big', 'q_plant_big', 'Large Hosta', 1.1], ['Plant_7', 'q_groundcover', 'Ground Cover', 0.18],
+    ['Grass_Common_Short', 'q_grass_short', 'Meadow Grass', 0.45], ['Grass_Common_Tall', 'q_grass_tall', 'Tall Meadow Grass', 0.8],
+    ['Grass_Wispy_Short', 'q_grass_wispy', 'Wispy Grass', 0.45], ['Grass_Wispy_Tall', 'q_grass_wispy_tall', 'Tall Wispy Grass', 0.75],
+    ['Mushroom_Common', 'q_mushroom', 'Toadstools', 0.25], ['Mushroom_Laetiporus', 'q_mushroom_shelf', 'Shelf Fungus', 0.35],
+  ] },
+  { src: QU, category: 'shrubs', snap: 'ground', tags: ['bush', 'textured'], alphaMask: true, items: [
+    ['Bush', 'q_round_bush', 'Round Bush', 0.8], ['Bush_Flowers', 'q_round_bush_flowers', 'Round Flowering Bush', 0.85],
+    ['Bush_Large', 'q_hedge_bush', 'Hedge Bush', 1.3], ['Bush_Large_Flowers', 'q_hedge_bush_flowers', 'Flowering Hedge Bush', 1.35],
+    ['Grass_Large', 'q_grass_clump', 'Grass Clump', 0.5], ['Grass_Small', 'q_grass_small', 'Short Grass', 0.35],
+  ] },
+  { src: QN, category: 'flowers', snap: 'ground', tags: ['flower', 'textured'], alphaMask: true, items: [
+    ['Flower_3_Group', 'q_flowers_white', 'Pink Lilies', 0.55], ['Flower_4_Group', 'q_flowers_blue', 'Yellow Irises', 0.6],
+    ['Flower_3_Single', 'q_flower_white', 'Pink Lily', 0.5], ['Flower_4_Single', 'q_flower_blue', 'Yellow Iris', 0.55],
+    ['Petal_2', 'q_petals', 'Fallen Petals', 0.08],
+  ] },
+  { src: QU, category: 'flowers', snap: 'ground', tags: ['flower', 'textured'], alphaMask: true, items: [
+    ['Flower_1_Clump', 'q_flower_clump1', 'Blue Poppies', 0.6], ['Flower_2_Clump', 'q_flower_clump2', 'Buttercup Clump', 0.4],
+    ['Flower_3_Clump', 'q_flower_clump3', 'Forget-me-nots', 0.4], ['Flower_4_Clump', 'q_flower_clump4', 'Cosmos', 0.6], ['Flower_5_Clump', 'q_flower_clump5', 'Violets', 0.4],
+  ] },
+  { src: QN, category: 'rocks', snap: 'ground', tags: ['rock', 'stone', 'textured'], items: [
+    ['Rock_Medium_1', 'q_rock1', 'Weathered Rock', 1.6], ['Rock_Medium_2', 'q_rock2', 'Low Rock', 1.2], ['Rock_Medium_3', 'q_rock3', 'Craggy Rock', 1.8],
+    ['Pebble_Round_1', 'q_pebble', 'Pebble', 0.1], ['Pebble_Square_1', 'q_pebble_sq', 'Cobble', 0.13],
+  ] },
+  { src: QN, category: 'garden', snap: 'ground', tags: ['garden', 'path', 'stone', 'textured'], items: [
+    ['RockPath_Round_Small_1', 'q_stepping', 'Stepping Stones', 0.11], ['RockPath_Round_Thin', 'q_stepping_path', 'Stepping-stone Path', 0.11],
+    ['RockPath_Round_Wide', 'q_stepping_wide', 'Wide Stone Path', 0.11], ['RockPath_Square_Thin', 'q_flagstones', 'Flagstone Path', 0.18],
+    ['RockPath_Square_Wide', 'q_flagstones_wide', 'Wide Flagstones', 0.18],
+  ] },
+  // ---------------- Quaternius Medieval Village MegaKit (2 m modular grid, textured) ----------------
+  { src: QV, category: 'building_kit', snap: 'grid', tags: ['kit', 'modular', 'wall', 'textured'], items: [
+    ['Wall_Plaster_Straight', 'mv_wall_plaster', 'Plaster Wall', null], ['Wall_Plaster_WoodGrid', 'mv_wall_timber', 'Timber-frame Wall', null],
+    ['Wall_Plaster_Door_Round', 'mv_wall_plaster_door', 'Plaster Wall, Door', null], ['Wall_Plaster_Door_Flat', 'mv_wall_plaster_door_flat', 'Plaster Wall, Square Door', null],
+    ['Wall_Plaster_Window_Wide_Round', 'mv_wall_plaster_window', 'Plaster Wall, Window', null], ['Wall_Plaster_Window_Thin_Round', 'mv_wall_plaster_window_thin', 'Plaster Wall, Slim Window', null],
+    ['Wall_Plaster_Window_Wide_Flat', 'mv_wall_plaster_window_flat', 'Plaster Wall, Square Window', null],
+    ['Wall_UnevenBrick_Straight', 'mv_wall_stone', 'Rubble-stone Wall', null], ['Wall_UnevenBrick_Door_Round', 'mv_wall_stone_door', 'Stone Wall, Door', null],
+    ['Wall_UnevenBrick_Window_Wide_Round', 'mv_wall_stone_window', 'Stone Wall, Window', null], ['Wall_UnevenBrick_Window_Thin_Round', 'mv_wall_stone_window_thin', 'Stone Wall, Slim Window', null],
+    ['Wall_Arch', 'mv_arch', 'Timber Arch', null], ['Corner_Exterior_Brick', 'mv_corner_stone', 'Stone Corner Post', null], ['Corner_Exterior_Wood', 'mv_corner_wood', 'Timber Corner Post', null],
+  ] },
+  { src: QV, category: 'building_kit', snap: 'grid', tags: ['kit', 'modular', 'floor', 'textured'], items: [
+    ['Floor_Brick', 'mv_floor_brick', 'Brick Floor Tile', null], ['Floor_RedBrick', 'mv_floor_redbrick', 'Red Brick Floor Tile', null],
+    ['Floor_UnevenBrick', 'mv_floor_flagstone', 'Flagstone Floor Tile', null], ['Floor_WoodDark', 'mv_floor_wood_dark', 'Dark Plank Floor', null], ['Floor_WoodLight', 'mv_floor_wood', 'Plank Floor', null],
+  ] },
+  { src: QV, category: 'building_kit', snap: 'grid', tags: ['kit', 'modular', 'roof', 'textured'], items: [
+    ['Roof_RoundTiles_4x4', 'mv_roof_4x4', 'Tiled Roof 4x4 m', null], ['Roof_RoundTiles_6x6', 'mv_roof_6x6', 'Tiled Roof 6x6 m', null],
+    ['Roof_RoundTiles_6x10', 'mv_roof_6x10', 'Tiled Roof 6x10 m', null], ['Roof_RoundTiles_8x8', 'mv_roof_8x8', 'Tiled Roof 8x8 m', null],
+    ['Roof_RoundTiles_8x12', 'mv_roof_8x12', 'Tiled Roof 8x12 m', null], ['Roof_Tower_RoundTiles', 'mv_roof_tower', 'Tower Roof', null],
+    ['Roof_Dormer_RoundTile', 'mv_dormer', 'Dormer', null], ['Roof_2x4_RoundTile', 'mv_roof_porch', 'Porch Roof', null],
+    ['Prop_Chimney', 'mv_chimney', 'Stone Chimney', null], ['Prop_Chimney2', 'mv_chimney2', 'Rubble Chimney', null],
+  ] },
+  { src: QV, category: 'building_kit', snap: 'wall', tags: ['kit', 'door', 'window', 'textured'], items: [
+    ['Door_1_Round', 'mv_door_plank', 'Plank Door (arched)', null], ['Door_2_Round', 'mv_door_studded', 'Studded Door (arched)', null],
+    ['Door_4_Flat', 'mv_door_braced', 'Braced Door', null], ['Door_8_Round', 'mv_door_panel', 'Panelled Door (arched)', null],
+    ['DoorFrame_Round_Brick', 'mv_doorframe_stone', 'Stone Door Surround', null], ['DoorFrame_Round_WoodDark', 'mv_doorframe_wood', 'Timber Door Frame', null],
+    ['Window_Wide_Round1', 'mv_window_wide', 'Leaded Window (wide)', null], ['Window_Thin_Round1', 'mv_window_thin', 'Leaded Window (slim)', null],
+    ['Window_Wide_Flat1', 'mv_window_square', 'Casement Window', null], ['WindowShutters_Wide_Round_Open', 'mv_shutters_open', 'Shutters (open)', null],
+    ['WindowShutters_Wide_Round_Closed', 'mv_shutters_closed', 'Shutters (closed)', null], ['Window_Roof_Wide', 'mv_roof_window', 'Roof Window', null],
+  ] },
+  { src: QV, category: 'building_kit', snap: 'floor', tags: ['kit', 'stairs', 'textured'], items: [
+    ['Stair_Interior_Rails', 'mv_stair_rails', 'Timber Stair with Rail', null], ['Stair_Interior_Solid', 'mv_stair_solid', 'Solid Timber Stair', null],
+    ['Stairs_Exterior_Straight', 'mv_steps_stone', 'Stone Steps', null, { snap: 'grid' }], ['Stairs_Exterior_Platform', 'mv_steps_platform', 'Stone Landing', null, { snap: 'grid' }],
+    ['Balcony_Simple_Straight', 'mv_balcony', 'Timber Balcony Rail', null, { snap: 'grid' }], ['Balcony_Cross_Straight', 'mv_balcony_cross', 'Cross-braced Balcony Rail', null, { snap: 'grid' }],
+  ] },
+  { src: QV, category: 'village', snap: 'ground', tags: ['village', 'textured'], items: [
+    ['Prop_Wagon', 'mv_wagon', 'Hay Wagon', null], ['Prop_Crate', 'mv_crate', 'Timber Crate', 0.9],
+    ['Prop_WoodenFence_Single', 'mv_fence', 'Picket Fence (2 m)', null], ['Prop_MetalFence_Ornament', 'mv_iron_fence', 'Ornate Iron Railing', 2.2],
+    ['Prop_MetalFence_Simple', 'mv_iron_fence_plain', 'Iron Railing', 2.2], ['Prop_Support', 'mv_brace', 'Timber Brace', null],
+  ] },
+  { src: QV, category: 'garden', snap: 'ground', tags: ['garden', 'vine', 'textured'], alphaMask: true, items: [
+    ['Prop_Vine1', 'mv_ivy', 'Climbing Ivy', null, { snap: 'wall' }], ['Prop_Vine2', 'mv_ivy2', 'Climbing Ivy (narrow)', null, { snap: 'wall' }],
+    ['Prop_Vine5', 'mv_ivy_draped', 'Draped Ivy', null, { snap: 'wall' }], ['Prop_Vine6', 'mv_ivy_trailing', 'Trailing Ivy', null, { snap: 'wall' }],
+    ['Prop_ExteriorBorder_Straight1', 'mv_kerb', 'Stone Edging (2 m)', null], ['Prop_ExteriorBorder_Corner', 'mv_kerb_corner', 'Stone Edging Corner', null],
+  ] },
+  { src: QA, category: 'animals', snap: 'ground', tags: ['animal', 'wild'], items: [['Wolf', 'wolf', 'Wolf', 0.85]] },
   // ---------------- boats ----------------
   { src: K('pirate-kit'), category: 'boats', snap: 'ground', tags: ['boat', 'water'], items: [
     ['boat-row-small', 'rowboat', 'Rowboat', 1.0], ['boat-row-large', 'rowboat_large', 'Large Rowboat', 1.3], ['structure-platform-dock-small', 'dock', 'Small Dock', 1.5],
@@ -216,11 +312,12 @@ export const GROUPS = [
 export const CATEGORY_LABELS = {
   trees: 'Trees', shrubs: 'Shrubs & Grass', flowers: 'Flowers', rocks: 'Rocks & Logs', castle: 'Castle', siege: 'Siege', lighting: 'Lighting',
   furniture: 'Furniture', chapel: 'Chapel & Graves', props: 'Props', village: 'Village', garden: 'Garden', farm: 'Farm', animals: 'Animals',
-  boats: 'Boats & Bridges', decor: 'Decor',
+  boats: 'Boats & Bridges', decor: 'Decor', building_kit: 'Building Kit',
 };
 
 export const CREDITS = [
   { name: 'Kenney — Castle Kit, Fantasy Town Kit, Nature Kit, Furniture Kit, Survival Kit, Graveyard Kit, Pirate Kit, Food Kit, Mini Dungeon, Modular Dungeon Kit, Holiday Kit', url: 'https://kenney.nl', license: 'CC0 1.0' },
   { name: 'Quaternius — animals, nature and props (via poly.pizza)', url: 'https://quaternius.com', license: 'CC0 1.0' },
+  { name: 'Quaternius — Medieval Village MegaKit, Stylized Nature MegaKit, Ultimate Stylized Nature, Ultimate Animated Animals', url: 'https://quaternius.com', license: 'CC0 1.0' },
   { name: 'Dream Estate Builder Blender scripts (blender/*.py) — castle pieces, furniture, farm, garden, duck, goat', url: '', license: 'CC0 1.0' },
 ];

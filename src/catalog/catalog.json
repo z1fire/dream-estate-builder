@@ -684,6 +684,39 @@
    "source": "Quaternius"
   },
   {
+   "id": "wolf",
+   "name": "Wolf",
+   "category": "animals",
+   "tags": [
+    "animal",
+    "wild"
+   ],
+   "model": "models/animals/wolf.glb",
+   "scale": 1,
+   "footprint": [
+    0.34,
+    1.76
+   ],
+   "height": 0.85,
+   "snap": "ground",
+   "thumb": "thumbs/wolf.webp",
+   "animations": [
+    "Attack",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle",
+    "Idle_2",
+    "Idle_2_HeadLow",
+    "Idle_HitReact1",
+    "Idle_HitReact2",
+    "Jump_ToIdle",
+    "Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
    "id": "bridge_arched",
    "name": "Arched Bridge",
    "category": "boats",
@@ -793,6 +826,987 @@
    "snap": "ground",
    "thumb": "thumbs/bridge_wood.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "mv_door_braced",
+   "name": "Braced Door",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_door_braced.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    0.21
+   ],
+   "height": 2.09,
+   "snap": "wall",
+   "thumb": "thumbs/mv_door_braced.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_floor_brick",
+   "name": "Brick Floor Tile",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "floor",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_floor_brick.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_floor_brick.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_window_square",
+   "name": "Casement Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_window_square.glb",
+   "scale": 1,
+   "footprint": [
+    1.61,
+    0.68
+   ],
+   "height": 1.58,
+   "snap": "wall",
+   "thumb": "thumbs/mv_window_square.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_balcony_cross",
+   "name": "Cross-braced Balcony Rail",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_balcony_cross.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.21
+   ],
+   "height": 1.23,
+   "snap": "grid",
+   "thumb": "thumbs/mv_balcony_cross.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_floor_wood_dark",
+   "name": "Dark Plank Floor",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "floor",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_floor_wood_dark.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_floor_wood_dark.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_dormer",
+   "name": "Dormer",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_dormer.glb",
+   "scale": 1,
+   "footprint": [
+    1.97,
+    2.44
+   ],
+   "height": 2.67,
+   "snap": "grid",
+   "thumb": "thumbs/mv_dormer.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_floor_flagstone",
+   "name": "Flagstone Floor Tile",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "floor",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_floor_flagstone.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_floor_flagstone.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_window_thin",
+   "name": "Leaded Window (slim)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_window_thin.glb",
+   "scale": 1,
+   "footprint": [
+    0.89,
+    0.34
+   ],
+   "height": 1.6,
+   "snap": "wall",
+   "thumb": "thumbs/mv_window_thin.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_window_wide",
+   "name": "Leaded Window (wide)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_window_wide.glb",
+   "scale": 1,
+   "footprint": [
+    1.36,
+    0.53
+   ],
+   "height": 1.73,
+   "snap": "wall",
+   "thumb": "thumbs/mv_window_wide.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_door_panel",
+   "name": "Panelled Door (arched)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_door_panel.glb",
+   "scale": 1,
+   "footprint": [
+    1.15,
+    0.2
+   ],
+   "height": 2.32,
+   "snap": "wall",
+   "thumb": "thumbs/mv_door_panel.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_door_plank",
+   "name": "Plank Door (arched)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_door_plank.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    0.12
+   ],
+   "height": 2.32,
+   "snap": "wall",
+   "thumb": "thumbs/mv_door_plank.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_floor_wood",
+   "name": "Plank Floor",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "floor",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_floor_wood.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_floor_wood.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster",
+   "name": "Plaster Wall",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster_door",
+   "name": "Plaster Wall, Door",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster_door.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster_door.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster_window_thin",
+   "name": "Plaster Wall, Slim Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster_window_thin.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster_window_thin.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster_door_flat",
+   "name": "Plaster Wall, Square Door",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster_door_flat.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster_door_flat.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster_window_flat",
+   "name": "Plaster Wall, Square Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster_window_flat.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster_window_flat.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_plaster_window",
+   "name": "Plaster Wall, Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_plaster_window.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_plaster_window.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_porch",
+   "name": "Porch Roof",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_porch.glb",
+   "scale": 1,
+   "footprint": [
+    3.29,
+    4.23
+   ],
+   "height": 2.67,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_porch.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_floor_redbrick",
+   "name": "Red Brick Floor Tile",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "floor",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_floor_redbrick.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_floor_redbrick.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_window",
+   "name": "Roof Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_window.glb",
+   "scale": 1,
+   "footprint": [
+    1.42,
+    1.18
+   ],
+   "height": 1.18,
+   "snap": "wall",
+   "thumb": "thumbs/mv_roof_window.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_chimney2",
+   "name": "Rubble Chimney",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_chimney2.glb",
+   "scale": 1,
+   "footprint": [
+    0.95,
+    0.99
+   ],
+   "height": 3,
+   "snap": "grid",
+   "thumb": "thumbs/mv_chimney2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_stone",
+   "name": "Rubble-stone Wall",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_stone.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_stone.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_shutters_closed",
+   "name": "Shutters (closed)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_shutters_closed.glb",
+   "scale": 1,
+   "footprint": [
+    1.35,
+    0.14
+   ],
+   "height": 1.65,
+   "snap": "wall",
+   "thumb": "thumbs/mv_shutters_closed.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_shutters_open",
+   "name": "Shutters (open)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_shutters_open.glb",
+   "scale": 1,
+   "footprint": [
+    2.3,
+    0.47
+   ],
+   "height": 1.65,
+   "snap": "wall",
+   "thumb": "thumbs/mv_shutters_open.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_stair_solid",
+   "name": "Solid Timber Stair",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_stair_solid.glb",
+   "scale": 1,
+   "footprint": [
+    1.77,
+    4.71
+   ],
+   "height": 3.05,
+   "snap": "floor",
+   "thumb": "thumbs/mv_stair_solid.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_chimney",
+   "name": "Stone Chimney",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_chimney.glb",
+   "scale": 1,
+   "footprint": [
+    0.95,
+    1
+   ],
+   "height": 3.18,
+   "snap": "grid",
+   "thumb": "thumbs/mv_chimney.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_corner_stone",
+   "name": "Stone Corner Post",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_corner_stone.glb",
+   "scale": 1,
+   "footprint": [
+    0.53,
+    0.58
+   ],
+   "height": 3.02,
+   "snap": "grid",
+   "thumb": "thumbs/mv_corner_stone.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_doorframe_stone",
+   "name": "Stone Door Surround",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_doorframe_stone.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.48
+   ],
+   "height": 2.59,
+   "snap": "wall",
+   "thumb": "thumbs/mv_doorframe_stone.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_steps_platform",
+   "name": "Stone Landing",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_steps_platform.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 1,
+   "snap": "grid",
+   "thumb": "thumbs/mv_steps_platform.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_steps_stone",
+   "name": "Stone Steps",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_steps_stone.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2.08
+   ],
+   "height": 1.2,
+   "snap": "grid",
+   "thumb": "thumbs/mv_steps_stone.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_stone_door",
+   "name": "Stone Wall, Door",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_stone_door.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_stone_door.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_stone_window_thin",
+   "name": "Stone Wall, Slim Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_stone_window_thin.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_stone_window_thin.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_stone_window",
+   "name": "Stone Wall, Window",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_stone_window.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_stone_window.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_door_studded",
+   "name": "Studded Door (arched)",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_door_studded.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    0.26
+   ],
+   "height": 2.33,
+   "snap": "wall",
+   "thumb": "thumbs/mv_door_studded.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_4x4",
+   "name": "Tiled Roof 4x4 m",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_4x4.glb",
+   "scale": 1,
+   "footprint": [
+    5.51,
+    5.56
+   ],
+   "height": 4.25,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_4x4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_6x10",
+   "name": "Tiled Roof 6x10 m",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_6x10.glb",
+   "scale": 1,
+   "footprint": [
+    8.25,
+    11.85
+   ],
+   "height": 5.67,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_6x10.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_6x6",
+   "name": "Tiled Roof 6x6 m",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_6x6.glb",
+   "scale": 1,
+   "footprint": [
+    8.25,
+    8.03
+   ],
+   "height": 5.67,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_6x6.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_8x12",
+   "name": "Tiled Roof 8x12 m",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_8x12.glb",
+   "scale": 1,
+   "footprint": [
+    9.95,
+    14.13
+   ],
+   "height": 6.78,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_8x12.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_8x8",
+   "name": "Tiled Roof 8x8 m",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_8x8.glb",
+   "scale": 1,
+   "footprint": [
+    9.95,
+    10.33
+   ],
+   "height": 6.78,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_8x8.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_arch",
+   "name": "Timber Arch",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_arch.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.06
+   ],
+   "height": 3,
+   "snap": "grid",
+   "thumb": "thumbs/mv_arch.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_balcony",
+   "name": "Timber Balcony Rail",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_balcony.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.21
+   ],
+   "height": 1.23,
+   "snap": "grid",
+   "thumb": "thumbs/mv_balcony.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_corner_wood",
+   "name": "Timber Corner Post",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_corner_wood.glb",
+   "scale": 1,
+   "footprint": [
+    0.21,
+    0.24
+   ],
+   "height": 3,
+   "snap": "grid",
+   "thumb": "thumbs/mv_corner_wood.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_doorframe_wood",
+   "name": "Timber Door Frame",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "door",
+    "window",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_doorframe_wood.glb",
+   "scale": 1,
+   "footprint": [
+    1.41,
+    0.54
+   ],
+   "height": 2.56,
+   "snap": "wall",
+   "thumb": "thumbs/mv_doorframe_wood.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_stair_rails",
+   "name": "Timber Stair with Rail",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "stairs",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_stair_rails.glb",
+   "scale": 1,
+   "footprint": [
+    1.72,
+    4.56
+   ],
+   "height": 3.93,
+   "snap": "floor",
+   "thumb": "thumbs/mv_stair_rails.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_wall_timber",
+   "name": "Timber-frame Wall",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "wall",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_wall_timber.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.41
+   ],
+   "height": 3.12,
+   "snap": "grid",
+   "thumb": "thumbs/mv_wall_timber.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_roof_tower",
+   "name": "Tower Roof",
+   "category": "building_kit",
+   "tags": [
+    "kit",
+    "modular",
+    "roof",
+    "textured"
+   ],
+   "model": "models/building_kit/mv_roof_tower.glb",
+   "scale": 1,
+   "footprint": [
+    5.65,
+    5.43
+   ],
+   "height": 7.36,
+   "snap": "grid",
+   "thumb": "thumbs/mv_roof_tower.webp",
+   "source": "Quaternius"
   },
   {
    "id": "door_arched",
@@ -2423,6 +3437,44 @@
    "source": "Kenney"
   },
   {
+   "id": "q_flower_clump1",
+   "name": "Blue Poppies",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_clump1.glb",
+   "scale": 1,
+   "footprint": [
+    0.42,
+    0.39
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_clump1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flower_clump2",
+   "name": "Buttercup Clump",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_clump2.glb",
+   "scale": 1,
+   "footprint": [
+    0.38,
+    0.33
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_clump2.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "flower_yellow2",
    "name": "Buttercups",
    "category": "flowers",
@@ -2441,6 +3493,63 @@
    "source": "Kenney"
   },
   {
+   "id": "q_flower_clump4",
+   "name": "Cosmos",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_clump4.glb",
+   "scale": 1,
+   "footprint": [
+    0.57,
+    0.5
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_clump4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_petals",
+   "name": "Fallen Petals",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_petals.glb",
+   "scale": 1,
+   "footprint": [
+    0.23,
+    0.21
+   ],
+   "height": 0.08,
+   "snap": "ground",
+   "thumb": "thumbs/q_petals.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flower_clump3",
+   "name": "Forget-me-nots",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_clump3.glb",
+   "scale": 1,
+   "footprint": [
+    0.38,
+    0.33
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_clump3.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "flower_purple2",
    "name": "Lavender",
    "category": "flowers",
@@ -2457,6 +3566,44 @@
    "snap": "ground",
    "thumb": "thumbs/flower_purple2.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_flowers_white",
+   "name": "Pink Lilies",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flowers_white.glb",
+   "scale": 1,
+   "footprint": [
+    0.4,
+    0.43
+   ],
+   "height": 0.55,
+   "snap": "ground",
+   "thumb": "thumbs/q_flowers_white.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flower_white",
+   "name": "Pink Lily",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_white.glb",
+   "scale": 1,
+   "footprint": [
+    0.22,
+    0.21
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_white.webp",
+   "source": "Quaternius"
   },
   {
    "id": "flower_red2",
@@ -2513,6 +3660,25 @@
    "source": "Kenney"
   },
   {
+   "id": "q_flower_clump5",
+   "name": "Violets",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_clump5.glb",
+   "scale": 1,
+   "footprint": [
+    0.38,
+    0.33
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_clump5.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "flower_group",
    "name": "Wildflowers",
    "category": "flowers",
@@ -2547,6 +3713,44 @@
    "snap": "ground",
    "thumb": "thumbs/flower_yellow.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_flower_blue",
+   "name": "Yellow Iris",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flower_blue.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    0.18
+   ],
+   "height": 0.55,
+   "snap": "ground",
+   "thumb": "thumbs/q_flower_blue.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flowers_blue",
+   "name": "Yellow Irises",
+   "category": "flowers",
+   "tags": [
+    "flower",
+    "textured"
+   ],
+   "model": "models/flowers/q_flowers_blue.glb",
+   "scale": 1,
+   "footprint": [
+    0.43,
+    0.33
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_flowers_blue.webp",
+   "source": "Quaternius"
   },
   {
    "id": "altar",
@@ -3567,6 +4771,87 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "mv_ivy",
+   "name": "Climbing Ivy",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_ivy.glb",
+   "scale": 1,
+   "footprint": [
+    1.54,
+    0.22
+   ],
+   "height": 2.6,
+   "snap": "wall",
+   "thumb": "thumbs/mv_ivy.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_ivy2",
+   "name": "Climbing Ivy (narrow)",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_ivy2.glb",
+   "scale": 1,
+   "footprint": [
+    1.39,
+    0.21
+   ],
+   "height": 2.6,
+   "snap": "wall",
+   "thumb": "thumbs/mv_ivy2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_ivy_draped",
+   "name": "Draped Ivy",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_ivy_draped.glb",
+   "scale": 1,
+   "footprint": [
+    2.3,
+    1.13
+   ],
+   "height": 2.99,
+   "snap": "wall",
+   "thumb": "thumbs/mv_ivy_draped.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flagstones",
+   "name": "Flagstone Path",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "path",
+    "stone",
+    "textured"
+   ],
+   "model": "models/garden/q_flagstones.glb",
+   "scale": 1,
+   "footprint": [
+    1.59,
+    2.03
+   ],
+   "height": 0.18,
+   "snap": "ground",
+   "thumb": "thumbs/q_flagstones.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "statue_column",
    "name": "Garden Column",
    "category": "garden",
@@ -3679,6 +4964,48 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "q_stepping",
+   "name": "Stepping Stones",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "path",
+    "stone",
+    "textured"
+   ],
+   "model": "models/garden/q_stepping.glb",
+   "scale": 1,
+   "footprint": [
+    1.03,
+    1.44
+   ],
+   "height": 0.11,
+   "snap": "ground",
+   "thumb": "thumbs/q_stepping.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_stepping_path",
+   "name": "Stepping-stone Path",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "path",
+    "stone",
+    "textured"
+   ],
+   "model": "models/garden/q_stepping_path.glb",
+   "scale": 1,
+   "footprint": [
+    1.45,
+    2.08
+   ],
+   "height": 0.11,
+   "snap": "ground",
+   "thumb": "thumbs/q_stepping_path.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "bench_stone",
    "name": "Stone Bench",
    "category": "garden",
@@ -3695,6 +5022,46 @@
    "snap": "ground",
    "thumb": "thumbs/bench_stone.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "mv_kerb",
+   "name": "Stone Edging (2 m)",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_kerb.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.7
+   ],
+   "height": 0.13,
+   "snap": "ground",
+   "thumb": "thumbs/mv_kerb.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_kerb_corner",
+   "name": "Stone Edging Corner",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_kerb_corner.glb",
+   "scale": 1,
+   "footprint": [
+    0.7,
+    0.7
+   ],
+   "height": 0.13,
+   "snap": "ground",
+   "thumb": "thumbs/mv_kerb_corner.webp",
+   "source": "Quaternius"
   },
   {
    "id": "statue_head",
@@ -3769,6 +5136,68 @@
    "snap": "ground",
    "thumb": "thumbs/fountain_tiered.webp",
    "source": "Blender (this repo)"
+  },
+  {
+   "id": "mv_ivy_trailing",
+   "name": "Trailing Ivy",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "vine",
+    "textured"
+   ],
+   "model": "models/garden/mv_ivy_trailing.glb",
+   "scale": 1,
+   "footprint": [
+    4.14,
+    1.47
+   ],
+   "height": 2.47,
+   "snap": "wall",
+   "thumb": "thumbs/mv_ivy_trailing.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_flagstones_wide",
+   "name": "Wide Flagstones",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "path",
+    "stone",
+    "textured"
+   ],
+   "model": "models/garden/q_flagstones_wide.glb",
+   "scale": 1,
+   "footprint": [
+    2.09,
+    2.03
+   ],
+   "height": 0.18,
+   "snap": "ground",
+   "thumb": "thumbs/q_flagstones_wide.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_stepping_wide",
+   "name": "Wide Stone Path",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "path",
+    "stone",
+    "textured"
+   ],
+   "model": "models/garden/q_stepping_wide.glb",
+   "scale": 1,
+   "footprint": [
+    2.06,
+    2.08
+   ],
+   "height": 0.11,
+   "snap": "ground",
+   "thumb": "thumbs/q_stepping_wide.webp",
+   "source": "Quaternius"
   },
   {
    "id": "brazier",
@@ -4510,6 +5939,46 @@
    "source": "Kenney"
   },
   {
+   "id": "q_pebble_sq",
+   "name": "Cobble",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone",
+    "textured"
+   ],
+   "model": "models/rocks/q_pebble_sq.glb",
+   "scale": 1,
+   "footprint": [
+    0.43,
+    0.44
+   ],
+   "height": 0.13,
+   "snap": "ground",
+   "thumb": "thumbs/q_pebble_sq.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_rock3",
+   "name": "Craggy Rock",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone",
+    "textured"
+   ],
+   "model": "models/rocks/q_rock3.glb",
+   "scale": 1,
+   "footprint": [
+    2.66,
+    2.7
+   ],
+   "height": 1.8,
+   "snap": "ground",
+   "thumb": "thumbs/q_rock3.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "log",
    "name": "Fallen Log",
    "category": "rocks",
@@ -4586,6 +6055,26 @@
    "source": "Kenney"
   },
   {
+   "id": "q_rock2",
+   "name": "Low Rock",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone",
+    "textured"
+   ],
+   "model": "models/rocks/q_rock2.glb",
+   "scale": 1,
+   "footprint": [
+    1.93,
+    1.57
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/q_rock2.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "boulder3",
    "name": "Mossy Boulder",
    "category": "rocks",
@@ -4603,6 +6092,26 @@
    "snap": "ground",
    "thumb": "thumbs/boulder3.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_pebble",
+   "name": "Pebble",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone",
+    "textured"
+   ],
+   "model": "models/rocks/q_pebble.glb",
+   "scale": 1,
+   "footprint": [
+    0.52,
+    0.38
+   ],
+   "height": 0.1,
+   "snap": "ground",
+   "thumb": "thumbs/q_pebble.webp",
+   "source": "Quaternius"
   },
   {
    "id": "rock",
@@ -4681,6 +6190,45 @@
    "source": "Kenney"
   },
   {
+   "id": "q_rock1",
+   "name": "Weathered Rock",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone",
+    "textured"
+   ],
+   "model": "models/rocks/q_rock1.glb",
+   "scale": 1,
+   "footprint": [
+    2.28,
+    2.12
+   ],
+   "height": 1.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_rock1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_fern",
+   "name": "Bracken Fern",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_fern.glb",
+   "scale": 1,
+   "footprint": [
+    2.69,
+    2.53
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/q_fern.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "bush",
    "name": "Bush",
    "category": "shrubs",
@@ -4698,6 +6246,44 @@
    "snap": "ground",
    "thumb": "thumbs/bush.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_clover",
+   "name": "Clover",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_clover.glb",
+   "scale": 1,
+   "footprint": [
+    0.21,
+    0.2
+   ],
+   "height": 0.3,
+   "snap": "ground",
+   "thumb": "thumbs/q_clover.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_clover2",
+   "name": "Clover Patch",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_clover2.glb",
+   "scale": 1,
+   "footprint": [
+    0.22,
+    0.21
+   ],
+   "height": 0.32,
+   "snap": "ground",
+   "thumb": "thumbs/q_clover2.webp",
+   "source": "Quaternius"
   },
   {
    "id": "bush_cone",
@@ -4756,6 +6342,63 @@
    "source": "Quaternius"
   },
   {
+   "id": "q_bush_flowers",
+   "name": "Flowering Hawthorn",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_bush_flowers.glb",
+   "scale": 1,
+   "footprint": [
+    1.82,
+    1.86
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_bush_flowers.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_hedge_bush_flowers",
+   "name": "Flowering Hedge Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_hedge_bush_flowers.glb",
+   "scale": 1,
+   "footprint": [
+    2.07,
+    0.82
+   ],
+   "height": 1.35,
+   "snap": "ground",
+   "thumb": "thumbs/q_hedge_bush_flowers.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_grass_clump",
+   "name": "Grass Clump",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_clump.glb",
+   "scale": 1,
+   "footprint": [
+    0.73,
+    0.51
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_clump.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "grass_tuft",
    "name": "Grass Tuft",
    "category": "shrubs",
@@ -4775,6 +6418,82 @@
    "source": "Kenney"
   },
   {
+   "id": "q_groundcover",
+   "name": "Ground Cover",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_groundcover.glb",
+   "scale": 1,
+   "footprint": [
+    0.76,
+    0.69
+   ],
+   "height": 0.18,
+   "snap": "ground",
+   "thumb": "thumbs/q_groundcover.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_bush",
+   "name": "Hawthorn Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_bush.glb",
+   "scale": 1,
+   "footprint": [
+    1.82,
+    1.86
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_bush.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_hedge_bush",
+   "name": "Hedge Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_hedge_bush.glb",
+   "scale": 1,
+   "footprint": [
+    2.03,
+    0.77
+   ],
+   "height": 1.3,
+   "snap": "ground",
+   "thumb": "thumbs/q_hedge_bush.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_plant",
+   "name": "Hosta",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_plant.glb",
+   "scale": 1,
+   "footprint": [
+    0.75,
+    0.82
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_plant.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "bush_large",
    "name": "Large Bush",
    "category": "shrubs",
@@ -4792,6 +6511,25 @@
    "snap": "ground",
    "thumb": "thumbs/bush_large.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_plant_big",
+   "name": "Large Hosta",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_plant_big.glb",
+   "scale": 1,
+   "footprint": [
+    0.85,
+    0.92
+   ],
+   "height": 1.1,
+   "snap": "ground",
+   "thumb": "thumbs/q_plant_big.webp",
+   "source": "Quaternius"
   },
   {
    "id": "bush_detailed",
@@ -4830,6 +6568,25 @@
    "snap": "ground",
    "thumb": "thumbs/lily.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_grass_short",
+   "name": "Meadow Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_short.glb",
+   "scale": 1,
+   "footprint": [
+    0.22,
+    0.25
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_short.webp",
+   "source": "Quaternius"
   },
   {
    "id": "mushrooms",
@@ -4889,6 +6646,82 @@
    "source": "Kenney"
   },
   {
+   "id": "q_round_bush",
+   "name": "Round Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_round_bush.glb",
+   "scale": 1,
+   "footprint": [
+    1.27,
+    1.21
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/q_round_bush.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_round_bush_flowers",
+   "name": "Round Flowering Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_round_bush_flowers.glb",
+   "scale": 1,
+   "footprint": [
+    1.23,
+    1.24
+   ],
+   "height": 0.85,
+   "snap": "ground",
+   "thumb": "thumbs/q_round_bush_flowers.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_mushroom_shelf",
+   "name": "Shelf Fungus",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_mushroom_shelf.glb",
+   "scale": 1,
+   "footprint": [
+    0.62,
+    0.5
+   ],
+   "height": 0.35,
+   "snap": "ground",
+   "thumb": "thumbs/q_mushroom_shelf.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_grass_small",
+   "name": "Short Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_small.glb",
+   "scale": 1,
+   "footprint": [
+    0.42,
+    0.25
+   ],
+   "height": 0.35,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_small.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "bush_small",
    "name": "Small Bush",
    "category": "shrubs",
@@ -4927,6 +6760,63 @@
    "source": "Kenney"
   },
   {
+   "id": "q_grass_tall",
+   "name": "Tall Meadow Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_tall.glb",
+   "scale": 1,
+   "footprint": [
+    0.38,
+    0.42
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_tall.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_grass_wispy_tall",
+   "name": "Tall Wispy Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_wispy_tall.glb",
+   "scale": 1,
+   "footprint": [
+    0.69,
+    0.71
+   ],
+   "height": 0.75,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_wispy_tall.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_mushroom",
+   "name": "Toadstools",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_mushroom.glb",
+   "scale": 1,
+   "footprint": [
+    0.3,
+    0.42
+   ],
+   "height": 0.25,
+   "snap": "ground",
+   "thumb": "thumbs/q_mushroom.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "grass_wild",
    "name": "Wild Grass",
    "category": "shrubs",
@@ -4942,6 +6832,25 @@
    "height": 0.8,
    "snap": "ground",
    "thumb": "thumbs/grass_wild.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_grass_wispy",
+   "name": "Wispy Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "textured"
+   ],
+   "model": "models/shrubs/q_grass_wispy.glb",
+   "scale": 1,
+   "footprint": [
+    0.56,
+    0.51
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/q_grass_wispy.webp",
    "source": "Quaternius"
   },
   {
@@ -5096,6 +7005,215 @@
    "source": "Kenney"
   },
   {
+   "id": "q_dead_stump",
+   "name": "Broken Stump",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_dead_stump.glb",
+   "scale": 1,
+   "footprint": [
+    1.44,
+    1.53
+   ],
+   "height": 2.6,
+   "snap": "ground",
+   "thumb": "thumbs/q_dead_stump.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_common_1",
+   "name": "Common Tree I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_common_1.glb",
+   "scale": 1,
+   "footprint": [
+    4.75,
+    5.04
+   ],
+   "height": 8,
+   "snap": "ground",
+   "thumb": "thumbs/q_common_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_common_2",
+   "name": "Common Tree II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_common_2.glb",
+   "scale": 1,
+   "footprint": [
+    4.96,
+    4.76
+   ],
+   "height": 8.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_common_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_common_3",
+   "name": "Common Tree III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_common_3.glb",
+   "scale": 1,
+   "footprint": [
+    4.31,
+    4.5
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_common_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_common_4",
+   "name": "Common Tree IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_common_4.glb",
+   "scale": 1,
+   "footprint": [
+    4.05,
+    3.98
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_common_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_common_5",
+   "name": "Common Tree V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_common_5.glb",
+   "scale": 1,
+   "footprint": [
+    3.93,
+    4.52
+   ],
+   "height": 7.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_common_5.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_twisted_1",
+   "name": "Copper Beech I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_twisted_1.glb",
+   "scale": 1,
+   "footprint": [
+    10.51,
+    8.98
+   ],
+   "height": 13,
+   "snap": "ground",
+   "thumb": "thumbs/q_twisted_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_twisted_2",
+   "name": "Copper Beech II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_twisted_2.glb",
+   "scale": 1,
+   "footprint": [
+    7.8,
+    6.8
+   ],
+   "height": 14,
+   "snap": "ground",
+   "thumb": "thumbs/q_twisted_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_twisted_3",
+   "name": "Copper Beech III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_twisted_3.glb",
+   "scale": 1,
+   "footprint": [
+    8.83,
+    8.95
+   ],
+   "height": 12.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_twisted_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_twisted_4",
+   "name": "Copper Beech IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_twisted_4.glb",
+   "scale": 1,
+   "footprint": [
+    7.76,
+    8.44
+   ],
+   "height": 14,
+   "snap": "ground",
+   "thumb": "thumbs/q_twisted_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_twisted_5",
+   "name": "Copper Beech V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_twisted_5.glb",
+   "scale": 1,
+   "footprint": [
+    7.27,
+    7.19
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/q_twisted_5.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "birch_dead",
    "name": "Dead Birch",
    "category": "trees",
@@ -5111,6 +7229,120 @@
    "height": 9,
    "snap": "ground",
    "thumb": "thumbs/birch_dead.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_dead_spread",
+   "name": "Dead Spreading Tree",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_dead_spread.glb",
+   "scale": 1,
+   "footprint": [
+    9.76,
+    5.74
+   ],
+   "height": 7.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_dead_spread.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_deadtree_1",
+   "name": "Dead Tree I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_deadtree_1.glb",
+   "scale": 1,
+   "footprint": [
+    5.18,
+    4.84
+   ],
+   "height": 8,
+   "snap": "ground",
+   "thumb": "thumbs/q_deadtree_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_deadtree_2",
+   "name": "Dead Tree II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_deadtree_2.glb",
+   "scale": 1,
+   "footprint": [
+    5.27,
+    5
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/q_deadtree_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_deadtree_3",
+   "name": "Dead Tree III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_deadtree_3.glb",
+   "scale": 1,
+   "footprint": [
+    4.81,
+    4.84
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_deadtree_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_deadtree_4",
+   "name": "Dead Tree IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_deadtree_4.glb",
+   "scale": 1,
+   "footprint": [
+    6.23,
+    6.05
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_deadtree_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_deadtree_5",
+   "name": "Dead Tree V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_deadtree_5.glb",
+   "scale": 1,
+   "footprint": [
+    6.1,
+    6.14
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/q_deadtree_5.webp",
    "source": "Quaternius"
   },
   {
@@ -5130,6 +7362,101 @@
    "snap": "ground",
    "thumb": "thumbs/fir.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_birch_1",
+   "name": "Golden Birch I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_birch_1.glb",
+   "scale": 1,
+   "footprint": [
+    4.47,
+    3.21
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/q_birch_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_birch_2",
+   "name": "Golden Birch II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_birch_2.glb",
+   "scale": 1,
+   "footprint": [
+    5.3,
+    4.46
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/q_birch_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_birch_3",
+   "name": "Golden Birch III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_birch_3.glb",
+   "scale": 1,
+   "footprint": [
+    5.97,
+    3.94
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_birch_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_birch_4",
+   "name": "Golden Birch IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_birch_4.glb",
+   "scale": 1,
+   "footprint": [
+    4.94,
+    3.27
+   ],
+   "height": 7.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_birch_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_birch_5",
+   "name": "Golden Birch V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_birch_5.glb",
+   "scale": 1,
+   "footprint": [
+    6.16,
+    6.05
+   ],
+   "height": 9.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_birch_5.webp",
+   "source": "Quaternius"
   },
   {
    "id": "tree_leafy",
@@ -5280,6 +7607,101 @@
    "source": "Kenney"
   },
   {
+   "id": "q_maple_1",
+   "name": "Red Maple I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_maple_1.glb",
+   "scale": 1,
+   "footprint": [
+    9.38,
+    7.38
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_maple_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_maple_2",
+   "name": "Red Maple II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_maple_2.glb",
+   "scale": 1,
+   "footprint": [
+    9.98,
+    9.3
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/q_maple_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_maple_3",
+   "name": "Red Maple III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_maple_3.glb",
+   "scale": 1,
+   "footprint": [
+    14.14,
+    10.41
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/q_maple_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_maple_4",
+   "name": "Red Maple IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_maple_4.glb",
+   "scale": 1,
+   "footprint": [
+    4.24,
+    3.73
+   ],
+   "height": 5.5,
+   "snap": "ground",
+   "thumb": "thumbs/q_maple_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_maple_5",
+   "name": "Red Maple V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_maple_5.glb",
+   "scale": 1,
+   "footprint": [
+    10.6,
+    7.67
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/q_maple_5.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "tree_round",
    "name": "Round Tree",
    "category": "trees",
@@ -5316,6 +7738,101 @@
    "source": "Kenney"
   },
   {
+   "id": "q_pine_1",
+   "name": "Scots Pine I",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_pine_1.glb",
+   "scale": 1,
+   "footprint": [
+    7.43,
+    6.82
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/q_pine_1.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_pine_2",
+   "name": "Scots Pine II",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_pine_2.glb",
+   "scale": 1,
+   "footprint": [
+    8.54,
+    7.79
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/q_pine_2.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_pine_3",
+   "name": "Scots Pine III",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_pine_3.glb",
+   "scale": 1,
+   "footprint": [
+    5.86,
+    6.49
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/q_pine_3.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_pine_4",
+   "name": "Scots Pine IV",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_pine_4.glb",
+   "scale": 1,
+   "footprint": [
+    7.94,
+    7.35
+   ],
+   "height": 14,
+   "snap": "ground",
+   "thumb": "thumbs/q_pine_4.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "q_pine_5",
+   "name": "Scots Pine V",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_pine_5.glb",
+   "scale": 1,
+   "footprint": [
+    8.83,
+    8.56
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/q_pine_5.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "birch_q",
    "name": "Silver Birch",
    "category": "trees",
@@ -5350,6 +7867,25 @@
    "snap": "ground",
    "thumb": "thumbs/tree_simple.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "q_snag",
+   "name": "Snag",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "textured"
+   ],
+   "model": "models/trees/q_snag.glb",
+   "scale": 1,
+   "footprint": [
+    3.49,
+    1.46
+   ],
+   "height": 7,
+   "snap": "ground",
+   "thumb": "thumbs/q_snag.webp",
+   "source": "Quaternius"
   },
   {
    "id": "spruce",
@@ -5499,6 +8035,44 @@
    "source": "Kenney"
   },
   {
+   "id": "mv_wagon",
+   "name": "Hay Wagon",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_wagon.glb",
+   "scale": 1,
+   "footprint": [
+    1.95,
+    4.02
+   ],
+   "height": 1.53,
+   "snap": "ground",
+   "thumb": "thumbs/mv_wagon.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_iron_fence_plain",
+   "name": "Iron Railing",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_iron_fence_plain.glb",
+   "scale": 1,
+   "footprint": [
+    1.49,
+    0.12
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/mv_iron_fence_plain.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "market_goods",
    "name": "Market Goods",
    "category": "village",
@@ -5607,6 +8181,25 @@
    "source": "Kenney"
   },
   {
+   "id": "mv_iron_fence",
+   "name": "Ornate Iron Railing",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_iron_fence.glb",
+   "scale": 1,
+   "footprint": [
+    1.51,
+    0.12
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/mv_iron_fence.webp",
+   "source": "Quaternius"
+  },
+  {
    "id": "bench_q",
    "name": "Park Bench",
    "category": "village",
@@ -5622,6 +8215,25 @@
    "height": 0.9,
    "snap": "ground",
    "thumb": "thumbs/bench_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_fence",
+   "name": "Picket Fence (2 m)",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_fence.glb",
+   "scale": 1,
+   "footprint": [
+    2.06,
+    0.12
+   ],
+   "height": 0.84,
+   "snap": "ground",
+   "thumb": "thumbs/mv_fence.webp",
    "source": "Quaternius"
   },
   {
@@ -5695,6 +8307,44 @@
    "snap": "ground",
    "thumb": "thumbs/stall_bench.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "mv_brace",
+   "name": "Timber Brace",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_brace.glb",
+   "scale": 1,
+   "footprint": [
+    0.2,
+    2.04
+   ],
+   "height": 1.71,
+   "snap": "ground",
+   "thumb": "thumbs/mv_brace.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "mv_crate",
+   "name": "Timber Crate",
+   "category": "village",
+   "tags": [
+    "village",
+    "textured"
+   ],
+   "model": "models/village/mv_crate.glb",
+   "scale": 1,
+   "footprint": [
+    0.92,
+    0.92
+   ],
+   "height": 0.9,
+   "snap": "ground",
+   "thumb": "thumbs/mv_crate.webp",
+   "source": "Quaternius"
   },
   {
    "id": "town_banner_green",

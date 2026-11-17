@@ -86,7 +86,8 @@ export class VegetationSystem implements System {
     const ev = isEvergreen(ka.item);
     for (const [mat, orig] of ka.origColors) {
       const m = mat as THREE.MeshStandardMaterial;
-      const leafy = orig.g > orig.r * 1.1 && orig.g > orig.b;
+      // flat-coloured kits: judge by colour; textured packs (white factor × leaf texture): judge by material name
+      const leafy = (orig.g > orig.r * 1.1 && orig.g > orig.b) || (!!m.map && /lea[fv]|bush|grass|clover|plant|fern|vine/i.test(m.name));
       m.color.copy(orig);
       if (!leafy || ka.item.category === 'rocks') { if (s === 'winter' && ka.item.category === 'rocks') m.color.lerp(new THREE.Color('#e8eef2'), 0.25); continue; }
       if (s === 'autumn' && !ev) m.color.setRGB(orig.r * 2.4 + 0.08, orig.g * 1.05, orig.b * 0.4);
