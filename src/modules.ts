@@ -19,6 +19,9 @@ import { FloorPlanTool } from './interiors/FloorPlanTool';
 import { FurnishTool } from './interiors/FurnishTool';
 import { FarmSystem } from './farming/FarmSystem';
 import { FieldTool, PastureTool, SquareTool, registerFarmInspectors } from './farming/FarmTools';
+import { AnimalSystem } from './animals/AnimalSystem';
+import { BirdSystem } from './animals/Birds';
+import { HerdTool, registerAnimalInspector } from './animals/HerdTool';
 import { MoatTool, PondTool, StreamTool, registerWaterInspectors } from './water/WaterTools';
 
 export interface ModuleHooks {
@@ -39,6 +42,7 @@ export interface Systems {
   walls: CurtainWallSystem;
   interior: InteriorSystem;
   farm: FarmSystem;
+  animals: AnimalSystem;
 }
 
 /** Registers feature modules (systems + tools). Each phase adds its module here. */
@@ -91,6 +95,12 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   app.registerTool(new SquareTool(app));
   registerFarmInspectors(app);
 
-  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior, farm } };
+  // --- Phase 7: animals ---
+  const animals = app.addSystem(new AnimalSystem(app), 'animals') as AnimalSystem;
+  app.addSystem(new BirdSystem(app), 'animals');
+  app.registerTool(new HerdTool(app));
+  registerAnimalInspector(app);
+
+  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls, interior, farm, animals } };
   return hooks;
 }

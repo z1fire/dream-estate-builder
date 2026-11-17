@@ -10,10 +10,10 @@
    "model": "models/animals/alpaca.glb",
    "scale": 1,
    "footprint": [
-    14.76,
-    50.17
+    0.4,
+    1.35
    ],
-   "height": 62.99,
+   "height": 1.7,
    "snap": "ground",
    "thumb": "thumbs/alpaca.webp",
    "animations": [
@@ -56,10 +56,10 @@
    "model": "models/animals/bull.glb",
    "scale": 1,
    "footprint": [
-    21.74,
-    69.77
+    0.88,
+    2.81
    ],
-   "height": 39.67,
+   "height": 1.6,
    "snap": "ground",
    "thumb": "thumbs/bull.webp",
    "animations": [
@@ -101,10 +101,10 @@
    "model": "models/animals/chick.glb",
    "scale": 1,
    "footprint": [
-    22.55,
-    30.28
+    0.12,
+    0.16
    ],
-   "height": 38.37,
+   "height": 0.2,
    "snap": "ground",
    "thumb": "thumbs/chick.webp",
    "animations": [
@@ -126,10 +126,10 @@
    "model": "models/animals/chicken.glb",
    "scale": 1,
    "footprint": [
-    38.34,
-    34.31
+    0.45,
+    0.4
    ],
-   "height": 38.31,
+   "height": 0.45,
    "snap": "ground",
    "thumb": "thumbs/chicken.webp",
    "animations": [
@@ -155,10 +155,10 @@
    "model": "models/animals/cow.glb",
    "scale": 1,
    "footprint": [
-    18.75,
-    65.41
+    0.76,
+    2.64
    ],
-   "height": 37.19,
+   "height": 1.5,
    "snap": "ground",
    "thumb": "thumbs/cow.webp",
    "animations": [
@@ -200,10 +200,10 @@
    "model": "models/animals/deer.glb",
    "scale": 1,
    "footprint": [
-    24.84,
-    74.87
+    0.55,
+    1.65
    ],
-   "height": 72.77,
+   "height": 1.6,
    "snap": "ground",
    "thumb": "thumbs/deer.webp",
    "animations": [
@@ -246,10 +246,10 @@
    "model": "models/animals/dog.glb",
    "scale": 1,
    "footprint": [
-    35.78,
-    79.02
+    0.38,
+    0.83
    ],
-   "height": 71.48,
+   "height": 0.75,
    "snap": "ground",
    "thumb": "thumbs/dog.webp",
    "animations": [
@@ -274,10 +274,10 @@
    "model": "models/animals/donkey.glb",
    "scale": 1,
    "footprint": [
-    17.45,
-    70.82
+    0.41,
+    1.67
    ],
-   "height": 59.48,
+   "height": 1.4,
    "snap": "ground",
    "thumb": "thumbs/donkey.webp",
    "animations": [
@@ -344,10 +344,10 @@
    "model": "models/animals/fox.glb",
    "scale": 1,
    "footprint": [
-    7.41,
-    41.1
+    0.22,
+    1.21
    ],
-   "height": 18.7,
+   "height": 0.55,
    "snap": "ground",
    "thumb": "thumbs/fox.webp",
    "animations": [
@@ -411,10 +411,10 @@
    "model": "models/animals/horse.glb",
    "scale": 1,
    "footprint": [
-    17.47,
-    70.48
+    0.5,
+    2
    ],
-   "height": 59.9,
+   "height": 1.7,
    "snap": "ground",
    "thumb": "thumbs/horse.webp",
    "animations": [
@@ -457,10 +457,10 @@
    "model": "models/animals/husky.glb",
    "scale": 1,
    "footprint": [
-    12.76,
-    50.14
+    0.25,
+    0.98
    ],
-   "height": 41.14,
+   "height": 0.8,
    "snap": "ground",
    "thumb": "thumbs/husky.webp",
    "animations": [
@@ -501,10 +501,10 @@
    "model": "models/animals/pig.glb",
    "scale": 1,
    "footprint": [
-    46.32,
-    112.31
+    0.47,
+    1.14
    ],
-   "height": 88.61,
+   "height": 0.9,
    "snap": "ground",
    "thumb": "thumbs/pig.webp",
    "animations": [
@@ -529,10 +529,10 @@
    "model": "models/animals/sheep.glb",
    "scale": 1,
    "footprint": [
-    48.35,
-    126.86
+    0.62,
+    1.63
    ],
-   "height": 77.61,
+   "height": 1,
    "snap": "ground",
    "thumb": "thumbs/sheep.webp",
    "animations": [
@@ -557,10 +557,10 @@
    "model": "models/animals/shiba.glb",
    "scale": 1,
    "footprint": [
-    10.52,
-    38.76
+    0.21,
+    0.77
    ],
-   "height": 30.39,
+   "height": 0.6,
    "snap": "ground",
    "thumb": "thumbs/shiba.webp",
    "animations": [
@@ -601,10 +601,10 @@
    "model": "models/animals/stag.glb",
    "scale": 1,
    "footprint": [
-    22.59,
-    74.53
+    0.95,
+    1.8
    ],
-   "height": 64.44,
+   "height": 2,
    "snap": "ground",
    "thumb": "thumbs/stag.webp",
    "animations": [
@@ -647,10 +647,10 @@
    "model": "models/animals/horse_white.glb",
    "scale": 1,
    "footprint": [
-    17.47,
-    70.48
+    0.5,
+    2
    ],
-   "height": 59.9,
+   "height": 1.7,
    "snap": "ground",
    "thumb": "thumbs/horse_white.webp",
    "animations": [

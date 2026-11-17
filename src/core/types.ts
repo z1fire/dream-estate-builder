@@ -211,6 +211,8 @@ export interface AnimalDef {
   /** for ducks: water body / moat id they swim on */
   waterId?: string | null;
   scale: number;
+  /** catalog model variant (e.g. horse_white, bull, donkey, husky); defaults per species */
+  variant?: string;
 }
 
 export interface Viewpoint {

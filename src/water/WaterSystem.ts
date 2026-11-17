@@ -245,11 +245,12 @@ export class WaterSystem implements System {
 
   private buildPond(w: WaterBody): THREE.Object3D {
     const s = this.pondS(w);
-    const b = s.box, step = 2;
+    const b = s.box, step = 1.5;
     const nx = Math.ceil((b.maxX - b.minX) / step), nz = Math.ceil((b.maxZ - b.minZ) / step);
     const vid = new Int32Array((nx + 1) * (nz + 1)).fill(-1);
     const pos: number[] = [], data: number[] = [], flow: number[] = [], idx: number[] = [];
-    const inside = (x: number, z: number) => pondDist(s, x, z) > -1.2;
+    // generous: cells reaching past the shore are hidden under the raised bank, so no gaps at the waterline
+    const inside = (x: number, z: number) => pondDist(s, x, z) > -2.2;
     const base = this.app.store.doc.heights;
     const v = (i: number, j: number) => {
       const k = j * (nx + 1) + i;
@@ -312,6 +313,26 @@ export class WaterSystem implements System {
       }
     }
     return null;
+  }
+
+  /** Which water body (moat/pond/stream id) contains (x,z). */
+  bodyAt(x: number, z: number): string | null {
+    const doc = this.app.store.doc;
+    for (const m of doc.moats) { const q = this.moatS(m).idx.nearest(x, z); if (q && q.d < this.moatS(m).half) return m.id; }
+    for (const w of doc.water) {
+      if (w.kind === 'pond') { if (pondDist(this.pondS(w), x, z) > 0) return w.id; }
+      else { const q = streamSurfaceAt(this.streamS(w), x, z); if (q && q.d < w.width / 2) return w.id; }
+    }
+    return null;
+  }
+  /** Water level of a body by id. */
+  levelOf(id: string, x: number, z: number): number | null {
+    const m = this.app.store.doc.moats.find((v) => v.id === id);
+    if (m) return m.level;
+    const w = this.app.store.doc.water.find((v) => v.id === id);
+    if (!w) return null;
+    if (w.kind === 'pond') return w.level;
+    return streamSurfaceAt(this.streamS(w), x, z)?.surf ?? null;
   }
 
   /** Is (x,z) inside any water body? (including a margin) */

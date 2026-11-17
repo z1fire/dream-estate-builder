@@ -83,12 +83,14 @@ for (const group of GROUPS) {
       if (m.getMetallicFactor() > 0.5 && !/metal|iron|gold|steel/i.test(m.getName())) m.setMetallicFactor(0);
       m.setRoughnessFactor(Math.max(0.55, m.getRoughnessFactor()));
     }
+    // measure before quantization (quantize re-encodes skinned meshes, which skews getBounds)
+    const measured = getBounds(scene);
     await doc.transform(
       dedup(), prune(), weld(), resample(),
       textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [512, 512] }),
       quantize(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }),
     );
-    b = getBounds(scene);
+    b = measured;
     const category = group.category;
     const dir = path.join(OUT, category);
     await mkdir(dir, { recursive: true });
