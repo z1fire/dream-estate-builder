@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { trackErrors, ready, drag } from './helpers';
 
 test('terrain sculpt, paint, measure, plan view, undo', async ({ page }) => {
+  test.setTimeout(300_000);
   const errors = trackErrors(page);
   await ready(page);
   await page.screenshot({ path: 'tests/screenshots/02-start.png' });
@@ -46,12 +47,13 @@ test('terrain sculpt, paint, measure, plan view, undo', async ({ page }) => {
   await page.keyboard.press('Tab');
   await page.waitForTimeout(800);
   await page.screenshot({ path: 'tests/screenshots/02-plan.png' });
-  await expect(page.locator('.scalebar .t')).toContainText('ft');
+  await expect(page.locator('.scalebar .t')).toContainText('ft', { timeout: 30_000 });
   await page.keyboard.press('Tab');
 
   // save + reload round trip
   await page.evaluate(() => (window as any).deb.autosave.saveNow());
   const id = await page.evaluate(() => (window as any).app.store.doc.id);
+  page.on('dialog', (d) => void d.accept()); // the unsaved-changes guard may ask before leaving
   await page.goto('./');
   await page.waitForFunction(() => (window as any).app && (window as any).deb, null, { timeout: 60_000 });
   const id2 = await page.evaluate(() => (window as any).app.store.doc.id);

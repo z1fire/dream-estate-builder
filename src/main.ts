@@ -74,12 +74,15 @@ async function boot() {
 
   const loadDemo = async () => {
     toast('Building the demo estate…', 4000);
+    if (app.store.dirtySinceSave) await autosave.saveNow(); // never lose the estate you were working on
+    await new Promise((r) => setTimeout(r, 30));
     const { buildDemoEstate } = await import('./persistence/demo');
-    const d = await buildDemoEstate(app);
-    replaceDoc(d);
+    await buildDemoEstate(app); // loads itself into the store
+    app.selection.clear();
+    frameEstate();
     await mods.afterDemo?.();
     void autosave.saveNow();
-    toast('Demo estate loaded — explore, or press K to walk around');
+    toast('Welcome to Ravensmoor — try Views ▸ Play guided tour, or press K to walk around', 5000);
   };
 
   const ui = new UI(app, {

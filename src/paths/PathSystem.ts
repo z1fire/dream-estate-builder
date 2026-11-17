@@ -24,7 +24,7 @@ export class PathSystem implements System {
     this.group.name = 'paths';
     app.terrain.addProvider(this.provider());
     app.store.subscribe((c) => {
-      if (c.type === 'doc' || (c.type === 'collection' && ['paths', 'water', 'moats'].includes(c.key))) this.schedule();
+      if (c.type === 'doc' || (c.type === 'collection' && ['paths', 'water', 'moats', 'buildings'].includes(c.key))) this.schedule();
       else if (c.type === 'terrain') this.schedule(800);
     });
     app.groundPickers.push((x, z) => {
@@ -114,6 +114,9 @@ export class PathSystem implements System {
           while (j < s.line.length && wet[j] !== null) j++;
           const a = Math.max(0, i - 3), b = Math.min(s.line.length - 1, j + 2);
           const lvl = Math.max(...wet.slice(i, j).map((v) => v ?? -1e9));
+          // a gatehouse drawbridge already spans this crossing → no extra bridge
+          const mid = s.line[Math.floor((i + j) / 2)];
+          if (this.underDrawbridge(mid[0], mid[1])) { i = j; continue; }
           const pts = s.line.slice(a, b + 1);
           const key = `${p.id}:${k++}`;
           const sig = JSON.stringify([pts, lvl, p.style, p.width]);
@@ -130,6 +133,18 @@ export class PathSystem implements System {
       this.group.add(obj);
       this.bridges.set(k, { sig: w.sig, obj });
     }
+  }
+
+  private underDrawbridge(x: number, z: number): boolean {
+    for (const b of this.app.store.doc.buildings) {
+      if (b.kind !== 'gatehouse' || !b.extra.drawbridge) continue;
+      const fx = Math.sin(b.rotY), fz = Math.cos(b.rotY);
+      const len = Number(b.extra.bridgeLength ?? 9);
+      const ax = b.pos[0] + fx * b.depth / 2, az = b.pos[2] + fz * b.depth / 2;
+      const t = Math.max(0, Math.min(len, (x - ax) * fx + (z - az) * fz));
+      if (Math.hypot(x - (ax + fx * t), z - (az + fz * t)) < 5) return true;
+    }
+    return false;
   }
 
   private buildBridge(pts: V2[], level: number, p: PathDef): THREE.Object3D {
