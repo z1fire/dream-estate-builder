@@ -7,7 +7,7 @@ import type { BuildingDef, BuildingKind, CurtainWallDef, FloorDef, MaterialKind,
 import { PolylineDraw } from '../editing/PolylineDraw';
 import { Tool, type ToolEvent } from '../editing/Tool';
 import { button, editSlider, h, hint, section, segmented, select, slider, textInput, toast, toggle } from '../ui/dom';
-import { edgeCount, footprint, levelBase, totalHeight } from './footprint';
+import { edgeCount, footprint, levelBase, levelInset, totalHeight } from './footprint';
 import { MATERIAL_LABELS } from './materials';
 import { makeBuilding, PRESETS } from './presets';
 import { GATE_WIDTH, segmentNormal, towerRadius } from './CurtainWallSystem';
@@ -185,6 +185,21 @@ export function wallBuildings(app: App, w: CurtainWallDef): { buildings: Buildin
   return { buildings, objects };
 }
 
+/** After a taper change: single-room storeys span their (inset) storey, and stairs stay inside the storey they reach. */
+export function fitTaper(b: BuildingDef) {
+  const hw = b.width / 2 - b.wallThickness, hd = (b.shape === 'round' ? b.width : b.depth) / 2 - b.wallThickness;
+  for (const f of b.floors) {
+    if (f.level < 0) continue;
+    const li = levelInset(b, f.level);
+    if (f.rooms.length === 1) f.rooms[0].rect = [-hw + li, -hd + li, hw - li, hd - li];
+    const ni = levelInset(b, f.level + 1);
+    for (const s of f.stairs) {
+      const lim = (s.kind === 'spiral' ? 1.6 : 0.7);
+      s.pos = [Math.max(-hw + ni + lim, Math.min(hw - ni - lim, s.pos[0])), Math.max(-hd + ni + lim, Math.min(hd - ni - lim, s.pos[1]))];
+    }
+  }
+}
+
 /** Set the number of storeys above ground (keeps basements, existing floors' rooms/walls/stairs). */
 export function setFloors(b: BuildingDef, count: number, h?: number) {
   const above = b.floors.filter((f) => f.level >= 0).sort((a, c) => a.level - c.level);
@@ -205,6 +220,7 @@ export function setFloors(b: BuildingDef, count: number, h?: number) {
     else if (f.level >= 0 && !f.stairs.length && template) f.stairs = [{ ...template, id: uid('st'), from: f.level, rotY: template.kind === 'spiral' ? f.level * 1.3 : template.rotY }];
   }
   b.floors = out;
+  if (b.extra.taper) fitTaper(b);
   // windows on new floors: copy the first-floor (or ground-floor window) pattern
   const pattern = b.openings.filter((o) => o.floor === 1 || (o.floor === 0 && !o.kind.startsWith('door') && o.kind !== 'archway'));
   const src = pattern.some((x) => x.floor === 1) ? 1 : 0;
@@ -276,6 +292,7 @@ export function registerBuildingInspectors(app: App, water: WaterSystem) {
         editSlider('Roof hip', 0, 1, 0.05, Number(b.extra.hip ?? 1), (v) => edit(b.id, (e) => (e.extra.hip = v), 'Roof hip')),
         toggle('Double eaves', !!b.extra.doubleEave, (v) => edit(b.id, (e) => (e.extra.doubleEave = v), 'Double eaves')),
         toggle('Eaves on every storey', !!b.extra.tiers, (v) => edit(b.id, (e) => (e.extra.tiers = v), 'Storey eaves')),
+        editSlider('Storey taper', 0, 0.8, 0.05, Number(b.extra.taper ?? 0), (v) => edit(b.id, (e) => { e.extra.taper = v; fitTaper(e); }, 'Storey taper'), (m) => (m > 0 ? `${ft(m)} per storey` : 'none')),
         editSlider('Veranda columns', 0, 3, 0.1, Number(b.extra.columns ?? 0), (v) => edit(b.id, (e) => (e.extra.columns = v), 'Veranda'), (m) => (m > 0 ? ft(m) : 'none')),
         editSlider('Stone terrace', 0, 6, 0.1, Number(b.extra.terrace ?? 0), (v) => edit(b.id, (e) => (e.extra.terrace = v), 'Terrace'), (m) => (m > 0 ? ft(m) : 'none')),
         toggle('Open sides (pavilion)', !!b.extra.open, (v) => edit(b.id, (e) => (e.extra.open = v), 'Open sides')),

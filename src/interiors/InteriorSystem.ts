@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { App, System } from '../app/App';
 import type { PropsSystem } from '../catalog/PropsSystem';
 import type { BuildingSystem } from '../buildings/BuildingSystem';
-import { footprint, levelBase } from '../buildings/footprint';
+import { footprint, levelBase, levelInset } from '../buildings/footprint';
 import type { BuildingDef, FloorDef, InteriorWall, V2Like } from './types';
 import { buildingToWorld, worldToBuilding } from '../editing/transform';
 import { h, toast } from '../ui/dom';
@@ -17,7 +17,7 @@ export function levelName(level: number) {
 /** Wall segments of a floor (building-local): exterior inner faces + interior walls, for snapping/openings. */
 export function floorWalls(b: BuildingDef, f: FloorDef): { id: string; a: V2Like; b: V2Like; t: number; ext: boolean }[] {
   const out: { id: string; a: V2Like; b: V2Like; t: number; ext: boolean }[] = [];
-  const c = footprint(b, b.wallThickness / 2);
+  const c = footprint(b, b.wallThickness / 2 + levelInset(b, f.level));
   c.forEach((p, i) => out.push({ id: `ext:${i}`, a: p, b: c[(i + 1) % c.length], t: b.wallThickness, ext: true }));
   for (const w of f.walls) out.push({ id: w.id, a: w.a, b: w.b, t: w.thickness, ext: false });
   return out;
@@ -146,7 +146,7 @@ export class InteriorSystem implements System {
 
   private renderGrid(b: BuildingDef) {
     if (this.grid) { this.group.remove(this.grid); this.grid.geometry.dispose(); }
-    const inner = footprint(b, b.wallThickness);
+    const inner = footprint(b, b.wallThickness + levelInset(b, this.level));
     const xs = inner.map((p) => p[0]), zs = inner.map((p) => p[1]);
     const minX = Math.min(...xs), maxX = Math.max(...xs), minZ = Math.min(...zs), maxZ = Math.max(...zs);
     const pts: number[] = [];

@@ -1,6 +1,6 @@
 import { uid } from '../core/store';
 import type { BuildingDef, BuildingKind, CeilingStyle, FloorDef, MaterialKind, Opening, OpeningKind, PlacedObject, RoofStyle, RoomType, Stair, SurfaceMat } from '../core/types';
-import { edgeCount, footprint, frontEdge, levelBase } from './footprint';
+import { edgeCount, footprint, frontEdge, levelBase, levelInset } from './footprint';
 
 export interface PresetInfo {
   kind: BuildingKind;
@@ -120,10 +120,10 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 7, room: 'Throne Hall', type: 'throne', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.8, terrace: 4, doubleEave: true, hip: 1 } }),
   cn_temple: S({ name: 'Temple of Heavenly Peace', w: 16, d: 11, t: 0.55, mat: 'redlacquer', roof: 'eaves', roofColor: '#3f7a5c', door: 'door_lattice', win: 'window_lattice', winSpacing: 3.2, stairs: 'none', doorWidth: 2.4, doorHeight: 3.4, style: 'chinese',
     floors: [{ level: 0, h: 6, room: 'Prayer Hall', type: 'chapel', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.5, terrace: 2.5, doubleEave: true, hip: 0.45 } }),
-  cn_pagoda: S({ name: 'Pagoda', w: 8, d: 8, t: 0.8, mat: 'whitewash', roof: 'eaves', roofColor: '#5d6f7a', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'straight', style: 'chinese',
+  cn_pagoda: S({ name: 'Pagoda', w: 9, d: 9, t: 0.6, mat: 'whitewash', roof: 'eaves', roofColor: '#5d6f7a', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'spiral', style: 'chinese',
     floors: [{ level: 0, h: 4, room: 'Shrine', type: 'chapel', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }, { level: 1, h: 3.4, room: 'Sutra Library', type: 'library', floor: 'plank', wall: 'whitewash', ceil: 'beamed' },
       { level: 2, h: 3.4, room: 'Meditation Room', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' }, { level: 3, h: 3.2, room: 'Bell Room', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' },
-      { level: 4, h: 3.2, room: 'Lookout', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' }], extra: { tiers: true, hip: 1, terrace: 1.6, finial: true } }),
+      { level: 4, h: 3.2, room: 'Lookout', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' }], extra: { tiers: true, hip: 1, terrace: 1.6, finial: true, taper: 0.4 } }),
   cn_gate: S({ name: 'Gate Tower', w: 13, d: 8, t: 1.0, mat: 'greybrick', roof: 'eaves', roofColor: '#6f747c', door: 'archway', win: 'window_lattice', winSpacing: 3.2, stairs: 'straight', doorWidth: 3.4, doorHeight: 4.2, style: 'chinese',
     floors: [{ level: 0, h: 5.4, room: 'Gate Passage', type: 'generic', floor: 'flagstone', wall: 'stone' }, { level: 1, h: 4, room: 'Watch Hall', type: 'armory', floor: 'plank', wall: 'redlacquer', ceil: 'beamed' }], extra: { hip: 0.5, tiers: true } }),
   cn_pavilion: S({ name: 'Pavilion', w: 5.5, d: 5.5, t: 0.2, mat: 'redlacquer', roof: 'eaves', roofColor: '#2f6b55', door: 'archway', win: 'window_lattice', winSpacing: 99, stairs: 'none', style: 'chinese',
@@ -137,7 +137,7 @@ const SPECS: Record<string, Spec> = {
 /** Doors on the front edge, windows spread around all edges & floors. */
 function autoOpenings(b: BuildingDef, spec: Spec): Opening[] {
   const ops: Opening[] = [];
-  const pts = footprint(b, b.wallThickness / 2);
+  const pts0 = footprint(b, b.wallThickness / 2);
   const n = edgeCount(b), front = frontEdge(b);
   const dw = spec.doorWidth ?? (spec.door === 'door_double' ? 2.2 : spec.door === 'archway' ? 3 : 1.25);
   const dh = spec.doorHeight ?? (spec.door === 'door_double' ? 3 : 2.4);
@@ -146,6 +146,7 @@ function autoOpenings(b: BuildingDef, spec: Spec): Opening[] {
   if (b.kind === 'gatehouse' || b.kind === 'cn_gate') ops.push({ id: uid('op'), wall: `ext:${(front + 2) % n}`, floor: 0, t: 0.5, kind: 'archway', width: dw, height: dh, sill: 0 });
   for (const f of b.floors) {
     if (f.level < 0) continue;
+    const pts = levelInset(b, f.level) ? footprint(b, b.wallThickness / 2 + levelInset(b, f.level)) : pts0;
     const isSlit = spec.win === 'arrow_slit';
     const isLattice = spec.win === 'window_lattice';
     const ww = isSlit ? 0.3 : spec.win === 'window_stained' ? 1.3 : isLattice ? 1.5 : 1.0;
@@ -171,11 +172,13 @@ function autoOpenings(b: BuildingDef, spec: Spec): Opening[] {
 function stairsFor(b: BuildingDef, spec: Spec, f: FloorDef, isTop: boolean): Stair[] {
   if (isTop || spec.stairs === 'none') return [];
   const inner = b.wallThickness;
+  // keep the stairwell inside the storey it arrives on (tapering buildings)
+  const ins = levelInset(b, f.level + 1);
   if (spec.stairs === 'spiral' || b.shape === 'round') {
-    const pos: [number, number] = b.shape === 'round' ? [0, 0] : [-b.width / 2 + inner + 1.6, -b.depth / 2 + inner + 1.6];
+    const pos: [number, number] = b.shape === 'round' ? [0, 0] : [-b.width / 2 + inner + 1.6 + ins, -b.depth / 2 + inner + 1.6 + ins];
     return [{ id: uid('st'), kind: 'spiral', pos, rotY: f.level * 1.3, from: f.level, width: 1.2 }];
   }
-  return [{ id: uid('st'), kind: 'straight', pos: [-b.width / 2 + inner + 0.75, -b.depth / 2 + inner + 0.2], rotY: 0, from: f.level, width: 1.1 }];
+  return [{ id: uid('st'), kind: 'straight', pos: [-b.width / 2 + inner + 0.75 + ins, -b.depth / 2 + inner + 0.2 + ins], rotY: 0, from: f.level, width: 1.1 }];
 }
 
 /** Starter furniture per room type: [id, x fraction, z fraction, rotY, x metres offset?, z metres offset?] (building-local). */
@@ -220,7 +223,7 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
   const top = levels[levels.length - 1]?.level ?? 0;
   b.floors = spec.floors.map((f): FloorDef => ({
     level: f.level, height: f.h, walls: [], stairs: [],
-    rooms: [{ id: uid('rm'), name: f.room, type: f.type, rect: [-hw, -hd, hw, hd], floorMat: f.floor ?? 'plank', wallMat: f.wall ?? 'plaster', ceiling: f.ceil ?? 'flat' }],
+    rooms: [{ id: uid('rm'), name: f.room, type: f.type, rect: [-hw + levelInset(b, f.level), -hd + levelInset(b, f.level), hw - levelInset(b, f.level), hd - levelInset(b, f.level)], floorMat: f.floor ?? 'plank', wallMat: f.wall ?? 'plaster', ceiling: f.ceil ?? 'flat' }],
     floorMat: f.floor ?? 'plank', wallMat: f.wall ?? 'plaster', ceiling: f.ceil ?? 'flat',
   }));
   for (const f of b.floors) f.stairs = stairsFor(b, spec, f, f.level === top);
@@ -237,10 +240,11 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
       if (!list) continue;
       const y = levelBase(b, f.level) + 0.03;
       for (const [id, fx, fz, rot, ox = 0, oz = 0] of list) {
-        const x = fx * 2 * hw * 0.92 + ox, z = fz * 2 * hd * 0.92 + oz;
+        const li = levelInset(b, f.level);
+        const x = fx * 2 * (hw - li) * 0.92 + ox, z = fz * 2 * (hd - li) * 0.92 + oz;
         // keep clear of the stairwell
         if (f.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2) || b.floors.find((g) => g.level === f.level - 1)?.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2)) continue;
-        if (b.shape === 'round' && Math.hypot(x, z) > hw - 0.8) continue;
+        if (b.shape === 'round' && Math.hypot(x, z) > hw - li - 0.8) continue;
         const ceilingItem = id === 'chandelier' || id === 'cn_lantern_hanging';
         furniture.push({ id: uid('obj'), catalogId: id, pos: [x, ceilingItem ? y + f.height - 0.3 : y, z], rotY: rot, scale: 1, buildingId: b.id, floor: f.level });
       }

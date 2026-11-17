@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import type { App } from '../app/App';
 import { setFloors } from '../buildings/BuildingTools';
-import { edgeCount, insideFootprint, levelBase } from '../buildings/footprint';
+import { edgeCount, insideFootprint, levelBase, levelInset } from '../buildings/footprint';
 import { SURFACE_LABELS } from '../buildings/materials';
 import { composite, removeEntities, updateEntities, type Command } from '../core/commands';
 import { M_TO_FT } from '../core/math';
@@ -118,7 +118,7 @@ export class FloorPlanTool extends Tool {
           if (nw && !nw.w.ext) this.run('Remove wall', (_bb, ff) => { ff.walls = ff.walls.filter((w) => w.id !== nw.w.id); }, []);
           return;
         }
-        if (!insideFootprint(b, L.x, L.z, b.wallThickness * 0.5 - 0.3)) return;
+        if (!insideFootprint(b, L.x, L.z, b.wallThickness * 0.5 - 0.3 + levelInset(b, f.level))) return;
         if (!this.wallStart) { this.wallStart = L.clone(); return; }
         const a = this.wallStart;
         // axis-lock when nearly straight

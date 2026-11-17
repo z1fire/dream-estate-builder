@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { C, type GeoBuilder } from '../core/geom';
 import type { V2 } from '../core/math';
 import type { BuildingDef } from '../core/types';
-import { footprint, levelBase, totalHeight } from './footprint';
+import { footprint, levelBase, levelInset, topInset, totalHeight } from './footprint';
 
 /**
  * Chinese roofs: concave hip roofs whose eaves sweep up at the corners, built as a loft of rings from the eave line
@@ -134,7 +134,9 @@ function finial(t: RoofTargets, y: number) {
 
 /** Roof + eave details for b.roof === 'eaves'. `top` is the top of the highest wall. */
 export function buildChineseRoof(b: BuildingDef, t: RoofTargets, top: number) {
-  const hw = b.width / 2, hd = (b.shape === 'round' ? b.width : b.depth) / 2;
+  const hw0 = b.width / 2, hd0 = (b.shape === 'round' ? b.width : b.depth) / 2;
+  const ti = topInset(b);
+  const hw = hw0 - ti, hd = hd0 - ti;
   const cols = Number(b.extra.columns ?? 0);
   const open = !!b.extra.open;
   const over = (cols > 0 ? cols : 0) + (open ? 0.9 : 1.1);
@@ -146,9 +148,11 @@ export function buildChineseRoof(b: BuildingDef, t: RoofTargets, top: number) {
     for (const f of above.slice(0, -1)) {
       const y = levelBase(b, f.level + 1);
       const sk = 0.9 + (f.level === 0 && cols > 0 ? cols : 0);
-      const { corners } = eaveSurface(t, { ax0: hw + sk, bz0: hd + sk, ax1: hw, bz1: hd, y0: y - 0.35, rise: 0.75, lift: 0.4, N: 4 });
+      // the skirt runs from beyond this storey's walls up to the (possibly narrower) storey above
+      const i0 = levelInset(b, f.level), i1 = levelInset(b, f.level + 1);
+      const { corners } = eaveSurface(t, { ax0: hw0 - i0 + sk, bz0: hd0 - i0 + sk, ax1: hw0 - i1, bz1: hd0 - i1, y0: y - 0.35, rise: 0.75, lift: 0.4, N: 4 });
       hipRidges(t, corners, 1);
-      bracketBand(t, footprint(b, -0.05), y - 0.3);
+      bracketBand(t, footprint(b, -0.05 + i0), y - 0.3);
     }
   }
   let base = top, ex = hw, ez = hd, ov = over;
@@ -168,7 +172,7 @@ export function buildChineseRoof(b: BuildingDef, t: RoofTargets, top: number) {
     base = top + 0.4 + cl; ex = hw - ci; ez = hd - ci; ov = over * 0.8;
     bracketBand(t, ring, base);
   } else if (cols <= 0 && !open) {
-    bracketBand(t, footprint(b, -0.05), top);
+    bracketBand(t, footprint(b, -0.05 + ti), top);
   }
   const A = ex + ov, Bz = ez + ov;
   const short = Math.min(A, Bz);

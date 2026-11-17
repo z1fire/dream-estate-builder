@@ -143,7 +143,7 @@ export async function buildChineseDemo(app: App): Promise<EstateDoc> {
     { id: uid('vp'), name: 'Gate of Supreme Harmony', pos: [px + 22, py + 10, gateZ + 46], target: [px, py + 6, gateZ] },
     { id: uid('vp'), name: 'Palace courtyard', pos: [px + 30, py + 26, pz + 48], target: [px, py + 4, pz - 18] },
     { id: uid('vp'), name: 'Lotus pond', pos: [lx - 34, H(lx, lz) + 16, lz + 46], target: [lx + 4, H(lx, lz), lz - 4] },
-    { id: uid('vp'), name: 'Temple hill & pagoda', pos: [tx - 40, hy + 30, tz + 70], target: [tx + 10, hy + 10, tz - 6] },
+    { id: uid('vp'), name: 'Temple hill & pagoda', pos: [tx + 64, hy + 22, tz + 34], target: [tx + 12, hy + 9, tz - 8] },
     { id: uid('vp'), name: 'Teahouse street', pos: [ex + 40, sy + 22, ez + 84], target: [ex, sy, ez + 10] },
   ];
 

@@ -33,6 +33,16 @@ export function frontEdge(b: Pick<BuildingDef, 'shape'>): number {
   return best;
 }
 
+/** Extra inset of storey `level` on tapering buildings (pagodas): `extra.taper` metres per storey above the ground floor. */
+export function levelInset(b: Pick<BuildingDef, 'extra'>, level: number): number {
+  return level > 0 ? Math.max(0, Number(b.extra?.taper ?? 0)) * level : 0;
+}
+
+/** Inset of the highest storey (where the roof sits). */
+export function topInset(b: Pick<BuildingDef, 'extra' | 'floors'>): number {
+  return levelInset(b, Math.max(0, ...b.floors.map((f) => f.level)));
+}
+
 export function edgeCount(b: Pick<BuildingDef, 'shape'>) { return b.shape === 'round' ? ROUND_SEGMENTS : 4; }
 
 /** Base Y (relative to building origin) of each floor level. */

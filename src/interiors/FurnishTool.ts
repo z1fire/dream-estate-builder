@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { App } from '../app/App';
 import { CATALOG, itemsForRoom, type CatalogItem } from '../catalog/catalog';
 import { PlaceTool, type PlacementHit } from '../catalog/PlaceTool';
-import { insideFootprint, levelBase } from '../buildings/footprint';
+import { insideFootprint, levelBase, levelInset } from '../buildings/footprint';
 import type { ToolEvent } from '../editing/Tool';
 import { buildingToWorld } from '../editing/transform';
 import { catalogBrowser } from '../ui/CatalogBrowser';
@@ -27,7 +27,7 @@ export class FurnishTool extends PlaceTool {
     const r = this.interior.localHit(ev.ray);
     if (!r) return null;
     let x = Math.round(r.local.x / SNAP) * SNAP, z = Math.round(r.local.z / SNAP) * SNAP;
-    if (!insideFootprint(b, x, z, b.wallThickness + 0.1)) return null;
+    if (!insideFootprint(b, x, z, b.wallThickness + 0.1 + levelInset(b, f.level))) return null;
     const base = levelBase(b, f.level);
     let y = base + 0.03, rot = 0;
     if (item.snap === 'wall') {

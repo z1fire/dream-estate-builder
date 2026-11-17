@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GeoBuilder, C } from '../core/geom';
 import type { V2 } from '../core/math';
 import type { BuildingDef, FloorDef, Opening, OpeningKind, Stair } from '../core/types';
-import { footprint, levelBase, totalHeight } from './footprint';
+import { footprint, levelBase, levelInset, topInset, totalHeight } from './footprint';
 import { EXTERIOR_TEX, SURFACE_TEX, surfaceMaterial } from './materials';
 import { buildChineseBase, buildChineseRoof } from './chineseRoof';
 
@@ -282,8 +282,6 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
   root.add(roofG, anim);
   const t = b.wallThickness;
   const outerPts = footprint(b, 0);
-  const center = footprint(b, t / 2);
-  const innerPts = footprint(b, t);
   const extTex = EXTERIOR_TEX[b.material];
   const sorted = [...b.floors].sort((a, c) => a.level - c.level);
   const top = totalHeight(b);
@@ -297,6 +295,11 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
     root.add(g);
     const B = new Buckets();
     const y0 = levelBase(b, f.level);
+    // tapering buildings (pagodas) step each storey inward
+    const li = levelInset(b, f.level);
+    const center = footprint(b, t / 2 + li);
+    const innerPts = footprint(b, t + li);
+    const nextInset = sorted.some((x) => x.level === f.level + 1) ? levelInset(b, f.level + 1) : Infinity;
     const outer = B.get(`ext:${extTex}`, () => surfaceMaterial(extTex), 'extwall');
     const inner = B.get(`in:${f.wallMat}`, () => surfaceMaterial(SURFACE_TEX[f.wallMat]), 'intwall');
     const reveal = B.get(`ext:${extTex}`, () => surfaceMaterial(extTex), 'extwall');
@@ -317,7 +320,7 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
       const ext = b.shape === 'rect' ? t / 2 : 0.02;
       const a2: V2 = [a[0] - (dx / L) * ext, a[1] - (dz / L) * ext], c2: V2 = [c[0] + (dx / L) * ext, c[1] + (dz / L) * ext];
       const ops = b.openings.filter((o) => o.wall === `ext:${i}` && (o.floor ?? 0) === f.level).map((o) => ({ ...o, t: (o.t * L + ext) / (L + 2 * ext) }));
-      buildWall({ a: a2, b: c2, y0, h: f.height, t, outN: V(dz / L, 0, -dx / L), outer, inner, reveal, openings: ops, fills, caps: f.level === sorted[sorted.length - 1].level });
+      buildWall({ a: a2, b: c2, y0, h: f.height, t, outN: V(dz / L, 0, -dx / L), outer, inner, reveal, openings: ops, fills, caps: f.level === sorted[sorted.length - 1].level || nextInset > li });
     }
     // floor slab (holes for stairs arriving from below)
     const holes = sorted.find((x) => x.level === f.level - 1)?.stairs.map((s) => stairHole(s, sorted.find((x) => x.level === f.level - 1)!.height)) ?? [];
@@ -392,12 +395,13 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
   const wallTex = EXTERIOR_TEX[b.material];
   const wg = B.get('roofwall', () => surfaceMaterial(wallTex), 'roof');
   const over = 0.45;
-  const hw = b.width / 2, hd = b.depth / 2;
+  const ti = topInset(b);
+  const hw = b.width / 2 - ti, hd = b.depth / 2 - ti;
   const cren = b.crenellations;
   const parapetH = 1.1;
   // parapet + merlons around the top
   if (cren || b.roof === 'flat') {
-    const ring = footprint(b, 0), inner = footprint(b, b.wallThickness * 0.6);
+    const ring = footprint(b, ti), inner = footprint(b, b.wallThickness * 0.6 + ti);
     const n = ring.length;
     // corbel ledge
     for (let i = 0; i < n; i++) {
@@ -421,7 +425,7 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
     if (b.roof === 'flat') {
       const fg = B.get('rooffloor', () => surfaceMaterial('flagstone'), 'roof');
       const from = fg.vertexCount;
-      slab(footprint(b, 0.05), [], top + 0.02, 0, fg, null);
+      slab(footprint(b, 0.05 + ti), [], top + 0.02, 0, fg, null);
       planarUV(fg, from);
     }
   }
@@ -433,7 +437,7 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
   }
   const roofBase = cren ? top + parapetH * 0.3 : top;
   if (b.roof === 'conical') {
-    const r = (b.shape === 'round' ? b.width / 2 : Math.max(hw, hd)) + (cren ? -0.15 : over);
+    const r = (b.shape === 'round' ? b.width / 2 - ti : Math.max(hw, hd)) + (cren ? -0.15 : over);
     const hgt = r * 2.1;
     const seg = b.shape === 'round' ? 16 : 4;
     rg.cyl(0, roofBase, 0, r, 0, hgt, seg, WHITE, false, b.shape === 'round' ? 0 : Math.PI / 4);

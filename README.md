@@ -45,8 +45,8 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 - Adjustable height, wall thickness, storeys, roof style (conical, pitched, hipped, flat), roof colour, thatch, battlements, chimneys and materials (grey stone, sandstone, whitewash, half-timber, brick).
 
 **Chinese style** (Chinese mode, key Y)
-- Seven enterable buildings: a palace hall (double eaves, stone terrace, red colonnade), a temple, a five-storey pagoda with an eave on every floor and a gilded finial, a brick gate tower, an open pavilion with benches, a courtyard house and a two-storey teahouse.
-- Curved roofs with upturned corners and glazed tiles in any colour, hip ridges and ridge-end ornaments, and a painted bracket band (dougong) under the eaves. Any building can use them: choose *Curved eaves* as its roof, then set double eaves, eaves on every storey, veranda columns, a stone terrace or open sides.
+- Seven enterable buildings: a palace hall (double eaves, stone terrace, red colonnade), a temple, a five-storey pagoda whose storeys step inward, with an eave on every floor and a gilded finial, a brick gate tower, an open pavilion with benches, a courtyard house and a two-storey teahouse.
+- Curved roofs with upturned corners and glazed tiles in any colour, hip ridges and ridge-end ornaments, and a painted bracket band (dougong) under the eaves. Any building can use them: choose *Curved eaves* as its roof, then set double eaves, eaves on every storey, storey taper (each storey steps inward, with its rooms, stairs and furniture fitted to it), veranda columns, a stone terrace or open sides.
 - Red lacquer and grey brick walls, lattice doors and paper lattice windows that glow at night, and square-tile floors.
 - Courtyard walls with tiled coping and **moon gates** wherever the wall has a gate, and bamboo fences.
 - Garden pieces: stone lanterns, red lantern posts, zigzag and hump bridges, scholar rocks, guardian lions, an incense burner, a paifang archway, a free-standing moon gate, bonsai and a stone table with drum stools. Plants: cherry and plum blossom, bamboo groves, plus the red maples and golden birches from the nature packs.
