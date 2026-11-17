@@ -1,17 +1,17 @@
 import * as THREE from 'three';
 import { clamp } from '../core/math';
-import { CELL, GRID, HALF, VERTS, type EstateDoc } from '../core/types';
+import { CELL, GRID, HALF, VERTS } from '../core/types';
 import type { Rect } from '../core/store';
 
 /** World X/Z -> grid vertex coordinate (float). */
 export const toGrid = (w: number) => (w + HALF) / CELL;
 export const toWorld = (g: number) => g * CELL - HALF;
 
-export function heightAt(doc: EstateDoc, x: number, z: number): number {
+/** Bilinear-on-triangles height sample from a VERTS×VERTS heightfield. */
+export function heightAt(h: Float32Array, x: number, z: number): number {
   const gx = clamp(toGrid(x), 0, GRID - 1e-4), gz = clamp(toGrid(z), 0, GRID - 1e-4);
   const ix = Math.floor(gx), iz = Math.floor(gz);
   const fx = gx - ix, fz = gz - iz;
-  const h = doc.heights;
   const i = iz * VERTS + ix;
   const a = h[i], b = h[i + 1], c = h[i + VERTS], d = h[i + VERTS + 1];
   // triangle-consistent interpolation (matches the mesh split a-b-c / b-d-c)
@@ -19,20 +19,20 @@ export function heightAt(doc: EstateDoc, x: number, z: number): number {
   return d + (c - d) * (1 - fx) + (b - d) * (1 - fz);
 }
 
-export function normalAt(doc: EstateDoc, x: number, z: number, out = new THREE.Vector3()): THREE.Vector3 {
+export function normalAt(h: Float32Array, x: number, z: number, out = new THREE.Vector3()): THREE.Vector3 {
   const e = CELL;
-  const hl = heightAt(doc, x - e, z), hr = heightAt(doc, x + e, z);
-  const hd = heightAt(doc, x, z - e), hu = heightAt(doc, x, z + e);
+  const hl = heightAt(h, x - e, z), hr = heightAt(h, x + e, z);
+  const hd = heightAt(h, x, z - e), hu = heightAt(h, x, z + e);
   return out.set(hl - hr, 2 * e, hd - hu).normalize();
 }
 
-export function slopeAt(doc: EstateDoc, x: number, z: number): number {
-  const n = normalAt(doc, x, z);
+export function slopeAt(h: Float32Array, x: number, z: number): number {
+  const n = normalAt(h, x, z);
   return Math.acos(clamp(n.y, -1, 1));
 }
 
 /** Ray-march the heightfield. Returns hit point or null. */
-export function raycastTerrain(doc: EstateDoc, ray: THREE.Ray, maxDist = 4000): THREE.Vector3 | null {
+export function raycastTerrain(hf: Float32Array, ray: THREE.Ray, maxDist = 4000): THREE.Vector3 | null {
   const p = new THREE.Vector3();
   let prev = 0;
   let step = 1;
@@ -54,7 +54,7 @@ export function raycastTerrain(doc: EstateDoc, ray: THREE.Ray, maxDist = 4000): 
       }
       prev = t; t += Math.max(step, 4); continue;
     }
-    const h = heightAt(doc, p.x, p.z);
+    const h = heightAt(hf, p.x, p.z);
     const above = p.y > h;
     if (!above && prevAbove && t > 0) {
       // binary refine between prev and t
@@ -62,7 +62,7 @@ export function raycastTerrain(doc: EstateDoc, ray: THREE.Ray, maxDist = 4000): 
       for (let i = 0; i < 20; i++) {
         const m = (a + b) / 2;
         p.copy(o).addScaledVector(d, m);
-        if (p.y > heightAt(doc, p.x, p.z)) a = m; else b = m;
+        if (p.y > heightAt(hf, p.x, p.z)) a = m; else b = m;
       }
       return o.clone().addScaledVector(d, (a + b) / 2);
     }

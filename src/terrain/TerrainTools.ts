@@ -8,7 +8,7 @@ import { h, hint, section, segmented, slider } from '../ui/dom';
 import { ICONS } from '../ui/icons';
 import { applyHeightBrush, applyPaint, type BrushParams, type HeightBrush } from './brushes';
 import { layerSwatch } from './groundTextures';
-import { cellRect, heightAt, unionRect } from './heightfield';
+import { cellRect, unionRect } from './heightfield';
 
 const ftFmt = (m: number) => `${Math.round(m * M_TO_FT)} ft`;
 
@@ -122,7 +122,7 @@ export class TerrainTool extends BrushTool {
       this.down_ = false;
       return;
     }
-    if (this.brush === 'flatten' && ev.ground && !ev.e.shiftKey) this.params.target = heightAt(this.app.store.doc, ev.ground.x, ev.ground.z);
+    if (this.brush === 'flatten' && ev.ground && !ev.e.shiftKey) this.params.target = this.app.terrain.baseHeightAt(ev.ground.x, ev.ground.z);
   }
   protected applyAt(x: number, z: number, dt: number) {
     return applyHeightBrush(this.app.store.doc, this.brush, x, z, this.params, dt);

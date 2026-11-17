@@ -1,20 +1,23 @@
 import * as THREE from 'three';
 import type { Rect, Store } from '../core/store';
 import { distToPolyline, pointInPolygon } from '../core/math';
-import { GRID, HALF, VERTS, WORLD_SIZE, type EstateDoc } from '../core/types';
+import { GRID, HALF, VERTS, WORLD_SIZE } from '../core/types';
 import { createTerrainMaterial, makeSplatTexture, type TerrainUniforms } from './terrainMaterial';
-import { raycastTerrain } from './heightfield';
+import { heightAt, raycastTerrain } from './heightfield';
+import { boxToRect, intersectRect, rectsIntersect, type FeatureProvider, type TerrainFeature } from './features';
+import { unionRect } from './heightfield';
 
 const CHUNK = 64; // cells per chunk
 const NCH = GRID / CHUNK; // chunks per side
 const LODS = [1, 2, 4, 8];
 const SDF_RES = 256;
+const PLANE = GRID * GRID * 4;
 
 /** Shared index buffers per LOD level (grid + skirt). */
 const indexCache = new Map<number, THREE.BufferAttribute>();
 function lodIndex(step: number): THREE.BufferAttribute {
   if (indexCache.has(step)) return indexCache.get(step)!;
-  const n = CHUNK / step; // quads per side
+  const n = CHUNK / step;
   const v = n + 1;
   const idx: number[] = [];
   for (let z = 0; z < n; z++)
@@ -22,13 +25,12 @@ function lodIndex(step: number): THREE.BufferAttribute {
       const a = z * v + x, b = a + 1, c = a + v, d = c + 1;
       idx.push(a, c, b, b, c, d);
     }
-  // skirts: 4 edges, skirt verts appended after grid: edge e, index k
   const base = v * v;
   const edges: number[][] = [
-    Array.from({ length: v }, (_, k) => k), // z=0 (north)
-    Array.from({ length: v }, (_, k) => k * v + n), // x=n (east)
-    Array.from({ length: v }, (_, k) => n * v + (n - k)), // z=n (south), reversed
-    Array.from({ length: v }, (_, k) => (n - k) * v), // x=0 (west), reversed
+    Array.from({ length: v }, (_, k) => k),
+    Array.from({ length: v }, (_, k) => k * v + n),
+    Array.from({ length: v }, (_, k) => n * v + (n - k)),
+    Array.from({ length: v }, (_, k) => (n - k) * v),
   ];
   edges.forEach((edge, e) => {
     for (let k = 0; k < v - 1; k++) {
@@ -51,14 +53,13 @@ class Chunk {
     this.mesh.receiveShadow = true;
     this.mesh.castShadow = true;
     this.mesh.name = `terrain_${cx}_${cz}`;
-    this.mesh.userData.layer = 'terrain';
+    this.mesh.userData.noPick = true;
   }
-  build(doc: EstateDoc, lod: number) {
+  build(h: Float32Array, lod: number) {
     const step = LODS[lod];
     const n = CHUNK / step, v = n + 1;
     const total = v * v + 4 * v;
     const pos = new Float32Array(total * 3), nor = new Float32Array(total * 3);
-    const h = doc.heights;
     const gx0 = this.cx * CHUNK, gz0 = this.cz * CHUNK;
     const H = (gx: number, gz: number) => h[Math.min(GRID, Math.max(0, gz)) * VERTS + Math.min(GRID, Math.max(0, gx))];
     let minY = Infinity, maxY = -Infinity;
@@ -74,9 +75,7 @@ class Chunk {
         const L = Math.hypot(nx, ny, nz); nx /= L; ny /= L; nz /= L;
         nor[i] = nx; nor[i + 1] = ny; nor[i + 2] = nz;
       }
-    const edges = [
-      (k: number) => k, (k: number) => k * v + n, (k: number) => n * v + (n - k), (k: number) => (n - k) * v,
-    ];
+    const edges = [(k: number) => k, (k: number) => k * v + n, (k: number) => n * v + (n - k), (k: number) => (n - k) * v];
     const skirt = 1.5 * step;
     edges.forEach((f, e) => {
       for (let k = 0; k < v; k++) {
@@ -97,22 +96,35 @@ class Chunk {
   }
 }
 
+/**
+ * Renders the terrain. `store.doc.heights/splat` are the *base* (sculpted/painted) layers; registered
+ * FeatureProviders (moats, ponds, paths, building pads…) are applied on top into `final`/`finalSplat`.
+ */
 export class TerrainSystem {
   group = new THREE.Group();
   material: THREE.MeshStandardMaterial;
   uniforms: TerrainUniforms;
+  /** Final heights after features — use this for all sampling/raycasts. */
+  final: Float32Array;
+  finalSplat: Uint8Array;
   private chunks: Chunk[] = [];
   private sdfData = new Uint8Array(SDF_RES * SDF_RES);
   private sdfTex: THREE.DataTexture;
   private outer: THREE.Mesh;
+  private providers: FeatureProvider[] = [];
+  private features = new Map<string, TerrainFeature>();
   lodEnabled = true;
   private splatDirty = false;
+  /** listeners called after final heights change in a rect (vegetation/objects re-seat themselves) */
+  onHeightsChanged: ((r: Rect) => void)[] = [];
 
   constructor(private store: Store) {
     this.group.name = 'terrain';
+    this.final = store.doc.heights.slice();
+    this.finalSplat = store.doc.splat.slice();
     this.sdfTex = new THREE.DataTexture(this.sdfData, SDF_RES, SDF_RES, THREE.RedFormat, THREE.UnsignedByteType);
     this.sdfTex.magFilter = this.sdfTex.minFilter = THREE.LinearFilter;
-    const { material, uniforms } = createTerrainMaterial(store.doc.splat, this.sdfTex);
+    const { material, uniforms } = createTerrainMaterial(this.finalSplat, this.sdfTex);
     this.material = material;
     this.uniforms = uniforms;
     for (let cz = 0; cz < NCH; cz++)
@@ -121,7 +133,6 @@ export class TerrainSystem {
         this.chunks.push(c);
         this.group.add(c.mesh);
       }
-    // big skirt plane beyond the world edge
     const shape = new THREE.Shape([[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([x, y]) => new THREE.Vector2(x * WORLD_SIZE * 6, y * WORLD_SIZE * 6)));
     shape.holes.push(new THREE.Path([[-1, -1], [-1, 1], [1, 1], [1, -1]].map(([x, y]) => new THREE.Vector2(x * (HALF - 0.5), y * (HALF - 0.5)))));
     const ring = new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2);
@@ -132,21 +143,86 @@ export class TerrainSystem {
     this.group.add(this.outer);
     this.computeSdf();
     store.subscribe((c) => {
-      if (c.type === 'terrain') this.markDirty(c.rect);
-      else if (c.type === 'splat') this.splatDirty = true;
+      if (c.type === 'terrain') this.recompute(c.rect, true, false);
+      else if (c.type === 'splat') this.recompute(c.rect, false, true);
       else if (c.type === 'boundary') this.computeSdf();
       else if (c.type === 'doc') this.reload();
+      else if (c.type === 'collection') {
+        const ps = this.providers.filter((p) => p.keys.includes(c.key));
+        if (ps.length) this.refreshFeatures(ps);
+      }
     });
   }
 
+  addProvider(p: FeatureProvider) {
+    this.providers.push(p);
+    this.refreshFeatures([p]);
+  }
+
+  /** Re-derive features from providers; recompute only areas whose features changed. */
+  private refreshFeatures(ps: FeatureProvider[]) {
+    let dirty: Rect | null = null;
+    const prefixKeys = new Set(ps.flatMap((p) => p.keys));
+    const next = new Map<string, TerrainFeature>();
+    for (const p of ps) for (const f of p.features(this.store.doc)) next.set(f.key, f);
+    for (const [k, old] of this.features) {
+      if (!prefixKeys.has(k.split(':')[0] as never)) continue;
+      const nf = next.get(k);
+      if (!nf || nf.sig !== old.sig) dirty = unionRect(dirty, boxToRect(old.box, 2));
+      if (!nf) this.features.delete(k);
+    }
+    for (const [k, nf] of next) {
+      const old = this.features.get(k);
+      if (!old || old.sig !== nf.sig) dirty = unionRect(dirty, boxToRect(nf.box, 2));
+      this.features.set(k, nf);
+    }
+    if (dirty) this.recompute(dirty, true, true);
+  }
+
+  /** Recompute final heights / splat in rect = base + features. */
+  recompute(r: Rect, heights: boolean, splat: boolean) {
+    const doc = this.store.doc;
+    const feats = [...this.features.values()].sort((a, b) => a.order - b.order);
+    if (heights) {
+      for (let z = r.z0; z <= r.z1; z++) {
+        const o = z * VERTS;
+        this.final.set(doc.heights.subarray(o + r.x0, o + r.x1 + 1), o + r.x0);
+      }
+      for (const f of feats) {
+        if (!f.heights) continue;
+        const fr = intersectRect(boxToRect(f.box, 1), r);
+        if (fr) f.heights(this.final, fr);
+      }
+      this.markDirty(r);
+      for (const fn of this.onHeightsChanged) fn(r);
+    }
+    if (splat) {
+      const cr = { x0: Math.max(0, r.x0), z0: Math.max(0, r.z0), x1: Math.min(GRID - 1, r.x1), z1: Math.min(GRID - 1, r.z1) };
+      for (let p = 0; p < 3; p++)
+        for (let z = cr.z0; z <= cr.z1; z++) {
+          const o = p * PLANE + (z * GRID) * 4;
+          this.finalSplat.set(doc.splat.subarray(o + cr.x0 * 4, o + (cr.x1 + 1) * 4), o + cr.x0 * 4);
+        }
+      for (const f of feats) {
+        if (!f.splat) continue;
+        const fr = intersectRect(boxToRect(f.box, 1), cr);
+        if (fr) f.splat(this.finalSplat, fr);
+      }
+      this.splatDirty = true;
+    }
+  }
+
   private reload() {
-    const PLANE = GRID * GRID * 4;
-    const s = this.store.doc.splat;
+    this.final = this.store.doc.heights.slice();
+    this.finalSplat = this.store.doc.splat.slice();
     this.uniforms.uSplat0.value.dispose(); this.uniforms.uSplat1.value.dispose(); this.uniforms.uSplat2.value.dispose();
-    this.uniforms.uSplat0.value = makeSplatTexture(s.subarray(0, PLANE));
-    this.uniforms.uSplat1.value = makeSplatTexture(s.subarray(PLANE, 2 * PLANE));
-    this.uniforms.uSplat2.value = makeSplatTexture(s.subarray(2 * PLANE, 3 * PLANE));
-    for (const c of this.chunks) c.dirty = true;
+    this.uniforms.uSplat0.value = makeSplatTexture(this.finalSplat.subarray(0, PLANE));
+    this.uniforms.uSplat1.value = makeSplatTexture(this.finalSplat.subarray(PLANE, 2 * PLANE));
+    this.uniforms.uSplat2.value = makeSplatTexture(this.finalSplat.subarray(2 * PLANE, 3 * PLANE));
+    this.features.clear();
+    const all: Rect = { x0: 0, z0: 0, x1: GRID, z1: GRID };
+    for (const p of this.providers) for (const f of p.features(this.store.doc)) this.features.set(f.key, f);
+    this.recompute(all, true, true);
     this.computeSdf();
   }
 
@@ -169,18 +245,16 @@ export class TerrainSystem {
     this.sdfTex.needsUpdate = true;
   }
 
-  /** Per-frame: rebuild dirty chunks and adjust LOD. Budget-limited so brushing stays smooth. */
   update(camera: THREE.Camera) {
     const cp = camera.position;
     let budget = 24;
     for (const c of this.chunks) {
       const cxw = (c.cx + 0.5) * CHUNK - HALF, czw = (c.cz + 0.5) * CHUNK - HALF;
       const d = Math.hypot(cp.x - cxw, cp.z - czw, Math.max(0, cp.y - 30) * 0.5);
-      const want = !this.lodEnabled ? 0 : d < 180 ? 0 : d < 360 ? 1 : d < 650 ? 2 : 3;
+      const want = !this.lodEnabled ? 0 : d < 200 ? 0 : d < 380 ? 1 : d < 650 ? 2 : 3;
       if (c.dirty || c.lod !== want) {
-        if (budget <= 0 && c.lod >= 0 && !c.dirty) continue;
-        if (budget <= 0 && c.dirty && c.lod >= 0) continue;
-        c.build(this.store.doc, want);
+        if (budget <= 0 && c.lod >= 0) continue;
+        c.build(this.final, want);
         budget--;
       }
     }
@@ -192,13 +266,16 @@ export class TerrainSystem {
     }
   }
 
-  /** Force-build every chunk now (e.g. before a screenshot). */
-  buildAll() {
-    for (const c of this.chunks) if (c.dirty || c.lod < 0) c.build(this.store.doc, Math.max(0, c.lod));
+  buildAll(camera?: THREE.Camera) {
+    for (const c of this.chunks) if (c.dirty || c.lod < 0) c.build(this.final, Math.max(0, c.lod));
+    if (camera) this.update(camera);
   }
 
+  heightAt(x: number, z: number) { return heightAt(this.final, x, z); }
+  baseHeightAt(x: number, z: number) { return heightAt(this.store.doc.heights, x, z); }
+
   raycast(ray: THREE.Ray): THREE.Vector3 | null {
-    return raycastTerrain(this.store.doc, ray);
+    return raycastTerrain(this.final, ray);
   }
 
   setBrush(x: number, z: number, r: number, visible: boolean, color?: string) {
@@ -206,3 +283,5 @@ export class TerrainSystem {
     if (color) this.uniforms.uBrushColor.value.set(color);
   }
 }
+
+export { rectsIntersect };

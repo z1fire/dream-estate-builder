@@ -29,6 +29,8 @@ export class Environment {
   private sunDir = new THREE.Vector3();
   onSeason: (s: Season) => void = () => {};
   shadowTarget = new THREE.Vector3();
+  /** plan (top-down) view disables fog so the map stays crisp */
+  planView = false;
   shadowSize = 160;
 
   constructor(scene: THREE.Scene) {
@@ -134,7 +136,7 @@ export class Environment {
     const nightFog = new THREE.Color('#141b2b');
     const fc = dayFog.clone().lerp(duskFog, golden * 0.6).lerp(nightFog, this.night);
     this.fog.color.copy(fc);
-    this.fog.density = this.weather === 'fog' ? 0.012 : this.weather === 'rain' ? 0.0035 : overcast ? 0.0018 : 0.0009;
+    this.fog.density = this.planView ? 0 : this.weather === 'fog' ? 0.012 : this.weather === 'rain' ? 0.0035 : overcast ? 0.0018 : 0.0009;
     if (this.night > 0.6) this.sky.visible = true;
 
     this.rain.visible = this.weather === 'rain' && this.season !== 'winter';

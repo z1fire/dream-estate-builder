@@ -8,6 +8,9 @@ import { Environment } from '../environment/Environment';
 import type { PickInfo, Tool, ToolEvent } from '../editing/Tool';
 import { TerrainSystem } from '../terrain/TerrainSystem';
 import { Quality, detectQuality, type QualityLevel } from './quality';
+import type { Selection } from '../editing/Selection';
+import type { Labels } from '../ui/Labels';
+import type { UI } from '../ui/UI';
 
 THREE.Mesh.prototype.raycast = acceleratedRaycast;
 (THREE.BufferGeometry.prototype as any).computeBoundsTree = computeBoundsTree;
@@ -52,6 +55,20 @@ export class App {
   onDocReplaced: () => void = () => {};
   /** set when the user is in first-person walk mode; tools are suspended */
   walking = false;
+  /** assigned during bootstrap */
+  selection!: Selection;
+  labels!: Labels;
+  ui!: UI;
+  /** builds the viewpoints/tour popover (camera module) */
+  viewpointsPanel?: (close: () => void) => HTMLElement;
+  /** whether a vegetation kind / catalog id counts as a tree (for stats) */
+  isTreeKind?: (id: string) => boolean;
+  /** kind -> world bounding box of an entity (for selection highlight / focus) */
+  readonly boxResolvers = new Map<string, (id: string) => THREE.Box3 | null>();
+  /** kind -> properties panel builder */
+  readonly inspectors = new Map<string, (ids: string[]) => HTMLElement>();
+  /** status-bar message setter (assigned by UI) */
+  status: (msg: string) => void = () => {};
 
   constructor(root: HTMLElement, doc: EstateDoc) {
     this.viewport = document.createElement('div');
@@ -86,6 +103,10 @@ export class App {
     this.bindInput();
     window.addEventListener('resize', () => this.resize());
     this.resize();
+  }
+
+  entityBox(kind: string, id: string): THREE.Box3 | null {
+    return this.boxResolvers.get(kind)?.(id) ?? null;
   }
 
   // ---------- systems / layers ----------
@@ -172,7 +193,8 @@ export class App {
   }
 
   private bindInput() {
-    const el = this.renderer.domElement;
+    // listen on the viewport div: OrbitControls captures the pointer there, so pointerup targets it
+    const el = this.viewport;
     el.addEventListener('contextmenu', (e) => e.preventDefault());
     el.addEventListener('pointerdown', (e) => {
       this.viewport.focus();

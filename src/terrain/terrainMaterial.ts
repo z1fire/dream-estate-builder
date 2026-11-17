@@ -65,7 +65,11 @@ uniform float uWet;
 float tHash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
 float tNoise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); f=f*f*(3.0-2.0*f);
   return mix(mix(tHash(i),tHash(i+vec2(1,0)),f.x), mix(tHash(i+vec2(0,1)),tHash(i+vec2(1,1)),f.x), f.y); }
-vec3 layerCol(float l, vec2 uv){ return texture(uGround, vec3(uv, l)).rgb; }
+// two rotated/scaled samples per layer break up visible tiling
+vec3 layerCol(float l, vec2 uv){
+  vec2 uv2 = mat2(0.8, -0.6, 0.6, 0.8) * uv * 0.37 + 0.31;
+  return mix(texture(uGround, vec3(uv, l)).rgb, texture(uGround, vec3(uv2, l)).rgb, 0.45);
+}
 `)
       .replace('#include <map_fragment>', `
 {
@@ -73,7 +77,7 @@ vec3 layerCol(float l, vec2 uv){ return texture(uGround, vec3(uv, l)).rgb; }
   vec4 s0 = texture2D(uSplat0, suv);
   vec4 s1 = texture2D(uSplat1, suv);
   vec4 s2 = texture2D(uSplat2, suv);
-  vec2 tuv = vWPos.xz / 3.0;
+  vec2 tuv = vWPos.xz / 4.0;
   float slope = 1.0 - clamp(vWNorm.y, 0.0, 1.0);
   float rockAuto = smoothstep(0.28, 0.45, slope);
   s2.g = max(s2.g, rockAuto);

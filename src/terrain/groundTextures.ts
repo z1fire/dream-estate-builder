@@ -38,11 +38,11 @@ function paint(layer: GroundLayer, out: Uint8Array, off: number) {
   for (let y = 0; y < SIZE; y++)
     for (let x = 0; x < SIZE; x++) {
       const n = tfbm(x, y, 8, 3), n2 = tnoise(x, y, 32);
-      let k = 1 + n * 0.22 + n2 * 0.06;
+      let k = 1 + n * 0.16 + n2 * 0.05;
       const c: RGB = [...base];
       if (layer === 'grass' || layer === 'meadow') {
         const blade = tnoise(x, y, 64);
-        k += blade * 0.08;
+        k += blade * 0.04;
         c[1] += n * 14;
         if (layer === 'meadow' && tnoise(x + 17, y, 48) > 0.62) { c[0] = 220; c[1] = 205; c[2] = 110; } // little flowers
       } else if (layer === 'farmland') {
