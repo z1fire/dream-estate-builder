@@ -54,6 +54,14 @@ async function kenney(blocked) {
     const dir = path.join(RAW, 'kenney', kit);
     if (await exists(path.join(dir, '.done'))) { console.log(`[kenney] ${kit} already present`); continue; }
     try {
+      if (await exists(path.join(RAW, 'kenney', `${kit}.zip`))) {
+        await mkdir(dir, { recursive: true });
+        const tar = process.platform === 'win32' ? 'C:/Windows/System32/tar.exe' : 'tar';
+        execFileSync(tar, ['-xf', path.join(RAW, 'kenney', `${kit}.zip`), '-C', dir]);
+        await writeFile(path.join(dir, '.done'), new Date().toISOString());
+        console.log(`[kenney] ${kit} ✓ (from cached zip)`);
+        continue;
+      }
       const page = await fetchText(`https://kenney.nl/assets/${kit}`);
       if (!page) throw new Error('page not found');
       if (!/creativecommons\.org\/publicdomain\/zero/.test(page.text)) throw new Error('license is not CC0');
@@ -65,8 +73,10 @@ async function kenney(blocked) {
       }).then((r) => r.json());
       await mkdir(dir, { recursive: true });
       const zip = path.join(RAW, 'kenney', `${kit}.zip`);
-      await download(link.url, zip);
-      execFileSync('tar', ['-xf', zip, '-C', dir]);
+      if (!(await exists(zip))) await download(link.url, zip);
+      // Windows: use the system bsdtar (GNU tar from Git Bash treats "C:" as a remote host)
+      const tar = process.platform === 'win32' ? 'C:/Windows/System32/tar.exe' : 'tar';
+      execFileSync(tar, ['-xf', zip, '-C', dir]);
       await writeFile(path.join(dir, '.done'), new Date().toISOString());
       console.log(`[kenney] ${kit} ✓`);
     } catch (e) {

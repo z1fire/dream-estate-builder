@@ -1,0 +1,5810 @@
+{
+ "items": [
+  {
+   "id": "alpaca",
+   "name": "Alpaca",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/alpaca.glb",
+   "scale": 1,
+   "footprint": [
+    14.76,
+    50.17
+   ],
+   "height": 62.99,
+   "snap": "ground",
+   "thumb": "thumbs/alpaca.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "bull",
+   "name": "Bull",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/bull.glb",
+   "scale": 1,
+   "footprint": [
+    21.74,
+    69.77
+   ],
+   "height": 39.67,
+   "snap": "ground",
+   "thumb": "thumbs/bull.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "chick",
+   "name": "Chick",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/chick.glb",
+   "scale": 1,
+   "footprint": [
+    22.55,
+    30.28
+   ],
+   "height": 38.37,
+   "snap": "ground",
+   "thumb": "thumbs/chick.webp",
+   "animations": [
+    "AnimalArmature|AnimalArmature|AnimalArmature|Attack",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Peck",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Run"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "chicken",
+   "name": "Chicken",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/chicken.glb",
+   "scale": 1,
+   "footprint": [
+    38.34,
+    34.31
+   ],
+   "height": 38.31,
+   "snap": "ground",
+   "thumb": "thumbs/chicken.webp",
+   "animations": [
+    "CharacterArmature|Bite_Front",
+    "CharacterArmature|Dance",
+    "CharacterArmature|Death",
+    "CharacterArmature|HitRecieve",
+    "CharacterArmature|Idle",
+    "CharacterArmature|Jump",
+    "CharacterArmature|No",
+    "CharacterArmature|Walk",
+    "CharacterArmature|Yes"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "cow",
+   "name": "Cow",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/cow.glb",
+   "scale": 1,
+   "footprint": [
+    18.75,
+    65.41
+   ],
+   "height": 37.19,
+   "snap": "ground",
+   "thumb": "thumbs/cow.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "deer",
+   "name": "Deer",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/deer.glb",
+   "scale": 1,
+   "footprint": [
+    24.84,
+    74.87
+   ],
+   "height": 72.77,
+   "snap": "ground",
+   "thumb": "thumbs/deer.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "dog",
+   "name": "Dog",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/dog.glb",
+   "scale": 1,
+   "footprint": [
+    35.78,
+    79.02
+   ],
+   "height": 71.48,
+   "snap": "ground",
+   "thumb": "thumbs/dog.webp",
+   "animations": [
+    "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Headbutt",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Eating",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Loop",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Start",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Run",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "donkey",
+   "name": "Donkey",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/donkey.glb",
+   "scale": 1,
+   "footprint": [
+    17.45,
+    70.82
+   ],
+   "height": 59.48,
+   "snap": "ground",
+   "thumb": "thumbs/donkey.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "duck",
+   "name": "Duck",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/duck.glb",
+   "scale": 1,
+   "footprint": [
+    0.31,
+    0.64
+   ],
+   "height": 0.51,
+   "snap": "ground",
+   "thumb": "thumbs/duck.webp",
+   "animations": [
+    "Eat",
+    "Idle",
+    "Swim",
+    "Walk"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "fox",
+   "name": "Fox",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/fox.glb",
+   "scale": 1,
+   "footprint": [
+    7.41,
+    41.1
+   ],
+   "height": 18.7,
+   "snap": "ground",
+   "thumb": "thumbs/fox.webp",
+   "animations": [
+    "Attack",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_ToIdle",
+    "Walk",
+    "Idle_2_HeadLow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_2_HeadLow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_ToIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "goat",
+   "name": "Goat",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/goat.glb",
+   "scale": 1,
+   "footprint": [
+    0.47,
+    1.43
+   ],
+   "height": 1.41,
+   "snap": "ground",
+   "thumb": "thumbs/goat.webp",
+   "animations": [
+    "Eat",
+    "Idle",
+    "Walk"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "horse",
+   "name": "Horse",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/horse.glb",
+   "scale": 1,
+   "footprint": [
+    17.47,
+    70.48
+   ],
+   "height": 59.9,
+   "snap": "ground",
+   "thumb": "thumbs/horse.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop_Jump",
+    "Gallop",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "husky",
+   "name": "Husky",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/husky.glb",
+   "scale": 1,
+   "footprint": [
+    12.76,
+    50.14
+   ],
+   "height": 41.14,
+   "snap": "ground",
+   "thumb": "thumbs/husky.webp",
+   "animations": [
+    "Attack",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_ToIdle",
+    "Walk",
+    "Idle_2",
+    "Idle_2_HeadLow",
+    "Idle",
+    "AnimalArmature|Attack",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_2_HeadLow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_ToIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "pig",
+   "name": "Pig",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/pig.glb",
+   "scale": 1,
+   "footprint": [
+    46.32,
+    112.31
+   ],
+   "height": 88.61,
+   "snap": "ground",
+   "thumb": "thumbs/pig.webp",
+   "animations": [
+    "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Headbutt",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Eating",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Loop",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Start",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Run",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "sheep",
+   "name": "Sheep",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/sheep.glb",
+   "scale": 1,
+   "footprint": [
+    48.35,
+    126.86
+   ],
+   "height": 77.61,
+   "snap": "ground",
+   "thumb": "thumbs/sheep.webp",
+   "animations": [
+    "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Headbutt",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Eating",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Loop",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Start",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Run",
+    "AnimalArmature|AnimalArmature|AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "shiba",
+   "name": "Shiba Inu",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/shiba.glb",
+   "scale": 1,
+   "footprint": [
+    10.52,
+    38.76
+   ],
+   "height": 30.39,
+   "snap": "ground",
+   "thumb": "thumbs/shiba.webp",
+   "animations": [
+    "Attack",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_ToIdle",
+    "Walk",
+    "Idle_2_HeadLow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_2_HeadLow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_ToIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "stag",
+   "name": "Stag",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/stag.glb",
+   "scale": 1,
+   "footprint": [
+    22.59,
+    74.53
+   ],
+   "height": 64.44,
+   "snap": "ground",
+   "thumb": "thumbs/stag.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop",
+    "Gallop_Jump",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "horse_white",
+   "name": "White Horse",
+   "category": "animals",
+   "tags": [
+    "animal"
+   ],
+   "model": "models/animals/horse_white.glb",
+   "scale": 1,
+   "footprint": [
+    17.47,
+    70.48
+   ],
+   "height": 59.9,
+   "snap": "ground",
+   "thumb": "thumbs/horse_white.webp",
+   "animations": [
+    "Attack_Headbutt",
+    "Attack_Kick",
+    "Death",
+    "Eating",
+    "Gallop_Jump",
+    "Gallop",
+    "Idle_HitReact_Left",
+    "Idle_HitReact_Right",
+    "Jump_toIdle",
+    "Walk",
+    "Idle_Headlow",
+    "Idle_2",
+    "Idle",
+    "AnimalArmature|Attack_Headbutt",
+    "AnimalArmature|Attack_Kick",
+    "AnimalArmature|Death",
+    "AnimalArmature|Eating",
+    "AnimalArmature|Gallop",
+    "AnimalArmature|Gallop_Jump",
+    "AnimalArmature|Idle",
+    "AnimalArmature|Idle_2",
+    "AnimalArmature|Idle_Headlow",
+    "AnimalArmature|Idle_HitReact_Left",
+    "AnimalArmature|Idle_HitReact_Right",
+    "AnimalArmature|Jump_toIdle",
+    "AnimalArmature|Walk"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "bridge_arched",
+   "name": "Arched Bridge",
+   "category": "boats",
+   "tags": [
+    "bridge"
+   ],
+   "model": "models/boats/bridge_arched.glb",
+   "scale": 1,
+   "footprint": [
+    7.4,
+    7.4
+   ],
+   "height": 3.2,
+   "snap": "ground",
+   "thumb": "thumbs/bridge_arched.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rowboat_large",
+   "name": "Large Rowboat",
+   "category": "boats",
+   "tags": [
+    "boat",
+    "water"
+   ],
+   "model": "models/boats/rowboat_large.glb",
+   "scale": 1,
+   "footprint": [
+    4.22,
+    4.37
+   ],
+   "height": 1.3,
+   "snap": "ground",
+   "thumb": "thumbs/rowboat_large.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rowboat",
+   "name": "Rowboat",
+   "category": "boats",
+   "tags": [
+    "boat",
+    "water"
+   ],
+   "model": "models/boats/rowboat.glb",
+   "scale": 1,
+   "footprint": [
+    3.24,
+    2.8
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/rowboat.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "dock",
+   "name": "Small Dock",
+   "category": "boats",
+   "tags": [
+    "boat",
+    "water"
+   ],
+   "model": "models/boats/dock.glb",
+   "scale": 1,
+   "footprint": [
+    2.17,
+    2.87
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/dock.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bridge_stone",
+   "name": "Stone Bridge",
+   "category": "boats",
+   "tags": [
+    "bridge"
+   ],
+   "model": "models/boats/bridge_stone.glb",
+   "scale": 1,
+   "footprint": [
+    6.5,
+    6.5
+   ],
+   "height": 2.5,
+   "snap": "ground",
+   "thumb": "thumbs/bridge_stone.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bridge_wood",
+   "name": "Wooden Bridge",
+   "category": "boats",
+   "tags": [
+    "bridge"
+   ],
+   "model": "models/boats/bridge_wood.glb",
+   "scale": 1,
+   "footprint": [
+    5.2,
+    5.2
+   ],
+   "height": 2,
+   "snap": "ground",
+   "thumb": "thumbs/bridge_wood.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "door_arched",
+   "name": "Arched Door",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/door_arched.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    0.14
+   ],
+   "height": 2.8,
+   "snap": "wall",
+   "thumb": "thumbs/door_arched.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "window_arched",
+   "name": "Arched Window",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/window_arched.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    0.25
+   ],
+   "height": 2.48,
+   "snap": "wall",
+   "thumb": "thumbs/window_arched.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "arrow_slit",
+   "name": "Arrow Slit",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/arrow_slit.glb",
+   "scale": 1,
+   "footprint": [
+    1.54,
+    0.2
+   ],
+   "height": 2,
+   "snap": "grid",
+   "thumb": "thumbs/arrow_slit.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "banner_blue",
+   "name": "Banner (blue)",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/banner_blue.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.1
+   ],
+   "height": 2.64,
+   "snap": "wall",
+   "thumb": "thumbs/banner_blue.webp",
+   "roomTypes": [
+    "hall",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "banner_green",
+   "name": "Banner (green)",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/banner_green.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.1
+   ],
+   "height": 2.64,
+   "snap": "wall",
+   "thumb": "thumbs/banner_green.webp",
+   "roomTypes": [
+    "hall",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "banner_red",
+   "name": "Banner (red)",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/banner_red.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.1
+   ],
+   "height": 2.64,
+   "snap": "wall",
+   "thumb": "thumbs/banner_red.webp",
+   "roomTypes": [
+    "hall",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "flag_banner",
+   "name": "Banner Pole",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/flag_banner.glb",
+   "scale": 1,
+   "footprint": [
+    0.09,
+    1.45
+   ],
+   "height": 5,
+   "snap": "grid",
+   "thumb": "thumbs/flag_banner.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "door_double",
+   "name": "Double Door",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/door_double.glb",
+   "scale": 1,
+   "footprint": [
+    2.2,
+    0.15
+   ],
+   "height": 3.9,
+   "snap": "wall",
+   "thumb": "thumbs/door_double.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "drawbridge",
+   "name": "Drawbridge",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/drawbridge.glb",
+   "scale": 1,
+   "footprint": [
+    4.05,
+    8
+   ],
+   "height": 0.75,
+   "snap": "grid",
+   "thumb": "thumbs/drawbridge.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "flag",
+   "name": "Flag",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/flag.glb",
+   "scale": 1,
+   "footprint": [
+    0.49,
+    2
+   ],
+   "height": 4,
+   "snap": "grid",
+   "thumb": "thumbs/flag.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flagpole",
+   "name": "Flagpole",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/flagpole.glb",
+   "scale": 1,
+   "footprint": [
+    2.1,
+    0.2
+   ],
+   "height": 6.15,
+   "snap": "grid",
+   "thumb": "thumbs/flagpole.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "kit_gate",
+   "name": "Kit Gate",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_gate.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    4.36
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_gate.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_wall_half",
+   "name": "Kit Half Wall",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_wall_half.glb",
+   "scale": 1,
+   "footprint": [
+    2.29,
+    2.29
+   ],
+   "height": 3,
+   "snap": "grid",
+   "thumb": "thumbs/kit_wall_half.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_tower_hex_base",
+   "name": "Kit Hex Tower Base",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_tower_hex_base.glb",
+   "scale": 1,
+   "footprint": [
+    3.43,
+    2.97
+   ],
+   "height": 5,
+   "snap": "grid",
+   "thumb": "thumbs/kit_tower_hex_base.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_tower_hex_mid",
+   "name": "Kit Hex Tower Mid",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_tower_hex_mid.glb",
+   "scale": 1,
+   "footprint": [
+    10.35,
+    8.97
+   ],
+   "height": 5,
+   "snap": "grid",
+   "thumb": "thumbs/kit_tower_hex_mid.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_tower_hex_roof",
+   "name": "Kit Hex Tower Roof",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_tower_hex_roof.glb",
+   "scale": 1,
+   "footprint": [
+    7.06,
+    6.11
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_tower_hex_roof.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_tower_hex_top",
+   "name": "Kit Hex Tower Top",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_tower_hex_top.glb",
+   "scale": 1,
+   "footprint": [
+    19.94,
+    17.27
+   ],
+   "height": 3,
+   "snap": "grid",
+   "thumb": "thumbs/kit_tower_hex_top.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_metal_gate",
+   "name": "Kit Iron Gate",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_metal_gate.glb",
+   "scale": 1,
+   "footprint": [
+    0.49,
+    4.76
+   ],
+   "height": 5,
+   "snap": "grid",
+   "thumb": "thumbs/kit_metal_gate.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_gate_narrow",
+   "name": "Kit Narrow Gate",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_gate_narrow.glb",
+   "scale": 1,
+   "footprint": [
+    2.89,
+    4.58
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_gate_narrow.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_tower_square",
+   "name": "Kit Square Tower",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_tower_square.glb",
+   "scale": 1,
+   "footprint": [
+    10.69,
+    10.69
+   ],
+   "height": 14,
+   "snap": "grid",
+   "thumb": "thumbs/kit_tower_square.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_wall",
+   "name": "Kit Wall",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_wall.glb",
+   "scale": 1,
+   "footprint": [
+    4.58,
+    4.58
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_wall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_wall_corner",
+   "name": "Kit Wall Corner",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_wall_corner.glb",
+   "scale": 1,
+   "footprint": [
+    4.58,
+    4.58
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_wall_corner.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_wall_doorway",
+   "name": "Kit Wall Doorway",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_wall_doorway.glb",
+   "scale": 1,
+   "footprint": [
+    2.29,
+    4.58
+   ],
+   "height": 6,
+   "snap": "grid",
+   "thumb": "thumbs/kit_wall_doorway.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "kit_wall_pillar",
+   "name": "Kit Wall Pillar",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_wall_pillar.glb",
+   "scale": 1,
+   "footprint": [
+    4.96,
+    4.96
+   ],
+   "height": 6.5,
+   "snap": "grid",
+   "thumb": "thumbs/kit_wall_pillar.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "merlon",
+   "name": "Merlon",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/merlon.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    0.8
+   ],
+   "height": 0.9,
+   "snap": "grid",
+   "thumb": "thumbs/merlon.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "moat_edge_stone",
+   "name": "Moat Edging",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/moat_edge_stone.glb",
+   "scale": 1,
+   "footprint": [
+    3.98,
+    1.04
+   ],
+   "height": 1.78,
+   "snap": "grid",
+   "thumb": "thumbs/moat_edge_stone.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "pennant",
+   "name": "Pennant",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/pennant.glb",
+   "scale": 1,
+   "footprint": [
+    0.49,
+    2.65
+   ],
+   "height": 4,
+   "snap": "grid",
+   "thumb": "thumbs/pennant.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "portcullis",
+   "name": "Portcullis",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/portcullis.glb",
+   "scale": 1,
+   "footprint": [
+    4,
+    0.2
+   ],
+   "height": 5.33,
+   "snap": "grid",
+   "thumb": "thumbs/portcullis.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "window_shutter",
+   "name": "Shuttered Window",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/window_shutter.glb",
+   "scale": 1,
+   "footprint": [
+    2.04,
+    0.25
+   ],
+   "height": 1.98,
+   "snap": "wall",
+   "thumb": "thumbs/window_shutter.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "spiral_stairs",
+   "name": "Spiral Stairs",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/spiral_stairs.glb",
+   "scale": 1,
+   "footprint": [
+    3.2,
+    3.19
+   ],
+   "height": 3.6,
+   "snap": "grid",
+   "thumb": "thumbs/spiral_stairs.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "window_stained",
+   "name": "Stained Glass Window",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/window_stained.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    0.25
+   ],
+   "height": 2.53,
+   "snap": "wall",
+   "thumb": "thumbs/window_stained.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "kit_stairs_stone",
+   "name": "Stone Steps",
+   "category": "castle",
+   "tags": [
+    "castle",
+    "kit"
+   ],
+   "model": "models/castle/kit_stairs_stone.glb",
+   "scale": 1,
+   "footprint": [
+    0.69,
+    2.43
+   ],
+   "height": 2,
+   "snap": "grid",
+   "thumb": "thumbs/kit_stairs_stone.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "door_wood",
+   "name": "Wooden Door",
+   "category": "castle",
+   "tags": [
+    "castle"
+   ],
+   "model": "models/castle/door_wood.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    0.15
+   ],
+   "height": 2.2,
+   "snap": "wall",
+   "thumb": "thumbs/door_wood.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "coffin",
+   "name": "Coffin",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/coffin.glb",
+   "scale": 1,
+   "footprint": [
+    1.06,
+    1.55
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/coffin.webp",
+   "roomTypes": [
+    "chapel",
+    "cellar"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "crypt",
+   "name": "Crypt",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/crypt.glb",
+   "scale": 1,
+   "footprint": [
+    4.43,
+    6.86
+   ],
+   "height": 4.5,
+   "snap": "ground",
+   "thumb": "thumbs/crypt.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "grave_cross",
+   "name": "Grave Cross",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/grave_cross.glb",
+   "scale": 1,
+   "footprint": [
+    0.77,
+    0.29
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/grave_cross.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "gravestone",
+   "name": "Gravestone",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/gravestone.glb",
+   "scale": 1,
+   "footprint": [
+    0.78,
+    0.43
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/gravestone.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "iron_fence",
+   "name": "Iron Fence",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/iron_fence.glb",
+   "scale": 1,
+   "footprint": [
+    1.82,
+    0.2
+   ],
+   "height": 1.6,
+   "snap": "ground",
+   "thumb": "thumbs/iron_fence.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "gravestone_fancy",
+   "name": "Ornate Gravestone",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/gravestone_fancy.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    0.55
+   ],
+   "height": 1.3,
+   "snap": "ground",
+   "thumb": "thumbs/gravestone_fancy.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "altar_stone",
+   "name": "Stone Altar",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/altar_stone.glb",
+   "scale": 1,
+   "footprint": [
+    2.35,
+    1.47
+   ],
+   "height": 1.1,
+   "snap": "ground",
+   "thumb": "thumbs/altar_stone.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "pillar_stone",
+   "name": "Stone Pillar",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/pillar_stone.glb",
+   "scale": 1,
+   "footprint": [
+    0.59,
+    0.59
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/pillar_stone.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "urn",
+   "name": "Urn",
+   "category": "chapel",
+   "tags": [
+    "chapel",
+    "graveyard"
+   ],
+   "model": "models/chapel/urn.glb",
+   "scale": 1,
+   "footprint": [
+    0.55,
+    0.55
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/urn.webp",
+   "roomTypes": [
+    "chapel",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "apple",
+   "name": "Apple",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/apple.glb",
+   "scale": 1,
+   "footprint": [
+    0.08,
+    0.08
+   ],
+   "height": 0.08,
+   "snap": "floor",
+   "thumb": "thumbs/apple.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "books",
+   "name": "Books",
+   "category": "decor",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/decor/books.glb",
+   "scale": 1,
+   "footprint": [
+    0.36,
+    0.23
+   ],
+   "height": 0.25,
+   "snap": "floor",
+   "thumb": "thumbs/books.webp",
+   "roomTypes": [
+    "library",
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "bowl",
+   "name": "Bowl of Stew",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/bowl.glb",
+   "scale": 1,
+   "footprint": [
+    0.23,
+    0.27
+   ],
+   "height": 0.1,
+   "snap": "floor",
+   "thumb": "thumbs/bowl.webp",
+   "roomTypes": [
+    "kitchen",
+    "tavern"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "bread",
+   "name": "Bread",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/bread.glb",
+   "scale": 1,
+   "footprint": [
+    1.67,
+    1.38
+   ],
+   "height": 0.15,
+   "snap": "floor",
+   "thumb": "thumbs/bread.webp",
+   "roomTypes": [
+    "kitchen",
+    "hall",
+    "tavern"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "cheese",
+   "name": "Cheese Wheel",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/cheese.glb",
+   "scale": 1,
+   "footprint": [
+    0.46,
+    0.46
+   ],
+   "height": 0.15,
+   "snap": "floor",
+   "thumb": "thumbs/cheese.webp",
+   "roomTypes": [
+    "kitchen",
+    "cellar"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "clay_pot",
+   "name": "Clay Pot",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/clay_pot.glb",
+   "scale": 1,
+   "footprint": [
+    0.84,
+    0.57
+   ],
+   "height": 0.6,
+   "snap": "floor",
+   "thumb": "thumbs/clay_pot.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "coat_rack",
+   "name": "Coat Rack",
+   "category": "decor",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/decor/coat_rack.glb",
+   "scale": 1,
+   "footprint": [
+    0.64,
+    0.64
+   ],
+   "height": 1.8,
+   "snap": "floor",
+   "thumb": "thumbs/coat_rack.webp",
+   "roomTypes": [
+    "bedroom",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "cutting_board",
+   "name": "Cutting Board",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/cutting_board.glb",
+   "scale": 1,
+   "footprint": [
+    0.48,
+    0.68
+   ],
+   "height": 0.05,
+   "snap": "floor",
+   "thumb": "thumbs/cutting_board.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "dungeon_banner",
+   "name": "Dungeon Banner",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/dungeon_banner.glb",
+   "scale": 1,
+   "footprint": [
+    2.32,
+    0.39
+   ],
+   "height": 2.5,
+   "snap": "floor",
+   "thumb": "thumbs/dungeon_banner.webp",
+   "roomTypes": [
+    "dungeon",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "dungeon_column",
+   "name": "Dungeon Column",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/dungeon_column.glb",
+   "scale": 1,
+   "footprint": [
+    1.59,
+    1.59
+   ],
+   "height": 3.5,
+   "snap": "floor",
+   "thumb": "thumbs/dungeon_column.webp",
+   "roomTypes": [
+    "dungeon",
+    "cellar"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "trap",
+   "name": "Floor Trap",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/trap.glb",
+   "scale": 1,
+   "footprint": [
+    0.56,
+    0.56
+   ],
+   "height": 0.2,
+   "snap": "floor",
+   "thumb": "thumbs/trap.webp",
+   "roomTypes": [
+    "dungeon"
+   ],
+   "animations": [
+    "show",
+    "hide",
+    "show-hide"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "goblet",
+   "name": "Goblet",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/goblet.glb",
+   "scale": 1,
+   "footprint": [
+    0.08,
+    0.07
+   ],
+   "height": 0.18,
+   "snap": "floor",
+   "thumb": "thumbs/goblet.webp",
+   "roomTypes": [
+    "hall",
+    "throne"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "pie",
+   "name": "Pie",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/pie.glb",
+   "scale": 1,
+   "footprint": [
+    0.63,
+    0.63
+   ],
+   "height": 0.1,
+   "snap": "floor",
+   "thumb": "thumbs/pie.webp",
+   "roomTypes": [
+    "kitchen",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "potted_plant",
+   "name": "Potted Plant",
+   "category": "decor",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/decor/potted_plant.glb",
+   "scale": 1,
+   "footprint": [
+    0.29,
+    0.33
+   ],
+   "height": 0.9,
+   "snap": "floor",
+   "thumb": "thumbs/potted_plant.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "roast",
+   "name": "Roast",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/roast.glb",
+   "scale": 1,
+   "footprint": [
+    1.48,
+    1.78
+   ],
+   "height": 0.2,
+   "snap": "floor",
+   "thumb": "thumbs/roast.webp",
+   "roomTypes": [
+    "kitchen",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "loaf",
+   "name": "Round Loaf",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/loaf.glb",
+   "scale": 1,
+   "footprint": [
+    0.39,
+    0.26
+   ],
+   "height": 0.15,
+   "snap": "floor",
+   "thumb": "thumbs/loaf.webp",
+   "roomTypes": [
+    "kitchen",
+    "hall",
+    "tavern"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "rug_round",
+   "name": "Round Rug",
+   "category": "decor",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/decor/rug_round.glb",
+   "scale": 1,
+   "footprint": [
+    2.76,
+    2.76
+   ],
+   "height": 0.03,
+   "snap": "floor",
+   "thumb": "thumbs/rug_round.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "shield_round",
+   "name": "Round Shield",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/shield_round.glb",
+   "scale": 1,
+   "footprint": [
+    0.8,
+    0.22
+   ],
+   "height": 0.8,
+   "snap": "floor",
+   "thumb": "thumbs/shield_round.webp",
+   "roomTypes": [
+    "armory"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "sword",
+   "name": "Sword",
+   "category": "decor",
+   "tags": [
+    "dungeon"
+   ],
+   "model": "models/decor/sword.glb",
+   "scale": 1,
+   "footprint": [
+    0.52,
+    0.24
+   ],
+   "height": 1,
+   "snap": "floor",
+   "thumb": "thumbs/sword.webp",
+   "roomTypes": [
+    "armory"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "mug",
+   "name": "Tankard",
+   "category": "decor",
+   "tags": [
+    "food",
+    "table"
+   ],
+   "model": "models/decor/mug.glb",
+   "scale": 1,
+   "footprint": [
+    0.19,
+    0.16
+   ],
+   "height": 0.15,
+   "snap": "floor",
+   "thumb": "thumbs/mug.webp",
+   "roomTypes": [
+    "tavern",
+    "hall"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "beehive",
+   "name": "Beehive",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/beehive.glb",
+   "scale": 1,
+   "footprint": [
+    0.6,
+    0.6
+   ],
+   "height": 1.1,
+   "snap": "ground",
+   "thumb": "thumbs/beehive.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "crop_carrot",
+   "name": "Carrots",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_carrot.glb",
+   "scale": 1,
+   "footprint": [
+    0.19,
+    0.19
+   ],
+   "height": 0.35,
+   "snap": "ground",
+   "thumb": "thumbs/crop_carrot.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "crop_corn",
+   "name": "Corn",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_corn.glb",
+   "scale": 1,
+   "footprint": [
+    0.78,
+    0.78
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/crop_corn.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "feed_trough",
+   "name": "Feed Trough",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/feed_trough.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.5
+   ],
+   "height": 0.49,
+   "snap": "ground",
+   "thumb": "thumbs/feed_trough.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "crop_greens",
+   "name": "Greens",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_greens.glb",
+   "scale": 1,
+   "footprint": [
+    0.26,
+    0.26
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/crop_greens.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "hay_bale",
+   "name": "Hay Bale",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/hay_bale.glb",
+   "scale": 1,
+   "footprint": [
+    1.03,
+    0.68
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/hay_bale.webp",
+   "roomTypes": [
+    "stable"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "hay_bales",
+   "name": "Hay Bales",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/hay_bales.glb",
+   "scale": 1,
+   "footprint": [
+    1.92,
+    1.36
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/hay_bales.webp",
+   "roomTypes": [
+    "stable"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "haystack",
+   "name": "Haystack",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/haystack.glb",
+   "scale": 1,
+   "footprint": [
+    2.8,
+    2.8
+   ],
+   "height": 3.4,
+   "snap": "ground",
+   "thumb": "thumbs/haystack.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "crop_melon",
+   "name": "Melons",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_melon.glb",
+   "scale": 1,
+   "footprint": [
+    0.48,
+    0.42
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/crop_melon.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "pumpkin",
+   "name": "Pumpkin",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/pumpkin.glb",
+   "scale": 1,
+   "footprint": [
+    0.53,
+    0.53
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/pumpkin.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "crop_pumpkin",
+   "name": "Pumpkin Plant",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_pumpkin.glb",
+   "scale": 1,
+   "footprint": [
+    0.66,
+    0.68
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/crop_pumpkin.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "hay_bale_round",
+   "name": "Round Hay Bale",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/hay_bale_round.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    1.4
+   ],
+   "height": 1.4,
+   "snap": "ground",
+   "thumb": "thumbs/hay_bale_round.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "scarecrow",
+   "name": "Scarecrow",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/scarecrow.glb",
+   "scale": 1,
+   "footprint": [
+    1.8,
+    0.7
+   ],
+   "height": 2.6,
+   "snap": "ground",
+   "thumb": "thumbs/scarecrow.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "crop_sprouts",
+   "name": "Sprouts",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_sprouts.glb",
+   "scale": 1,
+   "footprint": [
+    0.23,
+    0.23
+   ],
+   "height": 0.25,
+   "snap": "ground",
+   "thumb": "thumbs/crop_sprouts.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "crop_turnip",
+   "name": "Turnips",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_turnip.glb",
+   "scale": 1,
+   "footprint": [
+    0.18,
+    0.18
+   ],
+   "height": 0.35,
+   "snap": "ground",
+   "thumb": "thumbs/crop_turnip.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "water_trough",
+   "name": "Water Trough",
+   "category": "farm",
+   "tags": [
+    "farm"
+   ],
+   "model": "models/farm/water_trough.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.7
+   ],
+   "height": 0.57,
+   "snap": "ground",
+   "thumb": "thumbs/water_trough.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "crop_wheat",
+   "name": "Wheat",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_wheat.glb",
+   "scale": 1,
+   "footprint": [
+    1.01,
+    0.84
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/crop_wheat.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "crop_corn_young",
+   "name": "Young Corn",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_corn_young.glb",
+   "scale": 1,
+   "footprint": [
+    0.3,
+    0.3
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/crop_corn_young.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "crop_wheat_young",
+   "name": "Young Wheat",
+   "category": "farm",
+   "tags": [
+    "farm",
+    "crop"
+   ],
+   "model": "models/farm/crop_wheat_young.glb",
+   "scale": 1,
+   "footprint": [
+    0.81,
+    0.67
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/crop_wheat_young.webp",
+   "hidden": true,
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_yellow2",
+   "name": "Buttercups",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_yellow2.glb",
+   "scale": 1,
+   "footprint": [
+    0.55,
+    0.55
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/flower_yellow2.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_purple2",
+   "name": "Lavender",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_purple2.glb",
+   "scale": 1,
+   "footprint": [
+    0.49,
+    0.5
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/flower_purple2.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_red2",
+   "name": "Poppies",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_red2.glb",
+   "scale": 1,
+   "footprint": [
+    0.35,
+    0.35
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/flower_red2.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_purple",
+   "name": "Purple Flowers",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_purple.glb",
+   "scale": 1,
+   "footprint": [
+    0.3,
+    0.34
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/flower_purple.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_red",
+   "name": "Red Flowers",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_red.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    0.28
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/flower_red.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "flower_group",
+   "name": "Wildflowers",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_group.glb",
+   "scale": 1,
+   "footprint": [
+    0.36,
+    0.39
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/flower_group.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "flower_yellow",
+   "name": "Yellow Flowers",
+   "category": "flowers",
+   "tags": [
+    "flower"
+   ],
+   "model": "models/flowers/flower_yellow.glb",
+   "scale": 1,
+   "footprint": [
+    0.37,
+    0.42
+   ],
+   "height": 0.45,
+   "snap": "ground",
+   "thumb": "thumbs/flower_yellow.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "altar",
+   "name": "Altar",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/altar.glb",
+   "scale": 1,
+   "footprint": [
+    2.1,
+    1.01
+   ],
+   "height": 1.68,
+   "snap": "floor",
+   "thumb": "thumbs/altar.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "anvil",
+   "name": "Anvil",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/anvil.glb",
+   "scale": 1,
+   "footprint": [
+    0.97,
+    0.6
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/anvil.webp",
+   "roomTypes": [
+    "workshop",
+    "smithy"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "armor_stand",
+   "name": "Armor Stand",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/armor_stand.glb",
+   "scale": 1,
+   "footprint": [
+    0.62,
+    0.6
+   ],
+   "height": 2.1,
+   "snap": "floor",
+   "thumb": "thumbs/armor_stand.webp",
+   "roomTypes": [
+    "armory",
+    "hall",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bar_counter",
+   "name": "Bar Counter",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bar_counter.glb",
+   "scale": 1,
+   "footprint": [
+    3.1,
+    0.8
+   ],
+   "height": 1.28,
+   "snap": "floor",
+   "thumb": "thumbs/bar_counter.webp",
+   "roomTypes": [
+    "tavern"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "rug_blue",
+   "name": "Blue Rug",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/rug_blue.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    2
+   ],
+   "height": 0.03,
+   "snap": "floor",
+   "thumb": "thumbs/rug_blue.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bookcase_q",
+   "name": "Bookcase",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bookcase_q.glb",
+   "scale": 1,
+   "footprint": [
+    1.15,
+    0.41
+   ],
+   "height": 2.1,
+   "snap": "floor",
+   "thumb": "thumbs/bookcase_q.webp",
+   "roomTypes": [
+    "library"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "bookshelf",
+   "name": "Bookshelf",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bookshelf.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.43
+   ],
+   "height": 2.2,
+   "snap": "wall",
+   "thumb": "thumbs/bookshelf.webp",
+   "roomTypes": [
+    "library",
+    "bedroom",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bread_oven",
+   "name": "Bread Oven",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bread_oven.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    1.9
+   ],
+   "height": 2.25,
+   "snap": "floor",
+   "thumb": "thumbs/bread_oven.webp",
+   "roomTypes": [
+    "kitchen",
+    "bakery"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "rug_runner",
+   "name": "Carpet Runner",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/rug_runner.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    6
+   ],
+   "height": 0.03,
+   "snap": "floor",
+   "thumb": "thumbs/rug_runner.webp",
+   "roomTypes": [
+    "throne",
+    "hall",
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cask",
+   "name": "Cask",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/cask.glb",
+   "scale": 1,
+   "footprint": [
+    1.34,
+    1.63
+   ],
+   "height": 1.52,
+   "snap": "floor",
+   "thumb": "thumbs/cask.webp",
+   "roomTypes": [
+    "cellar",
+    "tavern"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cauldron",
+   "name": "Cauldron",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/cauldron.glb",
+   "scale": 1,
+   "footprint": [
+    1.29,
+    1.07
+   ],
+   "height": 0.9,
+   "snap": "floor",
+   "thumb": "thumbs/cauldron.webp",
+   "roomTypes": [
+    "kitchen",
+    "dungeon"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "cell_bars",
+   "name": "Cell Bars",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/cell_bars.glb",
+   "scale": 1,
+   "footprint": [
+    3,
+    0.12
+   ],
+   "height": 2.47,
+   "snap": "floor",
+   "thumb": "thumbs/cell_bars.webp",
+   "roomTypes": [
+    "dungeon"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "chair",
+   "name": "Chair",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/chair.glb",
+   "scale": 1,
+   "footprint": [
+    0.5,
+    0.5
+   ],
+   "height": 1.08,
+   "snap": "floor",
+   "thumb": "thumbs/chair.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "chest_q",
+   "name": "Chest",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/chest_q.glb",
+   "scale": 1,
+   "footprint": [
+    1.11,
+    0.7
+   ],
+   "height": 0.7,
+   "snap": "floor",
+   "thumb": "thumbs/chest_q.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "cooking_pot",
+   "name": "Cooking Pot",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/cooking_pot.glb",
+   "scale": 1,
+   "footprint": [
+    1.45,
+    1.68
+   ],
+   "height": 1.71,
+   "snap": "floor",
+   "thumb": "thumbs/cooking_pot.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "light": {
+    "color": "#ff8a30",
+    "intensity": 3,
+    "distance": 5,
+    "y": 0.3
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "closet",
+   "name": "Cupboard",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/closet.glb",
+   "scale": 1,
+   "footprint": [
+    1.04,
+    0.58
+   ],
+   "height": 2,
+   "snap": "floor",
+   "thumb": "thumbs/closet.webp",
+   "roomTypes": [
+    "bedroom",
+    "kitchen"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "bed_double_q",
+   "name": "Double Bed",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bed_double_q.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    3.01
+   ],
+   "height": 1.1,
+   "snap": "floor",
+   "thumb": "thumbs/bed_double_q.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "fireplace",
+   "name": "Fireplace",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/fireplace.glb",
+   "scale": 1,
+   "footprint": [
+    1.9,
+    0.8
+   ],
+   "height": 1.62,
+   "snap": "wall",
+   "thumb": "thumbs/fireplace.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "light": {
+    "color": "#ff8a30",
+    "intensity": 9,
+    "distance": 10,
+    "y": 0.6
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "forge",
+   "name": "Forge",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/forge.glb",
+   "scale": 1,
+   "footprint": [
+    2.5,
+    1.4
+   ],
+   "height": 3,
+   "snap": "floor",
+   "thumb": "thumbs/forge.webp",
+   "roomTypes": [
+    "workshop",
+    "smithy"
+   ],
+   "light": {
+    "color": "#ff7020",
+    "intensity": 8,
+    "distance": 9,
+    "y": 1.1
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bed_fourposter",
+   "name": "Four-Poster Bed",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bed_fourposter.glb",
+   "scale": 1,
+   "footprint": [
+    1.96,
+    2.43
+   ],
+   "height": 2.46,
+   "snap": "floor",
+   "thumb": "thumbs/bed_fourposter.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "hearth",
+   "name": "Great Hearth",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/hearth.glb",
+   "scale": 1,
+   "footprint": [
+    2.9,
+    1.2
+   ],
+   "height": 3.9,
+   "snap": "wall",
+   "thumb": "thumbs/hearth.webp",
+   "roomTypes": [
+    "kitchen",
+    "hall"
+   ],
+   "light": {
+    "color": "#ff8a30",
+    "intensity": 14,
+    "distance": 14,
+    "y": 0.8
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "kitchen_table",
+   "name": "Kitchen Table",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/kitchen_table.glb",
+   "scale": 1,
+   "footprint": [
+    2,
+    0.9
+   ],
+   "height": 1.01,
+   "snap": "floor",
+   "thumb": "thumbs/kitchen_table.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "chest_large",
+   "name": "Large Chest",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/chest_large.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    0.71
+   ],
+   "height": 0.89,
+   "snap": "floor",
+   "thumb": "thumbs/chest_large.webp",
+   "roomTypes": [
+    "bedroom",
+    "storage",
+    "armory",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "lectern",
+   "name": "Lectern",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/lectern.glb",
+   "scale": 1,
+   "footprint": [
+    0.6,
+    0.5
+   ],
+   "height": 1.25,
+   "snap": "floor",
+   "thumb": "thumbs/lectern.webp",
+   "roomTypes": [
+    "library",
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bench_long",
+   "name": "Long Bench",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bench_long.glb",
+   "scale": 1,
+   "footprint": [
+    3.6,
+    0.38
+   ],
+   "height": 0.5,
+   "snap": "floor",
+   "thumb": "thumbs/bench_long.webp",
+   "roomTypes": [
+    "hall",
+    "tavern",
+    "kitchen",
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "long_table",
+   "name": "Long Table",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/long_table.glb",
+   "scale": 1,
+   "footprint": [
+    4,
+    1.1
+   ],
+   "height": 0.84,
+   "snap": "floor",
+   "thumb": "thumbs/long_table.webp",
+   "roomTypes": [
+    "hall",
+    "tavern",
+    "kitchen"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "nightstand",
+   "name": "Nightstand",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/nightstand.glb",
+   "scale": 1,
+   "footprint": [
+    0.5,
+    0.5
+   ],
+   "height": 0.78,
+   "snap": "floor",
+   "thumb": "thumbs/nightstand.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "pew",
+   "name": "Pew",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/pew.glb",
+   "scale": 1,
+   "footprint": [
+    2.48,
+    0.55
+   ],
+   "height": 1.02,
+   "snap": "floor",
+   "thumb": "thumbs/pew.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "pot_shelf",
+   "name": "Pot Shelf",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/pot_shelf.glb",
+   "scale": 1,
+   "footprint": [
+    1.62,
+    0.4
+   ],
+   "height": 1.88,
+   "snap": "wall",
+   "thumb": "thumbs/pot_shelf.webp",
+   "roomTypes": [
+    "kitchen",
+    "storage"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "rug_red",
+   "name": "Red Rug",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/rug_red.glb",
+   "scale": 1,
+   "footprint": [
+    2.4,
+    1.6
+   ],
+   "height": 0.03,
+   "snap": "floor",
+   "thumb": "thumbs/rug_red.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "round_table",
+   "name": "Round Table",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/round_table.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    1.4
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/round_table.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "shield_wall",
+   "name": "Shield Display",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/shield_wall.glb",
+   "scale": 1,
+   "footprint": [
+    2.01,
+    0.15
+   ],
+   "height": 1.18,
+   "snap": "wall",
+   "thumb": "thumbs/shield_wall.webp",
+   "roomTypes": [
+    "armory",
+    "hall"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bed_simple",
+   "name": "Simple Bed",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/bed_simple.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    2.04
+   ],
+   "height": 0.6,
+   "snap": "floor",
+   "thumb": "thumbs/bed_simple.webp",
+   "roomTypes": [
+    "bedroom",
+    "barracks"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "stool",
+   "name": "Stool",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/stool.glb",
+   "scale": 1,
+   "footprint": [
+    0.4,
+    0.4
+   ],
+   "height": 0.49,
+   "snap": "floor",
+   "thumb": "thumbs/stool.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "straw_pile",
+   "name": "Straw Pile",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/straw_pile.glb",
+   "scale": 1,
+   "footprint": [
+    1.98,
+    1.52
+   ],
+   "height": 0.56,
+   "snap": "floor",
+   "thumb": "thumbs/straw_pile.webp",
+   "roomTypes": [
+    "dungeon",
+    "stable"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "shelf_tall",
+   "name": "Tall Shelf",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/shelf_tall.glb",
+   "scale": 1,
+   "footprint": [
+    1.32,
+    0.52
+   ],
+   "height": 2,
+   "snap": "floor",
+   "thumb": "thumbs/shelf_tall.webp",
+   "roomTypes": [
+    "kitchen",
+    "storage",
+    "library"
+   ],
+   "source": "Quaternius"
+  },
+  {
+   "id": "tapestry_blue",
+   "name": "Tapestry (blue)",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/tapestry_blue.glb",
+   "scale": 1,
+   "footprint": [
+    2.2,
+    0.07
+   ],
+   "height": 2.43,
+   "snap": "wall",
+   "thumb": "thumbs/tapestry_blue.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "tapestry_green",
+   "name": "Tapestry (green)",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/tapestry_green.glb",
+   "scale": 1,
+   "footprint": [
+    2.2,
+    0.07
+   ],
+   "height": 2.43,
+   "snap": "wall",
+   "thumb": "thumbs/tapestry_green.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "tapestry_red",
+   "name": "Tapestry (red)",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/tapestry_red.glb",
+   "scale": 1,
+   "footprint": [
+    2.2,
+    0.07
+   ],
+   "height": 2.43,
+   "snap": "wall",
+   "thumb": "thumbs/tapestry_red.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "throne",
+   "name": "Throne",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/throne.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    1.6
+   ],
+   "height": 2.35,
+   "snap": "floor",
+   "thumb": "thumbs/throne.webp",
+   "roomTypes": [
+    "throne",
+    "hall"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "shackles",
+   "name": "Wall Shackles",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/shackles.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    0.14
+   ],
+   "height": 0.7,
+   "snap": "wall",
+   "thumb": "thumbs/shackles.webp",
+   "roomTypes": [
+    "dungeon"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "wardrobe",
+   "name": "Wardrobe",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/wardrobe.glb",
+   "scale": 1,
+   "footprint": [
+    1.5,
+    0.75
+   ],
+   "height": 2.2,
+   "snap": "floor",
+   "thumb": "thumbs/wardrobe.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "weapon_rack",
+   "name": "Weapon Rack",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/weapon_rack.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    0.4
+   ],
+   "height": 2.13,
+   "snap": "wall",
+   "thumb": "thumbs/weapon_rack.webp",
+   "roomTypes": [
+    "armory",
+    "barracks"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "wine_rack",
+   "name": "Wine Rack",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/wine_rack.glb",
+   "scale": 1,
+   "footprint": [
+    1.8,
+    0.56
+   ],
+   "height": 2,
+   "snap": "wall",
+   "thumb": "thumbs/wine_rack.webp",
+   "roomTypes": [
+    "cellar"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "writing_desk",
+   "name": "Writing Desk",
+   "category": "furniture",
+   "tags": [
+    "furniture"
+   ],
+   "model": "models/furniture/writing_desk.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    0.7
+   ],
+   "height": 1.42,
+   "snap": "floor",
+   "thumb": "thumbs/writing_desk.webp",
+   "roomTypes": [
+    "library",
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "birdbath",
+   "name": "Birdbath",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/birdbath.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    1
+   ],
+   "height": 1.02,
+   "snap": "ground",
+   "thumb": "thumbs/birdbath.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "statue_column",
+   "name": "Garden Column",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "statue"
+   ],
+   "model": "models/garden/statue_column.glb",
+   "scale": 1,
+   "footprint": [
+    0.9,
+    0.9
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/statue_column.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "hedge_gate",
+   "name": "Hedge Arch",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "hedge"
+   ],
+   "model": "models/garden/hedge_gate.glb",
+   "scale": 1,
+   "footprint": [
+    2.4,
+    9.6
+   ],
+   "height": 2.4,
+   "snap": "ground",
+   "thumb": "thumbs/hedge_gate.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "hedge_block",
+   "name": "Hedge Block",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "hedge"
+   ],
+   "model": "models/garden/hedge_block.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    5.6
+   ],
+   "height": 1.4,
+   "snap": "ground",
+   "thumb": "thumbs/hedge_block.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "statue_knight",
+   "name": "Knight Statue",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/statue_knight.glb",
+   "scale": 1,
+   "footprint": [
+    1.52,
+    1.3
+   ],
+   "height": 3.32,
+   "snap": "ground",
+   "thumb": "thumbs/statue_knight.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "obelisk",
+   "name": "Obelisk",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "statue"
+   ],
+   "model": "models/garden/obelisk.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    1.4
+   ],
+   "height": 4,
+   "snap": "ground",
+   "thumb": "thumbs/obelisk.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rose_arch",
+   "name": "Rose Arch",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/rose_arch.glb",
+   "scale": 1,
+   "footprint": [
+    2.41,
+    0.95
+   ],
+   "height": 2.97,
+   "snap": "ground",
+   "thumb": "thumbs/rose_arch.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "bench_stone",
+   "name": "Stone Bench",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/bench_stone.glb",
+   "scale": 1,
+   "footprint": [
+    0.92,
+    0.52
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/bench_stone.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "statue_head",
+   "name": "Stone Head",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "statue"
+   ],
+   "model": "models/garden/statue_head.glb",
+   "scale": 1,
+   "footprint": [
+    1.45,
+    1.11
+   ],
+   "height": 2,
+   "snap": "ground",
+   "thumb": "thumbs/statue_head.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "sundial",
+   "name": "Sundial",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/sundial.glb",
+   "scale": 1,
+   "footprint": [
+    0.8,
+    0.8
+   ],
+   "height": 1.3,
+   "snap": "ground",
+   "thumb": "thumbs/sundial.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "hedge_tall",
+   "name": "Tall Hedge",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "hedge"
+   ],
+   "model": "models/garden/hedge_tall.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    4
+   ],
+   "height": 2.4,
+   "snap": "ground",
+   "thumb": "thumbs/hedge_tall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "fountain_tiered",
+   "name": "Tiered Fountain",
+   "category": "garden",
+   "tags": [
+    "garden"
+   ],
+   "model": "models/garden/fountain_tiered.glb",
+   "scale": 1,
+   "footprint": [
+    4.75,
+    4.75
+   ],
+   "height": 2.85,
+   "snap": "ground",
+   "thumb": "thumbs/fountain_tiered.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "brazier",
+   "name": "Brazier",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/brazier.glb",
+   "scale": 1,
+   "footprint": [
+    1.1,
+    1.1
+   ],
+   "height": 1.74,
+   "snap": "ground",
+   "thumb": "thumbs/brazier.webp",
+   "light": {
+    "color": "#ff9030",
+    "intensity": 9,
+    "distance": 12,
+    "y": 1.5
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "candelabra",
+   "name": "Candelabra",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/candelabra.glb",
+   "scale": 1,
+   "footprint": [
+    0.43,
+    0.2
+   ],
+   "height": 0.53,
+   "snap": "ground",
+   "thumb": "thumbs/candelabra.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "light": {
+    "color": "#ffb060",
+    "intensity": 2.5,
+    "distance": 5,
+    "y": 0.5
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "lantern_candle",
+   "name": "Candle Lantern",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/lantern_candle.glb",
+   "scale": 1,
+   "footprint": [
+    0.31,
+    0.31
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/lantern_candle.webp",
+   "light": {
+    "color": "#ffb060",
+    "intensity": 2,
+    "distance": 5,
+    "y": 0.3
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "candle_stand",
+   "name": "Candle Stand",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/candle_stand.glb",
+   "scale": 1,
+   "footprint": [
+    0.4,
+    0.4
+   ],
+   "height": 1.69,
+   "snap": "ground",
+   "thumb": "thumbs/candle_stand.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "light": {
+    "color": "#ffb060",
+    "intensity": 3,
+    "distance": 6,
+    "y": 1.65
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "candles",
+   "name": "Candles",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/candles.glb",
+   "scale": 1,
+   "footprint": [
+    0.51,
+    0.53
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/candles.webp",
+   "roomTypes": [
+    "chapel",
+    "dungeon",
+    "cellar",
+    "bedroom"
+   ],
+   "light": {
+    "color": "#ffb060",
+    "intensity": 2,
+    "distance": 4,
+    "y": 0.35
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "chandelier",
+   "name": "Chandelier",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/chandelier.glb",
+   "scale": 1,
+   "footprint": [
+    1.9,
+    1.9
+   ],
+   "height": 1.85,
+   "snap": "ceiling",
+   "thumb": "thumbs/chandelier.webp",
+   "roomTypes": [
+    "hall",
+    "throne",
+    "tavern",
+    "chapel"
+   ],
+   "light": {
+    "color": "#ffc070",
+    "intensity": 10,
+    "distance": 14,
+    "y": -1.6
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "fire_basket",
+   "name": "Fire Basket",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/fire_basket.glb",
+   "scale": 1,
+   "footprint": [
+    3.48,
+    3.48
+   ],
+   "height": 1.4,
+   "snap": "ground",
+   "thumb": "thumbs/fire_basket.webp",
+   "light": {
+    "color": "#ff9030",
+    "intensity": 8,
+    "distance": 12,
+    "y": 1.3
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "lamppost",
+   "name": "Lamp Post",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/lamppost.glb",
+   "scale": 1,
+   "footprint": [
+    0.53,
+    1.17
+   ],
+   "height": 3.2,
+   "snap": "ground",
+   "thumb": "thumbs/lamppost.webp",
+   "light": {
+    "color": "#ffb060",
+    "intensity": 6,
+    "distance": 12,
+    "y": 2.9
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "torch_standing",
+   "name": "Standing Torch",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/torch_standing.glb",
+   "scale": 1,
+   "footprint": [
+    0.43,
+    0.5
+   ],
+   "height": 2.36,
+   "snap": "ground",
+   "thumb": "thumbs/torch_standing.webp",
+   "light": {
+    "color": "#ffa040",
+    "intensity": 6,
+    "distance": 10,
+    "y": 2.2
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "lantern_post",
+   "name": "Street Lantern",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/lantern_post.glb",
+   "scale": 1,
+   "footprint": [
+    0.42,
+    0.43
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/lantern_post.webp",
+   "light": {
+    "color": "#ffb060",
+    "intensity": 6,
+    "distance": 12,
+    "y": 2.6
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "torch_wall",
+   "name": "Wall Torch",
+   "category": "lighting",
+   "tags": [
+    "light"
+   ],
+   "model": "models/lighting/torch_wall.glb",
+   "scale": 1,
+   "footprint": [
+    0.26,
+    0.62
+   ],
+   "height": 1.08,
+   "snap": "wall",
+   "thumb": "thumbs/torch_wall.webp",
+   "light": {
+    "color": "#ffa040",
+    "intensity": 6,
+    "distance": 9,
+    "y": 0.8
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "axe",
+   "name": "Axe",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/axe.glb",
+   "scale": 1,
+   "footprint": [
+    0.4,
+    0.11
+   ],
+   "height": 0.9,
+   "snap": "ground",
+   "thumb": "thumbs/axe.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "barrel",
+   "name": "Barrel",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/barrel.glb",
+   "scale": 1,
+   "footprint": [
+    0.69,
+    0.69
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/barrel.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "bedroll",
+   "name": "Bedroll",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/bedroll.glb",
+   "scale": 1,
+   "footprint": [
+    0.5,
+    0.97
+   ],
+   "height": 0.2,
+   "snap": "ground",
+   "thumb": "thumbs/bedroll.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bucket",
+   "name": "Bucket",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/bucket.glb",
+   "scale": 1,
+   "footprint": [
+    0.3,
+    0.3
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/bucket.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "campfire",
+   "name": "Campfire",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/campfire.glb",
+   "scale": 1,
+   "footprint": [
+    1.53,
+    1.48
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/campfire.webp",
+   "light": {
+    "color": "#ff8a30",
+    "intensity": 8,
+    "distance": 10,
+    "y": 0.6
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "cannon",
+   "name": "Cannon",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/cannon.glb",
+   "scale": 1,
+   "footprint": [
+    1.6,
+    2.19
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/cannon.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "crate",
+   "name": "Crate",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/crate.glb",
+   "scale": 1,
+   "footprint": [
+    0.8,
+    0.8
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/crate.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "crate_bottles",
+   "name": "Crate of Bottles",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/crate_bottles.glb",
+   "scale": 1,
+   "footprint": [
+    0.82,
+    0.99
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/crate_bottles.webp",
+   "roomTypes": [
+    "cellar",
+    "tavern"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "firewood",
+   "name": "Firewood",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/firewood.glb",
+   "scale": 1,
+   "footprint": [
+    1.97,
+    0.84
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/firewood.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "grindstone",
+   "name": "Grindstone",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/grindstone.glb",
+   "scale": 1,
+   "footprint": [
+    1.02,
+    1.28
+   ],
+   "height": 1.1,
+   "snap": "ground",
+   "thumb": "thumbs/grindstone.webp",
+   "roomTypes": [
+    "armory",
+    "workshop"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "hoe",
+   "name": "Hoe",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/hoe.glb",
+   "scale": 1,
+   "footprint": [
+    0.53,
+    0.44
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/hoe.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "crate_large",
+   "name": "Large Crate",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/crate_large.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    2.4
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/crate_large.webp",
+   "roomTypes": [
+    "storage",
+    "cellar"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "barrel_open",
+   "name": "Open Barrel",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/barrel_open.glb",
+   "scale": 1,
+   "footprint": [
+    0.69,
+    0.69
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/barrel_open.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "pickaxe",
+   "name": "Pickaxe",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/pickaxe.glb",
+   "scale": 1,
+   "footprint": [
+    0.67,
+    0.15
+   ],
+   "height": 0.9,
+   "snap": "ground",
+   "thumb": "thumbs/pickaxe.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "planks",
+   "name": "Planks",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/planks.glb",
+   "scale": 1,
+   "footprint": [
+    1.59,
+    2.68
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/planks.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "shovel",
+   "name": "Shovel",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/shovel.glb",
+   "scale": 1,
+   "footprint": [
+    0.34,
+    0.15
+   ],
+   "height": 1.4,
+   "snap": "ground",
+   "thumb": "thumbs/shovel.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "signpost_k",
+   "name": "Signpost",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/signpost_k.glb",
+   "scale": 1,
+   "footprint": [
+    0.93,
+    0.19
+   ],
+   "height": 2,
+   "snap": "ground",
+   "thumb": "thumbs/signpost_k.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "chest_small",
+   "name": "Small Chest",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/chest_small.glb",
+   "scale": 1,
+   "footprint": [
+    0.51,
+    0.53
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/chest_small.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "animations": [
+    "open",
+    "close",
+    "open-close"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "stone_pile",
+   "name": "Stone Pile",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/stone_pile.glb",
+   "scale": 1,
+   "footprint": [
+    0.93,
+    0.8
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/stone_pile.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tent",
+   "name": "Tent",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/tent.glb",
+   "scale": 1,
+   "footprint": [
+    2.74,
+    2.74
+   ],
+   "height": 2.4,
+   "snap": "ground",
+   "thumb": "thumbs/tent.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "workbench",
+   "name": "Workbench",
+   "category": "props",
+   "tags": [
+    "prop"
+   ],
+   "model": "models/props/workbench.glb",
+   "scale": 1,
+   "footprint": [
+    1.14,
+    1.03
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/workbench.webp",
+   "roomTypes": [
+    "workshop"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "boulder",
+   "name": "Boulder",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/boulder.glb",
+   "scale": 1,
+   "footprint": [
+    7.25,
+    9.38
+   ],
+   "height": 2.4,
+   "snap": "ground",
+   "thumb": "thumbs/boulder.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "boulder2",
+   "name": "Boulder (flat)",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/boulder2.glb",
+   "scale": 1,
+   "footprint": [
+    5.97,
+    5.69
+   ],
+   "height": 1.8,
+   "snap": "ground",
+   "thumb": "thumbs/boulder2.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "log",
+   "name": "Fallen Log",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/log.glb",
+   "scale": 1,
+   "footprint": [
+    0.81,
+    2.46
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/log.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stone_flat",
+   "name": "Flat Stone",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/stone_flat.glb",
+   "scale": 1,
+   "footprint": [
+    1.91,
+    1.65
+   ],
+   "height": 0.25,
+   "snap": "ground",
+   "thumb": "thumbs/stone_flat.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stone_large",
+   "name": "Grey Stone",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/stone_large.glb",
+   "scale": 1,
+   "footprint": [
+    4.53,
+    5.86
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/stone_large.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "log_pile",
+   "name": "Log Pile",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/log_pile.glb",
+   "scale": 1,
+   "footprint": [
+    1.23,
+    2.05
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/log_pile.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "boulder3",
+   "name": "Mossy Boulder",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/boulder3.glb",
+   "scale": 1,
+   "footprint": [
+    8.25,
+    6.92
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/boulder3.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rock",
+   "name": "Rock",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/rock.glb",
+   "scale": 1,
+   "footprint": [
+    1.13,
+    1.13
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/rock.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rock2",
+   "name": "Rock (round)",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/rock2.glb",
+   "scale": 1,
+   "footprint": [
+    1.47,
+    1.47
+   ],
+   "height": 0.5,
+   "snap": "ground",
+   "thumb": "thumbs/rock2.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "rock_tall",
+   "name": "Standing Rock",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/rock_tall.glb",
+   "scale": 1,
+   "footprint": [
+    3.45,
+    2.4
+   ],
+   "height": 3.5,
+   "snap": "ground",
+   "thumb": "thumbs/rock_tall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stump",
+   "name": "Stump",
+   "category": "rocks",
+   "tags": [
+    "rock",
+    "stone"
+   ],
+   "model": "models/rocks/stump.glb",
+   "scale": 1,
+   "footprint": [
+    0.93,
+    1.08
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/stump.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush",
+   "name": "Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/bush.glb",
+   "scale": 1,
+   "footprint": [
+    1.78,
+    1.78
+   ],
+   "height": 1.1,
+   "snap": "ground",
+   "thumb": "thumbs/bush.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush_cone",
+   "name": "Cone Shrub",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/bush_cone.glb",
+   "scale": 1,
+   "footprint": [
+    1.85,
+    2.1
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/bush_cone.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "fern",
+   "name": "Fern",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/fern.glb",
+   "scale": 1,
+   "footprint": [
+    0.99,
+    1.08
+   ],
+   "height": 0.6,
+   "snap": "ground",
+   "thumb": "thumbs/fern.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush_flowers",
+   "name": "Flowering Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush"
+   ],
+   "model": "models/shrubs/bush_flowers.glb",
+   "scale": 1,
+   "footprint": [
+    1.45,
+    1.49
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/bush_flowers.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "grass_tuft",
+   "name": "Grass Tuft",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/grass_tuft.glb",
+   "scale": 1,
+   "footprint": [
+    0.6,
+    0.62
+   ],
+   "height": 0.4,
+   "snap": "ground",
+   "thumb": "thumbs/grass_tuft.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush_large",
+   "name": "Large Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/bush_large.glb",
+   "scale": 1,
+   "footprint": [
+    2.77,
+    2.49
+   ],
+   "height": 1.8,
+   "snap": "ground",
+   "thumb": "thumbs/bush_large.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush_detailed",
+   "name": "Leafy Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/bush_detailed.glb",
+   "scale": 1,
+   "footprint": [
+    2.01,
+    2.01
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/bush_detailed.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "lily",
+   "name": "Lily Pad",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/lily.glb",
+   "scale": 1,
+   "footprint": [
+    0.14,
+    0.16
+   ],
+   "height": 0.05,
+   "snap": "ground",
+   "thumb": "thumbs/lily.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "mushrooms",
+   "name": "Mushrooms",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/mushrooms.glb",
+   "scale": 1,
+   "footprint": [
+    0.32,
+    0.3
+   ],
+   "height": 0.3,
+   "snap": "ground",
+   "thumb": "thumbs/mushrooms.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "mushrooms_red",
+   "name": "Red Mushrooms",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/mushrooms_red.glb",
+   "scale": 1,
+   "footprint": [
+    0.32,
+    0.3
+   ],
+   "height": 0.3,
+   "snap": "ground",
+   "thumb": "thumbs/mushrooms_red.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "reeds",
+   "name": "Reeds",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/reeds.glb",
+   "scale": 1,
+   "footprint": [
+    1.43,
+    1.43
+   ],
+   "height": 1.5,
+   "snap": "ground",
+   "thumb": "thumbs/reeds.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bush_small",
+   "name": "Small Bush",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/bush_small.glb",
+   "scale": 1,
+   "footprint": [
+    1.29,
+    1.14
+   ],
+   "height": 0.7,
+   "snap": "ground",
+   "thumb": "thumbs/bush_small.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "grass_tall",
+   "name": "Tall Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush",
+    "shrub"
+   ],
+   "model": "models/shrubs/grass_tall.glb",
+   "scale": 1,
+   "footprint": [
+    1.13,
+    1.12
+   ],
+   "height": 0.7,
+   "snap": "ground",
+   "thumb": "thumbs/grass_tall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "grass_wild",
+   "name": "Wild Grass",
+   "category": "shrubs",
+   "tags": [
+    "bush"
+   ],
+   "model": "models/shrubs/grass_wild.glb",
+   "scale": 1,
+   "footprint": [
+    0.38,
+    0.42
+   ],
+   "height": 0.8,
+   "snap": "ground",
+   "thumb": "thumbs/grass_wild.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "ballista",
+   "name": "Ballista",
+   "category": "siege",
+   "tags": [
+    "siege",
+    "weapon"
+   ],
+   "model": "models/siege/ballista.glb",
+   "scale": 1,
+   "footprint": [
+    3.94,
+    2.9
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/ballista.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "battering_ram",
+   "name": "Battering Ram",
+   "category": "siege",
+   "tags": [
+    "siege",
+    "weapon"
+   ],
+   "model": "models/siege/battering_ram.glb",
+   "scale": 1,
+   "footprint": [
+    5.29,
+    2.53
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/battering_ram.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "catapult",
+   "name": "Catapult",
+   "category": "siege",
+   "tags": [
+    "siege",
+    "weapon"
+   ],
+   "model": "models/siege/catapult.glb",
+   "scale": 1,
+   "footprint": [
+    4.57,
+    3.18
+   ],
+   "height": 3.5,
+   "snap": "ground",
+   "thumb": "thumbs/catapult.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "siege_tower",
+   "name": "Siege Tower",
+   "category": "siege",
+   "tags": [
+    "siege",
+    "weapon"
+   ],
+   "model": "models/siege/siege_tower.glb",
+   "scale": 1,
+   "footprint": [
+    8.07,
+    4.97
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/siege_tower.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "trebuchet",
+   "name": "Trebuchet",
+   "category": "siege",
+   "tags": [
+    "siege",
+    "weapon"
+   ],
+   "model": "models/siege/trebuchet.glb",
+   "scale": 1,
+   "footprint": [
+    6.62,
+    4.5
+   ],
+   "height": 7,
+   "snap": "ground",
+   "thumb": "thumbs/trebuchet.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_apple",
+   "name": "Apple Tree",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "fruit",
+    "orchard"
+   ],
+   "model": "models/trees/tree_apple.glb",
+   "scale": 1,
+   "footprint": [
+    3.22,
+    2.96
+   ],
+   "height": 4.2,
+   "snap": "ground",
+   "thumb": "thumbs/tree_apple.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "birch",
+   "name": "Birch",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/birch.glb",
+   "scale": 1,
+   "footprint": [
+    4.57,
+    4.14
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/birch.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_broad",
+   "name": "Broad Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_broad.glb",
+   "scale": 1,
+   "footprint": [
+    4.92,
+    4.26
+   ],
+   "height": 7.5,
+   "snap": "ground",
+   "thumb": "thumbs/tree_broad.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "birch_dead",
+   "name": "Dead Birch",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/birch_dead.glb",
+   "scale": 1,
+   "footprint": [
+    2.04,
+    2.29
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/birch_dead.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "fir",
+   "name": "Fir",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/fir.glb",
+   "scale": 1,
+   "footprint": [
+    3.7,
+    3.7
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/fir.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_leafy",
+   "name": "Leafy Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_leafy.glb",
+   "scale": 1,
+   "footprint": [
+    5.72,
+    5.14
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/tree_leafy.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "pine_q",
+   "name": "Mountain Pine",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/pine_q.glb",
+   "scale": 1,
+   "footprint": [
+    10.1,
+    9.2
+   ],
+   "height": 13,
+   "snap": "ground",
+   "thumb": "thumbs/pine_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "oak",
+   "name": "Oak",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/oak.glb",
+   "scale": 1,
+   "footprint": [
+    5.22,
+    6.03
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/oak.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_pear",
+   "name": "Pear Tree",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "fruit",
+    "orchard"
+   ],
+   "model": "models/trees/tree_pear.glb",
+   "scale": 1,
+   "footprint": [
+    3.22,
+    2.96
+   ],
+   "height": 4.2,
+   "snap": "ground",
+   "thumb": "thumbs/tree_pear.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "pine",
+   "name": "Pine",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/pine.glb",
+   "scale": 1,
+   "footprint": [
+    3.53,
+    3.59
+   ],
+   "height": 14,
+   "snap": "ground",
+   "thumb": "thumbs/pine.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_plateau",
+   "name": "Plateau Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_plateau.glb",
+   "scale": 1,
+   "footprint": [
+    3.92,
+    4.19
+   ],
+   "height": 8,
+   "snap": "ground",
+   "thumb": "thumbs/tree_plateau.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_plum",
+   "name": "Plum Tree",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "fruit",
+    "orchard"
+   ],
+   "model": "models/trees/tree_plum.glb",
+   "scale": 1,
+   "footprint": [
+    3.22,
+    2.96
+   ],
+   "height": 4.2,
+   "snap": "ground",
+   "thumb": "thumbs/tree_plum.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "poplar",
+   "name": "Poplar",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/poplar.glb",
+   "scale": 1,
+   "footprint": [
+    2.84,
+    3.28
+   ],
+   "height": 12,
+   "snap": "ground",
+   "thumb": "thumbs/poplar.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "tree_round",
+   "name": "Round Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_round.glb",
+   "scale": 1,
+   "footprint": [
+    3.54,
+    3.06
+   ],
+   "height": 8,
+   "snap": "ground",
+   "thumb": "thumbs/tree_round.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "sapling",
+   "name": "Sapling",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/sapling.glb",
+   "scale": 1,
+   "footprint": [
+    1.12,
+    1.29
+   ],
+   "height": 3.5,
+   "snap": "ground",
+   "thumb": "thumbs/sapling.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "birch_q",
+   "name": "Silver Birch",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/birch_q.glb",
+   "scale": 1,
+   "footprint": [
+    5.24,
+    7.63
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/birch_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "tree_simple",
+   "name": "Simple Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_simple.glb",
+   "scale": 1,
+   "footprint": [
+    1.63,
+    1.89
+   ],
+   "height": 7,
+   "snap": "ground",
+   "thumb": "thumbs/tree_simple.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "spruce",
+   "name": "Spruce",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/spruce.glb",
+   "scale": 1,
+   "footprint": [
+    4.52,
+    5.21
+   ],
+   "height": 10,
+   "snap": "ground",
+   "thumb": "thumbs/spruce.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "pine_tall",
+   "name": "Tall Pine",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/pine_tall.glb",
+   "scale": 1,
+   "footprint": [
+    3.19,
+    3.24
+   ],
+   "height": 16,
+   "snap": "ground",
+   "thumb": "thumbs/pine_tall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "willow",
+   "name": "Willow",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/willow.glb",
+   "scale": 1,
+   "footprint": [
+    5.29,
+    8.42
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/willow.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "tree_q",
+   "name": "Woodland Tree",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/tree_q.glb",
+   "scale": 1,
+   "footprint": [
+    5.34,
+    5.67
+   ],
+   "height": 9,
+   "snap": "ground",
+   "thumb": "thumbs/tree_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "pine_small",
+   "name": "Young Pine",
+   "category": "trees",
+   "tags": [
+    "tree"
+   ],
+   "model": "models/trees/pine_small.glb",
+   "scale": 1,
+   "footprint": [
+    2.07,
+    2.07
+   ],
+   "height": 4,
+   "snap": "ground",
+   "thumb": "thumbs/pine_small.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "cart",
+   "name": "Cart",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/cart.glb",
+   "scale": 1,
+   "footprint": [
+    2.67,
+    4
+   ],
+   "height": 1.6,
+   "snap": "ground",
+   "thumb": "thumbs/cart.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "wheel",
+   "name": "Cart Wheel",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/wheel.glb",
+   "scale": 1,
+   "footprint": [
+    0.59,
+    1.16
+   ],
+   "height": 1.2,
+   "snap": "ground",
+   "thumb": "thumbs/wheel.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "pillar",
+   "name": "Column",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/pillar.glb",
+   "scale": 1,
+   "footprint": [
+    0.56,
+    0.56
+   ],
+   "height": 3.5,
+   "snap": "ground",
+   "thumb": "thumbs/pillar.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "market_goods",
+   "name": "Market Goods",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/market_goods.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    0.8
+   ],
+   "height": 0.28,
+   "snap": "ground",
+   "thumb": "thumbs/market_goods.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "stall",
+   "name": "Market Stall",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/stall.glb",
+   "scale": 1,
+   "footprint": [
+    5.33,
+    8.21
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/stall.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stall_green",
+   "name": "Market Stall (green)",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/stall_green.glb",
+   "scale": 1,
+   "footprint": [
+    2.43,
+    2.43
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/stall_green.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stall_red",
+   "name": "Market Stall (red)",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/stall_red.glb",
+   "scale": 1,
+   "footprint": [
+    2.43,
+    2.43
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/stall_red.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "market_stalls_q",
+   "name": "Market Stalls",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/market_stalls_q.glb",
+   "scale": 1,
+   "footprint": [
+    9.41,
+    7.07
+   ],
+   "height": 3.2,
+   "snap": "ground",
+   "thumb": "thumbs/market_stalls_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "fountain_ornate",
+   "name": "Ornate Fountain",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/fountain_ornate.glb",
+   "scale": 1,
+   "footprint": [
+    12.5,
+    12.5
+   ],
+   "height": 3,
+   "snap": "ground",
+   "thumb": "thumbs/fountain_ornate.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "bench_q",
+   "name": "Park Bench",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/bench_q.glb",
+   "scale": 1,
+   "footprint": [
+    3.22,
+    1.08
+   ],
+   "height": 0.9,
+   "snap": "ground",
+   "thumb": "thumbs/bench_q.webp",
+   "source": "Quaternius"
+  },
+  {
+   "id": "fountain_round",
+   "name": "Round Fountain",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/fountain_round.glb",
+   "scale": 1,
+   "footprint": [
+    11.43,
+    11.43
+   ],
+   "height": 1.6,
+   "snap": "ground",
+   "thumb": "thumbs/fountain_round.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "signpost",
+   "name": "Signpost",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/signpost.glb",
+   "scale": 1,
+   "footprint": [
+    1.48,
+    0.32
+   ],
+   "height": 2.3,
+   "snap": "ground",
+   "thumb": "thumbs/signpost.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "fountain_square",
+   "name": "Square Fountain",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/fountain_square.glb",
+   "scale": 1,
+   "footprint": [
+    7.03,
+    7.03
+   ],
+   "height": 1.6,
+   "snap": "ground",
+   "thumb": "thumbs/fountain_square.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "stall_bench",
+   "name": "Stall Bench",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/stall_bench.glb",
+   "scale": 1,
+   "footprint": [
+    1.15,
+    4.17
+   ],
+   "height": 1,
+   "snap": "ground",
+   "thumb": "thumbs/stall_bench.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "town_banner_green",
+   "name": "Town Banner (green)",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/town_banner_green.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    2.38
+   ],
+   "height": 4,
+   "snap": "ground",
+   "thumb": "thumbs/town_banner_green.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "town_banner_red",
+   "name": "Town Banner (red)",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/town_banner_red.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    2.38
+   ],
+   "height": 4,
+   "snap": "ground",
+   "thumb": "thumbs/town_banner_red.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "hay_cart",
+   "name": "Wagon",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/hay_cart.glb",
+   "scale": 1,
+   "footprint": [
+    2.28,
+    3.55
+   ],
+   "height": 2.2,
+   "snap": "ground",
+   "thumb": "thumbs/hay_cart.webp",
+   "source": "Kenney"
+  },
+  {
+   "id": "waterwheel",
+   "name": "Waterwheel",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/waterwheel.glb",
+   "scale": 1,
+   "footprint": [
+    1.4,
+    4.16
+   ],
+   "height": 4.16,
+   "snap": "ground",
+   "thumb": "thumbs/waterwheel.webp",
+   "hidden": true,
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "well",
+   "name": "Well",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/well.glb",
+   "scale": 1,
+   "footprint": [
+    2.8,
+    2.32
+   ],
+   "height": 3.2,
+   "snap": "ground",
+   "thumb": "thumbs/well.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "windmill_sails",
+   "name": "Windmill Sails",
+   "category": "village",
+   "tags": [
+    "village"
+   ],
+   "model": "models/village/windmill_sails.glb",
+   "scale": 1,
+   "footprint": [
+    11,
+    0.42
+   ],
+   "height": 11,
+   "snap": "ground",
+   "thumb": "thumbs/windmill_sails.webp",
+   "hidden": true,
+   "source": "Blender (this repo)"
+  }
+ ]
+}

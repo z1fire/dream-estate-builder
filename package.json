@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --port 4173 --strictPort",
-    "lint": "eslint src scripts tests",
+    "lint": "eslint src scripts tests tools",
     "test:e2e": "playwright test",
     "build:assets": "node scripts/build-assets.mjs"
   },
