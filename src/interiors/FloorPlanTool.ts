@@ -3,19 +3,22 @@ import type { App } from '../app/App';
 import { setFloors } from '../buildings/BuildingTools';
 import { edgeCount, insideFootprint, levelBase, levelInset } from '../buildings/footprint';
 import { SURFACE_LABELS } from '../buildings/materials';
-import { composite, removeEntities, updateEntities, type Command } from '../core/commands';
+import { addEntities, composite, removeEntities, updateEntities, type Command } from '../core/commands';
 import { M_TO_FT } from '../core/math';
 import { clone, uid } from '../core/store';
 import type { BuildingDef, CeilingStyle, FloorDef, OpeningKind, Room, RoomType, SurfaceMat } from '../core/types';
 import { buildingToWorld } from '../editing/transform';
 import { Tool, type ToolEvent } from '../editing/Tool';
-import { button, editSlider, h, hint, section, segmented, select, textInput, toast } from '../ui/dom';
+import { button, editSlider, h, hint, section, segmented, select, slider, textInput, toast, toggle } from '../ui/dom';
 import { levelName, nearestWall, type InteriorSystem } from './InteriorSystem';
+import { furnishBuilding, generatePlan, programOf, restyle, styleOf, type InteriorStyle, type Program } from './planGenerator';
 
-type Sub = 'walls' | 'rooms' | 'openings' | 'stairs' | 'floors';
+type Sub = 'layout' | 'walls' | 'rooms' | 'openings' | 'stairs' | 'floors';
 
 export const ROOM_TYPES: [RoomType, string][] = [
   ['hall', 'Great hall'], ['throne', 'Throne room'], ['bedroom', 'Bedroom'], ['kitchen', 'Kitchen'], ['library', 'Library'], ['armory', 'Armory'],
+  ['living', 'Living room'], ['dining', 'Dining room'], ['bathroom', 'Bathroom'], ['closet', 'Closet / dressing room'], ['hallway', 'Hallway / landing'],
+  ['laundry', 'Laundry / utility'], ['office', 'Office / study'], ['pantry', 'Pantry'],
   ['chapel', 'Chapel'], ['cellar', 'Cellar'], ['dungeon', 'Dungeon'], ['storage', 'Storage'], ['tavern', 'Tavern'], ['shop', 'Shop'], ['workshop', 'Workshop'], ['stable', 'Stable'], ['generic', 'Room'],
 ];
 const OPENINGS: { id: OpeningKind; label: string; w: number; h: number; sill: number }[] = [
@@ -33,7 +36,9 @@ const ft = (m: number) => `${Math.round(m * M_TO_FT)} ft`;
 export class FloorPlanTool extends Tool {
   id = 'interior';
   name = 'Floor plan';
-  sub: Sub = 'walls';
+  sub: Sub = 'layout';
+  private prog: Program | null = null;
+  private progFor = '';
   openingKind: OpeningKind = 'door_wood';
   stairKind: 'straight' | 'spiral' = 'straight';
   private stairRot = 0;
@@ -61,6 +66,7 @@ export class FloorPlanTool extends Tool {
       openings: 'Click on a wall to add the chosen door/window · click an existing one to remove it',
       stairs: 'Click to place stairs up to the next floor · <kbd>Q</kbd>/<kbd>E</kbd> rotate · click existing stairs to remove',
       floors: 'Add storeys and cellars, and set the materials of this floor',
+      layout: 'Choose the rooms you want and generate floor plans for the whole building, or switch between Modern and Period interiors',
     } as Record<Sub, string>)[this.sub];
   }
 
@@ -215,10 +221,11 @@ export class FloorPlanTool extends Tool {
       return h('div', {}, hint('Choose a building to step inside, or double-click any building in the world.'),
         this.app.store.doc.buildings.length ? section('Buildings', list) : hint('<i>No buildings yet — add some from Castle, Village or Farming.</i>'));
     }
-    const subSeg = segmented<Sub>([{ id: 'walls', label: 'Walls' }, { id: 'rooms', label: 'Rooms' }, { id: 'openings', label: 'Doors & windows' }, { id: 'stairs', label: 'Stairs' }, { id: 'floors', label: 'Floors & materials' }],
+    const subSeg = segmented<Sub>([{ id: 'layout', label: 'Layout' }, { id: 'walls', label: 'Walls' }, { id: 'rooms', label: 'Rooms' }, { id: 'openings', label: 'Doors & windows' }, { id: 'stairs', label: 'Stairs' }, { id: 'floors', label: 'Floors & materials' }],
       this.sub, (v) => { this.sub = v; this.wallStart = this.roomStart = null; this.app.ui.refreshPanel(); }, 'grid2');
     const body: (HTMLElement | null)[] = [];
-    if (this.sub === 'walls') {
+    if (this.sub === 'layout') body.push(...this.layoutPanel(b));
+    else if (this.sub === 'walls') {
       body.push(hint(`${f.walls.length} interior wall${f.walls.length === 1 ? '' : 's'} on this floor. Walls snap to a 9-inch grid and lock straight when close to an axis.`),
         h('div', { class: 'btn-row' }, button('Clear interior walls', () => this.run('Clear walls', (_bb, ff) => { ff.walls = []; }), 'small danger')));
     } else if (this.sub === 'rooms') {
@@ -249,6 +256,43 @@ export class FloorPlanTool extends Tool {
           above > 1 ? button('Remove top storey', () => this.removeTop(b, above), 'small danger') : null)));
     }
     return h('div', {}, hint(`<b>${b.name}</b> · ${levelName(f.level)} · <kbd>PgUp</kbd>/<kbd>PgDn</kbd> change floor`), subSeg, ...body);
+  }
+
+  /** Replace the whole building (plan and/or finishes) and its furniture in one undo step. */
+  private rebuild(label: string, fn: (b: BuildingDef) => string | null) {
+    const b = this.interior.building;
+    if (!b) return;
+    const before = clone(b), after = clone(b);
+    const err = fn(after);
+    if (err) { toast(err); return; }
+    const old = this.app.store.doc.objects.filter((o) => o.buildingId === b.id).map((o) => o.id);
+    const furniture = furnishBuilding(after);
+    this.app.cmd.run(composite(label, [updateEntities(this.app.store, 'buildings', [before], [after], label), ...(old.length ? [removeEntities(this.app.store, 'objects', old)] : []), ...(furniture.length ? [addEntities(this.app.store, 'objects', furniture)] : [])]));
+    this.app.ui.refreshPanel();
+  }
+
+  private layoutPanel(b: BuildingDef): HTMLElement[] {
+    if (this.progFor !== b.id || !this.prog) { this.prog = programOf(b); this.progFor = b.id; }
+    const p = this.prog;
+    const style = styleOf(b);
+    const rooms = b.floors.reduce((s, f) => s + f.rooms.length, 0);
+    const area = b.floors.filter((f) => f.level >= 0).reduce((s, f) => s + f.rooms.filter((r) => r.type !== 'hallway').reduce((a, r) => a + (r.rect[2] - r.rect[0]) * (r.rect[3] - r.rect[1]), 0), 0);
+    return [
+      section('Interior style', segmented<InteriorStyle>([{ id: 'modern', label: 'Modern living' }, { id: 'period', label: 'Period' }], style, (v) => this.rebuild(v === 'modern' ? 'Modern interiors' : 'Period interiors', (bb) => { restyle(bb, v); return null; })),
+        hint(style === 'modern' ? 'Modern kitchens and bathrooms, painted walls, hardwood and tile floors — a home you could live in.' : 'Historic rooms: hearth kitchens, washstands and wooden tubs, four-poster or canopy beds, plaster and flagstone.')),
+      section('Rooms to fit',
+        slider('Bedrooms', 0, 8, 1, p.bedrooms, (v) => (p.bedrooms = v)),
+        slider('Bathrooms', 0, 6, 1, p.bathrooms, (v) => (p.bathrooms = v)),
+        toggle('Kitchen', p.kitchen, (v) => (p.kitchen = v)), toggle('Living room', p.living, (v) => (p.living = v)), toggle('Dining room', p.dining, (v) => (p.dining = v)),
+        toggle('Study / office', p.office, (v) => (p.office = v)), toggle('Laundry & pantry', p.laundry, (v) => (p.laundry = v)),
+        h('div', { class: 'btn-row' }, button('Generate floor plans', () => this.rebuild('Generate floor plans', (bb) => {
+          const r = generatePlan(bb, { ...p }, styleOf(bb));
+          if (!r.ok) return r.reason ?? 'Could not lay out this building';
+          toast(r.dropped ? `Floor plans generated — ${r.dropped} small room${r.dropped > 1 ? 's' : ''} didn’t fit; try fewer rooms or a bigger building` : 'Floor plans generated and furnished');
+          return null;
+        }), 'small primary'), button('Re-furnish rooms', () => this.rebuild('Re-furnish rooms', () => null), 'small'))),
+      hint(`${rooms} rooms · ${Math.round(area * 10.764).toLocaleString()} sq ft of rooms. Generating lays out every storey (entrance hall and stairs, corridors, bedrooms with en-suites and closets, doors) and furnishes it; it replaces this building’s furniture. Then fine-tune with Walls, Rooms and Doors, and Furnish.`),
+    ];
   }
 
   private removeTop(b: BuildingDef, above: number) {

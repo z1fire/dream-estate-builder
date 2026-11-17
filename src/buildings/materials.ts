@@ -177,6 +177,21 @@ const DEFS: Record<string, TexDef> = {
       g.fillStyle = '#5a120d'; g.fillRect(S / 2 - 3, 0, 6, S);
     },
   },
+  hardwood: {
+    size: 2.4, draw: (g) => {
+      const r = rng(50);
+      for (let i = 0; i < 16; i++) for (let k = 0; k < 3; k++) {
+        const c = new THREE.Color('#a8784a').multiplyScalar(0.82 + r() * 0.3);
+        g.fillStyle = `#${c.getHexString()}`;
+        const off = ((i * 37) % 3) * S / 3 * 0.5;
+        g.fillRect(((k * S) / 3 + off) % S, (i * S) / 16, S / 3 - 2, S / 16 - 2);
+      }
+      noise(g, 8, 51);
+    },
+  },
+  carpet: { size: 2, draw: (g) => { g.fillStyle = '#b9ad9a'; g.fillRect(0, 0, S, S); noise(g, 22, 52); } },
+  whitetile: { size: 1.2, draw: (g) => { g.fillStyle = '#c9c9c4'; g.fillRect(0, 0, S, S); for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) { g.fillStyle = '#f1f1ee'; g.fillRect(x * S / 4 + 2, y * S / 4 + 2, S / 4 - 4, S / 4 - 4); } noise(g, 5, 53); } },
+  paint: { size: 3, draw: (g) => { g.fillStyle = '#efebe3'; g.fillRect(0, 0, S, S); noise(g, 5, 54); } },
   squaretile: { size: 1.6, draw: (g) => { blocks(g, '#5f6064', '#3f4043', 4, 4, 0.1, 43); noise(g, 8, 44); } },
 };
 
@@ -217,9 +232,9 @@ export function setWindowGlow(night: number) {
 
 export const EXTERIOR_TEX: Record<MaterialKind, string> = { greystone: 'greystone', sandstone: 'sandstone', whitewash: 'whitewash', timber: 'timber', brick: 'brick', redlacquer: 'redlacquer', greybrick: 'greybrick' };
 export const SURFACE_TEX: Record<SurfaceMat, string> = {
-  stone: 'stone', plaster: 'plaster', woodpanel: 'woodpanel', tapestry: 'tapestry', plank: 'plank', flagstone: 'flagstone', rug: 'rug', brick: 'brick', whitewash: 'whitewash', redlacquer: 'redlacquer', squaretile: 'squaretile',
+  stone: 'stone', plaster: 'plaster', woodpanel: 'woodpanel', tapestry: 'tapestry', plank: 'plank', flagstone: 'flagstone', rug: 'rug', brick: 'brick', whitewash: 'whitewash', redlacquer: 'redlacquer', squaretile: 'squaretile', hardwood: 'hardwood', carpet: 'carpet', whitetile: 'whitetile', paint: 'paint',
 };
 export const SURFACE_LABELS: Record<SurfaceMat, string> = {
-  stone: 'Stone', plaster: 'Plaster', woodpanel: 'Wood panelling', tapestry: 'Tapestry', plank: 'Wood planks', flagstone: 'Flagstone', rug: 'Rug', brick: 'Brick', whitewash: 'Whitewash', redlacquer: 'Red lacquer', squaretile: 'Square tiles',
+  stone: 'Stone', plaster: 'Plaster', woodpanel: 'Wood panelling', tapestry: 'Tapestry', plank: 'Wood planks', flagstone: 'Flagstone', rug: 'Rug', brick: 'Brick', whitewash: 'Whitewash', redlacquer: 'Red lacquer', squaretile: 'Square tiles', hardwood: 'Hardwood', carpet: 'Carpet', whitetile: 'White tiles', paint: 'Painted plaster',
 };
 export const MATERIAL_LABELS: Record<MaterialKind, string> = { greystone: 'Grey stone', sandstone: 'Sandstone', whitewash: 'Whitewashed', timber: 'Half-timbered', brick: 'Brick', redlacquer: 'Red lacquer (Chinese)', greybrick: 'Grey brick (Chinese)' };

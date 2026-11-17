@@ -8,12 +8,13 @@ Design your dream estate in the browser, from bare land to the candlesticks in t
 
 | | |
 |---|---|
-| ![Castle gate](docs/screenshots/castle-gate.jpg) | ![Throne room cutaway](docs/screenshots/interior.jpg) |
+| ![Castle gate](docs/screenshots/castle-gate.jpg) | ![A furnished manor floor plan (Modern)](docs/screenshots/interior.jpg) |
 | ![Village](docs/screenshots/village.jpg) | ![Farms](docs/screenshots/farms.jpg) |
 | ![Night](docs/screenshots/night.jpg) | ![Winter](docs/screenshots/winter.jpg) |
 | ![Gardens and maze](docs/screenshots/gardens.jpg) | ![Plan view](docs/screenshots/plan.jpg) |
 | ![Chinese palace courtyard](docs/screenshots/chinese-palace.jpg) | ![Lotus pond, zigzag bridge and pavilion](docs/screenshots/chinese-garden.jpg) |
 | ![Temple and pagoda](docs/screenshots/chinese-pagoda.jpg) | ![Teahouse street at dusk](docs/screenshots/chinese-street.jpg) |
+| ![A Chinese family home with Period interiors](docs/screenshots/interior-period.jpg) | |
 
 ![The editor](docs/screenshots/editor.jpg)
 
@@ -53,11 +54,18 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 - Furniture: canopy bed, official's armchair, dragon throne, folding screen, lacquered cabinet, scholar's desk, altar table, hanging scroll, porcelain vase, temple drum, gong, tea table and hanging red lanterns. Chinese buildings come furnished with these.
 - The **Jade Lotus Garden** demo (`?demo=chinese`, or Estate ▸ Load Chinese demo estate) has a walled palace compound, a temple hill with the pagoda, a lotus pond and a teahouse street.
 
+**Livable homes**
+- Homes come with real floor plans: the manor house, cottages, longhouse, keep, Chinese courtyard house and family residence are laid out room by room and furnished when you build them.
+- **Layout** tab (inside any rectangular building): choose bedrooms, bathrooms, kitchen, living room, dining room, study, laundry & pantry, and *Generate floor plans*. Every storey is laid out around an entrance hall with the staircase (or straight into the living room in a small cottage): corridors, a main bedroom with en-suite and walk-in closet, shared bathrooms, a cloakroom downstairs, interior walls and doors. Rooms that don't fit are reported. One undo step reverts it.
+- **Modern or Period**, switchable per building. Modern: fitted kitchens (base and wall cabinets, sink, range and hood, fridge, island and stools), bathrooms (toilet, vanity and mirror, bath, shower), beds with bedside tables and lamps, wardrobes, sofas, TV, dining sets, desks, washer and dryer, ceiling lights; painted walls, hardwood, carpet and tile. Period: hearth kitchens, washstands and wooden tubs, garderobes, four-poster or Chinese canopy beds, plaster and flagstone (Chinese buildings get lacquered furniture, screens and lanterns).
+- *Re-furnish rooms* furnishes any plan from its room types, including ones you drew yourself. Furniture keeps clear of doors, windows and stairwells.
+- New room types: living, dining, bathroom, closet, hallway, laundry, office and pantry.
+
 **Interiors**
 - Double-click any building to go inside. The cutaway view hides the roof and the floors above, a floor selector switches levels, and X-ray mode makes the walls see-through.
 - Floor plan editor: draw interior walls on a grid, define named and typed rooms, and add storeys, cellars and dungeons.
 - Doors (wooden, arched, double), archways, windows (stained glass, arched, shuttered), arrow slits, and straight or spiral stairs. Stairs cut their own stairwell in the floor above.
-- Floor, wall and ceiling materials: stone, plaster, wood panelling, tapestry, planks, flagstone, rug, brick and whitewash. Ceilings can be flat, beamed or vaulted.
+- Floor, wall and ceiling materials: stone, plaster, wood panelling, tapestry, planks, flagstone, rug, brick, whitewash, red lacquer, square tiles, hardwood, carpet, white tiles and painted plaster. Ceilings can be flat, beamed or vaulted.
 - Furniture catalog organised by room type: great hall, bedroom, kitchen, library, armory, chapel, cellar, dungeon, throne room and tavern. Wall items snap to walls and chandeliers hang from the ceiling. Candles, torches, chandeliers and fireplaces light rooms at night.
 
 **Village and farming**

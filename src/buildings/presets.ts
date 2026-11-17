@@ -1,6 +1,7 @@
 import { uid } from '../core/store';
 import type { BuildingDef, BuildingKind, CeilingStyle, FloorDef, MaterialKind, Opening, OpeningKind, PlacedObject, RoofStyle, RoomType, Stair, SurfaceMat } from '../core/types';
 import { edgeCount, footprint, frontEdge, levelBase, levelInset } from './footprint';
+import { DEFAULT_PROGRAM, furnishBuilding, generatePlan, type Program } from '../interiors/planGenerator';
 
 export interface PresetInfo {
   kind: BuildingKind;
@@ -32,6 +33,7 @@ export const PRESETS: PresetInfo[] = [
   { kind: 'windmill', label: 'Windmill', group: 'village', desc: 'Round windmill with sails', icon: '🌬' },
   { kind: 'workshop', label: 'Workshop', group: 'village', desc: 'Craftsman’s workshop', icon: '🪚' },
   { kind: 'storehouse', label: 'Storehouse', group: 'village', desc: 'Stone granary', icon: '📦' },
+  { kind: 'manor', label: 'Manor house', group: 'village', desc: '5 bed, 4 bath family home over 3 floors', icon: '🏛' },
   { kind: 'barn', label: 'Barn', group: 'farm', desc: 'Large barn with double doors', icon: '🏚' },
   { kind: 'chicken_coop', label: 'Chicken coop', group: 'farm', desc: 'Small coop', icon: '🐔' },
   { kind: 'pig_pen', label: 'Pig shed', group: 'farm', desc: 'Shelter for a pig pen', icon: '🐖' },
@@ -44,6 +46,7 @@ export const PRESETS: PresetInfo[] = [
   { kind: 'cn_pavilion', label: 'Pavilion', group: 'chinese', desc: 'Open garden pavilion with benches', icon: '⛱' },
   { kind: 'cn_house', label: 'Courtyard house', group: 'chinese', desc: 'Grey-brick wing with a columned porch', icon: '🏠' },
   { kind: 'cn_teahouse', label: 'Teahouse', group: 'chinese', desc: 'Two storeys of tea rooms, eaves on each', icon: '🍵' },
+  { kind: 'cn_residence', label: 'Family residence', group: 'chinese', desc: '4 bed, 3 bath home over 2 floors', icon: '🏡' },
 ];
 
 interface FloorSpec { level: number; h: number; room: string; type: RoomType; floor?: SurfaceMat; wall?: SurfaceMat; ceil?: CeilingStyle }
@@ -53,6 +56,8 @@ interface Spec {
   extra?: BuildingDef['extra']; doorWidth?: number; doorHeight?: number;
   /** furniture set: European (default) or Chinese */
   style?: 'chinese';
+  /** a home: generate a furnished floor plan (Modern interiors) with this room program */
+  plan?: Partial<Program>;
 }
 
 const S = (s: Partial<Spec> & Pick<Spec, 'name' | 'w' | 'd' | 'floors'>): Spec => ({
@@ -60,7 +65,7 @@ const S = (s: Partial<Spec> & Pick<Spec, 'name' | 'w' | 'd' | 'floors'>): Spec =
 });
 
 const SPECS: Record<string, Spec> = {
-  keep: S({ name: 'Keep', w: 16, d: 14, t: 1.4, roof: 'flat', cren: true, door: 'door_arched', win: 'window_arched', winSpacing: 4.5, stairs: 'spiral', roofColor: '#555b66',
+  keep: S({ name: 'Keep', w: 16, d: 14, t: 1.4, roof: 'flat', cren: true, door: 'door_arched', win: 'window_arched', winSpacing: 4.5, stairs: 'spiral', roofColor: '#555b66', plan: { bedrooms: 5, bathrooms: 4 },
     floors: [{ level: -1, h: 3.6, room: 'Dungeon', type: 'dungeon', floor: 'flagstone', wall: 'stone', ceil: 'vaulted' }, { level: 0, h: 5.5, room: 'Great Chamber', type: 'hall', floor: 'flagstone', wall: 'stone', ceil: 'beamed' },
       { level: 1, h: 4.2, room: 'Throne Room', type: 'throne', floor: 'plank', wall: 'tapestry', ceil: 'beamed' }, { level: 2, h: 4, room: 'Lord’s Bedchamber', type: 'bedroom', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' },
       { level: 3, h: 3.6, room: 'Library', type: 'library', floor: 'plank', wall: 'plaster', ceil: 'flat' }] }),
@@ -81,13 +86,13 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 4.5, room: 'Armory', type: 'armory', floor: 'flagstone', wall: 'stone', ceil: 'vaulted' }] }),
   stables: S({ name: 'Stables', w: 16, d: 7, t: 0.4, mat: 'timber', roof: 'pitched', roofColor: '#6b4a32', door: 'door_double', win: 'window_shutter', winSpacing: 4, stairs: 'none',
     floors: [{ level: 0, h: 3.6, room: 'Stables', type: 'stable', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' }], extra: { thatch: true } }),
-  cottage: S({ name: 'Cottage', w: 8, d: 6, t: 0.45, mat: 'whitewash', roof: 'pitched', win: 'window_shutter', winSpacing: 3, stairs: 'none',
+  cottage: S({ name: 'Cottage', w: 10, d: 7, t: 0.45, mat: 'whitewash', roof: 'pitched', win: 'window_shutter', winSpacing: 3, stairs: 'none', plan: { bedrooms: 1, bathrooms: 1, living: false, dining: false, office: false, laundry: false },
     floors: [{ level: 0, h: 3, room: 'Hall & Kitchen', type: 'kitchen', floor: 'flagstone', wall: 'plaster', ceil: 'beamed' }], extra: { thatch: true, chimney: true } }),
-  cottage_timber: S({ name: 'Timber Cottage', w: 9, d: 7, t: 0.4, mat: 'timber', roof: 'pitched', roofColor: '#8a4632', win: 'window_shutter', winSpacing: 3,
+  cottage_timber: S({ name: 'Timber Cottage', w: 10, d: 8, t: 0.4, mat: 'timber', roof: 'pitched', roofColor: '#8a4632', win: 'window_shutter', winSpacing: 3, plan: { bedrooms: 2, bathrooms: 1, dining: false, office: false, laundry: false },
     floors: [{ level: 0, h: 3, room: 'Living Room', type: 'kitchen', floor: 'plank', wall: 'plaster', ceil: 'beamed' }, { level: 1, h: 2.8, room: 'Bedroom', type: 'bedroom', floor: 'plank', wall: 'plaster', ceil: 'beamed' }], extra: { chimney: true } }),
-  cottage_stone: S({ name: 'Stone Cottage', w: 9, d: 6.5, t: 0.6, mat: 'greystone', roof: 'pitched', roofColor: '#4f5560', win: 'window_shutter', winSpacing: 3, stairs: 'none',
+  cottage_stone: S({ name: 'Stone Cottage', w: 12, d: 7, t: 0.6, mat: 'greystone', roof: 'pitched', roofColor: '#4f5560', win: 'window_shutter', winSpacing: 3, stairs: 'none', plan: { bedrooms: 1, bathrooms: 1, dining: false, office: false, laundry: false },
     floors: [{ level: 0, h: 3.2, room: 'Cottage', type: 'kitchen', floor: 'flagstone', wall: 'whitewash', ceil: 'beamed' }], extra: { chimney: true } }),
-  longhouse: S({ name: 'Longhouse', w: 18, d: 7, t: 0.45, mat: 'timber', roof: 'pitched', win: 'window_shutter', winSpacing: 4.5, door: 'door_double', stairs: 'none',
+  longhouse: S({ name: 'Longhouse', w: 18, d: 7, t: 0.45, mat: 'timber', roof: 'pitched', win: 'window_shutter', winSpacing: 4.5, door: 'door_double', stairs: 'none', plan: { bedrooms: 2, bathrooms: 1, dining: false, office: false, laundry: false },
     floors: [{ level: 0, h: 3.4, room: 'Longhouse', type: 'hall', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' }], extra: { thatch: true, chimney: true } }),
   tavern: S({ name: 'The Prancing Pony', w: 14, d: 10, t: 0.5, mat: 'timber', roof: 'pitched', roofColor: '#7d3d2c', win: 'window_shutter', winSpacing: 3, door: 'door_double',
     floors: [{ level: 0, h: 3.4, room: 'Taproom', type: 'tavern', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' }, { level: 1, h: 3, room: 'Guest Rooms', type: 'bedroom', floor: 'plank', wall: 'plaster', ceil: 'beamed' }], extra: { chimney: true } }),
@@ -115,6 +120,10 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 3.2, room: 'Dovecote', type: 'storage', floor: 'flagstone', wall: 'whitewash' }, { level: 1, h: 2.4, room: 'Loft', type: 'storage', floor: 'plank', wall: 'whitewash' }] }),
   greenhouse: S({ name: 'Greenhouse', w: 9, d: 5, t: 0.2, mat: 'whitewash', roof: 'pitched', roofColor: '#9cc0c8', win: 'window_arched', winSpacing: 1.6, stairs: 'none', door: 'door_wood',
     floors: [{ level: 0, h: 2.8, room: 'Greenhouse', type: 'generic', floor: 'flagstone', wall: 'whitewash' }] }),
+  manor: S({ name: 'Manor House', w: 22, d: 13, t: 0.6, mat: 'sandstone', roof: 'hipped', roofColor: '#5b4a42', win: 'window_shutter', winSpacing: 3, door: 'door_double', stairs: 'none', plan: { bedrooms: 5, bathrooms: 4 },
+    floors: [{ level: 0, h: 3.4, room: 'Hall', type: 'hall' }, { level: 1, h: 3.1, room: 'Bedrooms', type: 'bedroom' }, { level: 2, h: 3, room: 'Bedrooms', type: 'bedroom' }], extra: { chimney: true } }),
+  cn_residence: S({ name: 'Family Residence', w: 20, d: 12, t: 0.5, mat: 'greybrick', roof: 'eaves', roofColor: '#737980', door: 'door_lattice', win: 'window_lattice', winSpacing: 2.8, stairs: 'none', doorWidth: 1.8, doorHeight: 2.7, style: 'chinese', plan: { bedrooms: 4, bathrooms: 3 },
+    floors: [{ level: 0, h: 3.6, room: 'Hall', type: 'hall' }, { level: 1, h: 3.3, room: 'Bedrooms', type: 'bedroom' }], extra: { columns: 1.3, tiers: true, hip: 0.4, terrace: 1.4 } }),
   // ---- Chinese (roof 'eaves': see chineseRoof.ts for the extra flags) ----
   cn_hall: S({ name: 'Hall of Supreme Harmony', w: 24, d: 13, t: 0.6, mat: 'redlacquer', roof: 'eaves', roofColor: '#d9a21e', door: 'door_lattice', win: 'window_lattice', winSpacing: 3.4, stairs: 'none', doorWidth: 2.6, doorHeight: 3.6, style: 'chinese',
     floors: [{ level: 0, h: 7, room: 'Throne Hall', type: 'throne', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.8, terrace: 4, doubleEave: true, hip: 1 } }),
@@ -128,7 +137,7 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 5.4, room: 'Gate Passage', type: 'generic', floor: 'flagstone', wall: 'stone' }, { level: 1, h: 4, room: 'Watch Hall', type: 'armory', floor: 'plank', wall: 'redlacquer', ceil: 'beamed' }], extra: { hip: 0.5, tiers: true } }),
   cn_pavilion: S({ name: 'Pavilion', w: 5.5, d: 5.5, t: 0.2, mat: 'redlacquer', roof: 'eaves', roofColor: '#2f6b55', door: 'archway', win: 'window_lattice', winSpacing: 99, stairs: 'none', style: 'chinese',
     floors: [{ level: 0, h: 3.4, room: 'Pavilion', type: 'generic', floor: 'squaretile', wall: 'redlacquer' }], extra: { open: true, hip: 1, terrace: 0.9, finial: true } }),
-  cn_house: S({ name: 'Courtyard House', w: 13, d: 6.5, t: 0.45, mat: 'greybrick', roof: 'eaves', roofColor: '#737980', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'none', doorWidth: 1.6, doorHeight: 2.6, style: 'chinese',
+  cn_house: S({ name: 'Courtyard House', w: 13, d: 6.5, t: 0.45, mat: 'greybrick', roof: 'eaves', roofColor: '#737980', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'none', doorWidth: 1.6, doorHeight: 2.6, style: 'chinese', plan: { bedrooms: 2, bathrooms: 1, dining: false, office: false, laundry: false },
     floors: [{ level: 0, h: 3.6, room: 'Family Hall', type: 'hall', floor: 'squaretile', wall: 'whitewash', ceil: 'beamed' }], extra: { columns: 1.3, hip: 0.25, terrace: 1.6 } }),
   cn_teahouse: S({ name: 'Teahouse', w: 12, d: 9, t: 0.4, mat: 'redlacquer', roof: 'eaves', roofColor: '#33604f', door: 'door_lattice', win: 'window_lattice', winSpacing: 2.6, doorWidth: 2, doorHeight: 2.8, style: 'chinese',
     floors: [{ level: 0, h: 3.6, room: 'Tea Room', type: 'tavern', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' }, { level: 1, h: 3.3, room: 'Upper Tea Room', type: 'tavern', floor: 'plank', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.2, tiers: true, hip: 0.6 } }),
@@ -231,6 +240,11 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
   const bas = b.floors.find((f) => f.level === -1);
   if (bas) bas.stairs = stairsFor(b, spec, bas, false);
   b.openings = autoOpenings(b, spec);
+  if (spec.plan) {
+    // homes come with a furnished floor plan
+    generatePlan(b, { ...DEFAULT_PROGRAM, ...spec.plan }, 'modern');
+    return { building: b, furniture: furnish ? furnishBuilding(b) : [] };
+  }
   const furniture: PlacedObject[] = [];
   if (furnish) {
     for (const f of b.floors) {

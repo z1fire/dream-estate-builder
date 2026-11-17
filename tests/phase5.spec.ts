@@ -45,22 +45,25 @@ test('interiors: enter keep, cutaway, edit plan, furnish', async ({ page }) => {
   await page.evaluate(() => { const app = (window as any).app; app.rig.orbit.target.set(0, app.__interior.levelY, 0); app.rig.persp.position.set(2, app.__interior.levelY + 34, 8); app.rig.orbit.update(); });
   await page.waitForTimeout(1200);
   await page.evaluate(() => (window as any).app.ui.setTool('interior'));
+  await page.locator('#sidepanel .seg button', { hasText: 'Walls' }).click();
+  const wallsBefore = await page.evaluate(() => (window as any).app.__interior.floor.walls.length);
   let p = await localToScreen(page, 0, -5.5); await page.mouse.click(p[0], p[1]);
   p = await localToScreen(page, 0, 5.5); await page.mouse.click(p[0], p[1]);
   await page.keyboard.press('Escape');
   const walls = await page.evaluate(() => (window as any).app.__interior.floor.walls.length);
-  expect(walls).toBe(1);
+  expect(walls).toBe(wallsBefore + 1);
   // add a door in that wall
   await page.locator('#sidepanel .seg button', { hasText: 'Doors & windows' }).click();
-  p = await localToScreen(page, 0, 0); await page.mouse.click(p[0], p[1]);
-  const ops = await page.evaluate(() => { const it = (window as any).app.__interior; return it.building.openings.filter((o: any) => o.wall === it.floor.walls[0].id).length; });
+  p = await localToScreen(page, 0, -3); await page.mouse.click(p[0], p[1]);
+  const ops = await page.evaluate(() => { const it = (window as any).app.__interior; return it.building.openings.filter((o: any) => o.wall === it.floor.walls[it.floor.walls.length - 1].id).length; });
   expect(ops).toBe(1);
   // add a room by dragging
+  const roomsBefore = await page.evaluate(() => (window as any).app.__interior.floor.rooms.length);
   await page.locator('#sidepanel .seg button', { hasText: 'Rooms' }).click();
   const a = await localToScreen(page, 0.5, -5.5), c = await localToScreen(page, 6, 5.5);
   await page.mouse.move(a[0], a[1]); await page.mouse.down(); await page.mouse.move((a[0] + c[0]) / 2, (a[1] + c[1]) / 2); await page.mouse.move(c[0], c[1]); await page.mouse.up();
   const rooms = await page.evaluate(() => (window as any).app.__interior.floor.rooms.length);
-  expect(rooms).toBe(2);
+  expect(rooms).toBe(roomsBefore + 1);
   // furnish: place a wardrobe
   await page.evaluate(() => { const app = (window as any).app; app.ui.setTool('furnish'); app.getTool('furnish').select('chest_large'); });
   await page.waitForTimeout(800);

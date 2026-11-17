@@ -89,7 +89,7 @@ export async function buildDemoEstate(app: App): Promise<EstateDoc> {
   add('cottage_timber', vx, vz + 30, Math.PI);
   add('cottage_stone', vx + 28, vz + 30, Math.PI);
   add('cottage', vx - 38, vz - 24, Math.PI / 2);
-  add('cottage_timber', vx - 10, vz + 58, Math.PI);
+  add('manor', vx - 10, vz + 60, Math.PI, {}, 'Ashworth Manor');
   add('cottage_stone', vx + 22, vz + 60, Math.PI);
   add('workshop', vx + 52, vz + 36, -Math.PI / 2, {}, 'Carpenter');
   add('storehouse', vx - 58, vz - 4, Math.PI / 2, {}, 'Granary');

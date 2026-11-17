@@ -6,6 +6,9 @@ import type { LightManager } from '../environment/Lights';
 import { catalogItem } from './catalog';
 import { instantiate } from './loader';
 
+/** Interior furniture further than this from the camera is hidden (it's behind walls anyway). */
+const INTERIOR_DRAW_DIST = 90;
+
 /** Renders every PlacedObject (catalog model) in the world or inside buildings. */
 export class PropsSystem implements System {
   group = new THREE.Group();
@@ -104,13 +107,19 @@ export class PropsSystem implements System {
   }
 
   refreshVisibility() {
+    const cam = this.app.rig.camera.position;
     for (const o of this.app.store.doc.objects) {
       const v = this.objs.get(o.id);
-      if (v) v.obj.visible = this.visibility(o);
+      if (v) v.obj.visible = this.visibility(o) && (!o.buildingId || v.obj.position.distanceTo(cam) < INTERIOR_DRAW_DIST);
     }
   }
 
+  private cullT = 0;
+
   update(dt: number) {
     for (const v of this.objs.values()) if (v.mixer && v.obj.visible) v.mixer.update(dt);
+    // furniture inside buildings is only drawn near the camera (homes can hold hundreds of pieces)
+    this.cullT -= dt;
+    if (this.cullT <= 0) { this.cullT = 0.3; this.refreshVisibility(); }
   }
 }

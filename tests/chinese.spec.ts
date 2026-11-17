@@ -51,7 +51,7 @@ test('Chinese demo: palace compound, pagoda, pavilions, courtyard walls, garden'
   await page.evaluate(() => (window as any).app.ui.setMode('chinese'));
   await page.waitForTimeout(800);
   await page.screenshot({ path: 'tests/screenshots/chinese-panel.png' });
-  expect(await page.locator('.cat-item').count()).toBe(7);
+  expect(await page.locator('.cat-item').count()).toBe(8);
   // night: lanterns and lattice windows glow
   await page.evaluate(() => { const app = (window as any).app; app.env.setTime?.(21.5); app.store.doc.settings.timeOfDay = 21.5; app.store.notify({ type: 'settings' }); });
   await look(page, vps[2][0], vps[2][1]);

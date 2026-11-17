@@ -101,7 +101,8 @@ export interface Opening {
   height: number;
   sill: number;
 }
-export type SurfaceMat = 'stone' | 'plaster' | 'woodpanel' | 'tapestry' | 'plank' | 'flagstone' | 'rug' | 'brick' | 'whitewash' | 'redlacquer' | 'squaretile';
+export type SurfaceMat = 'stone' | 'plaster' | 'woodpanel' | 'tapestry' | 'plank' | 'flagstone' | 'rug' | 'brick' | 'whitewash' | 'redlacquer' | 'squaretile'
+  | 'hardwood' | 'carpet' | 'whitetile' | 'paint';
 export type CeilingStyle = 'flat' | 'beamed' | 'vaulted';
 export interface InteriorWall {
   id: string;
@@ -112,7 +113,8 @@ export interface InteriorWall {
 }
 export type RoomType =
   | 'hall' | 'bedroom' | 'kitchen' | 'library' | 'armory' | 'chapel' | 'cellar'
-  | 'dungeon' | 'throne' | 'storage' | 'tavern' | 'shop' | 'workshop' | 'stable' | 'generic';
+  | 'dungeon' | 'throne' | 'storage' | 'tavern' | 'shop' | 'workshop' | 'stable' | 'generic'
+  | 'living' | 'dining' | 'bathroom' | 'closet' | 'hallway' | 'laundry' | 'office' | 'pantry';
 export interface Room {
   id: string;
   name: string;
@@ -149,7 +151,7 @@ export type BuildingKind =
   | 'tavern' | 'blacksmith' | 'bakery' | 'market_stall' | 'watermill' | 'windmill' | 'church'
   | 'workshop' | 'storehouse' | 'barn' | 'chicken_coop' | 'pig_pen' | 'dovecote' | 'greenhouse'
   | 'beehive' | 'custom'
-  | 'cn_hall' | 'cn_temple' | 'cn_pagoda' | 'cn_gate' | 'cn_pavilion' | 'cn_house' | 'cn_teahouse';
+  | 'cn_hall' | 'cn_temple' | 'cn_pagoda' | 'cn_gate' | 'cn_pavilion' | 'cn_house' | 'cn_teahouse' | 'cn_residence' | 'manor';
 
 export interface BuildingDef {
   id: string;

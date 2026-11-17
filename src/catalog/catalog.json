@@ -4337,6 +4337,28 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "garderobe",
+   "name": "Garderobe",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "period"
+   ],
+   "model": "models/furniture/garderobe.glb",
+   "scale": 1,
+   "footprint": [
+    1,
+    0.75
+   ],
+   "height": 1.45,
+   "snap": "floor",
+   "thumb": "thumbs/garderobe.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "cn_gong",
    "name": "Gong",
    "category": "furniture",
@@ -5011,6 +5033,75 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "wash_tub",
+   "name": "Wash Tub",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "period"
+   ],
+   "model": "models/furniture/wash_tub.glb",
+   "scale": 1,
+   "footprint": [
+    1.62,
+    0.96
+   ],
+   "height": 1.05,
+   "snap": "floor",
+   "thumb": "thumbs/wash_tub.webp",
+   "roomTypes": [
+    "laundry"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "washstand",
+   "name": "Washstand",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "period"
+   ],
+   "model": "models/furniture/washstand.glb",
+   "scale": 1,
+   "footprint": [
+    0.8,
+    0.5
+   ],
+   "height": 1.85,
+   "snap": "floor",
+   "thumb": "thumbs/washstand.webp",
+   "roomTypes": [
+    "bathroom",
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_washstand",
+   "name": "Washstand (Chinese)",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "period",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_washstand.glb",
+   "scale": 1,
+   "footprint": [
+    0.75,
+    0.6
+   ],
+   "height": 1.6,
+   "snap": "floor",
+   "thumb": "thumbs/cn_washstand.webp",
+   "roomTypes": [
+    "bathroom",
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "weapon_rack",
    "name": "Weapon Rack",
    "category": "furniture",
@@ -5050,6 +5141,28 @@
    "thumb": "thumbs/wine_rack.webp",
    "roomTypes": [
     "cellar"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "wooden_tub",
+   "name": "Wooden Bathtub",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "period"
+   ],
+   "model": "models/furniture/wooden_tub.glb",
+   "scale": 1,
+   "footprint": [
+    1.79,
+    1.48
+   ],
+   "height": 0.73,
+   "snap": "floor",
+   "thumb": "thumbs/wooden_tub.webp",
+   "roomTypes": [
+    "bathroom"
    ],
    "source": "Blender (this repo)"
   },
@@ -5687,6 +5800,1216 @@
    "snap": "ground",
    "thumb": "thumbs/q_stepping_wide.webp",
    "source": "Quaternius"
+  },
+  {
+   "id": "m_armchair",
+   "name": "Armchair",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_armchair.glb",
+   "scale": 1,
+   "footprint": [
+    0.91,
+    0.76
+   ],
+   "height": 0.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_armchair.webp",
+   "roomTypes": [
+    "living",
+    "office",
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bar_stool",
+   "name": "Bar Stool",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bar_stool.glb",
+   "scale": 1,
+   "footprint": [
+    0.46,
+    0.4
+   ],
+   "height": 0.75,
+   "snap": "floor",
+   "thumb": "thumbs/m_bar_stool.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_mirror",
+   "name": "Bathroom Mirror",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_mirror.glb",
+   "scale": 1,
+   "footprint": [
+    0.55,
+    0.27
+   ],
+   "height": 0.8,
+   "snap": "wall",
+   "thumb": "thumbs/m_mirror.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bathtub",
+   "name": "Bathtub",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bathtub.glb",
+   "scale": 1,
+   "footprint": [
+    1.7,
+    0.8
+   ],
+   "height": 0.6,
+   "snap": "floor",
+   "thumb": "thumbs/m_bathtub.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_nightstand",
+   "name": "Bedside Table",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_nightstand.glb",
+   "scale": 1,
+   "footprint": [
+    0.56,
+    0.45
+   ],
+   "height": 0.55,
+   "snap": "floor",
+   "thumb": "thumbs/m_nightstand.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bin",
+   "name": "Bin",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bin.glb",
+   "scale": 1,
+   "footprint": [
+    0.29,
+    0.33
+   ],
+   "height": 0.6,
+   "snap": "floor",
+   "thumb": "thumbs/m_bin.webp",
+   "roomTypes": [
+    "kitchen",
+    "office"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bookcase",
+   "name": "Bookcase",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bookcase.glb",
+   "scale": 1,
+   "footprint": [
+    0.86,
+    0.54
+   ],
+   "height": 1.9,
+   "snap": "floor",
+   "thumb": "thumbs/m_bookcase.webp",
+   "roomTypes": [
+    "office",
+    "living",
+    "library"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bunk_bed",
+   "name": "Bunk Bed",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bunk_bed.glb",
+   "scale": 1,
+   "footprint": [
+    1.14,
+    2.19
+   ],
+   "height": 1.7,
+   "snap": "floor",
+   "thumb": "thumbs/m_bunk_bed.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_ceiling_light",
+   "name": "Ceiling Light",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_ceiling_light.glb",
+   "scale": 1,
+   "footprint": [
+    0.26,
+    0.26
+   ],
+   "height": 0.5,
+   "snap": "ceiling",
+   "thumb": "thumbs/m_ceiling_light.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "light": {
+    "color": "#fff4e0",
+    "intensity": 5,
+    "distance": 9,
+    "y": -0.15
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "m_dresser",
+   "name": "Chest of Drawers",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_dresser.glb",
+   "scale": 1,
+   "footprint": [
+    0.81,
+    0.66
+   ],
+   "height": 0.8,
+   "snap": "floor",
+   "thumb": "thumbs/m_dresser.webp",
+   "roomTypes": [
+    "bedroom",
+    "closet"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_coat_hooks",
+   "name": "Coat Hooks",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_coat_hooks.glb",
+   "scale": 1,
+   "footprint": [
+    0.64,
+    0.19
+   ],
+   "height": 0.4,
+   "snap": "wall",
+   "thumb": "thumbs/m_coat_hooks.webp",
+   "roomTypes": [
+    "hallway"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_coffee_machine",
+   "name": "Coffee Machine",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_coffee_machine.glb",
+   "scale": 1,
+   "footprint": [
+    0.37,
+    0.47
+   ],
+   "height": 0.35,
+   "snap": "floor",
+   "thumb": "thumbs/m_coffee_machine.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_coffee_table",
+   "name": "Coffee Table",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_coffee_table.glb",
+   "scale": 1,
+   "footprint": [
+    1.21,
+    0.73
+   ],
+   "height": 0.42,
+   "snap": "floor",
+   "thumb": "thumbs/m_coffee_table.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_monitor",
+   "name": "Computer Monitor",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_monitor.glb",
+   "scale": 1,
+   "footprint": [
+    0.6,
+    0.16
+   ],
+   "height": 0.45,
+   "snap": "floor",
+   "thumb": "thumbs/m_monitor.webp",
+   "roomTypes": [
+    "office"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_hood",
+   "name": "Cooker Hood",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_hood.glb",
+   "scale": 1,
+   "footprint": [
+    0.65,
+    0.43
+   ],
+   "height": 0.6,
+   "snap": "wall",
+   "thumb": "thumbs/m_hood.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_desk_corner",
+   "name": "Corner Desk",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_desk_corner.glb",
+   "scale": 1,
+   "footprint": [
+    1.93,
+    1.93
+   ],
+   "height": 0.76,
+   "snap": "floor",
+   "thumb": "thumbs/m_desk_corner.webp",
+   "roomTypes": [
+    "office"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_sofa_corner",
+   "name": "Corner Sofa",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_sofa_corner.glb",
+   "scale": 1,
+   "footprint": [
+    1.81,
+    1.81
+   ],
+   "height": 0.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_sofa_corner.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_chair_cushion",
+   "name": "Cushioned Chair",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_chair_cushion.glb",
+   "scale": 1,
+   "footprint": [
+    0.41,
+    0.41
+   ],
+   "height": 0.95,
+   "snap": "floor",
+   "thumb": "thumbs/m_chair_cushion.webp",
+   "roomTypes": [
+    "dining"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_design_chair",
+   "name": "Designer Chair",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_design_chair.glb",
+   "scale": 1,
+   "footprint": [
+    1.46,
+    0.82
+   ],
+   "height": 0.8,
+   "snap": "floor",
+   "thumb": "thumbs/m_design_chair.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_desk",
+   "name": "Desk",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_desk.glb",
+   "scale": 1,
+   "footprint": [
+    1.45,
+    0.78
+   ],
+   "height": 0.76,
+   "snap": "floor",
+   "thumb": "thumbs/m_desk.webp",
+   "roomTypes": [
+    "office",
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_chair",
+   "name": "Dining Chair",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_chair.glb",
+   "scale": 1,
+   "footprint": [
+    0.4,
+    0.4
+   ],
+   "height": 0.95,
+   "snap": "floor",
+   "thumb": "thumbs/m_chair.webp",
+   "roomTypes": [
+    "dining",
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_dining_table",
+   "name": "Dining Table",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_dining_table.glb",
+   "scale": 1,
+   "footprint": [
+    1.96,
+    1.04
+   ],
+   "height": 0.76,
+   "snap": "floor",
+   "thumb": "thumbs/m_dining_table.webp",
+   "roomTypes": [
+    "dining",
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_dining_table_cloth",
+   "name": "Dining Table (cloth)",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_dining_table_cloth.glb",
+   "scale": 1,
+   "footprint": [
+    2.01,
+    1.07
+   ],
+   "height": 0.78,
+   "snap": "floor",
+   "thumb": "thumbs/m_dining_table_cloth.webp",
+   "roomTypes": [
+    "dining"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_doormat",
+   "name": "Doormat",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_doormat.glb",
+   "scale": 1,
+   "footprint": [
+    0.86,
+    0.47
+   ],
+   "height": 0.02,
+   "snap": "floor",
+   "thumb": "thumbs/m_doormat.webp",
+   "roomTypes": [
+    "hallway"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bed_double",
+   "name": "Double Bed",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bed_double.glb",
+   "scale": 1,
+   "footprint": [
+    1.84,
+    2.16
+   ],
+   "height": 0.72,
+   "snap": "floor",
+   "thumb": "thumbs/m_bed_double.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_tv",
+   "name": "Flat-screen TV",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_tv.glb",
+   "scale": 1,
+   "footprint": [
+    1.13,
+    0.21
+   ],
+   "height": 0.75,
+   "snap": "floor",
+   "thumb": "thumbs/m_tv.webp",
+   "roomTypes": [
+    "living",
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_floor_lamp",
+   "name": "Floor Lamp",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_floor_lamp.glb",
+   "scale": 1,
+   "footprint": [
+    0.28,
+    0.33
+   ],
+   "height": 1.6,
+   "snap": "floor",
+   "thumb": "thumbs/m_floor_lamp.webp",
+   "roomTypes": [
+    "living",
+    "bedroom",
+    "office"
+   ],
+   "light": {
+    "color": "#fff1d6",
+    "intensity": 3,
+    "distance": 7,
+    "y": 1.45
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "m_fridge",
+   "name": "Fridge-Freezer",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_fridge.glb",
+   "scale": 1,
+   "footprint": [
+    1.05,
+    0.82
+   ],
+   "height": 1.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_fridge.webp",
+   "roomTypes": [
+    "kitchen",
+    "pantry"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_counter",
+   "name": "Kitchen Base Cabinet",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_counter.glb",
+   "scale": 1,
+   "footprint": [
+    0.88,
+    0.92
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/m_counter.webp",
+   "roomTypes": [
+    "kitchen",
+    "laundry",
+    "pantry"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_counter_drawers",
+   "name": "Kitchen Drawers",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_counter_drawers.glb",
+   "scale": 1,
+   "footprint": [
+    0.88,
+    0.92
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/m_counter_drawers.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_island",
+   "name": "Kitchen Island",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_island.glb",
+   "scale": 1,
+   "footprint": [
+    0.97,
+    0.48
+   ],
+   "height": 0.95,
+   "snap": "floor",
+   "thumb": "thumbs/m_island.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_kitchen_sink",
+   "name": "Kitchen Sink",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_kitchen_sink.glb",
+   "scale": 1,
+   "footprint": [
+    0.81,
+    0.84
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/m_kitchen_sink.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_sofa_long",
+   "name": "Long Sofa",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_sofa_long.glb",
+   "scale": 1,
+   "footprint": [
+    1.81,
+    1.52
+   ],
+   "height": 0.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_sofa_long.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_microwave",
+   "name": "Microwave",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_microwave.glb",
+   "scale": 1,
+   "footprint": [
+    0.48,
+    0.38
+   ],
+   "height": 0.3,
+   "snap": "floor",
+   "thumb": "thumbs/m_microwave.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_office_chair",
+   "name": "Office Chair",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_office_chair.glb",
+   "scale": 1,
+   "footprint": [
+    0.55,
+    0.52
+   ],
+   "height": 1,
+   "snap": "floor",
+   "thumb": "thumbs/m_office_chair.webp",
+   "roomTypes": [
+    "office",
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_basin",
+   "name": "Pedestal Basin",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_basin.glb",
+   "scale": 1,
+   "footprint": [
+    0.53,
+    0.46
+   ],
+   "height": 0.88,
+   "snap": "floor",
+   "thumb": "thumbs/m_basin.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_stove",
+   "name": "Range Cooker",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_stove.glb",
+   "scale": 1,
+   "footprint": [
+    0.88,
+    0.92
+   ],
+   "height": 0.92,
+   "snap": "floor",
+   "thumb": "thumbs/m_stove.webp",
+   "roomTypes": [
+    "kitchen"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_rug",
+   "name": "Rug",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_rug.glb",
+   "scale": 1,
+   "footprint": [
+    3.14,
+    1.84
+   ],
+   "height": 0.02,
+   "snap": "floor",
+   "thumb": "thumbs/m_rug.webp",
+   "roomTypes": [
+    "living",
+    "bedroom",
+    "dining"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_shower",
+   "name": "Shower",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_shower.glb",
+   "scale": 1,
+   "footprint": [
+    1.08,
+    1.12
+   ],
+   "height": 2.1,
+   "snap": "floor",
+   "thumb": "thumbs/m_shower.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_side_table",
+   "name": "Side Table",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_side_table.glb",
+   "scale": 1,
+   "footprint": [
+    0.76,
+    0.31
+   ],
+   "height": 0.55,
+   "snap": "floor",
+   "thumb": "thumbs/m_side_table.webp",
+   "roomTypes": [
+    "living",
+    "hallway"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_bed_single",
+   "name": "Single Bed",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_bed_single.glb",
+   "scale": 1,
+   "footprint": [
+    1.1,
+    2.16
+   ],
+   "height": 0.72,
+   "snap": "floor",
+   "thumb": "thumbs/m_bed_single.webp",
+   "roomTypes": [
+    "bedroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_plant_small",
+   "name": "Small Plant",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_plant_small.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    0.24
+   ],
+   "height": 0.35,
+   "snap": "floor",
+   "thumb": "thumbs/m_plant_small.webp",
+   "roomTypes": [
+    "*"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_sofa",
+   "name": "Sofa",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_sofa.glb",
+   "scale": 1,
+   "footprint": [
+    1.81,
+    0.76
+   ],
+   "height": 0.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_sofa.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_cabinet_wide",
+   "name": "Storage Cabinet",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_cabinet_wide.glb",
+   "scale": 1,
+   "footprint": [
+    1.92,
+    0.6
+   ],
+   "height": 1.9,
+   "snap": "floor",
+   "thumb": "thumbs/m_cabinet_wide.webp",
+   "roomTypes": [
+    "office",
+    "closet",
+    "pantry",
+    "storage"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_table_lamp",
+   "name": "Table Lamp",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_table_lamp.glb",
+   "scale": 1,
+   "footprint": [
+    0.24,
+    0.28
+   ],
+   "height": 0.5,
+   "snap": "floor",
+   "thumb": "thumbs/m_table_lamp.webp",
+   "roomTypes": [
+    "bedroom",
+    "living"
+   ],
+   "light": {
+    "color": "#fff1d6",
+    "intensity": 1.5,
+    "distance": 4,
+    "y": 0.4
+   },
+   "source": "Kenney"
+  },
+  {
+   "id": "m_toilet",
+   "name": "Toilet",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_toilet.glb",
+   "scale": 1,
+   "footprint": [
+    0.55,
+    0.85
+   ],
+   "height": 0.8,
+   "snap": "floor",
+   "thumb": "thumbs/m_toilet.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_dryer",
+   "name": "Tumble Dryer",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_dryer.glb",
+   "scale": 1,
+   "footprint": [
+    0.73,
+    0.71
+   ],
+   "height": 0.88,
+   "snap": "floor",
+   "thumb": "thumbs/m_dryer.webp",
+   "roomTypes": [
+    "laundry"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_tv_cabinet",
+   "name": "TV Cabinet",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_tv_cabinet.glb",
+   "scale": 1,
+   "footprint": [
+    1.29,
+    0.4
+   ],
+   "height": 0.5,
+   "snap": "floor",
+   "thumb": "thumbs/m_tv_cabinet.webp",
+   "roomTypes": [
+    "living"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_vanity",
+   "name": "Vanity Unit",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_vanity.glb",
+   "scale": 1,
+   "footprint": [
+    0.77,
+    0.58
+   ],
+   "height": 0.85,
+   "snap": "floor",
+   "thumb": "thumbs/m_vanity.webp",
+   "roomTypes": [
+    "bathroom"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_upper_cabinet",
+   "name": "Wall Cabinet",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_upper_cabinet.glb",
+   "scale": 1,
+   "footprint": [
+    0.77,
+    0.39
+   ],
+   "height": 0.7,
+   "snap": "wall",
+   "thumb": "thumbs/m_upper_cabinet.webp",
+   "roomTypes": [
+    "kitchen",
+    "laundry"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_wardrobe",
+   "name": "Wardrobe",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_wardrobe.glb",
+   "scale": 1,
+   "footprint": [
+    0.94,
+    0.59
+   ],
+   "height": 2,
+   "snap": "floor",
+   "thumb": "thumbs/m_wardrobe.webp",
+   "roomTypes": [
+    "bedroom",
+    "closet"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_washer_dryer",
+   "name": "Washer-Dryer Stack",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_washer_dryer.glb",
+   "scale": 1,
+   "footprint": [
+    0.75,
+    0.75
+   ],
+   "height": 1.8,
+   "snap": "floor",
+   "thumb": "thumbs/m_washer_dryer.webp",
+   "roomTypes": [
+    "laundry",
+    "closet"
+   ],
+   "source": "Kenney"
+  },
+  {
+   "id": "m_washer",
+   "name": "Washing Machine",
+   "category": "home",
+   "tags": [
+    "furniture",
+    "modern"
+   ],
+   "model": "models/home/m_washer.glb",
+   "scale": 1,
+   "footprint": [
+    0.73,
+    0.73
+   ],
+   "height": 0.88,
+   "snap": "floor",
+   "thumb": "thumbs/m_washer.webp",
+   "roomTypes": [
+    "laundry"
+   ],
+   "source": "Kenney"
   },
   {
    "id": "brazier",

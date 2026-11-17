@@ -311,6 +311,43 @@ export const GROUPS = [
     ['cn_vase', 'cn_vase', 'Porcelain Vase', null, { roomTypes: ['hall', 'throne', 'bedroom', 'library'] }], ['cn_drum', 'cn_drum', 'Temple Drum', null, { roomTypes: ['chapel', 'hall'] }],
     ['cn_gong', 'cn_gong', 'Gong', null, { roomTypes: ['chapel'] }], ['cn_tea_table', 'cn_tea_table', 'Tea Table', null, { roomTypes: ['hall', 'tavern', 'library'] }],
   ] },
+  // ---------------- modern home (Kenney Furniture Kit) — used by the Modern interior style ----------------
+  { src: KF, category: 'home', snap: 'floor', tags: ['furniture', 'modern'], items: [
+    ['loungeSofa', 'm_sofa', 'Sofa', 0.85, { roomTypes: ['living'] }], ['loungeSofaCorner', 'm_sofa_corner', 'Corner Sofa', 0.85, { roomTypes: ['living'] }],
+    ['loungeSofaLong', 'm_sofa_long', 'Long Sofa', 0.85, { roomTypes: ['living'] }], ['loungeChair', 'm_armchair', 'Armchair', 0.85, { roomTypes: ['living', 'office', 'bedroom'] }],
+    ['loungeDesignChair', 'm_design_chair', 'Designer Chair', 0.8, { roomTypes: ['living'] }], ['tableCoffee', 'm_coffee_table', 'Coffee Table', 0.42, { roomTypes: ['living'] }],
+    ['cabinetTelevision', 'm_tv_cabinet', 'TV Cabinet', 0.5, { roomTypes: ['living'] }], ['televisionModern', 'm_tv', 'Flat-screen TV', 0.75, { roomTypes: ['living', 'bedroom'] }],
+    ['table', 'm_dining_table', 'Dining Table', 0.76, { roomTypes: ['dining', 'kitchen'] }], ['tableCloth', 'm_dining_table_cloth', 'Dining Table (cloth)', 0.78, { roomTypes: ['dining'] }],
+    ['chair', 'm_chair', 'Dining Chair', 0.95, { roomTypes: ['dining', 'kitchen'] }], ['chairCushion', 'm_chair_cushion', 'Cushioned Chair', 0.95, { roomTypes: ['dining'] }],
+    ['kitchenCabinet', 'm_counter', 'Kitchen Base Cabinet', 0.92, { roomTypes: ['kitchen', 'laundry', 'pantry'] }], ['kitchenCabinetDrawer', 'm_counter_drawers', 'Kitchen Drawers', 0.92, { roomTypes: ['kitchen'] }],
+    ['kitchenCabinetUpper', 'm_upper_cabinet', 'Wall Cabinet', 0.7, { roomTypes: ['kitchen', 'laundry'], snap: 'wall' }],
+    ['kitchenSink', 'm_kitchen_sink', 'Kitchen Sink', 0.92, { roomTypes: ['kitchen'] }], ['kitchenStove', 'm_stove', 'Range Cooker', 0.92, { roomTypes: ['kitchen'] }],
+    ['kitchenFridgeLarge', 'm_fridge', 'Fridge-Freezer', 1.85, { roomTypes: ['kitchen', 'pantry'] }], ['kitchenBar', 'm_island', 'Kitchen Island', 0.95, { roomTypes: ['kitchen'] }],
+    ['stoolBar', 'm_bar_stool', 'Bar Stool', 0.75, { roomTypes: ['kitchen'] }], ['hoodModern', 'm_hood', 'Cooker Hood', 0.6, { roomTypes: ['kitchen'], snap: 'wall' }],
+    ['kitchenMicrowave', 'm_microwave', 'Microwave', 0.3, { roomTypes: ['kitchen'] }], ['kitchenCoffeeMachine', 'm_coffee_machine', 'Coffee Machine', 0.35, { roomTypes: ['kitchen'] }],
+    ['toilet', 'm_toilet', 'Toilet', 0.8, { roomTypes: ['bathroom'] }], ['bathtub', 'm_bathtub', 'Bathtub', 0.6, { roomTypes: ['bathroom'] }],
+    ['shower', 'm_shower', 'Shower', 2.1, { roomTypes: ['bathroom'] }], ['bathroomSink', 'm_basin', 'Pedestal Basin', 0.88, { roomTypes: ['bathroom'] }],
+    ['bathroomCabinetDrawer', 'm_vanity', 'Vanity Unit', 0.85, { roomTypes: ['bathroom'] }], ['bathroomMirror', 'm_mirror', 'Bathroom Mirror', 0.8, { roomTypes: ['bathroom'], snap: 'wall' }],
+    ['washer', 'm_washer', 'Washing Machine', 0.88, { roomTypes: ['laundry'] }], ['dryer', 'm_dryer', 'Tumble Dryer', 0.88, { roomTypes: ['laundry'] }],
+    ['washerDryerStacked', 'm_washer_dryer', 'Washer-Dryer Stack', 1.8, { roomTypes: ['laundry', 'closet'] }],
+    ['bedDouble', 'm_bed_double', 'Double Bed', 0.72, { roomTypes: ['bedroom'] }], ['bedSingle', 'm_bed_single', 'Single Bed', 0.72, { roomTypes: ['bedroom'] }],
+    ['bedBunk', 'm_bunk_bed', 'Bunk Bed', 1.7, { roomTypes: ['bedroom'] }], ['cabinetBedDrawer', 'm_nightstand', 'Bedside Table', 0.55, { roomTypes: ['bedroom'] }],
+    ['cabinetBedDrawerTable', 'm_dresser', 'Chest of Drawers', 0.8, { roomTypes: ['bedroom', 'closet'] }], ['bookcaseClosedDoors', 'm_wardrobe', 'Wardrobe', 2.0, { roomTypes: ['bedroom', 'closet'] }],
+    ['desk', 'm_desk', 'Desk', 0.76, { roomTypes: ['office', 'bedroom'] }], ['deskCorner', 'm_desk_corner', 'Corner Desk', 0.76, { roomTypes: ['office'] }],
+    ['chairDesk', 'm_office_chair', 'Office Chair', 1.0, { roomTypes: ['office', 'bedroom'] }], ['computerScreen', 'm_monitor', 'Computer Monitor', 0.45, { roomTypes: ['office'] }],
+    ['bookcaseOpen', 'm_bookcase', 'Bookcase', 1.9, { roomTypes: ['office', 'living', 'library'] }], ['bookcaseClosedWide', 'm_cabinet_wide', 'Storage Cabinet', 1.9, { roomTypes: ['office', 'closet', 'pantry', 'storage'] }],
+    ['sideTable', 'm_side_table', 'Side Table', 0.55, { roomTypes: ['living', 'hallway'] }], ['rugRectangle', 'm_rug', 'Rug', 0.02, { roomTypes: ['living', 'bedroom', 'dining'] }],
+    ['rugDoormat', 'm_doormat', 'Doormat', 0.02, { roomTypes: ['hallway'] }], ['trashcan', 'm_bin', 'Bin', 0.6, { roomTypes: ['kitchen', 'office'] }],
+    ['lampRoundFloor', 'm_floor_lamp', 'Floor Lamp', 1.6, { roomTypes: ['living', 'bedroom', 'office'], light: { color: '#fff1d6', intensity: 3, distance: 7, y: 1.45 } }],
+    ['lampRoundTable', 'm_table_lamp', 'Table Lamp', 0.5, { roomTypes: ['bedroom', 'living'], light: { color: '#fff1d6', intensity: 1.5, distance: 4, y: 0.4 } }],
+    ['lampSquareCeiling', 'm_ceiling_light', 'Ceiling Light', 0.5, { snap: 'ceiling', roomTypes: ['*'], light: { color: '#fff4e0', intensity: 5, distance: 9, y: -0.15 } }],
+    ['plantSmall2', 'm_plant_small', 'Small Plant', 0.35, { roomTypes: ['*'] }], ['coatRack', 'm_coat_hooks', 'Coat Hooks', 0.4, { snap: 'wall', roomTypes: ['hallway'] }],
+  ] },
+  { src: B('furniture'), category: 'furniture', snap: 'floor', tags: ['furniture', 'period'], items: [
+    ['wooden_tub', 'wooden_tub', 'Wooden Bathtub', null, { roomTypes: ['bathroom'] }], ['washstand', 'washstand', 'Washstand', null, { roomTypes: ['bathroom', 'bedroom'] }],
+    ['garderobe', 'garderobe', 'Garderobe', null, { roomTypes: ['bathroom'] }], ['wash_tub', 'wash_tub', 'Wash Tub', null, { roomTypes: ['laundry'] }],
+    ['cn_washstand', 'cn_washstand', 'Washstand (Chinese)', null, { roomTypes: ['bathroom', 'bedroom'], tags: ['chinese'] }],
+  ] },
   // ---------------- boats ----------------
   { src: K('pirate-kit'), category: 'boats', snap: 'ground', tags: ['boat', 'water'], items: [
     ['boat-row-small', 'rowboat', 'Rowboat', 1.0], ['boat-row-large', 'rowboat_large', 'Large Rowboat', 1.3], ['structure-platform-dock-small', 'dock', 'Small Dock', 1.5],
@@ -340,7 +377,7 @@ export const GROUPS = [
 export const CATEGORY_LABELS = {
   trees: 'Trees', shrubs: 'Shrubs & Grass', flowers: 'Flowers', rocks: 'Rocks & Logs', castle: 'Castle', siege: 'Siege', lighting: 'Lighting',
   furniture: 'Furniture', chapel: 'Chapel & Graves', props: 'Props', village: 'Village', garden: 'Garden', farm: 'Farm', animals: 'Animals',
-  boats: 'Boats & Bridges', decor: 'Decor', building_kit: 'Building Kit',
+  boats: 'Boats & Bridges', decor: 'Decor', building_kit: 'Building Kit', home: 'Modern Home',
 };
 
 export const CREDITS = [

@@ -54,7 +54,7 @@ export async function buildChineseDemo(app: App): Promise<EstateDoc> {
   const gateZ = pz + 55;
   add('cn_gate', px, gateZ, 0, {}, 'Gate of Supreme Harmony');
   add('cn_hall', px, pz - 22, 0, {}, 'Hall of Jade Harmony');
-  add('cn_house', px - 36, pz + 6, Math.PI / 2, {}, 'West Residence');
+  add('cn_residence', px - 36, pz + 6, Math.PI / 2, {}, 'West Residence');
   add('cn_house', px + 36, pz + 6, -Math.PI / 2, {}, 'East Residence');
   add('cn_house', px - 36, pz + 30, Math.PI / 2, { width: 11 }, 'Scholar’s Study');
   add('cn_pavilion', px + 36, pz + 32, -Math.PI / 2, {}, 'Pavilion of Listening Rain');
