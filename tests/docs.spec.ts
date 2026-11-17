@@ -47,3 +47,16 @@ test('README screenshots: Chinese demo', async ({ page }) => {
   await page.waitForTimeout(1500);
   await shot(page, 'interior-period', `const b = app.store.doc.buildings.find((x) => x.name === 'West Residence'); const y = app.__interior.levelY; app.rig.persp.position.set(b.pos[0] + 15, y + 17, b.pos[2] + 3); app.rig.orbit.target.set(b.pos[0], y, b.pos[2]); app.rig.orbit.update();`, { wait: 5000 });
 });
+
+test('README screenshots: Hundred Acre Estate', async ({ page }) => {
+  test.setTimeout(600_000);
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('./?demo=estate');
+  await page.waitForFunction(() => (window as any).app?.store.doc.name === 'The Hundred Acre Estate', null, { timeout: 240_000 });
+  await page.evaluate(() => (window as any).app.setQuality('medium'));
+  const cam = (p: number[], t: number[]) => `app.ui.setView('orbit'); app.rig.persp.position.set(${p}); app.rig.orbit.target.set(${t}); app.rig.orbit.update();`;
+  const v = await page.evaluate(() => (window as any).app.store.doc.viewpoints);
+  await shot(page, 'estate-aerial', cam(v[0].pos, v[0].target), { photo: true, wait: 7000 });
+  await shot(page, 'estate-court', cam(v[3].pos, v[3].target), { photo: true });
+  await shot(page, 'estate-ranges', cam(v[2].pos, v[2].target), { photo: true });
+});

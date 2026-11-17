@@ -21,6 +21,7 @@ export const PRESETS: PresetInfo[] = [
   { kind: 'barracks', label: 'Barracks', group: 'castle', desc: 'Two storeys of bunks', icon: '🛡' },
   { kind: 'armory', label: 'Armory', group: 'castle', desc: 'Weapon store with battlements', icon: '⚔' },
   { kind: 'stables', label: 'Stables', group: 'castle', desc: 'Horse stalls and hay', icon: '🐎' },
+  { kind: 'range', label: 'Wall range', group: 'castle', desc: 'Lodgings built against the curtain wall: lean-to roof, arcade', icon: '🏘' },
   { kind: 'cottage', label: 'Cottage', group: 'village', desc: 'Whitewashed, thatched cottage', icon: '🏠' },
   { kind: 'cottage_timber', label: 'Timber cottage', group: 'village', desc: 'Half-timbered, two storeys', icon: '🏡' },
   { kind: 'cottage_stone', label: 'Stone cottage', group: 'village', desc: 'Stone cottage, slate roof', icon: '🪨' },
@@ -120,6 +121,8 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 3.2, room: 'Dovecote', type: 'storage', floor: 'flagstone', wall: 'whitewash' }, { level: 1, h: 2.4, room: 'Loft', type: 'storage', floor: 'plank', wall: 'whitewash' }] }),
   greenhouse: S({ name: 'Greenhouse', w: 9, d: 5, t: 0.2, mat: 'whitewash', roof: 'pitched', roofColor: '#9cc0c8', win: 'window_arched', winSpacing: 1.6, stairs: 'none', door: 'door_wood',
     floors: [{ level: 0, h: 2.8, room: 'Greenhouse', type: 'generic', floor: 'flagstone', wall: 'whitewash' }] }),
+  range: S({ name: 'Lodging Range', w: 24, d: 8, t: 0.8, mat: 'greystone', roof: 'lean', roofColor: '#4f5560', win: 'window_arched', winSpacing: 3.4, door: 'door_arched', stairs: 'none', plan: { bedrooms: 3, bathrooms: 2, dining: false, laundry: false },
+    floors: [{ level: 0, h: 3.4, room: 'Hall', type: 'hall' }, { level: 1, h: 3.2, room: 'Chambers', type: 'bedroom' }], extra: { arcade: 2.6, backToWall: true, roofRise: 2.6, chimney: true } }),
   manor: S({ name: 'Manor House', w: 22, d: 13, t: 0.6, mat: 'sandstone', roof: 'hipped', roofColor: '#5b4a42', win: 'window_shutter', winSpacing: 3, door: 'door_double', stairs: 'none', plan: { bedrooms: 5, bathrooms: 4 },
     floors: [{ level: 0, h: 3.4, room: 'Hall', type: 'hall' }, { level: 1, h: 3.1, room: 'Bedrooms', type: 'bedroom' }, { level: 2, h: 3, room: 'Bedrooms', type: 'bedroom' }], extra: { chimney: true } }),
   cn_residence: S({ name: 'Family Residence', w: 20, d: 12, t: 0.5, mat: 'greybrick', roof: 'eaves', roofColor: '#737980', door: 'door_lattice', win: 'window_lattice', winSpacing: 2.8, stairs: 'none', doorWidth: 1.8, doorHeight: 2.7, style: 'chinese', plan: { bedrooms: 4, bathrooms: 3 },
@@ -171,6 +174,7 @@ function autoOpenings(b: BuildingDef, spec: Spec): Opening[] {
         const t = (j + 0.5) / k;
         if (f.level === 0 && i === front && Math.abs(t - 0.5) * L < dw / 2 + ww / 2 + 0.4) continue;
         if (b.extra.waterwheel && i === 1) continue;
+        if (b.extra.backToWall && i === 0) continue; // blank back wall against a curtain wall
         ops.push({ id: uid('op'), wall: `ext:${i}`, floor: f.level, t, kind: spec.win, width: ww, height: wh, sill });
       }
     }

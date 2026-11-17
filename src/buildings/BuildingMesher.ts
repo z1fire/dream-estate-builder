@@ -378,6 +378,7 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
       const ts = B.get('terraceside', () => surfaceMaterial('greystone', '#d0cabd'), 'extwall');
       buildChineseBase(b, cg, tt, ts);
     }
+    buildArcade(b, B, extTex);
     const g = levels.get(minLevel) ?? root;
     B.into(g);
   }
@@ -385,6 +386,55 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
   buildRoof(b, roofG, outerPts, top);
   void WHITE;
   return { root, levels, roof: roofG, anim };
+}
+
+/** Arcade (covered walk) along the front of a rect building: piers and round arches, a flagged floor and a lean-to pentice
+ * (or the main lean-to roof carried over it on a one-storey building). `extra.arcade` = depth in metres. */
+function buildArcade(b: BuildingDef, B: Buckets, extTex: Parameters<typeof surfaceMaterial>[0]) {
+  const arc = Number(b.extra.arcade ?? 0);
+  if (b.shape !== 'rect' || arc < 1) return;
+  const g0 = b.floors.find((f) => f.level === 0);
+  if (!g0) return;
+  const above = b.floors.filter((f) => f.level >= 0).length;
+  const underMainRoof = b.roof === 'lean' && above === 1;
+  const hw = b.width / 2, hd = b.depth / 2, h0 = g0.height;
+  const ext = B.get(`ext:${extTex}`, () => surfaceMaterial(extTex), 'extwall');
+  const dummy = new GeoBuilder();
+  const fills = { door: dummy, glass: dummy, stained: dummy, frame: dummy, lattice: dummy, cnDoor: dummy };
+  const front = hd + arc - 0.3;
+  const wallH = underMainRoof ? h0 + 0.12 : h0 - 0.15;
+  const bays = Math.max(1, Math.round(b.width / 3.6));
+  const bw = b.width / bays;
+  const archH = Math.min(wallH - 0.7, bw + 1.6);
+  const openings: Opening[] = Array.from({ length: bays }, (_, j) => ({ id: `arc${j}`, wall: 'arcade', floor: 0, t: (j + 0.5) / bays, kind: 'archway' as OpeningKind, width: bw - 0.9, height: archH, sill: 0 }));
+  buildWall({ a: [-hw, front], b: [hw, front], y0: 0, h: wallH, t: 0.6, outN: V(0, 0, 1), outer: ext, inner: ext, reveal: ext, openings, fills, caps: true, ends: true });
+  // open ends
+  for (const s of [1, -1]) {
+    const x = s * (hw - 0.3), L = front - 0.3 - hd;
+    const ops: Opening[] = L > 2 ? [{ id: 'arce', wall: 'arcade', floor: 0, t: 0.5, kind: 'archway', width: L - 1.2, height: Math.min(archH, wallH - 0.6), sill: 0 }] : [];
+    buildWall({ a: [x, hd], b: [x, front - 0.3], y0: 0, h: wallH, t: 0.6, outN: V(s, 0, 0), outer: ext, inner: ext, reveal: ext, openings: ops, fills, caps: true, ends: false });
+  }
+  // flagged walk + plinth
+  const fg = B.get('floor:flagstone', () => surfaceMaterial('flagstone'), 'floor');
+  const from = fg.vertexCount;
+  quadFacing(fg, V(-hw, 0.04, hd), V(hw, 0.04, hd), V(hw, 0.04, front + 0.3), V(-hw, 0.04, front + 0.3), V(0, 1, 0));
+  planarUV(fg, from);
+  const pg = B.get('plinth', () => surfaceMaterial(extTex, '#bdb6a8'), 'extwall');
+  quadFacing(pg, V(-hw, -1.6, front + 0.3), V(hw, -1.6, front + 0.3), V(hw, 0.04, front + 0.3), V(-hw, 0.04, front + 0.3), V(0, 0, 1));
+  for (const s of [1, -1]) quadFacing(pg, V(s * hw, -1.6, hd), V(s * hw, -1.6, front + 0.3), V(s * hw, 0.04, front + 0.3), V(s * hw, 0.04, hd), V(s, 0, 0));
+  if (underMainRoof) return;
+  // pentice roof from the front wall down onto the arcade
+  const thatch = b.extra.thatch === true;
+  const rg = B.get('pentice', () => surfaceMaterial(thatch ? 'thatch' : 'roof_tiles', thatch ? '#ffffff' : b.roofColor, { side: THREE.DoubleSide }), 'roof');
+  const yHi = h0 + 0.8, yLo = wallH + 0.05, zf = front + 0.75;
+  const yF = yLo - ((yHi - yLo) * 0.45) / (front - hd);
+  quadFacing(rg, V(-hw - 0.2, yHi, hd), V(hw + 0.2, yHi, hd), V(hw + 0.2, yF, zf), V(-hw - 0.2, yF, zf), V(0, 1, 0.5));
+  for (const s of [1, -1]) {
+    const x = s * (hw - 0.3);
+    const p = [V(x, wallH, hd), V(x, wallH, front), V(x, yHi, hd)];
+    const cr = new THREE.Vector3().subVectors(p[1], p[0]).cross(new THREE.Vector3().subVectors(p[2], p[0]));
+    if (cr.x * s >= 0) ext.tri(p[0], p[1], p[2], WHITE); else ext.tri(p[1], p[0], p[2], WHITE);
+  }
 }
 
 function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number) {
@@ -489,6 +539,40 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
       const cx = alongX ? hw * 0.55 : hd * 0.3, cz = alongX ? hd * 0.3 : hw * 0.55;
       const m = new THREE.Matrix4().setPosition(alongX ? V(cx, y0 + hgt * 0.55, cz * 0.5) : V(cz * 0.5, y0 + hgt * 0.55, cx));
       cg.boxM(m, 0.9, hgt * 1.0 + 0.8, 0.9, WHITE);
+    }
+  } else if (b.roof === 'lean') {
+    // lean-to (mono-pitch): high at the back (local -Z, e.g. against a curtain wall), low over the front.
+    // A one-storey building with an arcade carries the same roof out over the arcade.
+    const above = b.floors.filter((f) => f.level >= 0).length;
+    const arc = b.shape === 'rect' && above === 1 ? Math.max(0, Number(b.extra.arcade ?? 0)) : 0;
+    const zLow = hd + arc;
+    const rise = Number(b.extra.roofRise ?? Math.min(4, (hd * 2 + arc) * 0.45));
+    const Y = (z: number) => roofBase + (rise * (zLow - z)) / (zLow + hd);
+    const zf = zLow + over, zb = -hd - (b.extra.backToWall ? 0.05 : over), xs = hw + over;
+    quadFacing(rg, V(-xs, Y(zf), zf), V(xs, Y(zf), zf), V(xs, Y(zb), zb), V(-xs, Y(zb), zb), V(0, 1, 0.5));
+    quadFacing(rg, V(-xs, Y(zf), zf), V(xs, Y(zf), zf), V(xs, Y(zf) - 0.15, zf), V(-xs, Y(zf) - 0.15, zf), V(0, 0, 1));
+    const t = b.wallThickness;
+    for (const s of [1, -1]) {
+      const x = s * (hw - 0.01), xi = s * (hw - t);
+      quadFacing(wg, V(x, top, -hd), V(x, top, hd), V(x, Y(hd), hd), V(x, Y(-hd), -hd), V(s, 0, 0));
+      quadFacing(wg, V(xi, top, -hd + t), V(xi, top, hd - t), V(xi, Y(hd - t), hd - t), V(xi, Y(-hd + t), -hd + t), V(-s, 0, 0));
+      // over the arcade ends
+      if (arc > 0) {
+        const p = [V(x, top, hd), V(x, top, zLow), V(x, Y(hd), hd)];
+        const cr = new THREE.Vector3().subVectors(p[1], p[0]).cross(new THREE.Vector3().subVectors(p[2], p[0]));
+        if (cr.x * s >= 0) wg.tri(p[0], p[1], p[2], WHITE); else wg.tri(p[1], p[0], p[2], WHITE);
+      }
+    }
+    // back wall up to the roof, and the strip over the front wall when the roof runs on over an arcade
+    quadFacing(wg, V(-hw, top, -hd + 0.01), V(hw, top, -hd + 0.01), V(hw, Y(-hd), -hd + 0.01), V(-hw, Y(-hd), -hd + 0.01), V(0, 0, -1));
+    quadFacing(wg, V(-hw + t, top, -hd + t), V(hw - t, top, -hd + t), V(hw - t, Y(-hd + t), -hd + t), V(-hw + t, Y(-hd + t), -hd + t), V(0, 0, 1));
+    if (Y(hd) > top + 0.02) {
+      quadFacing(wg, V(-hw, top, hd - 0.01), V(hw, top, hd - 0.01), V(hw, Y(hd), hd - 0.01), V(-hw, Y(hd), hd - 0.01), V(0, 0, 1));
+      quadFacing(wg, V(-hw + t, top, hd - t), V(hw - t, top, hd - t), V(hw - t, Y(hd - t), hd - t), V(-hw + t, Y(hd - t), hd - t), V(0, 0, -1));
+    }
+    if (b.extra.chimney) {
+      const cg = B.get('chimney', () => surfaceMaterial('greystone'), 'roof');
+      cg.box(hw * 0.5, Y(-hd + 1) + 0.4, -hd + 1, 0.9, 2.2, 0.9, 0, WHITE);
     }
   }
   B.into(roofG);

@@ -12,6 +12,7 @@ import { MATERIAL_LABELS } from './materials';
 import { makeBuilding, PRESETS } from './presets';
 import { GATE_WIDTH, segmentNormal, towerRadius } from './CurtainWallSystem';
 import type { WaterSystem } from '../water/WaterSystem';
+import { backOntoWall, lineWallWithRanges, RANGE_USES, rangeDefaults, snapToWall, type RangeUse } from './wallRanges';
 
 const ft = (m: number) => `${Math.round(m * M_TO_FT)} ft`;
 
@@ -19,11 +20,14 @@ const ft = (m: number) => `${Math.round(m * M_TO_FT)} ft`;
 export class BuildingTool extends Tool {
   readonly id: string;
   readonly name = 'Buildings';
-  hint = 'Click to place · <kbd>Q</kbd>/<kbd>E</kbd> rotate 15° · double-click a placed building to go inside';
+  hint = 'Click to place · <kbd>Q</kbd>/<kbd>E</kbd> rotate 15° · move next to a curtain wall to build against it · double-click a placed building to go inside';
+  againstWalls = true;
+  private snapped: ReturnType<typeof snapToWall> = null;
   kind: BuildingKind;
   private rot = 0;
   private ghost = new THREE.Group();
   private ghostKind = '';
+  private ghostDepth = 0;
   constructor(app: App, private group: 'castle' | 'village' | 'farm' | 'chinese') {
     super(app);
     this.id = `building:${group}`;
@@ -37,6 +41,7 @@ export class BuildingTool extends Tool {
     this.ghostKind = this.kind;
     this.ghost.clear();
     const { building: b } = makeBuilding(this.kind, [0, 0, 0], 0, {}, false);
+    this.ghostDepth = b.shape === 'rect' ? b.depth : 0;
     const hgt = totalHeight(b) + (b.roof === 'flat' ? 1 : Math.min(b.width, b.depth) * 0.6);
     const fp = footprint(b);
     const pts = [...fp, fp[0]].flatMap(([x, z]) => [new THREE.Vector3(x, 0.2, z), new THREE.Vector3(x, hgt, z)]);
@@ -55,8 +60,16 @@ export class BuildingTool extends Tool {
     this.ghost.visible = !!ev.ground;
     if (!ev.ground) return;
     const p = this.snapPos(ev.ground);
+    this.snapped = this.wallSnap(p.x, p.z);
+    if (this.snapped) { p.x = this.snapped.x; p.z = this.snapped.z; }
     this.ghost.position.set(p.x, this.app.terrain.baseHeightAt(p.x, p.z), p.z);
-    this.ghost.rotation.y = this.rot;
+    this.ghost.rotation.y = this.snapped ? this.snapped.rotY : this.rot;
+  }
+  /** Rect buildings snap their back against a nearby curtain wall face. */
+  private wallSnap(x: number, z: number) {
+    if (!this.againstWalls || ['gatehouse', 'tower_round', 'tower_square', 'windmill', 'dovecote', 'cn_gate', 'cn_pagoda', 'cn_pavilion'].includes(this.kind)) return null;
+    this.makeGhost();
+    return this.ghostDepth > 0 ? snapToWall(this.app, x, z, this.ghostDepth) : null;
   }
   private snapPos(p: THREE.Vector3) {
     const s = this.app.store.doc.settings;
@@ -66,8 +79,11 @@ export class BuildingTool extends Tool {
   down(ev: ToolEvent) {
     if (!ev.ground) return;
     const p = this.snapPos(ev.ground);
+    const snap = this.wallSnap(p.x, p.z);
+    if (snap) { p.x = snap.x; p.z = snap.z; }
     const y = this.app.terrain.baseHeightAt(p.x, p.z);
-    const { building, furniture } = makeBuilding(this.kind, [p.x, y, p.z], this.rot);
+    const { building, furniture } = makeBuilding(this.kind, [p.x, y, p.z], snap ? snap.rotY : this.rot);
+    if (snap) { backOntoWall(building, snap.wall.height); building.material = snap.wall.material; }
     const cmds: Command[] = [addEntities(this.app.store, 'buildings', [building], `Build ${building.name}`)];
     if (furniture.length) cmds.push(addEntities(this.app.store, 'objects', furniture));
     this.app.cmd.run(composite(`Build ${building.name}`, cmds));
@@ -88,6 +104,7 @@ export class BuildingTool extends Tool {
       grid.appendChild(el);
     }
     return h('div', {}, section('Choose a building', grid),
+      this.group === 'castle' || this.group === 'village' ? toggle('Build against curtain walls', this.againstWalls, (v) => (this.againstWalls = v)) : null,
       hint('Every building comes with floors, rooms, stairs and starter furniture. Select it afterwards to change size, storeys, materials and roof; double-click to step inside and edit its interior.'));
   }
 }
@@ -283,11 +300,14 @@ export function registerBuildingInspectors(app: App, water: WaterSystem) {
         toggle('Dungeon / cellar below', basements > 0, (v) => edit(b.id, (e) => toggleBasement(e, v), v ? 'Add cellar' : 'Remove cellar'))),
       section('Look',
         select<MaterialKind>('Walls', Object.entries(MATERIAL_LABELS) as [MaterialKind, string][], b.material, (v) => edit(b.id, (e) => (e.material = v), 'Wall material')),
-        select<RoofStyle>('Roof', [['conical', b.shape === 'round' ? 'Conical' : 'Pyramid'], ['pitched', 'Pitched (gable)'], ['hipped', 'Hipped'], ['eaves', 'Curved eaves (Chinese)'], ['flat', 'Flat'], ['none', 'None']], b.roof, (v) => edit(b.id, (e) => (e.roof = v), 'Roof style')),
+        select<RoofStyle>('Roof', [['conical', b.shape === 'round' ? 'Conical' : 'Pyramid'], ['pitched', 'Pitched (gable)'], ['hipped', 'Hipped'], ['eaves', 'Curved eaves (Chinese)'], ['lean', 'Lean-to (against a wall)'], ['flat', 'Flat'], ['none', 'None']], b.roof, (v) => edit(b.id, (e) => (e.roof = v), 'Roof style')),
         h('label', { class: 'field' }, h('span', { class: 'lbl' }, 'Roof colour'), colorInput(b.roofColor, (v) => edit(b.id, (e) => (e.roofColor = v), 'Roof colour'))),
         toggle('Thatched roof', !!b.extra.thatch, (v) => edit(b.id, (e) => (e.extra.thatch = v), 'Thatch')),
         toggle('Battlements', b.crenellations, (v) => edit(b.id, (e) => (e.crenellations = v), 'Battlements')),
-        toggle('Chimney', !!b.extra.chimney, (v) => edit(b.id, (e) => (e.extra.chimney = v), 'Chimney'))),
+        toggle('Chimney', !!b.extra.chimney, (v) => edit(b.id, (e) => (e.extra.chimney = v), 'Chimney')),
+        b.shape === 'rect' ? editSlider('Arcade (covered walk)', 0, 5, 0.1, Number(b.extra.arcade ?? 0), (v) => edit(b.id, (e) => (e.extra.arcade = v < 1 ? 0 : v), 'Arcade'), (m) => (m >= 1 ? ft(m) : 'none')) : null,
+        b.shape === 'rect' ? toggle('Backs onto a wall (blank back, lean-to)', !!b.extra.backToWall, (v) => edit(b.id, (e) => { if (v) backOntoWall(e); else e.extra.backToWall = false; }, 'Back onto wall')) : null,
+        b.roof === 'lean' ? editSlider('Lean-to rise', 0.5, 8, 0.1, Number(b.extra.roofRise ?? Math.min(4, b.depth * 0.45)), (v) => edit(b.id, (e) => (e.extra.roofRise = v), 'Roof rise'), ft) : null),
       b.roof === 'eaves' || b.kind.startsWith('cn_') ? section('Chinese details',
         editSlider('Roof hip', 0, 1, 0.05, Number(b.extra.hip ?? 1), (v) => edit(b.id, (e) => (e.extra.hip = v), 'Roof hip')),
         toggle('Double eaves', !!b.extra.doubleEave, (v) => edit(b.id, (e) => (e.extra.doubleEave = v), 'Double eaves')),
@@ -329,6 +349,18 @@ export function registerBuildingInspectors(app: App, water: WaterSystem) {
       section('Towers', segmented([{ id: 'round', label: 'Round' }, { id: 'square', label: 'Square' }, { id: 'none', label: 'None' }], w.towers, (v) => editW((x) => (x.towers = v as CurtainWallDef['towers']), 'Tower style', true)),
         editSlider('Storeys', 2, 6, 1, w.towerFloors, (v) => editW((x) => (x.towerFloors = v), 'Tower storeys', true)),
         h('div', { class: 'btn-row' }, button('Rebuild towers & gate', () => editW(() => {}, 'Rebuild towers', true), 'small'))),
+      section('Buildings along the wall',
+        select<RangeUse>('Use', RANGE_USES, rangeDefaults.use, (v) => (rangeDefaults.use = v)),
+        slider('Depth', 5, 14, 0.5, rangeDefaults.depth, (v) => (rangeDefaults.depth = v), ft),
+        slider('Storeys', 1, 3, 1, rangeDefaults.storeys, (v) => (rangeDefaults.storeys = v)),
+        slider('Arcade', 0, 4, 0.1, rangeDefaults.arcade, (v) => (rangeDefaults.arcade = v < 1 ? 0 : v), (m) => (m >= 1 ? ft(m) : 'none')),
+        h('div', { class: 'btn-row' }, button('Line the wall with ranges', () => {
+          const { buildings, objects } = lineWallWithRanges(app, w, { ...rangeDefaults, side: w.closed ? 1 : 0 });
+          if (!buildings.length) { toast('No free stretch of wall long enough for a range'); return; }
+          app.cmd.run(composite('Build wall ranges', [addEntities(app.store, 'buildings', buildings), ...(objects.length ? [addEntities(app.store, 'objects', objects)] : [])]));
+          toast(`${buildings.length} range${buildings.length > 1 ? 's' : ''} built against the wall`);
+        }, 'small')),
+        hint('Long buildings backing onto the wall, between the towers and gates: blank back wall, a lean-to roof under the wall-walk and an arcade facing the courtyard. Open walls get ranges on both sides.')),
       w.closed ? section('Moat', h('div', { class: 'btn-row' }, button('Dig a moat around these walls', () => {
         const c = moatAroundWall(app, water, w);
         if (c) { app.cmd.run(c); toast('Moat dug and drawbridge lengthened to cross it'); }

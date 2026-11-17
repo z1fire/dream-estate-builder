@@ -14,7 +14,7 @@ export type GroundLayer = (typeof GROUND_LAYERS)[number];
 
 export type MaterialKind = 'greystone' | 'sandstone' | 'whitewash' | 'timber' | 'brick' | 'redlacquer' | 'greybrick';
 /** 'eaves' = Chinese hip roof with concave slopes and upturned corners (see buildings/chineseRoof.ts) */
-export type RoofStyle = 'conical' | 'pitched' | 'flat' | 'hipped' | 'eaves' | 'none';
+export type RoofStyle = 'conical' | 'pitched' | 'flat' | 'hipped' | 'eaves' | 'lean' | 'none';
 
 export interface WaterBody {
   id: string;
@@ -151,7 +151,7 @@ export type BuildingKind =
   | 'tavern' | 'blacksmith' | 'bakery' | 'market_stall' | 'watermill' | 'windmill' | 'church'
   | 'workshop' | 'storehouse' | 'barn' | 'chicken_coop' | 'pig_pen' | 'dovecote' | 'greenhouse'
   | 'beehive' | 'custom'
-  | 'cn_hall' | 'cn_temple' | 'cn_pagoda' | 'cn_gate' | 'cn_pavilion' | 'cn_house' | 'cn_teahouse' | 'cn_residence' | 'manor';
+  | 'cn_hall' | 'cn_temple' | 'cn_pagoda' | 'cn_gate' | 'cn_pavilion' | 'cn_house' | 'cn_teahouse' | 'cn_residence' | 'manor' | 'range';
 
 export interface BuildingDef {
   id: string;

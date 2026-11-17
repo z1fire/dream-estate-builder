@@ -72,17 +72,18 @@ async function boot() {
     else toast(`Welcome to ${r.name}!`);
   };
 
-  const loadDemo = async (which: 'castle' | 'chinese' = 'castle') => {
-    toast(which === 'chinese' ? 'Building the Chinese demo estate…' : 'Building the demo estate…', 4000);
+  const loadDemo = async (which: 'castle' | 'chinese' | 'estate' = 'castle') => {
+    toast(which === 'chinese' ? 'Building the Chinese demo estate…' : which === 'estate' ? 'Building the Hundred Acre Estate…' : 'Building the demo estate…', 4000);
     if (app.store.dirtySinceSave) await autosave.saveNow(); // never lose the estate you were working on
     await new Promise((r) => setTimeout(r, 30));
     if (which === 'chinese') { const { buildChineseDemo } = await import('./persistence/demoChinese'); await buildChineseDemo(app); }
+    else if (which === 'estate') { const { buildCourtyardDemo } = await import('./persistence/demoCourtyard'); await buildCourtyardDemo(app); }
     else { const { buildDemoEstate } = await import('./persistence/demo'); await buildDemoEstate(app); } // loads itself into the store
     app.selection.clear();
     frameEstate();
     await mods.afterDemo?.();
     void autosave.saveNow();
-    toast(which === 'chinese' ? 'Welcome to Jade Lotus Garden — try Views ▸ Play guided tour, or press K to walk around' : 'Welcome to Ravensmoor — try Views ▸ Play guided tour, or press K to walk around', 5000);
+    toast(which === 'chinese' ? 'Welcome to Jade Lotus Garden — try Views ▸ Play guided tour, or press K to walk around' : which === 'estate' ? 'Welcome to the Hundred Acre Estate — try Views ▸ Play guided tour, or press K to walk around' : 'Welcome to Ravensmoor — try Views ▸ Play guided tour, or press K to walk around', 5000);
   };
 
   const ui = new UI(app, {
@@ -91,7 +92,7 @@ async function boot() {
       if (app.store.dirtySinceSave) await autosave.saveNow();
       const d = await loadEstate(id);
       if (d) { replaceDoc(d); toast(`Opened ${d.name}`); }
-    }, () => newEstateWizard(createFromWizard), () => void loadDemo(), () => void loadDemo('chinese')),
+    }, () => newEstateWizard(createFromWizard), () => void loadDemo(), () => void loadDemo('chinese'), () => void loadDemo('estate')),
     save: async () => { if (await autosave.saveNow()) toast('Estate saved'); },
     exportJSON: async () => {
       const text = await exportEstateJSON(app.store.doc);
@@ -124,7 +125,7 @@ async function boot() {
   (window as any).deb = { loadDemo, ui, autosave };
   document.getElementById('boot')?.classList.add('hide');
 
-  if (params.has('demo')) await loadDemo(params.get('demo') === 'chinese' ? 'chinese' : 'castle');
+  if (params.has('demo')) { const d = params.get('demo'); await loadDemo(d === 'chinese' ? 'chinese' : d === 'estate' ? 'estate' : 'castle'); }
   else if (firstRun) newEstateWizard(createFromWizard);
 }
 

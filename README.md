@@ -2,7 +2,7 @@
 
 Design your dream estate in the browser, from bare land to the candlesticks in the keep. Start by shaping the terrain, then dig a moat, raise curtain walls and towers, lay out a village and farms, and add herds of animals. Every building can be entered and furnished floor by floor. Build in European medieval or Chinese style, with palace halls, pagodas, moon gates and lotus ponds. When you're done, walk around it all in first person, or ride a horse.
 
-**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estates:** [Ravensmoor Castle](https://z1fire.github.io/dream-estate-builder/?demo) · [Jade Lotus Garden](https://z1fire.github.io/dream-estate-builder/?demo=chinese)
+**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estates:** [Ravensmoor Castle](https://z1fire.github.io/dream-estate-builder/?demo) · [Jade Lotus Garden](https://z1fire.github.io/dream-estate-builder/?demo=chinese) · [The Hundred Acre Estate](https://z1fire.github.io/dream-estate-builder/?demo=estate)
 
 ![Ravensmoor, the demo estate](docs/screenshots/hero.jpg)
 
@@ -13,6 +13,8 @@ Design your dream estate in the browser, from bare land to the candlesticks in t
 | ![Night](docs/screenshots/night.jpg) | ![Winter](docs/screenshots/winter.jpg) |
 | ![Gardens and maze](docs/screenshots/gardens.jpg) | ![Plan view](docs/screenshots/plan.jpg) |
 | ![Chinese palace courtyard](docs/screenshots/chinese-palace.jpg) | ![Lotus pond, zigzag bridge and pavilion](docs/screenshots/chinese-garden.jpg) |
+| ![The Hundred Acre Estate: a courtyard castle lined with ranges](docs/screenshots/estate-aerial.jpg) | ![The ceremonial court, with arcaded galleries](docs/screenshots/estate-court.jpg) |
+| ![Stable and workshop ranges against the curtain wall](docs/screenshots/estate-ranges.jpg) | |
 | ![Temple and pagoda](docs/screenshots/chinese-pagoda.jpg) | ![Teahouse street at dusk](docs/screenshots/chinese-street.jpg) |
 | ![A Chinese family home with Period interiors](docs/screenshots/interior-period.jpg) | |
 
@@ -42,6 +44,9 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 **Castle**
 - Wall drawing tool: click to lay out curtain walls that step with the terrain, with a wall-walk, battlements, arrow slits and buttresses. Round or square towers are placed at every corner, and a gatehouse goes on the longest side.
 - The gatehouse has a portcullis and a drawbridge that animate open and closed. "Dig a moat around these walls" lengthens the drawbridge to span the moat.
+- **Wall ranges**: buildings set against the inside of the curtain wall, the way real castles line their courtyards. Select a wall and click *Line the wall with ranges* to fill every free stretch between the towers, gates and cross walls with lodgings (furnished homes), stables, barracks, storerooms, workshops or halls, choosing the depth, storeys and arcade. Each range has a blank back wall, a lean-to roof tucked under the wall-walk and an arcaded walk facing the courtyard. Any rectangular building you place next to a wall snaps its back against it.
+- The **Hundred Acre Estate** demo (`?demo=estate`, or Estate ▸ Load Hundred Acre Estate demo) is a palace-style courtyard castle inside a moat: an outer service court with stables and workshops, a ceremonial court with a fountain, parterres and arcaded galleries, and a private garden before the palace, all framed by ranges built into the walls. Around it on 100 acres are a rental village by the lake, a tournament ground, farmland with a windmill, horse and cattle pastures, a pond pavilion and woodland trails.
+- Any building can have a lean-to roof, an arcade (covered walk) along its front, or a blank back wall (Look section).
 - Keep, round and square towers, great hall, chapel, barracks, armory and stables, plus the Kenney castle kit pieces, siege engines, banners, torches and a well.
 - Adjustable height, wall thickness, storeys, roof style (conical, pitched, hipped, flat), roof colour, thatch, battlements, chimneys and materials (grey stone, sandstone, whitewash, half-timber, brick).
 
