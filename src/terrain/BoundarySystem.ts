@@ -83,7 +83,7 @@ export class BoundarySystem implements System {
       labels.push({ text: fmtFeet(Math.hypot(c[0] - a[0], c[1] - a[1])), pos: new THREE.Vector3(mx, H(mx, mz) + 1.5, mz), cls: 'survey', maxDist: 900 });
     }
     const [cx, cz] = polygonCentroid(b);
-    labels.push({ text: `${this.app.store.doc.name} · ${fmtAreaBoth(polygonArea(b))}`, pos: new THREE.Vector3(cx, H(cx, cz) + 3, cz), cls: 'survey', maxDist: 2500 });
+    labels.push({ text: `${this.app.store.doc.name} · ${fmtAreaBoth(polygonArea(b))}`, pos: new THREE.Vector3(cx, H(cx, cz) + 3, cz), cls: 'survey', maxDist: 5000, minDist: 420 });
     this.app.labels?.setGroup('boundary', labels);
   }
 

@@ -10,6 +10,9 @@ import { registerObjectInspector } from './catalog/inspector';
 import { GardenTool, ScatterTool } from './vegetation/VegetationTools';
 import { VegetationSystem } from './vegetation/VegetationSystem';
 import { WaterSystem } from './water/WaterSystem';
+import { BuildingSystem } from './buildings/BuildingSystem';
+import { CurtainWallSystem } from './buildings/CurtainWallSystem';
+import { BuildingTool, CurtainTool, registerBuildingInspectors } from './buildings/BuildingTools';
 import { MoatTool, PondTool, StreamTool, registerWaterInspectors } from './water/WaterTools';
 
 export interface ModuleHooks {
@@ -26,6 +29,8 @@ export interface Systems {
   vegetation: VegetationSystem;
   paths: PathSystem;
   fences: FenceSystem;
+  buildings: BuildingSystem;
+  walls: CurtainWallSystem;
 }
 
 /** Registers feature modules (systems + tools). Each phase adds its module here. */
@@ -57,6 +62,13 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   registerPathInspectors(app);
   registerObjectInspector(app);
 
-  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences } };
+  // --- Phase 4: castle & buildings ---
+  const buildings = app.addSystem(new BuildingSystem(app), 'buildings') as BuildingSystem;
+  const walls = app.addSystem(new CurtainWallSystem(app), 'buildings') as CurtainWallSystem;
+  app.registerTool(new CurtainTool(app));
+  for (const g of ['castle', 'village', 'farm'] as const) app.registerTool(new BuildingTool(app, g));
+  registerBuildingInspectors(app, water);
+
+  const hooks: ModuleHooks & { systems: Systems } = { systems: { lights, props, water, vegetation, paths, fences, buildings, walls } };
   return hooks;
 }

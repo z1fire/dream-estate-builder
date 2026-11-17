@@ -91,6 +91,8 @@ export interface Opening {
   id: string;
   /** 'ext:<edgeIndex>' for exterior wall edges or interior wall id */
   wall: string;
+  /** floor level the opening is on */
+  floor: number;
   t: number; // 0..1 along wall
   kind: OpeningKind;
   width: number;
@@ -179,6 +181,9 @@ export interface CurtainWallDef {
   walkway: boolean;
   /** segment index where a gatehouse sits (built as a separate BuildingDef) */
   gateSegments: number[];
+  buttresses?: boolean;
+  /** flip which side counts as "outside" (merlons, buttresses) */
+  flip?: boolean;
 }
 
 export type CropKind = 'wheat' | 'corn' | 'barley' | 'vegetables' | 'pumpkins' | 'vineyard' | 'orchard' | 'flowers';
