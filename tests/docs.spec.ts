@@ -28,3 +28,17 @@ test('README screenshots', async ({ page }) => {
   await shot(page, 'winter', `const s = app.store.doc.settings; s.timeOfDay = 13; app.env.setTime(13); s.season = 'winter'; app.env.setSeason('winter'); s.weather = 'overcast'; app.env.setWeather('overcast');` + cam([60, 70, 40], [-20, 0, -100]), { photo: true, wait: 5000 });
   await shot(page, 'plan', `const s = app.store.doc.settings; s.season = 'summer'; app.env.setSeason('summer'); app.env.setWeather('clear'); app.ui.setView('plan'); app.rig.plan.target.set(0, 0, 0); app.rig.ortho.position.set(0, 1500, 0); app.rig.ortho.zoom = 0.85; app.rig.ortho.updateProjectionMatrix();`, { wait: 3000 });
 });
+
+test('README screenshots: Chinese demo', async ({ page }) => {
+  test.setTimeout(600_000);
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('./?demo=chinese');
+  await page.waitForFunction(() => (window as any).app?.store.doc.name === 'Jade Lotus Garden', null, { timeout: 180_000 });
+  await page.evaluate(() => (window as any).app.setQuality('medium'));
+  const cam = (p: number[], t: number[]) => `app.ui.setView('orbit'); app.rig.persp.position.set(${p}); app.rig.orbit.target.set(${t}); app.rig.orbit.update();`;
+  const v = await page.evaluate(() => (window as any).app.store.doc.viewpoints);
+  await shot(page, 'chinese-palace', cam(v[2].pos, v[2].target), { photo: true, wait: 6000 });
+  await shot(page, 'chinese-garden', cam(v[3].pos, v[3].target), { photo: true });
+  await shot(page, 'chinese-pagoda', cam(v[4].pos, v[4].target), { photo: true });
+  await shot(page, 'chinese-street', `const s = app.store.doc.settings; s.timeOfDay = 20.8; app.env.setTime(20.8);` + cam(v[5].pos, v[5].target), { photo: true });
+});

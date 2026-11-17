@@ -10,10 +10,15 @@ export const FENCE_STYLES: { id: FenceStyle; label: string; height: number }[] =
   { id: 'wattle', label: 'Wattle', height: 1.1 },
   { id: 'drystone', label: 'Dry stone', height: 1.1 },
   { id: 'hedge', label: 'Hedge', height: 1.6 },
+  { id: 'cn_wall', label: 'Courtyard wall (Chinese)', height: 2.6 },
+  { id: 'bamboo', label: 'Bamboo', height: 1.4 },
 ];
 
 const GATE_W = 1.8;
-const COL = { wood: C('#7a5432'), woodDark: C('#5a3d24'), picket: C('#e9e2d2'), wattle: C('#8a6a40'), stone: C('#8f8b80'), hedge: C('#3f6e2c') };
+/** moon gates are wider than field gates */
+const gateWidth = (f: FenceDef) => (f.style === 'cn_wall' ? 2.6 : GATE_W);
+const COL = { wood: C('#7a5432'), woodDark: C('#5a3d24'), picket: C('#e9e2d2'), wattle: C('#8a6a40'), stone: C('#8f8b80'), hedge: C('#3f6e2c'),
+  plaster: C('#ece7dc'), tile: C('#4a4d52'), tileDark: C('#383a3e'), plinth: C('#8d8a84'), bamboo: C('#b4a55a'), bambooDark: C('#7f7638'), red: C('#8e2418') };
 
 /** Fences, hedges and dry-stone walls drawn along a line, following the terrain, with gates. */
 export class FenceSystem implements System {
@@ -59,8 +64,9 @@ export class FenceSystem implements System {
       const a = pts[s], b = pts[s + 1];
       const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
       if (L < 0.05) continue;
-      const gate = f.gates.includes(s) && L > GATE_W + 0.6;
-      const g0 = gate ? (L - GATE_W) / 2 / L : 1, g1 = gate ? (L + GATE_W) / 2 / L : 1;
+      const GW = gateWidth(f);
+      const gate = f.gates.includes(s) && L > GW + 0.6;
+      const g0 = gate ? (L - GW) / 2 / L : 1, g1 = gate ? (L + GW) / 2 / L : 1;
       // run(s) of fence: [0, g0] and [g1, 1]
       const runs: [number, number][] = gate ? [[0, g0], [g1, 1]] : [[0, 1]];
       for (const [t0, t1] of runs) this.run(g, f, lerp2(a, b, t0), lerp2(a, b, t1), H, r);
@@ -132,6 +138,31 @@ export class FenceSystem implements System {
         }
         break;
       }
+      case 'cn_wall': {
+        // white plaster on a stone plinth, grey tiled coping with a ridge; pieces follow the ground
+        const n = Math.max(1, Math.round(L / 2));
+        for (let i = 0; i < n; i++) {
+          const p = P((i + 0.5) / n), seg = L / n + 0.02;
+          g.box(p.x, p.y + 0.15, p.z, 0.55, 0.9, seg, dir, COL.plinth);
+          g.box(p.x, p.y + h / 2 + 0.3, p.z, 0.42, h - 0.6, seg, dir, vary(COL.plaster, i, 0.03));
+          this.coping(g, p.x, p.y + h, p.z, seg, dir);
+        }
+        break;
+      }
+      case 'bamboo': {
+        const n = Math.max(1, Math.round(L / 1.8));
+        for (let i = 0; i <= n; i++) { const p = P(i / n); g.box(p.x, p.y + (h + 0.15) / 2, p.z, 0.09, h + 0.15, 0.09, dir, COL.bambooDark); }
+        const m = Math.max(1, Math.round(L / 0.11));
+        for (let i = 0; i < m; i++) {
+          const p = P((i + 0.5) / m), hh = h * (0.92 + r() * 0.08);
+          g.box(p.x, p.y + hh / 2, p.z, 0.06, hh, 0.06, dir, vary(COL.bamboo, i, 0.12));
+        }
+        for (let i = 0; i < n; i++) {
+          const p0 = P(i / n), p1 = P((i + 1) / n);
+          for (const ry of [h * 0.3, h * 0.78]) g.beam(p0.clone().setY(p0.y + ry), p1.clone().setY(p1.y + ry), 0.07, 0.07, COL.bambooDark);
+        }
+        break;
+      }
       case 'hedge':
       default: {
         const n = Math.max(1, Math.round(L / 0.9));
@@ -145,7 +176,40 @@ export class FenceSystem implements System {
     }
   }
 
+  /** grey tiled coping along a wall top (ridge at y + 0.35) */
+  private coping(g: GeoBuilder, x: number, y: number, z: number, len: number, dir: number) {
+    for (const s of [-1, 1]) g.box(x + Math.cos(dir) * s * 0.26, y + 0.12, z - Math.sin(dir) * s * 0.26, 0.5, 0.08, len, dir, COL.tile, 0, s * 0.5);
+    g.box(x, y + 0.28, z, 0.16, 0.14, len, dir, COL.tileDark);
+    g.box(x, y + 0.02, z, 0.48, 0.1, len, dir, COL.tileDark);
+  }
+
+  /** moon gate: the wall continues across the opening with a circular doorway cut through it */
+  private moonGate(g: GeoBuilder, f: FenceDef, a: V2, b: V2, H: (x: number, z: number) => number) {
+    const dir = Math.atan2(b[0] - a[0], b[1] - a[1]);
+    const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const y = Math.max(H(a[0], a[1]), H(b[0], b[1]));
+    const h = Math.max(f.height, 2.6) + 0.3, r = Math.min(1.15, L / 2 - 0.1), cy = r + 0.12;
+    const n = 22;
+    for (let i = 0; i < n; i++) {
+      const t0 = i / n, t1 = (i + 1) / n, tm = (t0 + t1) / 2;
+      const x = a[0] + (b[0] - a[0]) * tm, z = a[1] + (b[1] - a[1]) * tm;
+      const s = (tm - 0.5) * L, seg = L / n + 0.01;
+      if (Math.abs(s) < r) {
+        const dz = Math.sqrt(r * r - s * s);
+        const lo = cy - dz, hi = cy + dz;
+        if (lo > 0.02) g.box(x, y + lo / 2, z, 0.42, lo, seg, dir, COL.plaster);
+        g.box(x, y + (h + hi) / 2, z, 0.42, h - hi, seg, dir, COL.plaster);
+        // stone ring around the opening
+        g.box(x, y + hi + 0.05, z, 0.46, 0.1, seg, dir, COL.plinth);
+        if (lo > 0.02) g.box(x, y + lo - 0.05, z, 0.46, 0.1, seg, dir, COL.plinth);
+      } else g.box(x, y + h / 2, z, 0.42, h, seg, dir, COL.plaster);
+    }
+    const mx = (a[0] + b[0]) / 2, mz = (a[1] + b[1]) / 2;
+    this.coping(g, mx, y + h, mz, L + 0.6, dir);
+  }
+
   private gate(g: GeoBuilder, f: FenceDef, a: V2, b: V2, H: (x: number, z: number) => number) {
+    if (f.style === 'cn_wall') { this.moonGate(g, f, a, b, H); return; }
     const dir = Math.atan2(b[0] - a[0], b[1] - a[1]);
     const hp = f.style === 'hedge' ? f.height + 0.6 : Math.max(1.4, f.height + 0.25);
     for (const p of [a, b]) {

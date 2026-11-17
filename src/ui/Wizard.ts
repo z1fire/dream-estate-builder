@@ -60,7 +60,7 @@ export function newEstateWizard(onCreate: (r: WizardResult) => void, canCancel =
 }
 
 /** Saved estates browser. */
-export async function estatesDialog(currentId: string, onOpen: (id: string) => void, onNew: () => void, onDemo: () => void) {
+export async function estatesDialog(currentId: string, onOpen: (id: string) => void, onNew: () => void, onDemo: () => void, onChineseDemo?: () => void) {
   const back = h('div', { class: 'modal-back', onclick: (e: Event) => { if (e.target === back) back.remove(); } });
   const list = h('div', { style: 'display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:10px' });
   const render = (items: EstateMeta[]) => {
@@ -80,7 +80,8 @@ export async function estatesDialog(currentId: string, onOpen: (id: string) => v
   const modal = h('div', { class: 'modal', style: 'width:min(860px, calc(100vw - 32px))' },
     h('h1', {}, 'Your Estates'),
     h('p', { class: 'sub' }, 'Every estate autosaves in this browser. Use Export to back one up or move it to another computer.'),
-    h('div', { class: 'btn-row' }, h('button', { class: 'btn', onclick: () => { back.remove(); onNew(); } }, '✦ New estate'), h('button', { class: 'btn', onclick: () => { back.remove(); onDemo(); } }, '🏰 Load demo estate')),
+    h('div', { class: 'btn-row' }, h('button', { class: 'btn', onclick: () => { back.remove(); onNew(); } }, '✦ New estate'), h('button', { class: 'btn', onclick: () => { back.remove(); onDemo(); } }, '🏰 Load demo estate'),
+      onChineseDemo ? h('button', { class: 'btn', onclick: () => { back.remove(); onChineseDemo(); } }, '🏯 Chinese demo') : null),
     list,
     h('div', { class: 'foot' }, h('button', { class: 'btn primary', onclick: () => back.remove() }, 'Close')));
   back.appendChild(modal);

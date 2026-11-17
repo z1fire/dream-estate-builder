@@ -14,7 +14,7 @@ export interface UIActions {
   save(): Promise<void>;
   exportJSON(): void;
   importJSON(): void;
-  loadDemo(): void;
+  loadDemo(which?: 'castle' | 'chinese'): void;
   rename(name: string): void;
   photo(): void;
   tour(): void;
@@ -157,7 +157,7 @@ export class UI {
     const item = (label: string, fn: () => void) => h('button', { class: 'btn', style: 'width:100%;justify-content:flex-start;margin:3px 0', onclick: () => { this.closePopover(); fn(); } }, label);
     this.openPopover(b, h('div', { style: 'min-width:220px' },
       item('✦ New estate…', a.newEstate), item('📂 Open saved estate…', a.openEstates), item('💾 Save now', () => void a.save()),
-      item('⬇ Export estate (.json)', a.exportJSON), item('⬆ Import estate (.json)', a.importJSON), item('🏰 Load demo estate', a.loadDemo)));
+      item('⬇ Export estate (.json)', a.exportJSON), item('⬆ Import estate (.json)', a.importJSON), item('🏰 Load demo estate', () => a.loadDemo('castle')), item('🏯 Load Chinese demo estate', () => a.loadDemo('chinese'))));
   }
 
   private layersMenu(b: HTMLElement) {

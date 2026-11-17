@@ -283,6 +283,34 @@ export const GROUPS = [
     ['Prop_ExteriorBorder_Straight1', 'mv_kerb', 'Stone Edging (2 m)', null], ['Prop_ExteriorBorder_Corner', 'mv_kerb_corner', 'Stone Edging Corner', null],
   ] },
   { src: QA, category: 'animals', snap: 'ground', tags: ['animal', 'wild'], items: [['Wolf', 'wolf', 'Wolf', 0.85]] },
+  // ---------------- Chinese style (blender/generate_chinese.py) ----------------
+  { src: B('garden'), category: 'garden', snap: 'ground', tags: ['garden', 'chinese'], items: [
+    ['cn_stone_lantern', 'cn_stone_lantern', 'Stone Lantern', null, { light: { color: '#ffc070', intensity: 2, distance: 6, y: 1.45 } }],
+    ['cn_moon_gate', 'cn_moon_gate', 'Moon Gate', null], ['cn_scholar_rock', 'cn_scholar_rock', 'Scholar Rock', null],
+    ['cn_incense_burner', 'cn_incense_burner', 'Incense Burner', null, { roomTypes: ['chapel'] }], ['cn_guardian_lion', 'cn_guardian_lion', 'Guardian Lion', null],
+    ['cn_paifang', 'cn_paifang', 'Paifang Archway', null], ['cn_bonsai', 'cn_bonsai', 'Bonsai', null, { roomTypes: ['library', 'hall', 'bedroom'] }],
+    ['cn_table_set', 'cn_table_set', 'Stone Table & Drum Stools', null],
+  ] },
+  { src: B('lighting'), category: 'lighting', snap: 'ground', tags: ['light', 'chinese'], items: [
+    ['cn_lantern_post', 'cn_lantern_post', 'Red Lantern Post', null, { light: { color: '#ff6a3a', intensity: 4, distance: 8, y: 2.0 } }],
+    ['cn_lantern_hanging', 'cn_lantern_hanging', 'Hanging Red Lantern', null, { snap: 'ceiling', light: { color: '#ff7040', intensity: 5, distance: 9, y: -0.45 }, roomTypes: ['hall', 'throne', 'tavern', 'chapel', 'bedroom'] }],
+  ] },
+  { src: B('boats'), category: 'boats', snap: 'ground', tags: ['bridge', 'chinese'], items: [
+    ['cn_zigzag_bridge', 'cn_zigzag_bridge', 'Zigzag Bridge', null], ['cn_hump_bridge', 'cn_hump_bridge', 'Moon (Hump) Bridge', null],
+  ] },
+  { src: B('trees'), category: 'trees', snap: 'ground', tags: ['tree', 'chinese', 'blossom'], items: [
+    ['tree_cherry', 'tree_cherry', 'Cherry Blossom', 5.5], ['tree_plum_blossom', 'tree_plum_blossom', 'Plum Blossom', 5],
+    ['bamboo', 'bamboo', 'Bamboo Grove', null], ['bamboo_small', 'bamboo_small', 'Young Bamboo', null],
+  ] },
+  { src: B('furniture'), category: 'furniture', snap: 'floor', tags: ['furniture', 'chinese'], items: [
+    ['cn_canopy_bed', 'cn_canopy_bed', 'Canopy Bed (Chinese)', null, { roomTypes: ['bedroom'] }], ['cn_armchair', 'cn_armchair', 'Official’s Armchair', null, { roomTypes: ['hall', 'throne', 'library'] }],
+    ['cn_throne', 'cn_throne', 'Dragon Throne', null, { roomTypes: ['throne'] }], ['cn_screen', 'cn_screen', 'Folding Screen', null, { roomTypes: ['bedroom', 'hall', 'throne'] }],
+    ['cn_cabinet', 'cn_cabinet', 'Lacquered Cabinet', null, { roomTypes: ['bedroom', 'library', 'storage'], snap: 'wall' }], ['cn_desk', 'cn_desk', 'Scholar’s Desk', null, { roomTypes: ['library'] }],
+    ['cn_altar', 'cn_altar', 'Altar Table', null, { roomTypes: ['chapel'], light: { color: '#ffb060', intensity: 2, distance: 5, y: 1.45 } }],
+    ['cn_scroll', 'cn_scroll', 'Hanging Scroll', null, { snap: 'wall', roomTypes: ['library', 'hall', 'bedroom', 'throne'] }],
+    ['cn_vase', 'cn_vase', 'Porcelain Vase', null, { roomTypes: ['hall', 'throne', 'bedroom', 'library'] }], ['cn_drum', 'cn_drum', 'Temple Drum', null, { roomTypes: ['chapel', 'hall'] }],
+    ['cn_gong', 'cn_gong', 'Gong', null, { roomTypes: ['chapel'] }], ['cn_tea_table', 'cn_tea_table', 'Tea Table', null, { roomTypes: ['hall', 'tavern', 'library'] }],
+  ] },
   // ---------------- boats ----------------
   { src: K('pirate-kit'), category: 'boats', snap: 'ground', tags: ['boat', 'water'], items: [
     ['boat-row-small', 'rowboat', 'Rowboat', 1.0], ['boat-row-large', 'rowboat_large', 'Large Rowboat', 1.3], ['structure-platform-dock-small', 'dock', 'Small Dock', 1.5],

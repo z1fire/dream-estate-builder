@@ -19,6 +19,7 @@ export const MODES: ModeDef[] = [
   { id: 'paths', label: 'Paths', icon: 'paths', key: 'r', title: 'Roads, paths, fences and walls', tools: [{ id: 'path', label: 'Roads' }, { id: 'fence', label: 'Fences' }] },
   { id: 'castle', label: 'Castle', icon: 'castle', key: 'c', title: 'Castle walls, towers and keep', tools: [{ id: 'curtain', label: 'Walls' }, { id: 'building:castle', label: 'Buildings' }, { id: 'place:castle', label: 'Kit & Props' }] },
   { id: 'buildings', label: 'Village', icon: 'buildings', key: 'b', title: 'Village buildings and props', tools: [{ id: 'building:village', label: 'Buildings' }, { id: 'place:village', label: 'Props' }, { id: 'square', label: 'Town square' }] },
+  { id: 'chinese', label: 'Chinese', icon: 'pagoda', key: 'y', title: 'Chinese halls, pagodas and gardens', tools: [{ id: 'building:chinese', label: 'Buildings' }, { id: 'place:chinese', label: 'Garden & Furniture' }] },
   { id: 'interiors', label: 'Interiors', icon: 'interiors', key: 'i', title: 'Floor plans and furniture', tools: [{ id: 'interior', label: 'Floor plan' }, { id: 'furnish', label: 'Furnish' }] },
   { id: 'farming', label: 'Farming', icon: 'farming', key: 'f', title: 'Fields, pastures and farm buildings', tools: [{ id: 'field', label: 'Fields' }, { id: 'pasture', label: 'Pastures' }, { id: 'building:farm', label: 'Buildings' }, { id: 'place:farm', label: 'Props' }] },
   { id: 'animals', label: 'Animals', icon: 'animals', key: 'a', title: 'Livestock and wildlife', tools: [{ id: 'animals', label: 'Animals' }] },

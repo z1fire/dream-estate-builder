@@ -80,10 +80,10 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
   const buildings = app.addSystem(new BuildingSystem(app), 'buildings') as BuildingSystem;
   const walls = app.addSystem(new CurtainWallSystem(app), 'buildings') as CurtainWallSystem;
   app.registerTool(new CurtainTool(app));
-  for (const g of ['castle', 'village', 'farm'] as const) app.registerTool(new BuildingTool(app, g));
+  for (const g of ['castle', 'village', 'farm', 'chinese'] as const) app.registerTool(new BuildingTool(app, g));
   registerBuildingInspectors(app, water);
   // outdoor wall-mounted items (torches, banners) snap to facades and curtain walls
-  for (const f of ['castle', 'village', 'farm', 'garden']) app.registerTool(new PlaceTool(app, f, (ev, item) => exteriorWallSnap(app, ev, item)));
+  for (const f of ['castle', 'village', 'farm', 'garden', 'chinese']) app.registerTool(new PlaceTool(app, f, (ev, item) => exteriorWallSnap(app, ev, item)));
 
   // --- Phase 5: interiors ---
   const interior = app.addSystem(new InteriorSystem(app, buildings, props)) as InteriorSystem;

@@ -1,8 +1,8 @@
 # Dream Estate Builder
 
-Design your dream estate in the browser, from bare land to the candlesticks in the keep. Start by shaping the terrain, then dig a moat, raise curtain walls and towers, lay out a village and farms, and add herds of animals. Every building can be entered and furnished floor by floor. When you're done, walk around it all in first person, or ride a horse.
+Design your dream estate in the browser, from bare land to the candlesticks in the keep. Start by shaping the terrain, then dig a moat, raise curtain walls and towers, lay out a village and farms, and add herds of animals. Every building can be entered and furnished floor by floor. Build in European medieval or Chinese style, with palace halls, pagodas, moon gates and lotus ponds. When you're done, walk around it all in first person, or ride a horse.
 
-**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estate:** https://z1fire.github.io/dream-estate-builder/?demo
+**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estates:** [Ravensmoor Castle](https://z1fire.github.io/dream-estate-builder/?demo) · [Jade Lotus Garden](https://z1fire.github.io/dream-estate-builder/?demo=chinese)
 
 ![Ravensmoor, the demo estate](docs/screenshots/hero.jpg)
 
@@ -12,6 +12,8 @@ Design your dream estate in the browser, from bare land to the candlesticks in t
 | ![Village](docs/screenshots/village.jpg) | ![Farms](docs/screenshots/farms.jpg) |
 | ![Night](docs/screenshots/night.jpg) | ![Winter](docs/screenshots/winter.jpg) |
 | ![Gardens and maze](docs/screenshots/gardens.jpg) | ![Plan view](docs/screenshots/plan.jpg) |
+| ![Chinese palace courtyard](docs/screenshots/chinese-palace.jpg) | ![Lotus pond, zigzag bridge and pavilion](docs/screenshots/chinese-garden.jpg) |
+| ![Temple and pagoda](docs/screenshots/chinese-pagoda.jpg) | ![Teahouse street at dusk](docs/screenshots/chinese-street.jpg) |
 
 ![The editor](docs/screenshots/editor.jpg)
 
@@ -41,6 +43,15 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 - The gatehouse has a portcullis and a drawbridge that animate open and closed. "Dig a moat around these walls" lengthens the drawbridge to span the moat.
 - Keep, round and square towers, great hall, chapel, barracks, armory and stables, plus the Kenney castle kit pieces, siege engines, banners, torches and a well.
 - Adjustable height, wall thickness, storeys, roof style (conical, pitched, hipped, flat), roof colour, thatch, battlements, chimneys and materials (grey stone, sandstone, whitewash, half-timber, brick).
+
+**Chinese style** (Chinese mode, key Y)
+- Seven enterable buildings: a palace hall (double eaves, stone terrace, red colonnade), a temple, a five-storey pagoda with an eave on every floor and a gilded finial, a brick gate tower, an open pavilion with benches, a courtyard house and a two-storey teahouse.
+- Curved roofs with upturned corners and glazed tiles in any colour, hip ridges and ridge-end ornaments, and a painted bracket band (dougong) under the eaves. Any building can use them: choose *Curved eaves* as its roof, then set double eaves, eaves on every storey, veranda columns, a stone terrace or open sides.
+- Red lacquer and grey brick walls, lattice doors and paper lattice windows that glow at night, and square-tile floors.
+- Courtyard walls with tiled coping and **moon gates** wherever the wall has a gate, and bamboo fences.
+- Garden pieces: stone lanterns, red lantern posts, zigzag and hump bridges, scholar rocks, guardian lions, an incense burner, a paifang archway, a free-standing moon gate, bonsai and a stone table with drum stools. Plants: cherry and plum blossom, bamboo groves, plus the red maples and golden birches from the nature packs.
+- Furniture: canopy bed, official's armchair, dragon throne, folding screen, lacquered cabinet, scholar's desk, altar table, hanging scroll, porcelain vase, temple drum, gong, tea table and hanging red lanterns. Chinese buildings come furnished with these.
+- The **Jade Lotus Garden** demo (`?demo=chinese`, or Estate ▸ Load Chinese demo estate) has a walled palace compound, a temple hill with the pagoda, a lotus pond and a teahouse street.
 
 **Interiors**
 - Double-click any building to go inside. The cutaway view hides the roof and the floors above, a floor selector switches levels, and X-ray mode makes the walls see-through.
@@ -77,7 +88,7 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 |---|---|
 | Orbit / pan / zoom | Right-drag (or left-drag in Select) / middle-drag / wheel |
 | Plan view | Tab |
-| Modes | V Select · T Terrain · P Paint · W Water · G Plants · R Roads & fences · C Castle · B Village · I Interiors · F Farming · A Animals · K Walk · M Measure |
+| Modes | V Select · T Terrain · P Paint · W Water · G Plants · R Roads & fences · C Castle · B Village · Y Chinese · I Interiors · F Farming · A Animals · K Walk · M Measure |
 | Undo / redo / save | Ctrl+Z / Ctrl+Y / Ctrl+S |
 | Duplicate / delete | Ctrl+D / Del |
 | Move / rotate / scale gizmo | 1 / 2 / 3 · Q/E rotate 15° · Shift-click multi-select |
@@ -114,7 +125,7 @@ node scripts/gen-thumbnails.mjs --force                        # re-render every
 ```
 
 1. **Download** (`scripts/download-assets.mjs`): fetches the Kenney kits through kenney.nl's download links. Quaternius models come individually from poly.pizza, with every file checked to be by Quaternius and licensed CC0. Quaternius' full packs (Medieval Village MegaKit, Stylized Nature MegaKit, Ultimate Stylized Nature, Ultimate Animated Animals) are manual downloads from quaternius.com / itch.io. Unzip each into its own folder under `assets-raw/` (for example `assets-raw/Quaternius Medieval Village MegaKit/`); the selection already points at their `glTF` folders and skips any pack that isn't there.
-2. **Blender** (`blender/*.py`, run headless): generates the pieces the packs don't cover, in the same low-poly style. That covers moat edging, the drawbridge, portcullis, merlons, arrow slits, spiral stairs, banners, torches, braziers, the well, doors and windows; medieval furniture (four-poster bed, thrones, long tables, chandeliers, hearths, wine racks, casks, weapon racks, armour stands, pews, altar, cell bars and more); farm and garden props; and an animated **duck** and **goat** (rigged, with Idle/Walk/Eat/Swim clips).
+2. **Blender** (`blender/*.py`, run headless): generates the pieces the packs don't cover, in the same low-poly style. That covers moat edging, the drawbridge, portcullis, merlons, arrow slits, spiral stairs, banners, torches, braziers, the well, doors and windows; medieval furniture (four-poster bed, thrones, long tables, chandeliers, hearths, wine racks, casks, weapon racks, armour stands, pews, altar, cell bars and more); farm and garden props; and an animated **duck** and **goat** (rigged, with Idle/Walk/Eat/Swim clips). `generate_chinese.py` adds the Chinese lanterns, bridges, moon gate, scholar rock, guardian lion, paifang, blossom trees, bamboo and furniture.
 3. **Convert** (`scripts/convert-assets.mjs`): rescales each model to real-world size, recentres it, recolours the Kenney Nature and Furniture palettes, converts textures to WebP, quantises and compresses with meshopt, and updates `src/catalog/catalog.json`. Groups marked `alphaMask` switch alpha-blended leaves to alpha-test so instanced foliage sorts correctly; normal and roughness maps are reduced to 256 px.
 4. **Thumbnails** (`scripts/gen-thumbnails.mjs`): renders a WebP for each catalog entry with headless Chromium.
 
@@ -180,5 +191,5 @@ tests/          Playwright end-to-end tests        docs/      README screenshots
 All third-party assets are **CC0 1.0 (public domain)**.
 - **Kenney** (https://kenney.nl): Castle Kit, Fantasy Town Kit, Nature Kit, Furniture Kit, Survival Kit, Graveyard Kit, Pirate Kit, Food Kit and Mini Dungeon. The Modular Dungeon and Holiday kits are downloaded too, but not used in the catalog yet.
 - **Quaternius** (https://quaternius.com, models downloaded from https://poly.pizza): animated horses, cows, bulls, sheep, alpacas, pigs, chickens, chicks, dogs, huskies, shibas, deer, stags, donkeys and foxes, plus birch, willow and pine trees, bushes, flowers, a bookcase, chest, cauldron, shelves, beds, market stalls and benches. From the full packs: **Stylized Nature MegaKit** and **Ultimate Stylized Nature** (textured common trees, Scots pines, copper beeches, red maples, golden birches, dead trees, bushes, grasses, ferns, flowers, mushrooms, rocks and stepping-stone paths), **Medieval Village MegaKit** (the Building Kit category: 2 m modular plaster, timber and stone walls, floors, tiled roofs, dormers, chimneys, doors, windows, shutters, stairs, balconies, plus a wagon, crate, iron railings and climbing ivy) and **Ultimate Animated Animals** (the wolf).
-- **This repository's Blender scripts** (`blender/`): castle pieces, medieval furniture, farm and garden props, the duck and goat. Released under CC0 as well.
+- **This repository's Blender scripts** (`blender/`): castle pieces, medieval furniture, farm and garden props, the duck and goat, and the Chinese garden pieces, plants and furniture. Released under CC0 as well.
 - Fonts: Cinzel and Inter (SIL Open Font License) from Google Fonts. Libraries: three.js, three-mesh-bvh, fflate, idb-keyval (MIT).

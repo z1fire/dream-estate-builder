@@ -12,8 +12,9 @@ export const GROUND_LAYERS = [
 ] as const;
 export type GroundLayer = (typeof GROUND_LAYERS)[number];
 
-export type MaterialKind = 'greystone' | 'sandstone' | 'whitewash' | 'timber' | 'brick';
-export type RoofStyle = 'conical' | 'pitched' | 'flat' | 'hipped' | 'none';
+export type MaterialKind = 'greystone' | 'sandstone' | 'whitewash' | 'timber' | 'brick' | 'redlacquer' | 'greybrick';
+/** 'eaves' = Chinese hip roof with concave slopes and upturned corners (see buildings/chineseRoof.ts) */
+export type RoofStyle = 'conical' | 'pitched' | 'flat' | 'hipped' | 'eaves' | 'none';
 
 export interface WaterBody {
   id: string;
@@ -43,7 +44,7 @@ export interface PathDef {
   style: PathStyle;
 }
 
-export type FenceStyle = 'rail' | 'picket' | 'wattle' | 'drystone' | 'hedge' | 'castle';
+export type FenceStyle = 'rail' | 'picket' | 'wattle' | 'drystone' | 'hedge' | 'castle' | 'cn_wall' | 'bamboo';
 export interface FenceDef {
   id: string;
   points: V2[];
@@ -86,7 +87,8 @@ export interface PlacedObject {
 // ---------- Buildings + interiors ----------
 export type OpeningKind =
   | 'door_wood' | 'door_arched' | 'door_double' | 'archway'
-  | 'window_arched' | 'window_stained' | 'window_shutter' | 'arrow_slit';
+  | 'window_arched' | 'window_stained' | 'window_shutter' | 'arrow_slit'
+  | 'door_lattice' | 'window_lattice';
 export interface Opening {
   id: string;
   /** 'ext:<edgeIndex>' for exterior wall edges or interior wall id */
@@ -99,7 +101,7 @@ export interface Opening {
   height: number;
   sill: number;
 }
-export type SurfaceMat = 'stone' | 'plaster' | 'woodpanel' | 'tapestry' | 'plank' | 'flagstone' | 'rug' | 'brick' | 'whitewash';
+export type SurfaceMat = 'stone' | 'plaster' | 'woodpanel' | 'tapestry' | 'plank' | 'flagstone' | 'rug' | 'brick' | 'whitewash' | 'redlacquer' | 'squaretile';
 export type CeilingStyle = 'flat' | 'beamed' | 'vaulted';
 export interface InteriorWall {
   id: string;
@@ -146,7 +148,8 @@ export type BuildingKind =
   | 'armory' | 'stables' | 'well' | 'cottage' | 'cottage_timber' | 'cottage_stone' | 'longhouse'
   | 'tavern' | 'blacksmith' | 'bakery' | 'market_stall' | 'watermill' | 'windmill' | 'church'
   | 'workshop' | 'storehouse' | 'barn' | 'chicken_coop' | 'pig_pen' | 'dovecote' | 'greenhouse'
-  | 'beehive' | 'custom';
+  | 'beehive' | 'custom'
+  | 'cn_hall' | 'cn_temple' | 'cn_pagoda' | 'cn_gate' | 'cn_pavilion' | 'cn_house' | 'cn_teahouse';
 
 export interface BuildingDef {
   id: string;

@@ -754,6 +754,25 @@
    "source": "Kenney"
   },
   {
+   "id": "cn_hump_bridge",
+   "name": "Moon (Hump) Bridge",
+   "category": "boats",
+   "tags": [
+    "bridge",
+    "chinese"
+   ],
+   "model": "models/boats/cn_hump_bridge.glb",
+   "scale": 1,
+   "footprint": [
+    2.46,
+    10.33
+   ],
+   "height": 3.8,
+   "snap": "ground",
+   "thumb": "thumbs/cn_hump_bridge.webp",
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "rowboat",
    "name": "Rowboat",
    "category": "boats",
@@ -826,6 +845,25 @@
    "snap": "ground",
    "thumb": "thumbs/bridge_wood.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "cn_zigzag_bridge",
+   "name": "Zigzag Bridge",
+   "category": "boats",
+   "tags": [
+    "bridge",
+    "chinese"
+   ],
+   "model": "models/boats/cn_zigzag_bridge.glb",
+   "scale": 1,
+   "footprint": [
+    3.35,
+    12.37
+   ],
+   "height": 2.19,
+   "snap": "ground",
+   "thumb": "thumbs/cn_zigzag_bridge.webp",
+   "source": "Blender (this repo)"
   },
   {
    "id": "mv_door_braced",
@@ -3774,6 +3812,34 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_altar",
+   "name": "Altar Table",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_altar.glb",
+   "scale": 1,
+   "footprint": [
+    2.42,
+    0.75
+   ],
+   "height": 2.08,
+   "snap": "floor",
+   "thumb": "thumbs/cn_altar.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "light": {
+    "color": "#ffb060",
+    "intensity": 2,
+    "distance": 5,
+    "y": 1.45
+   },
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "anvil",
    "name": "Anvil",
    "category": "furniture",
@@ -3923,6 +3989,28 @@
    "roomTypes": [
     "kitchen",
     "bakery"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_canopy_bed",
+   "name": "Canopy Bed (Chinese)",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_canopy_bed.glb",
+   "scale": 1,
+   "footprint": [
+    2.3,
+    2.4
+   ],
+   "height": 2.66,
+   "snap": "floor",
+   "thumb": "thumbs/cn_canopy_bed.webp",
+   "roomTypes": [
+    "bedroom"
    ],
    "source": "Blender (this repo)"
   },
@@ -4127,6 +4215,28 @@
    "source": "Quaternius"
   },
   {
+   "id": "cn_throne",
+   "name": "Dragon Throne",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_throne.glb",
+   "scale": 1,
+   "footprint": [
+    3.26,
+    2.1
+   ],
+   "height": 2.71,
+   "snap": "floor",
+   "thumb": "thumbs/cn_throne.webp",
+   "roomTypes": [
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "fireplace",
    "name": "Fireplace",
    "category": "furniture",
@@ -4151,6 +4261,30 @@
     "distance": 10,
     "y": 0.6
    },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_screen",
+   "name": "Folding Screen",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_screen.glb",
+   "scale": 1,
+   "footprint": [
+    2.79,
+    0.22
+   ],
+   "height": 1.9,
+   "snap": "floor",
+   "thumb": "thumbs/cn_screen.webp",
+   "roomTypes": [
+    "bedroom",
+    "hall",
+    "throne"
+   ],
    "source": "Blender (this repo)"
   },
   {
@@ -4203,6 +4337,28 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_gong",
+   "name": "Gong",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_gong.glb",
+   "scale": 1,
+   "footprint": [
+    2.04,
+    0.5
+   ],
+   "height": 2.17,
+   "snap": "floor",
+   "thumb": "thumbs/cn_gong.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "hearth",
    "name": "Great Hearth",
    "category": "furniture",
@@ -4231,6 +4387,31 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_scroll",
+   "name": "Hanging Scroll",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_scroll.glb",
+   "scale": 1,
+   "footprint": [
+    0.8,
+    0.07
+   ],
+   "height": 1.59,
+   "snap": "wall",
+   "thumb": "thumbs/cn_scroll.webp",
+   "roomTypes": [
+    "library",
+    "hall",
+    "bedroom",
+    "throne"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "kitchen_table",
    "name": "Kitchen Table",
    "category": "furniture",
@@ -4248,6 +4429,30 @@
    "thumb": "thumbs/kitchen_table.webp",
    "roomTypes": [
     "kitchen"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_cabinet",
+   "name": "Lacquered Cabinet",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_cabinet.glb",
+   "scale": 1,
+   "footprint": [
+    1.1,
+    0.59
+   ],
+   "height": 2.24,
+   "snap": "wall",
+   "thumb": "thumbs/cn_cabinet.webp",
+   "roomTypes": [
+    "bedroom",
+    "library",
+    "storage"
    ],
    "source": "Blender (this repo)"
   },
@@ -4366,6 +4571,30 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_armchair",
+   "name": "Official’s Armchair",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_armchair.glb",
+   "scale": 1,
+   "footprint": [
+    0.85,
+    0.56
+   ],
+   "height": 1.19,
+   "snap": "floor",
+   "thumb": "thumbs/cn_armchair.webp",
+   "roomTypes": [
+    "hall",
+    "throne",
+    "library"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "pew",
    "name": "Pew",
    "category": "furniture",
@@ -4383,6 +4612,31 @@
    "thumb": "thumbs/pew.webp",
    "roomTypes": [
     "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_vase",
+   "name": "Porcelain Vase",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_vase.glb",
+   "scale": 1,
+   "footprint": [
+    0.76,
+    0.69
+   ],
+   "height": 1.06,
+   "snap": "floor",
+   "thumb": "thumbs/cn_vase.webp",
+   "roomTypes": [
+    "hall",
+    "throne",
+    "bedroom",
+    "library"
    ],
    "source": "Blender (this repo)"
   },
@@ -4447,6 +4701,28 @@
    "thumb": "thumbs/round_table.webp",
    "roomTypes": [
     "*"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_desk",
+   "name": "Scholar’s Desk",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_desk.glb",
+   "scale": 1,
+   "footprint": [
+    1.92,
+    0.75
+   ],
+   "height": 1.21,
+   "snap": "floor",
+   "thumb": "thumbs/cn_desk.webp",
+   "roomTypes": [
+    "library"
    ],
    "source": "Blender (this repo)"
   },
@@ -4624,6 +4900,53 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_tea_table",
+   "name": "Tea Table",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_tea_table.glb",
+   "scale": 1,
+   "footprint": [
+    1.2,
+    2.05
+   ],
+   "height": 0.61,
+   "snap": "floor",
+   "thumb": "thumbs/cn_tea_table.webp",
+   "roomTypes": [
+    "hall",
+    "tavern",
+    "library"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_drum",
+   "name": "Temple Drum",
+   "category": "furniture",
+   "tags": [
+    "furniture",
+    "chinese"
+   ],
+   "model": "models/furniture/cn_drum.glb",
+   "scale": 1,
+   "footprint": [
+    1.18,
+    1.09
+   ],
+   "height": 1.81,
+   "snap": "floor",
+   "thumb": "thumbs/cn_drum.webp",
+   "roomTypes": [
+    "chapel",
+    "hall"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "throne",
    "name": "Throne",
    "category": "furniture",
@@ -4771,6 +5094,30 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "cn_bonsai",
+   "name": "Bonsai",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_bonsai.glb",
+   "scale": 1,
+   "footprint": [
+    0.95,
+    0.8
+   ],
+   "height": 1.09,
+   "snap": "ground",
+   "thumb": "thumbs/cn_bonsai.webp",
+   "roomTypes": [
+    "library",
+    "hall",
+    "bedroom"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "mv_ivy",
    "name": "Climbing Ivy",
    "category": "garden",
@@ -4871,6 +5218,25 @@
    "source": "Kenney"
   },
   {
+   "id": "cn_guardian_lion",
+   "name": "Guardian Lion",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_guardian_lion.glb",
+   "scale": 1,
+   "footprint": [
+    1.1,
+    1.55
+   ],
+   "height": 2.62,
+   "snap": "ground",
+   "thumb": "thumbs/cn_guardian_lion.webp",
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "hedge_gate",
    "name": "Hedge Arch",
    "category": "garden",
@@ -4909,6 +5275,28 @@
    "source": "Kenney"
   },
   {
+   "id": "cn_incense_burner",
+   "name": "Incense Burner",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_incense_burner.glb",
+   "scale": 1,
+   "footprint": [
+    1.3,
+    1.3
+   ],
+   "height": 1.53,
+   "snap": "ground",
+   "thumb": "thumbs/cn_incense_burner.webp",
+   "roomTypes": [
+    "chapel"
+   ],
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "statue_knight",
    "name": "Knight Statue",
    "category": "garden",
@@ -4924,6 +5312,25 @@
    "height": 3.32,
    "snap": "ground",
    "thumb": "thumbs/statue_knight.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_moon_gate",
+   "name": "Moon Gate",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_moon_gate.glb",
+   "scale": 1,
+   "footprint": [
+    5.47,
+    1.1
+   ],
+   "height": 3.65,
+   "snap": "ground",
+   "thumb": "thumbs/cn_moon_gate.webp",
    "source": "Blender (this repo)"
   },
   {
@@ -4946,6 +5353,25 @@
    "source": "Kenney"
   },
   {
+   "id": "cn_paifang",
+   "name": "Paifang Archway",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_paifang.glb",
+   "scale": 1,
+   "footprint": [
+    9.4,
+    1.8
+   ],
+   "height": 6.59,
+   "snap": "ground",
+   "thumb": "thumbs/cn_paifang.webp",
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "rose_arch",
    "name": "Rose Arch",
    "category": "garden",
@@ -4961,6 +5387,25 @@
    "height": 2.97,
    "snap": "ground",
    "thumb": "thumbs/rose_arch.webp",
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_scholar_rock",
+   "name": "Scholar Rock",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_scholar_rock.glb",
+   "scale": 1,
+   "footprint": [
+    2.18,
+    1.7
+   ],
+   "height": 3.48,
+   "snap": "ground",
+   "thumb": "thumbs/cn_scholar_rock.webp",
    "source": "Blender (this repo)"
   },
   {
@@ -5081,6 +5526,50 @@
    "snap": "ground",
    "thumb": "thumbs/statue_head.webp",
    "source": "Kenney"
+  },
+  {
+   "id": "cn_stone_lantern",
+   "name": "Stone Lantern",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_stone_lantern.glb",
+   "scale": 1,
+   "footprint": [
+    1.07,
+    1.24
+   ],
+   "height": 2.13,
+   "snap": "ground",
+   "thumb": "thumbs/cn_stone_lantern.webp",
+   "light": {
+    "color": "#ffc070",
+    "intensity": 2,
+    "distance": 6,
+    "y": 1.45
+   },
+   "source": "Blender (this repo)"
+  },
+  {
+   "id": "cn_table_set",
+   "name": "Stone Table & Drum Stools",
+   "category": "garden",
+   "tags": [
+    "garden",
+    "chinese"
+   ],
+   "model": "models/garden/cn_table_set.glb",
+   "scale": 1,
+   "footprint": [
+    2.13,
+    2.11
+   ],
+   "height": 1.03,
+   "snap": "ground",
+   "thumb": "thumbs/cn_table_set.webp",
+   "source": "Blender (this repo)"
   },
   {
    "id": "sundial",
@@ -5386,6 +5875,38 @@
    "source": "Kenney"
   },
   {
+   "id": "cn_lantern_hanging",
+   "name": "Hanging Red Lantern",
+   "category": "lighting",
+   "tags": [
+    "light",
+    "chinese"
+   ],
+   "model": "models/lighting/cn_lantern_hanging.glb",
+   "scale": 1,
+   "footprint": [
+    0.56,
+    0.58
+   ],
+   "height": 1.4,
+   "snap": "ceiling",
+   "thumb": "thumbs/cn_lantern_hanging.webp",
+   "roomTypes": [
+    "hall",
+    "throne",
+    "tavern",
+    "chapel",
+    "bedroom"
+   ],
+   "light": {
+    "color": "#ff7040",
+    "intensity": 5,
+    "distance": 9,
+    "y": -0.45
+   },
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "lamppost",
    "name": "Lamp Post",
    "category": "lighting",
@@ -5408,6 +5929,31 @@
     "y": 2.9
    },
    "source": "Kenney"
+  },
+  {
+   "id": "cn_lantern_post",
+   "name": "Red Lantern Post",
+   "category": "lighting",
+   "tags": [
+    "light",
+    "chinese"
+   ],
+   "model": "models/lighting/cn_lantern_post.glb",
+   "scale": 1,
+   "footprint": [
+    1.09,
+    0.51
+   ],
+   "height": 2.65,
+   "snap": "ground",
+   "thumb": "thumbs/cn_lantern_post.webp",
+   "light": {
+    "color": "#ff6a3a",
+    "intensity": 4,
+    "distance": 8,
+    "y": 2
+   },
+   "source": "Blender (this repo)"
   },
   {
    "id": "torch_standing",
@@ -6969,6 +7515,26 @@
    "source": "Blender (this repo)"
   },
   {
+   "id": "bamboo",
+   "name": "Bamboo Grove",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "chinese",
+    "blossom"
+   ],
+   "model": "models/trees/bamboo.glb",
+   "scale": 1,
+   "footprint": [
+    1.84,
+    2.01
+   ],
+   "height": 6.53,
+   "snap": "ground",
+   "thumb": "thumbs/bamboo.webp",
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "birch",
    "name": "Birch",
    "category": "trees",
@@ -7022,6 +7588,26 @@
    "snap": "ground",
    "thumb": "thumbs/q_dead_stump.webp",
    "source": "Quaternius"
+  },
+  {
+   "id": "tree_cherry",
+   "name": "Cherry Blossom",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "chinese",
+    "blossom"
+   ],
+   "model": "models/trees/tree_cherry.glb",
+   "scale": 1,
+   "footprint": [
+    5.18,
+    4.3
+   ],
+   "height": 5.5,
+   "snap": "ground",
+   "thumb": "thumbs/tree_cherry.webp",
+   "source": "Blender (this repo)"
   },
   {
    "id": "q_common_1",
@@ -7569,6 +8155,26 @@
    "source": "Kenney"
   },
   {
+   "id": "tree_plum_blossom",
+   "name": "Plum Blossom",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "chinese",
+    "blossom"
+   ],
+   "model": "models/trees/tree_plum_blossom.glb",
+   "scale": 1,
+   "footprint": [
+    4.71,
+    3.91
+   ],
+   "height": 5,
+   "snap": "ground",
+   "thumb": "thumbs/tree_plum_blossom.webp",
+   "source": "Blender (this repo)"
+  },
+  {
    "id": "tree_plum",
    "name": "Plum Tree",
    "category": "trees",
@@ -7958,6 +8564,26 @@
    "snap": "ground",
    "thumb": "thumbs/tree_q.webp",
    "source": "Quaternius"
+  },
+  {
+   "id": "bamboo_small",
+   "name": "Young Bamboo",
+   "category": "trees",
+   "tags": [
+    "tree",
+    "chinese",
+    "blossom"
+   ],
+   "model": "models/trees/bamboo_small.glb",
+   "scale": 1,
+   "footprint": [
+    1.98,
+    1.93
+   ],
+   "height": 3.28,
+   "snap": "ground",
+   "thumb": "thumbs/bamboo_small.webp",
+   "source": "Blender (this repo)"
   },
   {
    "id": "pine_small",

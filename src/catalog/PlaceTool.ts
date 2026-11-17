@@ -9,13 +9,15 @@ import { h, hint, section, toast } from '../ui/dom';
 import { CATALOG, catalogItem, type CatalogItem } from './catalog';
 import { instantiate } from './loader';
 
-export const PLACE_FILTERS: Record<string, { label: string; categories: string[] }> = {
+/** `tag` narrows a filter to items carrying that tag (e.g. the Chinese palette). */
+export const PLACE_FILTERS: Record<string, { label: string; categories: string[]; tag?: string }> = {
   interior: { label: 'Furnish', categories: ['furniture', 'lighting', 'decor', 'props', 'chapel', 'castle', 'farm', 'building_kit'] },
   nature: { label: 'Trees & nature', categories: ['trees', 'shrubs', 'flowers', 'rocks'] },
   garden: { label: 'Garden ornaments', categories: ['garden', 'flowers', 'lighting'] },
   castle: { label: 'Castle kit & props', categories: ['castle', 'building_kit', 'siege', 'lighting', 'props'] },
   village: { label: 'Village props', categories: ['village', 'building_kit', 'props', 'lighting', 'garden', 'boats', 'chapel', 'decor'] },
   farm: { label: 'Farm props', categories: ['farm', 'props', 'village'] },
+  chinese: { label: 'Chinese garden & furniture', categories: ['garden', 'lighting', 'boats', 'trees', 'furniture'], tag: 'chinese' },
 };
 
 /** Where a placement lands — buildings/interiors can override (inside rooms, against walls). */
@@ -32,15 +34,19 @@ export class PlaceTool extends Tool {
   private rot = 0;
   private lastHit: PlacementHit | null = null;
   protected categories: string[];
+  protected tag?: string;
 
   constructor(app: App, filter: string, private resolve?: (ev: ToolEvent, item: CatalogItem) => PlacementHit | null, private exclusive = false) {
     super(app);
     this.id = `place:${filter}`;
     this.name = PLACE_FILTERS[filter]?.label ?? 'Place';
     this.categories = PLACE_FILTERS[filter]?.categories ?? [];
-    const first = CATALOG.find((c) => this.categories.includes(c.category) && !c.hidden);
+    this.tag = PLACE_FILTERS[filter]?.tag;
+    const first = CATALOG.find((c) => this.matches(c));
     if (first) this.selected.add(first.id);
   }
+
+  protected matches(c: CatalogItem) { return !c.hidden && this.categories.includes(c.category) && (!this.tag || c.tags.includes(this.tag)); }
 
   get item(): CatalogItem | undefined { return catalogItem([...this.selected][0]); }
   select(id: string) { this.selected.clear(); this.selected.add(id); this.ensureGhost(); }
@@ -122,10 +128,11 @@ export class PlaceTool extends Tool {
   }
 
   panel() {
-    const items = CATALOG.filter((c) => this.categories.includes(c.category) && !c.hidden);
+    const items = CATALOG.filter((c) => this.matches(c));
     if (!items.length) return hint('No models in this category yet.');
+    const cats = this.categories.filter((k) => items.some((i) => i.category === k));
     return h('div', {},
-      section('Choose a model', catalogBrowser({ items, selected: this.selected, categories: this.categories, onChange: () => { this.ensureGhost(); const it = this.item; if (it) toast(`${it.name}: click to place`, 1500); } })),
+      section('Choose a model', catalogBrowser({ items, selected: this.selected, categories: cats, onChange: () => { this.ensureGhost(); const it = this.item; if (it) toast(`${it.name}: click to place`, 1500); } })),
       hint('Placed objects can be selected, moved, rotated and duplicated with the Select tool (V).'));
   }
 }

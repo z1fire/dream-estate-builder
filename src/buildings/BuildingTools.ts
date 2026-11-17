@@ -24,7 +24,7 @@ export class BuildingTool extends Tool {
   private rot = 0;
   private ghost = new THREE.Group();
   private ghostKind = '';
-  constructor(app: App, private group: 'castle' | 'village' | 'farm') {
+  constructor(app: App, private group: 'castle' | 'village' | 'farm' | 'chinese') {
     super(app);
     this.id = `building:${group}`;
     this.kind = PRESETS.find((p) => p.group === group)!.kind;
@@ -267,11 +267,19 @@ export function registerBuildingInspectors(app: App, water: WaterSystem) {
         toggle('Dungeon / cellar below', basements > 0, (v) => edit(b.id, (e) => toggleBasement(e, v), v ? 'Add cellar' : 'Remove cellar'))),
       section('Look',
         select<MaterialKind>('Walls', Object.entries(MATERIAL_LABELS) as [MaterialKind, string][], b.material, (v) => edit(b.id, (e) => (e.material = v), 'Wall material')),
-        select<RoofStyle>('Roof', [['conical', b.shape === 'round' ? 'Conical' : 'Pyramid'], ['pitched', 'Pitched (gable)'], ['hipped', 'Hipped'], ['flat', 'Flat'], ['none', 'None']], b.roof, (v) => edit(b.id, (e) => (e.roof = v), 'Roof style')),
+        select<RoofStyle>('Roof', [['conical', b.shape === 'round' ? 'Conical' : 'Pyramid'], ['pitched', 'Pitched (gable)'], ['hipped', 'Hipped'], ['eaves', 'Curved eaves (Chinese)'], ['flat', 'Flat'], ['none', 'None']], b.roof, (v) => edit(b.id, (e) => (e.roof = v), 'Roof style')),
         h('label', { class: 'field' }, h('span', { class: 'lbl' }, 'Roof colour'), colorInput(b.roofColor, (v) => edit(b.id, (e) => (e.roofColor = v), 'Roof colour'))),
         toggle('Thatched roof', !!b.extra.thatch, (v) => edit(b.id, (e) => (e.extra.thatch = v), 'Thatch')),
         toggle('Battlements', b.crenellations, (v) => edit(b.id, (e) => (e.crenellations = v), 'Battlements')),
         toggle('Chimney', !!b.extra.chimney, (v) => edit(b.id, (e) => (e.extra.chimney = v), 'Chimney'))),
+      b.roof === 'eaves' || b.kind.startsWith('cn_') ? section('Chinese details',
+        editSlider('Roof hip', 0, 1, 0.05, Number(b.extra.hip ?? 1), (v) => edit(b.id, (e) => (e.extra.hip = v), 'Roof hip')),
+        toggle('Double eaves', !!b.extra.doubleEave, (v) => edit(b.id, (e) => (e.extra.doubleEave = v), 'Double eaves')),
+        toggle('Eaves on every storey', !!b.extra.tiers, (v) => edit(b.id, (e) => (e.extra.tiers = v), 'Storey eaves')),
+        editSlider('Veranda columns', 0, 3, 0.1, Number(b.extra.columns ?? 0), (v) => edit(b.id, (e) => (e.extra.columns = v), 'Veranda'), (m) => (m > 0 ? ft(m) : 'none')),
+        editSlider('Stone terrace', 0, 6, 0.1, Number(b.extra.terrace ?? 0), (v) => edit(b.id, (e) => (e.extra.terrace = v), 'Terrace'), (m) => (m > 0 ? ft(m) : 'none')),
+        toggle('Open sides (pavilion)', !!b.extra.open, (v) => edit(b.id, (e) => (e.extra.open = v), 'Open sides')),
+        toggle('Gilded finial', !!b.extra.finial, (v) => edit(b.id, (e) => (e.extra.finial = v), 'Finial'))) : null,
       ...kindSpecific,
     );
   });

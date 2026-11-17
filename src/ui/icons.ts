@@ -40,6 +40,7 @@ export const ICONS = {
   download: svg('<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>'),
   upload: svg('<path d="M12 21V9M7 14l5-5 5 5M4 3h16"/>'),
   crown: svg('<path d="M3 18l2-10 5 5 2-7 2 7 5-5 2 10z"/><path d="M3 21h18"/>'),
+  pagoda: svg('<path d="M12 2v3"/><path d="M4 9c3 0 5-2 8-4 3 2 5 4 8 4"/><path d="M7 9v4"/><path d="M17 9v4"/><path d="M3 15c3 0 5-1 9-3 4 2 6 3 9 3"/><path d="M6 15v6h12v-6"/><path d="M10 21v-3h4v3"/>'),
   compass: svg('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>'),
 };
 export type IconName = keyof typeof ICONS;

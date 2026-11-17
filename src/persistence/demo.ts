@@ -14,7 +14,7 @@ import { VEG_STRIDE } from '../vegetation/VegetationSystem';
 const CASTLE: V2 = [-20, -110];
 
 /** Raise/lower terrain around a point with a smooth falloff to a target height. */
-function shape(doc: EstateDoc, cx: number, cz: number, r: number, fall: number, fn: (h: number, w: number) => number) {
+export function shape(doc: EstateDoc, cx: number, cz: number, r: number, fall: number, fn: (h: number, w: number) => number) {
   for (let z = Math.max(0, Math.floor(cz + HALF - r - fall)); z <= Math.min(VERTS - 1, Math.ceil(cz + HALF + r + fall)); z++)
     for (let x = Math.max(0, Math.floor(cx + HALF - r - fall)); x <= Math.min(VERTS - 1, Math.ceil(cx + HALF + r + fall)); x++) {
       const d = Math.hypot(x - HALF - cx, z - HALF - cz);

@@ -41,7 +41,7 @@ if (!args.includes('--skip-blender')) {
   } else {
     console.log(`▶ Generating Blender assets with ${blender}`);
     const out = path.join(ROOT, 'assets-raw', 'blender');
-    for (const script of ['generate_castle.py', 'generate_furniture.py', 'generate_farm_garden.py']) {
+    for (const script of ['generate_castle.py', 'generate_furniture.py', 'generate_farm_garden.py', 'generate_chinese.py']) {
       run(blender, ['--background', '--factory-startup', '--python', path.join(ROOT, 'blender', script), '--', out]);
     }
   }

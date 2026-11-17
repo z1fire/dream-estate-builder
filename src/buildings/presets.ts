@@ -5,7 +5,7 @@ import { edgeCount, footprint, frontEdge, levelBase } from './footprint';
 export interface PresetInfo {
   kind: BuildingKind;
   label: string;
-  group: 'castle' | 'village' | 'farm';
+  group: 'castle' | 'village' | 'farm' | 'chinese';
   desc: string;
   icon: string;
 }
@@ -37,6 +37,13 @@ export const PRESETS: PresetInfo[] = [
   { kind: 'pig_pen', label: 'Pig shed', group: 'farm', desc: 'Shelter for a pig pen', icon: '🐖' },
   { kind: 'dovecote', label: 'Dovecote', group: 'farm', desc: 'Round dovecote', icon: '🕊' },
   { kind: 'greenhouse', label: 'Greenhouse', group: 'farm', desc: 'Glass-walled greenhouse', icon: '🌱' },
+  { kind: 'cn_hall', label: 'Palace hall', group: 'chinese', desc: 'Double-eaved throne hall on a stone terrace', icon: '🏯' },
+  { kind: 'cn_temple', label: 'Temple', group: 'chinese', desc: 'Prayer hall with altar, drum and gong', icon: '🛕' },
+  { kind: 'cn_pagoda', label: 'Pagoda', group: 'chinese', desc: 'Five storeys, an eave on every floor', icon: '🗼' },
+  { kind: 'cn_gate', label: 'Gate tower', group: 'chinese', desc: 'Brick gate passage with a watch hall above', icon: '⛩' },
+  { kind: 'cn_pavilion', label: 'Pavilion', group: 'chinese', desc: 'Open garden pavilion with benches', icon: '⛱' },
+  { kind: 'cn_house', label: 'Courtyard house', group: 'chinese', desc: 'Grey-brick wing with a columned porch', icon: '🏠' },
+  { kind: 'cn_teahouse', label: 'Teahouse', group: 'chinese', desc: 'Two storeys of tea rooms, eaves on each', icon: '🍵' },
 ];
 
 interface FloorSpec { level: number; h: number; room: string; type: RoomType; floor?: SurfaceMat; wall?: SurfaceMat; ceil?: CeilingStyle }
@@ -44,6 +51,8 @@ interface Spec {
   name: string; shape: 'rect' | 'round'; w: number; d: number; t: number; mat: MaterialKind; roof: RoofStyle; roofColor: string; cren: boolean;
   floors: FloorSpec[]; door: OpeningKind; win: OpeningKind; winSpacing: number; stairs: 'straight' | 'spiral' | 'none';
   extra?: BuildingDef['extra']; doorWidth?: number; doorHeight?: number;
+  /** furniture set: European (default) or Chinese */
+  style?: 'chinese';
 }
 
 const S = (s: Partial<Spec> & Pick<Spec, 'name' | 'w' | 'd' | 'floors'>): Spec => ({
@@ -106,6 +115,23 @@ const SPECS: Record<string, Spec> = {
     floors: [{ level: 0, h: 3.2, room: 'Dovecote', type: 'storage', floor: 'flagstone', wall: 'whitewash' }, { level: 1, h: 2.4, room: 'Loft', type: 'storage', floor: 'plank', wall: 'whitewash' }] }),
   greenhouse: S({ name: 'Greenhouse', w: 9, d: 5, t: 0.2, mat: 'whitewash', roof: 'pitched', roofColor: '#9cc0c8', win: 'window_arched', winSpacing: 1.6, stairs: 'none', door: 'door_wood',
     floors: [{ level: 0, h: 2.8, room: 'Greenhouse', type: 'generic', floor: 'flagstone', wall: 'whitewash' }] }),
+  // ---- Chinese (roof 'eaves': see chineseRoof.ts for the extra flags) ----
+  cn_hall: S({ name: 'Hall of Supreme Harmony', w: 24, d: 13, t: 0.6, mat: 'redlacquer', roof: 'eaves', roofColor: '#d9a21e', door: 'door_lattice', win: 'window_lattice', winSpacing: 3.4, stairs: 'none', doorWidth: 2.6, doorHeight: 3.6, style: 'chinese',
+    floors: [{ level: 0, h: 7, room: 'Throne Hall', type: 'throne', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.8, terrace: 4, doubleEave: true, hip: 1 } }),
+  cn_temple: S({ name: 'Temple of Heavenly Peace', w: 16, d: 11, t: 0.55, mat: 'redlacquer', roof: 'eaves', roofColor: '#3f7a5c', door: 'door_lattice', win: 'window_lattice', winSpacing: 3.2, stairs: 'none', doorWidth: 2.4, doorHeight: 3.4, style: 'chinese',
+    floors: [{ level: 0, h: 6, room: 'Prayer Hall', type: 'chapel', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.5, terrace: 2.5, doubleEave: true, hip: 0.45 } }),
+  cn_pagoda: S({ name: 'Pagoda', w: 8, d: 8, t: 0.8, mat: 'whitewash', roof: 'eaves', roofColor: '#5d6f7a', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'straight', style: 'chinese',
+    floors: [{ level: 0, h: 4, room: 'Shrine', type: 'chapel', floor: 'squaretile', wall: 'redlacquer', ceil: 'beamed' }, { level: 1, h: 3.4, room: 'Sutra Library', type: 'library', floor: 'plank', wall: 'whitewash', ceil: 'beamed' },
+      { level: 2, h: 3.4, room: 'Meditation Room', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' }, { level: 3, h: 3.2, room: 'Bell Room', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' },
+      { level: 4, h: 3.2, room: 'Lookout', type: 'generic', floor: 'plank', wall: 'whitewash', ceil: 'beamed' }], extra: { tiers: true, hip: 1, terrace: 1.6, finial: true } }),
+  cn_gate: S({ name: 'Gate Tower', w: 13, d: 8, t: 1.0, mat: 'greybrick', roof: 'eaves', roofColor: '#6f747c', door: 'archway', win: 'window_lattice', winSpacing: 3.2, stairs: 'straight', doorWidth: 3.4, doorHeight: 4.2, style: 'chinese',
+    floors: [{ level: 0, h: 5.4, room: 'Gate Passage', type: 'generic', floor: 'flagstone', wall: 'stone' }, { level: 1, h: 4, room: 'Watch Hall', type: 'armory', floor: 'plank', wall: 'redlacquer', ceil: 'beamed' }], extra: { hip: 0.5, tiers: true } }),
+  cn_pavilion: S({ name: 'Pavilion', w: 5.5, d: 5.5, t: 0.2, mat: 'redlacquer', roof: 'eaves', roofColor: '#2f6b55', door: 'archway', win: 'window_lattice', winSpacing: 99, stairs: 'none', style: 'chinese',
+    floors: [{ level: 0, h: 3.4, room: 'Pavilion', type: 'generic', floor: 'squaretile', wall: 'redlacquer' }], extra: { open: true, hip: 1, terrace: 0.9, finial: true } }),
+  cn_house: S({ name: 'Courtyard House', w: 13, d: 6.5, t: 0.45, mat: 'greybrick', roof: 'eaves', roofColor: '#737980', door: 'door_lattice', win: 'window_lattice', winSpacing: 3, stairs: 'none', doorWidth: 1.6, doorHeight: 2.6, style: 'chinese',
+    floors: [{ level: 0, h: 3.6, room: 'Family Hall', type: 'hall', floor: 'squaretile', wall: 'whitewash', ceil: 'beamed' }], extra: { columns: 1.3, hip: 0.25, terrace: 1.6 } }),
+  cn_teahouse: S({ name: 'Teahouse', w: 12, d: 9, t: 0.4, mat: 'redlacquer', roof: 'eaves', roofColor: '#33604f', door: 'door_lattice', win: 'window_lattice', winSpacing: 2.6, doorWidth: 2, doorHeight: 2.8, style: 'chinese',
+    floors: [{ level: 0, h: 3.6, room: 'Tea Room', type: 'tavern', floor: 'plank', wall: 'woodpanel', ceil: 'beamed' }, { level: 1, h: 3.3, room: 'Upper Tea Room', type: 'tavern', floor: 'plank', wall: 'redlacquer', ceil: 'beamed' }], extra: { columns: 1.2, tiers: true, hip: 0.6 } }),
 };
 
 /** Doors on the front edge, windows spread around all edges & floors. */
@@ -116,14 +142,16 @@ function autoOpenings(b: BuildingDef, spec: Spec): Opening[] {
   const dw = spec.doorWidth ?? (spec.door === 'door_double' ? 2.2 : spec.door === 'archway' ? 3 : 1.25);
   const dh = spec.doorHeight ?? (spec.door === 'door_double' ? 3 : 2.4);
   ops.push({ id: uid('op'), wall: `ext:${front}`, floor: 0, t: 0.5, kind: spec.door, width: dw, height: dh, sill: 0 });
-  if (b.kind === 'gatehouse') ops.push({ id: uid('op'), wall: `ext:${(front + 2) % n}`, floor: 0, t: 0.5, kind: 'archway', width: dw, height: dh, sill: 0 });
+  if (b.extra.open) return [];
+  if (b.kind === 'gatehouse' || b.kind === 'cn_gate') ops.push({ id: uid('op'), wall: `ext:${(front + 2) % n}`, floor: 0, t: 0.5, kind: 'archway', width: dw, height: dh, sill: 0 });
   for (const f of b.floors) {
     if (f.level < 0) continue;
     const isSlit = spec.win === 'arrow_slit';
-    const ww = isSlit ? 0.3 : spec.win === 'window_stained' ? 1.3 : 1.0;
-    const wh = isSlit ? 1.4 : spec.win === 'window_stained' ? Math.min(3.4, f.height - 1.8) : 1.3;
-    const sill = isSlit ? 1.3 : spec.win === 'window_stained' ? 1.4 : Math.min(1.0, f.height * 0.33);
-    if (wh < 0.6 || (b.kind === 'gatehouse' && f.level === 0)) continue;
+    const isLattice = spec.win === 'window_lattice';
+    const ww = isSlit ? 0.3 : spec.win === 'window_stained' ? 1.3 : isLattice ? 1.5 : 1.0;
+    const wh = isSlit ? 1.4 : spec.win === 'window_stained' ? Math.min(3.4, f.height - 1.8) : isLattice ? Math.min(f.height - 1.5, 2.2) : 1.3;
+    const sill = isSlit ? 1.3 : spec.win === 'window_stained' ? 1.4 : isLattice ? 0.9 : Math.min(1.0, f.height * 0.33);
+    if (wh < 0.6 || ((b.kind === 'gatehouse' || b.kind === 'cn_gate') && f.level === 0)) continue;
     for (let i = 0; i < n; i++) {
       const a = pts[i], c = pts[(i + 1) % n];
       const L = Math.hypot(c[0] - a[0], c[1] - a[1]);
@@ -166,6 +194,18 @@ const ROOM_FURNITURE: Partial<Record<RoomType, [string, number, number, number, 
   stable: [['hay_bales', -0.35, -0.3, 0], ['water_trough', 0.25, -0.38, 0], ['straw_pile', 0, 0.2, 0]],
 };
 
+/** Chinese starter furniture (same format as ROOM_FURNITURE). */
+const CN_ROOM_FURNITURE: Partial<Record<RoomType, [string, number, number, number, number?, number?][]>> = {
+  throne: [['cn_throne', 0, -0.32, 0], ['cn_vase', -0.3, -0.35, 0], ['cn_vase', 0.3, -0.35, 0], ['cn_incense_burner', -0.18, 0.05, 0], ['cn_incense_burner', 0.18, 0.05, 0], ['cn_lantern_hanging', -0.2, 0, 0], ['cn_lantern_hanging', 0.2, 0, 0], ['rug_runner', 0, 0.15, 0]],
+  chapel: [['cn_altar', 0, -0.36, 0], ['cn_incense_burner', 0, 0.05, 0], ['cn_drum', -0.35, -0.2, Math.PI / 2], ['cn_gong', 0.35, -0.2, -Math.PI / 2], ['cn_lantern_hanging', 0, -0.1, 0]],
+  hall: [['cn_tea_table', 0, 0.05, 0], ['cn_armchair', -0.2, -0.3, 0], ['cn_armchair', 0.2, -0.3, 0], ['cn_screen', 0, -0.42, 0], ['cn_vase', 0.4, -0.35, 0], ['cn_lantern_hanging', 0, 0, 0]],
+  bedroom: [['cn_canopy_bed', -0.25, -0.2, 0], ['cn_cabinet', 0.3, -0.38, 0], ['cn_screen', 0.25, 0.25, Math.PI], ['cn_lantern_hanging', 0, 0, 0]],
+  library: [['cn_desk', 0.1, -0.15, 0], ['cn_armchair', 0.1, 0.05, Math.PI], ['cn_cabinet', -0.32, -0.38, 0], ['cn_bonsai', 0.35, -0.38, 0], ['cn_vase', -0.35, 0.3, 0]],
+  tavern: [['cn_tea_table', -0.22, -0.15, 0], ['cn_tea_table', 0.22, -0.15, 0], ['cn_tea_table', -0.22, 0.22, 0], ['cn_tea_table', 0.22, 0.22, 0], ['cn_lantern_hanging', -0.2, 0, 0], ['cn_lantern_hanging', 0.2, 0, 0]],
+  armory: [['weapon_rack', -0.2, -0.36, 0], ['cn_drum', 0.25, -0.2, 0], ['cn_lantern_hanging', 0, 0, 0]],
+  generic: [['cn_table_set', 0, 0, 0]],
+};
+
 export interface PresetResult { building: BuildingDef; furniture: PlacedObject[] }
 
 export function makeBuilding(kind: BuildingKind, pos: [number, number, number], rotY = 0, over: Partial<BuildingDef> = {}, furnish = true): PresetResult {
@@ -192,7 +232,8 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
   if (furnish) {
     for (const f of b.floors) {
       const r = f.rooms[0];
-      const list = ROOM_FURNITURE[r.type];
+      const list = (spec.style === 'chinese' ? CN_ROOM_FURNITURE : ROOM_FURNITURE)[r.type];
+      if (spec.style === 'chinese' && r.type === 'generic' && !b.extra.open) continue;
       if (!list) continue;
       const y = levelBase(b, f.level) + 0.03;
       for (const [id, fx, fz, rot, ox = 0, oz = 0] of list) {
@@ -200,7 +241,7 @@ export function makeBuilding(kind: BuildingKind, pos: [number, number, number], 
         // keep clear of the stairwell
         if (f.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2) || b.floors.find((g) => g.level === f.level - 1)?.stairs.some((s) => Math.hypot(s.pos[0] - x, s.pos[1] - z) < 2.2)) continue;
         if (b.shape === 'round' && Math.hypot(x, z) > hw - 0.8) continue;
-        const ceilingItem = id === 'chandelier';
+        const ceilingItem = id === 'chandelier' || id === 'cn_lantern_hanging';
         furniture.push({ id: uid('obj'), catalogId: id, pos: [x, ceilingItem ? y + f.height - 0.3 : y, z], rotY: rot, scale: 1, buildingId: b.id, floor: f.level });
       }
     }

@@ -23,6 +23,7 @@ const OPENINGS: { id: OpeningKind; label: string; w: number; h: number; sill: nu
   { id: 'door_double', label: 'Double door', w: 2.2, h: 3, sill: 0 }, { id: 'archway', label: 'Archway', w: 2, h: 2.8, sill: 0 },
   { id: 'window_stained', label: 'Stained glass', w: 1.2, h: 2.6, sill: 1.2 }, { id: 'window_arched', label: 'Arched window', w: 1, h: 1.6, sill: 1 },
   { id: 'window_shutter', label: 'Shuttered', w: 1, h: 1.3, sill: 1 }, { id: 'arrow_slit', label: 'Arrow slit', w: 0.3, h: 1.4, sill: 1.2 },
+  { id: 'door_lattice', label: 'Lattice door', w: 1.8, h: 2.8, sill: 0 }, { id: 'window_lattice', label: 'Lattice window', w: 1.5, h: 1.8, sill: 0.9 },
 ];
 const SNAP = 0.25;
 const snap = (v: number) => Math.round(v / SNAP) * SNAP;

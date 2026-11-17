@@ -128,6 +128,56 @@ const DEFS: Record<string, TexDef> = {
       noise(g, 10, 28);
     },
   },
+  // ---- Chinese style ----
+  redlacquer: {
+    size: 3, draw: (g) => {
+      g.fillStyle = '#a3261c'; g.fillRect(0, 0, S, S); noise(g, 12, 40);
+      g.fillStyle = '#6e1712'; g.fillRect(0, 0, 18, S); g.fillRect(S / 2 - 6, 0, 12, S); // posts
+      g.fillStyle = '#d8cfbd'; g.fillRect(0, S - 30, S, 30); // pale stone dado at the base
+      g.fillStyle = '#7d1b14'; g.fillRect(0, S - 34, S, 5);
+    },
+  },
+  greybrick: { size: 1.2, draw: (g) => { blocks(g, '#6f747a', '#9ea2a5', 12, 4, 0.12, 41); noise(g, 10, 42); } },
+  cn_tiles: {
+    // glazed barrel tiles: vertical channels (u across the roof, v down the slope), tinted by roofColor
+    size: 1.2, draw: (g) => {
+      const n = 8, w = S / n;
+      for (let i = 0; i < n; i++) {
+        const grd = g.createLinearGradient(i * w, 0, (i + 1) * w, 0);
+        grd.addColorStop(0, '#6a6a6a'); grd.addColorStop(0.35, '#f2f2f2'); grd.addColorStop(0.7, '#b8b8b8'); grd.addColorStop(1, '#5a5a5a');
+        g.fillStyle = grd; g.fillRect(i * w, 0, w, S);
+      }
+      g.fillStyle = 'rgba(0,0,0,.28)';
+      for (let y = 0; y < 6; y++) for (let i = 0; i < n; i++) g.fillRect(i * w + 2, y * S / 6 + ((i % 2) * S) / 12, w - 4, 3);
+    },
+  },
+  lattice: {
+    // rice-paper window with a red geometric lattice (also glows at night)
+    size: 1, draw: (g) => {
+      g.fillStyle = '#efe3c6'; g.fillRect(0, 0, S, S);
+      g.strokeStyle = '#7a1a12'; g.lineWidth = 7;
+      const k = 8;
+      for (let i = 0; i <= k; i++) { g.beginPath(); g.moveTo(i * S / k, 0); g.lineTo(i * S / k, S); g.stroke(); g.beginPath(); g.moveTo(0, i * S / k); g.lineTo(S, i * S / k); g.stroke(); }
+      g.lineWidth = 4;
+      for (let i = 0; i < k; i += 2) for (let j = 0; j < k; j += 2) { g.strokeRect(i * S / k + S / (k * 2) - 6, j * S / k + S / (k * 2) - 6, S / k + 12, S / k + 12); }
+      g.strokeStyle = '#5a120d'; g.lineWidth = 14; g.strokeRect(0, 0, S, S);
+    },
+  },
+  door_lattice: {
+    size: 2.6, draw: (g) => {
+      g.fillStyle = '#9b2318'; g.fillRect(0, 0, S, S);
+      for (const x0 of [0, S / 2]) {
+        g.fillStyle = '#efe3c6'; g.fillRect(x0 + 14, 14, S / 2 - 28, S * 0.55);
+        g.strokeStyle = '#7a1a12'; g.lineWidth = 4;
+        for (let i = 0; i <= 6; i++) { const x = x0 + 14 + i * (S / 2 - 28) / 6; g.beginPath(); g.moveTo(x, 14); g.lineTo(x, 14 + S * 0.55); g.stroke(); }
+        for (let j = 0; j <= 8; j++) { const y = 14 + j * S * 0.55 / 8; g.beginPath(); g.moveTo(x0 + 14, y); g.lineTo(x0 + S / 2 - 14, y); g.stroke(); }
+        g.fillStyle = '#7a1a12'; g.fillRect(x0 + 20, S * 0.66, S / 2 - 40, S * 0.28);
+        g.fillStyle = '#d4a529'; g.beginPath(); g.arc(x0 + (x0 ? 14 : S / 2 - 14), S * 0.6, 6, 0, Math.PI * 2); g.fill();
+      }
+      g.fillStyle = '#5a120d'; g.fillRect(S / 2 - 3, 0, 6, S);
+    },
+  },
+  squaretile: { size: 1.6, draw: (g) => { blocks(g, '#5f6064', '#3f4043', 4, 4, 0.1, 43); noise(g, 8, 44); } },
 };
 
 const texCache = new Map<string, THREE.CanvasTexture>();
@@ -154,8 +204,8 @@ export function surfaceMaterial(name: string, tint = '#ffffff', opts: { side?: T
   const key = `${name}|${tint}|${opts.side ?? 0}|${opts.emissive ? 1 : 0}`;
   let m = matCache.get(key);
   if (m) return m;
-  m = new THREE.MeshStandardMaterial({ map: texture(name), color: tint, roughness: name === 'glass' || name === 'stained' ? 0.3 : 0.9, side: opts.side ?? THREE.FrontSide });
-  if (opts.emissive) { m.emissive = new THREE.Color(name === 'stained' ? '#ffffff' : '#ffb35a'); m.emissiveMap = texture(name); m.emissiveIntensity = 0; m.userData.nightGlow = true; }
+  m = new THREE.MeshStandardMaterial({ map: texture(name), color: tint, roughness: name === 'glass' || name === 'stained' ? 0.3 : name === 'cn_tiles' ? 0.55 : 0.9, side: opts.side ?? THREE.FrontSide });
+  if (opts.emissive) { m.emissive = new THREE.Color(name === 'stained' || name === 'lattice' ? '#ffffff' : '#ffb35a'); m.emissiveMap = texture(name); m.emissiveIntensity = 0; m.userData.nightGlow = true; }
   matCache.set(key, m);
   return m;
 }
@@ -165,11 +215,11 @@ export function setWindowGlow(night: number) {
   for (const m of matCache.values()) if (m.userData.nightGlow) m.emissiveIntensity = night * 1.4;
 }
 
-export const EXTERIOR_TEX: Record<MaterialKind, string> = { greystone: 'greystone', sandstone: 'sandstone', whitewash: 'whitewash', timber: 'timber', brick: 'brick' };
+export const EXTERIOR_TEX: Record<MaterialKind, string> = { greystone: 'greystone', sandstone: 'sandstone', whitewash: 'whitewash', timber: 'timber', brick: 'brick', redlacquer: 'redlacquer', greybrick: 'greybrick' };
 export const SURFACE_TEX: Record<SurfaceMat, string> = {
-  stone: 'stone', plaster: 'plaster', woodpanel: 'woodpanel', tapestry: 'tapestry', plank: 'plank', flagstone: 'flagstone', rug: 'rug', brick: 'brick', whitewash: 'whitewash',
+  stone: 'stone', plaster: 'plaster', woodpanel: 'woodpanel', tapestry: 'tapestry', plank: 'plank', flagstone: 'flagstone', rug: 'rug', brick: 'brick', whitewash: 'whitewash', redlacquer: 'redlacquer', squaretile: 'squaretile',
 };
 export const SURFACE_LABELS: Record<SurfaceMat, string> = {
-  stone: 'Stone', plaster: 'Plaster', woodpanel: 'Wood panelling', tapestry: 'Tapestry', plank: 'Wood planks', flagstone: 'Flagstone', rug: 'Rug', brick: 'Brick', whitewash: 'Whitewash',
+  stone: 'Stone', plaster: 'Plaster', woodpanel: 'Wood panelling', tapestry: 'Tapestry', plank: 'Wood planks', flagstone: 'Flagstone', rug: 'Rug', brick: 'Brick', whitewash: 'Whitewash', redlacquer: 'Red lacquer', squaretile: 'Square tiles',
 };
-export const MATERIAL_LABELS: Record<MaterialKind, string> = { greystone: 'Grey stone', sandstone: 'Sandstone', whitewash: 'Whitewashed', timber: 'Half-timbered', brick: 'Brick' };
+export const MATERIAL_LABELS: Record<MaterialKind, string> = { greystone: 'Grey stone', sandstone: 'Sandstone', whitewash: 'Whitewashed', timber: 'Half-timbered', brick: 'Brick', redlacquer: 'Red lacquer (Chinese)', greybrick: 'Grey brick (Chinese)' };

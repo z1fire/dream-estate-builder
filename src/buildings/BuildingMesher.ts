@@ -4,6 +4,7 @@ import type { V2 } from '../core/math';
 import type { BuildingDef, FloorDef, Opening, OpeningKind, Stair } from '../core/types';
 import { footprint, levelBase, totalHeight } from './footprint';
 import { EXTERIOR_TEX, SURFACE_TEX, surfaceMaterial } from './materials';
+import { buildChineseBase, buildChineseRoof } from './chineseRoof';
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 const WHITE = C('#ffffff');
@@ -44,7 +45,7 @@ export interface WallSpec {
   outN: THREE.Vector3; // normal of the "outer" face
   outer: GeoBuilder; inner: GeoBuilder; reveal: GeoBuilder;
   openings: Opening[];
-  fills: { door: GeoBuilder; glass: GeoBuilder; stained: GeoBuilder; frame: GeoBuilder };
+  fills: { door: GeoBuilder; glass: GeoBuilder; stained: GeoBuilder; frame: GeoBuilder; lattice: GeoBuilder; cnDoor: GeoBuilder };
   caps?: boolean;
   ends?: boolean;
 }
@@ -125,7 +126,7 @@ function fillOpening(w: WallSpec, kind: OpeningKind, P: (s: number, y: number, s
       const open = along.clone().multiplyScalar(Math.cos(ang)).addScaledVector(inward, Math.sin(ang));
       const far = hp.clone().addScaledVector(open, lw);
       const top = (arched ? spring : sill + oh) - 0.02;
-      const g = w.fills.door;
+      const g = kind === 'door_lattice' ? w.fills.cnDoor : w.fills.door;
       const th = 0.08;
       const off = V(-open.z, 0, open.x).multiplyScalar(th / 2);
       const a0 = hp.clone().add(off), a1 = far.clone().add(off), b0 = hp.clone().sub(off), b1 = far.clone().sub(off);
@@ -137,7 +138,7 @@ function fillOpening(w: WallSpec, kind: OpeningKind, P: (s: number, y: number, s
     return;
   }
   // windows: pane in the middle of the wall
-  const g = kind === 'window_stained' ? w.fills.stained : w.fills.glass;
+  const g = kind === 'window_stained' ? w.fills.stained : kind === 'window_lattice' ? w.fills.lattice : w.fills.glass;
   const s0 = c - hw, s1 = c + hw;
   const top = arched ? spring : sill + oh;
   for (const side of [0.05, -0.05]) {
@@ -304,10 +305,12 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
       glass: B.get('glass', () => surfaceMaterial('glass', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
       stained: B.get('stained', () => surfaceMaterial('stained', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
       frame: B.get('frame', () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), 'fill'),
+      lattice: B.get('lattice', () => surfaceMaterial('lattice', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
+      cnDoor: B.get('cndoor', () => surfaceMaterial('door_lattice', '#ffffff', { side: THREE.DoubleSide }), 'fill'),
     };
     // exterior walls
     const n = center.length;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < (b.extra.open ? 0 : n); i++) {
       const a = center[i], c = center[(i + 1) % n];
       const dx = c[0] - a[0], dz = c[1] - a[1], L = Math.hypot(dx, dz);
       // extend the centre-line by t/2 so corners close on rectangles
@@ -365,6 +368,13 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
       quadFacing(pg, V(a[0], yb, a[1]), V(c[0], yb, c[1]), V(c[0], 0.35, c[1]), V(a[0], 0.35, a[1]), V(dz / L, 0, -dx / L));
       quadFacing(pg, V(a[0], 0.35, a[1]), V(c[0], 0.35, c[1]), V(c[0] * 0.98, 0.35, c[1] * 0.98), V(a[0] * 0.98, 0.35, a[1] * 0.98), V(0, 1, 0));
     }
+    // Chinese terrace + columns
+    if (b.extra.terrace || b.extra.columns || b.extra.open) {
+      const cg = B.get('cnbase', () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.8 }), 'extwall');
+      const tt = B.get('terrace', () => surfaceMaterial('flagstone', '#d8d2c4'), 'extwall');
+      const ts = B.get('terraceside', () => surfaceMaterial('greystone', '#d0cabd'), 'extwall');
+      buildChineseBase(b, cg, tt, ts);
+    }
     const g = levels.get(minLevel) ?? root;
     B.into(g);
   }
@@ -414,6 +424,12 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
       slab(footprint(b, 0.05), [], top + 0.02, 0, fg, null);
       planarUV(fg, from);
     }
+  }
+  if (b.roof === 'eaves') {
+    const tiles = B.get('cntiles', () => surfaceMaterial('cn_tiles', b.roofColor, { side: THREE.DoubleSide }), 'roof');
+    const vc = () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.8 });
+    buildChineseRoof(b, { tiles, soffit: B.get('cnsoffit', vc, 'roof'), ridge: B.get('cnridge', vc, 'roof'), wall: wg,
+      finial: B.get('finial', () => new THREE.MeshStandardMaterial({ color: '#c9a24a', metalness: 0.6, roughness: 0.4 }), 'roof') }, top);
   }
   const roofBase = cren ? top + parapetH * 0.3 : top;
   if (b.roof === 'conical') {
