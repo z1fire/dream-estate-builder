@@ -90,10 +90,9 @@ test('Courtyard Castle demo: the castle of the Hundred Acre painting, light enou
     const app = (window as any).app;
     const b = app.store.doc.buildings.find((x: any) => x.name === 'The Palace — Great Hall');
     app.rig.persp.position.set(b.pos[0] + 2, b.pos[1] + 3, b.pos[2] + 20); app.rig.orbit.target.set(b.pos[0], b.pos[1] + 3, b.pos[2]); app.rig.orbit.update();
-    await new Promise((r) => setTimeout(r, 2500));
-    return { detailed: app.__buildings.isDetailed(b.id), furn: app.store.doc.objects.filter((o: any) => o.buildingId === b.id).length };
+    return { id: b.id, furn: app.store.doc.objects.filter((o: any) => o.buildingId === b.id).length };
   });
-  expect(near.detailed).toBe(true);
+  await page.waitForFunction((id) => (window as any).app.__buildings.isDetailed(id), near.id, { timeout: 30_000 });
   expect(near.furn).toBeGreaterThan(3);
   expect(errors, errors.join('\n')).toEqual([]);
 });

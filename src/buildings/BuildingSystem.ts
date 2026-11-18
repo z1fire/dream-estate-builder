@@ -133,6 +133,7 @@ export class BuildingSystem implements System {
       const m = meshBuilding(b);
       const group = new THREE.Group();
       group.add(m.root, m.anim);
+      m.root.traverse((n) => { n.updateMatrix(); n.matrixAutoUpdate = false; }); // static parts: no per-frame matrix work
       const shell = mergedShell(m);
       let loose: THREE.Group | null = null;
       for (const p of shell) {

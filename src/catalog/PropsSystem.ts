@@ -13,7 +13,7 @@ export class PropsSystem implements System {
   /** free-standing objects (Props layer) and furniture inside buildings (Interiors layer) */
   readonly exterior = new THREE.Group();
   readonly interior = new THREE.Group();
-  private objs = new Map<string, { sig: string; obj: THREE.Object3D; mixer?: THREE.AnimationMixer }>();
+  private objs = new Map<string, { sig: string; obj: THREE.Object3D; mixer?: THREE.AnimationMixer; h: number }>();
   /** interior cutaway filter: return false to hide an object */
   visibility: (o: PlacedObject) => boolean = () => true;
   /** furniture is only drawn while its building is drawn in full detail (near the camera, or cut away) */
@@ -56,13 +56,15 @@ export class PropsSystem implements System {
       if (cur) {
         const parent = o.buildingId ? this.interior : this.exterior;
         if (cur.obj.parent !== parent) parent.add(cur.obj);
-        this.place(cur.obj, o); cur.sig = sig; this.updateLight(o); continue;
+        this.place(cur.obj, o); cur.sig = sig; cur.h = (catalogItem(o.catalogId)?.height ?? 1) * o.scale; this.updateLight(o); continue;
       }
       const item = catalogItem(o.catalogId);
       if (!item) continue;
       const holder = new THREE.Group();
       holder.userData.pick = { kind: 'objects', id: o.id };
-      const entry = { sig, obj: holder as THREE.Object3D, mixer: undefined as THREE.AnimationMixer | undefined };
+      // static: its matrix is only recomputed when it's placed (thousands of props otherwise cost several ms a frame)
+      holder.matrixAutoUpdate = false;
+      const entry = { sig, obj: holder as THREE.Object3D, mixer: undefined as THREE.AnimationMixer | undefined, h: item.height * o.scale };
       this.objs.set(o.id, entry);
       (o.buildingId ? this.interior : this.exterior).add(holder);
       this.place(holder, o);
@@ -71,6 +73,8 @@ export class PropsSystem implements System {
         holder.add(object);
         // small things outdoors (benches, crates, planters) skip the shadow pass: hundreds of draw calls for barely visible shadows
         if (!o.buildingId && item.height < 1) object.traverse((m) => { m.castShadow = false; });
+        if (!animations.length) object.traverse((n) => { n.updateMatrix(); n.matrixAutoUpdate = false; }); // animated ones keep moving bones
+        holder.updateMatrixWorld(true);
         if (animations.length) {
           const mixer = new THREE.AnimationMixer(object);
           const clip = animations.find((a) => /idle/i.test(a.name)) ?? animations[0];
@@ -89,6 +93,8 @@ export class PropsSystem implements System {
     holder.position.copy(pos);
     holder.rotation.set(0, rotY, 0);
     holder.scale.setScalar(o.scale);
+    holder.updateMatrix();
+    holder.updateMatrixWorld(true);
   }
 
   private updateLight(o: PlacedObject) {
@@ -110,19 +116,25 @@ export class PropsSystem implements System {
 
   refreshVisibility() {
     const shown = new Map<string, boolean>();
+    const cam = this.app.rig.camera.position, plan = this.app.rig.mode === 'plan';
     for (const o of this.app.store.doc.objects) {
       const v = this.objs.get(o.id);
       if (!v) continue;
       let near = true;
       if (o.buildingId) { near = shown.get(o.buildingId) ?? this.interiorShown(o.buildingId); shown.set(o.buildingId, near); }
-      v.obj.visible = near && this.visibility(o);
+      // outdoor props fade out by size: crates and benches beyond ~100 m, lanterns and carts beyond ~200 m
+      else if (!plan) near = v.obj.position.distanceTo(cam) < (v.h < 1 ? 100 : v.h < 3.5 ? 200 : 450);
+      // hidden props leave the scene graph entirely: three walks every attached node each frame, visible or not
+      const parent = o.buildingId ? this.interior : this.exterior;
+      if (near && this.visibility(o)) { if (v.obj.parent !== parent) parent.add(v.obj); }
+      else if (v.obj.parent) v.obj.removeFromParent();
     }
   }
 
   private cullT = 0;
 
   update(dt: number) {
-    for (const v of this.objs.values()) if (v.mixer && v.obj.visible) v.mixer.update(dt);
+    for (const v of this.objs.values()) if (v.mixer && v.obj.parent) v.mixer.update(dt);
     // furniture inside buildings is only drawn while you can see in (homes can hold hundreds of pieces)
     this.cullT -= dt;
     if (this.cullT <= 0) { this.cullT = 0.25; this.refreshVisibility(); }
