@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { GeoBuilder, C } from '../core/geom';
 import type { V2 } from '../core/math';
 import type { BuildingDef, FloorDef, Opening, OpeningKind, Stair } from '../core/types';
-import { footprint, levelBase, levelInset, topInset, totalHeight } from './footprint';
-import { EXTERIOR_TEX, SURFACE_TEX, surfaceMaterial } from './materials';
+import { footprint, frontEdge, levelBase, levelInset, topInset, totalHeight } from './footprint';
+import { bannerMaterial, EXTERIOR_TEX, goldMaterial, SURFACE_TEX, surfaceMaterial, vcMaterial } from './materials';
 import { buildChineseBase, buildChineseRoof } from './chineseRoof';
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
@@ -22,7 +22,7 @@ class Buckets {
     for (const { g, mat, role } of this.map.values()) {
       if (!g.vertexCount) continue;
       const mesh = new THREE.Mesh(g.build(), mat());
-      mesh.castShadow = role !== 'glass';
+      mesh.castShadow = role !== 'glass' && role !== 'intwall' && role !== 'floor' && role !== 'ceiling' && role !== 'stairs';
       mesh.receiveShadow = true;
       mesh.userData.role = role;
       group.add(mesh);
@@ -307,7 +307,7 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
       door: B.get('door', () => surfaceMaterial('door_planks'), 'fill'),
       glass: B.get('glass', () => surfaceMaterial('glass', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
       stained: B.get('stained', () => surfaceMaterial('stained', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
-      frame: B.get('frame', () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), 'fill'),
+      frame: B.get('frame', () => vcMaterial(0.9), 'fill'),
       lattice: B.get('lattice', () => surfaceMaterial('lattice', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass'),
       cnDoor: B.get('cndoor', () => surfaceMaterial('door_lattice', '#ffffff', { side: THREE.DoubleSide }), 'fill'),
     };
@@ -342,7 +342,7 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
     const isTop = f.level === sorted[sorted.length - 1].level;
     if (!isTop || b.roof === 'flat' || b.roof === 'none') {
       const cg = B.get(`ceil:${f.ceiling}`, () => surfaceMaterial(f.ceiling === 'beamed' ? 'ceiling_beams' : f.ceiling === 'vaulted' ? 'stone' : 'plaster'), 'ceiling');
-      const beams = B.get('beams', () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), 'ceiling');
+      const beams = B.get('beams', () => vcMaterial(0.9), 'ceiling');
       ceilingFor(f, innerPts, y0 + f.height - SLAB, cg, beams, b);
     }
     // interior walls
@@ -373,7 +373,7 @@ export function meshBuilding(b: BuildingDef): MeshedBuilding {
     }
     // Chinese terrace + columns
     if (b.extra.terrace || b.extra.columns || b.extra.open) {
-      const cg = B.get('cnbase', () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.8 }), 'extwall');
+      const cg = B.get('cnbase', () => vcMaterial(0.8), 'extwall');
       const tt = B.get('terrace', () => surfaceMaterial('flagstone', '#d8d2c4'), 'extwall');
       const ts = B.get('terraceside', () => surfaceMaterial('greystone', '#d0cabd'), 'extwall');
       buildChineseBase(b, cg, tt, ts);
@@ -415,7 +415,7 @@ function buildArcade(b: BuildingDef, B: Buckets, extTex: Parameters<typeof surfa
     buildWall({ a: [x, hd], b: [x, front - 0.3], y0: 0, h: wallH, t: 0.6, outN: V(s, 0, 0), outer: ext, inner: ext, reveal: ext, openings: ops, fills, caps: true, ends: false });
   }
   // flagged walk + plinth
-  const fg = B.get('floor:flagstone', () => surfaceMaterial('flagstone'), 'floor');
+  const fg = B.get('arcfloor', () => surfaceMaterial('flagstone'), 'extwall');
   const from = fg.vertexCount;
   quadFacing(fg, V(-hw, 0.04, hd), V(hw, 0.04, hd), V(hw, 0.04, front + 0.3), V(-hw, 0.04, front + 0.3), V(0, 1, 0));
   planarUV(fg, from);
@@ -481,11 +481,12 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
   }
   if (b.roof === 'eaves') {
     const tiles = B.get('cntiles', () => surfaceMaterial('cn_tiles', b.roofColor, { side: THREE.DoubleSide }), 'roof');
-    const vc = () => new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.8 });
+    const vc = () => vcMaterial(0.8);
     buildChineseRoof(b, { tiles, soffit: B.get('cnsoffit', vc, 'roof'), ridge: B.get('cnridge', vc, 'roof'), wall: wg,
-      finial: B.get('finial', () => new THREE.MeshStandardMaterial({ color: '#c9a24a', metalness: 0.6, roughness: 0.4 }), 'roof') }, top);
+      finial: B.get('finial', goldMaterial, 'roof') }, top);
   }
   const roofBase = cren ? top + parapetH * 0.3 : top;
+  let spireTop = 0;
   if (b.roof === 'conical') {
     const r = (b.shape === 'round' ? b.width / 2 - ti : Math.max(hw, hd)) + (cren ? -0.15 : over);
     const hgt = r * 2.1;
@@ -493,12 +494,14 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
     rg.cyl(0, roofBase, 0, r, 0, hgt, seg, WHITE, false, b.shape === 'round' ? 0 : Math.PI / 4);
     // underside disc
     if (!cren) rg.cyl(0, roofBase - 0.01, 0, r, r * 0.001, 0.0, seg, WHITE, false);
-    const fin = B.get('finial', () => new THREE.MeshStandardMaterial({ color: '#c9a24a', metalness: 0.6, roughness: 0.4 }), 'roof');
+    const fin = B.get('finial', goldMaterial, 'roof');
     fin.cyl(0, roofBase + hgt - 0.1, 0, 0.06, 0.06, 1.2, 6, WHITE);
+    spireTop = roofBase + hgt + 1.1;
     // uv for cone: wrap around (use world xz + height)
     for (let i = 0; i < rg.vertexCount; i++) { rg.uv[i * 2] = Math.atan2(rg.pos[i * 3 + 2], rg.pos[i * 3]) * r; rg.uv[i * 2 + 1] = rg.pos[i * 3 + 1] * 1.2; }
   } else if (b.roof === 'pitched' || b.roof === 'hipped') {
-    const alongX = b.width >= b.depth;
+    // extra.ridge forces the ridge direction: 'z' turns the gable to the front
+    const alongX = b.extra.ridge === 'z' ? false : b.extra.ridge === 'x' ? true : b.width >= b.depth;
     const half = (alongX ? hd : hw) + over, len = (alongX ? hw : hd) + over;
     const hgt = Math.min(half * 1.15, 7);
     const ridgeInset = b.roof === 'hipped' ? half : 0;
@@ -540,6 +543,17 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
       const m = new THREE.Matrix4().setPosition(alongX ? V(cx, y0 + hgt * 0.55, cz * 0.5) : V(cz * 0.5, y0 + hgt * 0.55, cx));
       cg.boxM(m, 0.9, hgt * 1.0 + 0.8, 0.9, WHITE);
     }
+    const nd = Number(b.extra.dormers ?? 0);
+    if (nd > 0 && hgt > 2.4) for (const s of [1, -1]) {
+      if (s === -1 && alongX && b.extra.backToWall) continue;
+      addDormers(B, rg, wg, nd, (u, d, y) => P(u, y, s * (half - d)), alongX ? V(0, 0, s) : V(s, 0, 0),
+        { yEave: y0, tanP: hgt / half, dWall: over, dRidge: half, uMax: (dApex) => (b.roof === 'hipped' ? len - dApex - 0.2 : len - over - 0.4) });
+    }
+    // pinnacles on the gable apexes
+    if (b.extra.pinnacles && b.roof === 'pitched') for (const s of [1, -1]) {
+      const p = P(s * ((alongX ? hw : hd) - 0.2), roofBase - 0.2 + (hgt * (half - over)) / half, 0);
+      pinnacle(wg, p.x, p.y - 0.3, p.z, 0.9);
+    }
   } else if (b.roof === 'lean') {
     // lean-to (mono-pitch): high at the back (local -Z, e.g. against a curtain wall), low over the front.
     // A one-storey building with an arcade carries the same roof out over the arcade.
@@ -574,7 +588,99 @@ function buildRoof(b: BuildingDef, roofG: THREE.Group, _outer: V2[], top: number
       const cg = B.get('chimney', () => surfaceMaterial('greystone'), 'roof');
       cg.box(hw * 0.5, Y(-hd + 1) + 0.4, -hd + 1, 0.9, 2.2, 0.9, 0, WHITE);
     }
+    const nd = Number(b.extra.dormers ?? 0);
+    if (nd > 0) addDormers(B, rg, wg, nd, (u, d, y) => V(u, y, zf - d), V(0, 0, 1), { yEave: Y(zf), tanP: rise / (zLow + hd), dWall: zf - hd, dRidge: zf - zb - 0.3, uMax: () => hw - 0.3 });
   }
+  dressTop(b, B, rg, wg, top, ti, cren ? parapetH * 0.55 : 0, spireTop);
   B.into(roofG);
   void hw;
+}
+
+function triFacing(g: GeoBuilder, a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, want: THREE.Vector3, col = WHITE) {
+  const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a));
+  if (n.dot(want) >= 0) g.tri(a, b, c, col); else g.tri(b, a, c, col);
+}
+
+/**
+ * Gabled dormer windows along one roof slope. map(u, d, y): u runs along the eaves, d is the horizontal distance in from
+ * the eave edge, y is height. The slope rises tanP per metre of d from yEave.
+ */
+function addDormers(B: Buckets, rg: GeoBuilder, wg: GeoBuilder, n: number, map: (u: number, d: number, y: number) => THREE.Vector3, out: THREE.Vector3,
+  o: { yEave: number; tanP: number; dWall: number; dRidge: number; uMax: (dApex: number) => number }) {
+  const glass = B.get('glass', () => surfaceMaterial('glass', '#ffffff', { side: THREE.DoubleSide, emissive: true }), 'glass');
+  const yAt = (d: number) => o.yEave + d * o.tanP;
+  const df = o.dWall + 0.3, yf = yAt(df);
+  const dh = Math.min(1.6, (yAt(o.dRidge) - yf) * 0.45);
+  if (dh < 0.9) return;
+  const hw = 0.8, top = yf + dh, apex = Math.min(top + hw * 0.9, yAt(o.dRidge) - 0.25);
+  const dTop = (top - o.yEave) / o.tanP, dTop2 = (top - 0.1 - o.yEave) / o.tanP, dApex = (apex - o.yEave) / o.tanP;
+  const uMax = o.uMax(dApex) - hw - 0.3;
+  if (uMax < 0) return;
+  const count = Math.max(1, Math.min(n, Math.floor((2 * uMax) / (hw * 2 + 1.2)) + 1));
+  const udir = map(1, 0, 0).sub(map(0, 0, 0)).normalize(), up = V(0, 1, 0);
+  for (let i = 0; i < count; i++) {
+    const uc = count === 1 ? 0 : -uMax + (2 * uMax * i) / (count - 1);
+    quadFacing(wg, map(uc - hw, df, yf - 0.15), map(uc + hw, df, yf - 0.15), map(uc + hw, df, top), map(uc - hw, df, top), out);
+    triFacing(wg, map(uc - hw, df, top), map(uc + hw, df, top), map(uc, df, apex), out);
+    quadFacing(glass, map(uc - 0.48, df - 0.04, yf + 0.18), map(uc + 0.48, df - 0.04, yf + 0.18), map(uc + 0.48, df - 0.04, top - 0.15), map(uc - 0.48, df - 0.04, top - 0.15), out);
+    for (const s of [1, -1]) {
+      triFacing(wg, map(uc + s * hw, df, yf - 0.15), map(uc + s * hw, df, top), map(uc + s * hw, dTop, top), udir.clone().multiplyScalar(s));
+      const e = uc + s * (hw + 0.15);
+      quadFacing(rg, map(e, df - 0.2, top - 0.1), map(uc, df - 0.2, apex), map(uc, dApex, apex), map(e, dTop2, top - 0.1), up.clone().addScaledVector(udir, s));
+    }
+  }
+}
+
+/** A stone pinnacle: square shaft and a pointed cap. */
+function pinnacle(g: GeoBuilder, x: number, y: number, z: number, s = 1) {
+  g.box(x, y + 0.7 * s, z, 0.5 * s, 1.4 * s, 0.5 * s, 0, WHITE);
+  g.cyl(x, y + 1.4 * s, z, 0.38 * s, 0, 1.4 * s, 4, WHITE, false, Math.PI / 4);
+}
+
+/** Tower dressing: corner turrets (bartizans), pinnacles, a pennant on the spire and hanging heraldic banners. */
+function dressTop(b: BuildingDef, B: Buckets, rg: GeoBuilder, wg: GeoBuilder, top: number, ti: number, parapet: number, spireTop: number) {
+  const hw = b.width / 2 - ti, hd = b.depth / 2 - ti;
+  if (b.shape === 'rect' && b.extra.turrets) {
+    const r = Math.max(0.9, Math.min(1.6, Math.min(hw, hd) * 0.32));
+    const fin = B.get('finial', goldMaterial, 'roof');
+    for (const [sx, sz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+      const x = sx * (hw + r * 0.25), z = sz * (hd + r * 0.25);
+      wg.cyl(x, top - 2.6, z, r * 0.3, r, 1.4, 10, WHITE, false); // corbelling
+      wg.cyl(x, top - 1.2, z, r, r, 2.9, 10, WHITE, true);
+      rg.cyl(x, top + 1.7, z, r + 0.18, 0, r * 2.9, 10, WHITE, false);
+      rg.cyl(x, top + 1.69, z, r + 0.18, 0.01, 0, 10, WHITE, false);
+      fin.cyl(x, top + 1.6 + r * 2.9, z, 0.04, 0.04, 0.7, 5, WHITE);
+    }
+  }
+  if (b.shape === 'rect' && b.extra.pinnacles) {
+    const y = top + parapet;
+    for (const [sx, sz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) pinnacle(wg, sx * (hw - 0.25), y, sz * (hd - 0.25), b.extra.turrets ? 0.7 : 1);
+  }
+  if (spireTop > 0 && typeof b.extra.flag === 'string') {
+    const fin = B.get('finial', goldMaterial, 'roof');
+    fin.cyl(0, spireTop - 0.4, 0, 0.045, 0.045, 2.6, 5, WHITE);
+    const fg = B.get('flag:' + b.extra.flag, () => vcMaterial(0.85), 'roof');
+    const col = C(b.extra.flag), y = spireTop + 2.1;
+    const a = V(0.05, y, 0), c = V(0.05, y - 0.9, 0), d = V(2, y - 0.3, 0.12);
+    fg.tri(a, c, d, col); fg.tri(c, a, d, col);
+  }
+  if (typeof b.extra.banner === 'string') {
+    const ring = footprint(b, 0), n = ring.length;
+    const sides = String(b.extra.bannerSides ?? frontEdge(b)).split(',').map(Number).filter((i) => i >= 0 && i < n);
+    const g = B.get('banner:' + b.extra.banner, () => bannerMaterial(String(b.extra.banner)), 'fill');
+    const rod = C('#4a3a2a');
+    for (const i of sides) {
+      const a = ring[i], c = ring[(i + 1) % n];
+      const dx = c[0] - a[0], dz = c[1] - a[1], L = Math.hypot(dx, dz);
+      const nx = dz / L, nz = -dx / L, ux = dx / L, uz = dz / L;
+      const bw = b.shape === 'round' ? Math.min(2.2, b.width * 0.3) : Math.min(2.4, L * 0.42), bh = Math.min(bw * 2.3, top * 0.42);
+      const off = b.shape === 'round' ? 0.18 : 0.08, mx = (a[0] + c[0]) / 2 + nx * off, mz = (a[1] + c[1]) / 2 + nz * off, y1 = top - 0.9;
+      const P = (s: number, v: number) => V(mx + ux * (s - 0.5) * bw, y1 - (1 - v) * bh, mz + uz * (s - 0.5) * bw);
+      const pts: [number, number][] = [[0, 1], [1, 1], [1, 0.14], [0.5, 0], [0, 0.14]];
+      const base = g.vertexCount;
+      for (const [s, v] of pts) { const p = P(s, v); g.pos.push(p.x, p.y, p.z); g.nor.push(nx, 0, nz); g.col.push(1, 1, 1); g.uv.push(s, v); }
+      g.idx.push(base, base + 4, base + 3, base, base + 3, base + 2, base, base + 2, base + 1);
+      wg.beam(P(-0.08, 1).setY(y1 + 0.06), P(1.08, 1).setY(y1 + 0.06), 0.09, 0.09, rod);
+    }
+  }
 }

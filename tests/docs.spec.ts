@@ -60,3 +60,17 @@ test('README screenshots: Hundred Acre Estate', async ({ page }) => {
   await shot(page, 'estate-court', cam(v[3].pos, v[3].target), { photo: true });
   await shot(page, 'estate-ranges', cam(v[2].pos, v[2].target), { photo: true });
 });
+
+test('README screenshots: Courtyard Castle', async ({ page }) => {
+  test.setTimeout(600_000);
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('./?demo=courtyard');
+  await page.waitForFunction(() => (window as any).app?.store.doc.name === 'The Courtyard Castle', null, { timeout: 240_000 });
+  await page.evaluate(() => (window as any).app.setQuality('medium'));
+  const cam = (p: number[], t: number[]) => `app.ui.setView('orbit'); app.rig.persp.position.set(${p}); app.rig.orbit.target.set(${t}); app.rig.orbit.update();`;
+  const v = await page.evaluate(() => (window as any).app.store.doc.viewpoints);
+  await shot(page, 'courtyard-aerial', cam([70, 110, 190], [0, 0, -8]), { photo: true, wait: 7000 });
+  await shot(page, 'courtyard-palace', cam([60, 40, -20], [0, 8, -66]), { photo: true });
+  await shot(page, 'courtyard-gate', cam([30, 16, 128], [0, 9, 68]), { photo: true });
+  await shot(page, 'courtyard-arcade', cam(v[5].pos, v[5].target), { photo: true });
+});

@@ -6,8 +6,6 @@ import type { LightManager } from '../environment/Lights';
 import { catalogItem } from './catalog';
 import { instantiate } from './loader';
 
-/** Interior furniture further than this from the camera is hidden (it's behind walls anyway). */
-const INTERIOR_DRAW_DIST = 90;
 
 /** Renders every PlacedObject (catalog model) in the world or inside buildings. */
 export class PropsSystem implements System {
@@ -18,6 +16,8 @@ export class PropsSystem implements System {
   private objs = new Map<string, { sig: string; obj: THREE.Object3D; mixer?: THREE.AnimationMixer }>();
   /** interior cutaway filter: return false to hide an object */
   visibility: (o: PlacedObject) => boolean = () => true;
+  /** furniture is only drawn while its building is drawn in full detail (near the camera, or cut away) */
+  interiorShown: (buildingId: string) => boolean = () => true;
   private reseatTimer = 0;
 
   constructor(private app: App, private lights: LightManager) {
@@ -69,6 +69,8 @@ export class PropsSystem implements System {
       void instantiate(item.model).then(({ object, animations }) => {
         if (this.objs.get(o.id)?.obj !== holder) return;
         holder.add(object);
+        // small things outdoors (benches, crates, planters) skip the shadow pass: hundreds of draw calls for barely visible shadows
+        if (!o.buildingId && item.height < 1) object.traverse((m) => { m.castShadow = false; });
         if (animations.length) {
           const mixer = new THREE.AnimationMixer(object);
           const clip = animations.find((a) => /idle/i.test(a.name)) ?? animations[0];
@@ -107,10 +109,13 @@ export class PropsSystem implements System {
   }
 
   refreshVisibility() {
-    const cam = this.app.rig.camera.position;
+    const shown = new Map<string, boolean>();
     for (const o of this.app.store.doc.objects) {
       const v = this.objs.get(o.id);
-      if (v) v.obj.visible = this.visibility(o) && (!o.buildingId || v.obj.position.distanceTo(cam) < INTERIOR_DRAW_DIST);
+      if (!v) continue;
+      let near = true;
+      if (o.buildingId) { near = shown.get(o.buildingId) ?? this.interiorShown(o.buildingId); shown.set(o.buildingId, near); }
+      v.obj.visible = near && this.visibility(o);
     }
   }
 
@@ -118,8 +123,8 @@ export class PropsSystem implements System {
 
   update(dt: number) {
     for (const v of this.objs.values()) if (v.mixer && v.obj.visible) v.mixer.update(dt);
-    // furniture inside buildings is only drawn near the camera (homes can hold hundreds of pieces)
+    // furniture inside buildings is only drawn while you can see in (homes can hold hundreds of pieces)
     this.cullT -= dt;
-    if (this.cullT <= 0) { this.cullT = 0.3; this.refreshVisibility(); }
+    if (this.cullT <= 0) { this.cullT = 0.25; this.refreshVisibility(); }
   }
 }

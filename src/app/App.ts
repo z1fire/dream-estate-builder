@@ -182,7 +182,7 @@ export class App {
       if (!o) continue;
       let p = o.userData.pick as { kind: string; id: string } | ((i: number) => { kind: string; id: string } | null);
       if (typeof p === 'function') {
-        const r = p(h.instanceId ?? -1);
+        const r = p((h as { batchId?: number }).batchId ?? h.instanceId ?? -1);
         if (!r) continue;
         p = r;
       }

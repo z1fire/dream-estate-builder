@@ -238,3 +238,37 @@ export const SURFACE_LABELS: Record<SurfaceMat, string> = {
   stone: 'Stone', plaster: 'Plaster', woodpanel: 'Wood panelling', tapestry: 'Tapestry', plank: 'Wood planks', flagstone: 'Flagstone', rug: 'Rug', brick: 'Brick', whitewash: 'Whitewash', redlacquer: 'Red lacquer', squaretile: 'Square tiles', hardwood: 'Hardwood', carpet: 'Carpet', whitetile: 'White tiles', paint: 'Painted plaster',
 };
 export const MATERIAL_LABELS: Record<MaterialKind, string> = { greystone: 'Grey stone', sandstone: 'Sandstone', whitewash: 'Whitewashed', timber: 'Half-timbered', brick: 'Brick', redlacquer: 'Red lacquer (Chinese)', greybrick: 'Grey brick (Chinese)' };
+
+const vcCache = new Map<number, THREE.MeshStandardMaterial>();
+/** Shared vertex-coloured material (one per roughness) so building meshes can be merged by material. */
+export function vcMaterial(roughness = 0.9): THREE.MeshStandardMaterial {
+  let m = vcCache.get(roughness);
+  if (!m) vcCache.set(roughness, (m = new THREE.MeshStandardMaterial({ vertexColors: true, roughness })));
+  return m;
+}
+const LION = 'M38 18C50 8 64 16 61 30L67 44C74 60 71 78 64 90L73 104L81 128L66 128L60 108L53 116L57 130L42 130L44 112C40 100 42 86 46 72L35 66L22 75L19 67L32 56L30 47L15 43L15 34L30 36L31 31L22 29L27 22Z';
+const TAIL = 'M68 96C92 92 94 62 82 50C77 45 85 37 92 45';
+const bannerCache = new Map<string, THREE.MeshStandardMaterial>();
+/** Heraldic hanging banner: a gold rampant lion on the given field colour, gold border (UV 0..1, pointed foot). */
+export function bannerMaterial(color: string): THREE.MeshStandardMaterial {
+  let m = bannerCache.get(color);
+  if (m) return m;
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 256;
+  const g = c.getContext('2d')!;
+  g.fillStyle = color; g.fillRect(0, 0, 128, 256);
+  g.strokeStyle = '#d9b24c'; g.lineWidth = 6;
+  g.beginPath(); g.moveTo(8, 8); g.lineTo(120, 8); g.lineTo(120, 214); g.lineTo(64, 247); g.lineTo(8, 214); g.closePath(); g.stroke();
+  g.save(); g.translate(13, 44); g.scale(1, 1.18);
+  g.fillStyle = '#e2bb52'; g.fill(new Path2D(LION));
+  g.strokeStyle = '#e2bb52'; g.lineWidth = 6; g.lineCap = 'round'; g.stroke(new Path2D(TAIL));
+  g.restore();
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
+  m = new THREE.MeshStandardMaterial({ map: t, side: THREE.DoubleSide, roughness: 0.85 });
+  bannerCache.set(color, m);
+  return m;
+}
+let gold: THREE.MeshStandardMaterial | null = null;
+export function goldMaterial(): THREE.MeshStandardMaterial { return (gold ??= new THREE.MeshStandardMaterial({ color: '#c9a24a', metalness: 0.6, roughness: 0.4 })); }

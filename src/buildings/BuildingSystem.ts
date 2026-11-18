@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import type { App, System } from '../app/App';
 import { meshParts } from '../catalog/loader';
 import { lerp, smoothstep } from '../core/math';
@@ -11,13 +12,50 @@ import { meshBuilding, type MeshedBuilding } from './BuildingMesher';
 import { setWindowGlow } from './materials';
 
 const PAD = 3.5;
+/** Inside this distance from a building (or when it's cut away) its full mesh is drawn: storeys, interior walls, floors, stairs, furniture. */
+const DETAIL_DIST = 16;
+/** Mesh roles that can't be seen from outside a closed building. */
+const INTERIOR_ROLES = new Set(['intwall', 'floor', 'ceiling', 'stairs']);
 
-interface Entry { sig: string; group: THREE.Group; m: MeshedBuilding; b: BuildingDef; parts: Record<string, THREE.Object3D> }
+interface ShellPart { mat: THREE.Material; geo: THREE.BufferGeometry; cast: boolean }
+interface Entry {
+  sig: string; group: THREE.Group; m: MeshedBuilding; b: BuildingDef; parts: Record<string, THREE.Object3D>;
+  /** the outside, merged per material, drawn from the shared batches while the building is far away */
+  shell: ShellPart[]; inst: { mesh: THREE.BatchedMesh; id: number }[];
+  /** shell pieces that can't be batched (unusual attributes), drawn as plain meshes */
+  loose: THREE.Group | null;
+  detailed: boolean; radius: number;
+}
+const BATCH_ATTRS = ['position', 'normal', 'color', 'uv'];
+const batchable = (g: THREE.BufferGeometry) => !!g.index && Object.keys(g.attributes).length === BATCH_ATTRS.length && BATCH_ATTRS.every((a) => g.attributes[a]);
+
+/** The outside of a building merged into one geometry per material (a handful of pieces instead of dozens of meshes). */
+function mergedShell(m: MeshedBuilding): ShellPart[] {
+  m.root.updateMatrixWorld(true);
+  const byMat = new Map<THREE.Material, { geos: THREE.BufferGeometry[]; role: string; cast: boolean }>();
+  m.root.traverse((o) => {
+    const mesh = o as THREE.Mesh;
+    if (!mesh.isMesh || INTERIOR_ROLES.has(mesh.userData.role)) return;
+    const mat = mesh.material as THREE.Material;
+    let e = byMat.get(mat);
+    if (!e) byMat.set(mat, (e = { geos: [], role: mesh.userData.role, cast: mesh.castShadow }));
+    e.geos.push(mesh.geometry.clone().applyMatrix4(mesh.matrixWorld));
+  });
+  const out: ShellPart[] = [];
+  for (const [mat, e] of byMat) {
+    const merged = e.geos.length === 1 ? e.geos[0] : mergeGeometries(e.geos, false);
+    if (merged && e.geos.length > 1) for (const g of e.geos) g.dispose();
+    for (const geo of merged ? [merged] : e.geos) out.push({ mat, geo, cast: e.cast });
+  }
+  return out;
+}
 
 /** Renders all BuildingDefs, flattens terrain under them, animates drawbridges/portcullises/sails, and drives cutaway views. */
 export class BuildingSystem implements System {
   group = new THREE.Group();
   private entries = new Map<string, Entry>();
+  /** far-away building shells: one BatchedMesh (about one draw call) per material for the whole estate */
+  private batches: THREE.BatchedMesh[] = [];
   /** cutaway: building id (or '*' for all) and the highest visible level */
   cutaway: { id: string; level: number; xray: boolean } | null = null;
   onRebuilt: (id: string) => void = () => {};
@@ -84,34 +122,106 @@ export class BuildingSystem implements System {
   sync(force: boolean) {
     const doc = this.app.store.doc;
     const ids = new Set(doc.buildings.map((b) => b.id));
-    for (const [id, e] of this.entries) if (!ids.has(id) || force) { this.dispose(e); this.entries.delete(id); }
+    let remeshed = false;
+    for (const [id, e] of this.entries) if (!ids.has(id) || force) { this.dispose(e); this.entries.delete(id); remeshed = true; }
     for (const b of doc.buildings) {
       const shapeSig = JSON.stringify({ ...b, pos: 0, rotY: 0, extra: { ...b.extra, drawbridgeOpen: 0, portcullisOpen: 0 } });
       const cur = this.entries.get(b.id);
       if (cur && cur.sig === shapeSig) { cur.b = b; this.placeEntry(cur); continue; }
       if (cur) { this.dispose(cur); this.entries.delete(b.id); }
+      remeshed = true;
       const m = meshBuilding(b);
       const group = new THREE.Group();
-      group.add(m.root);
+      group.add(m.root, m.anim);
+      const shell = mergedShell(m);
+      let loose: THREE.Group | null = null;
+      for (const p of shell) {
+        if (batchable(p.geo)) continue;
+        loose ??= new THREE.Group();
+        const mesh = new THREE.Mesh(p.geo, p.mat);
+        mesh.castShadow = p.cast; mesh.receiveShadow = true; mesh.userData.role = 'shell';
+        loose.add(mesh);
+      }
+      if (loose) group.add(loose);
+      if (shell.length) m.root.visible = false;
       group.userData.pick = { kind: 'buildings', id: b.id };
-      const e: Entry = { sig: shapeSig, group, m, b, parts: {} };
+      const e: Entry = { sig: shapeSig, group, m, b, parts: {}, shell: shell.filter((p) => batchable(p.geo)), inst: [], loose, detailed: !shell.length, radius: Math.hypot(b.width, b.shape === 'round' ? b.width : b.depth + Number(b.extra.arcade ?? 0) * 2) / 2 };
       this.entries.set(b.id, e);
       this.group.add(group);
       this.placeEntry(e);
       this.addAnimatedParts(e);
       this.onRebuilt(b.id);
     }
+    if (remeshed) this.rebuildBatches();
     this.applyCutaway();
   }
+
+  /** Pack every building's far shell into one BatchedMesh per material. */
+  private rebuildBatches() {
+    for (const m of this.batches) { this.group.remove(m); m.dispose(); }
+    this.batches = [];
+    const byMat = new Map<THREE.Material, { parts: { e: Entry; p: ShellPart }[]; v: number; i: number }>();
+    for (const e of this.entries.values()) {
+      e.inst = [];
+      for (const p of e.shell) {
+        let L = byMat.get(p.mat);
+        if (!L) byMat.set(p.mat, (L = { parts: [], v: 0, i: 0 }));
+        L.parts.push({ e, p });
+        L.v += p.geo.attributes.position.count;
+        L.i += p.geo.index!.count;
+      }
+    }
+    for (const [mat, L] of byMat) {
+      const mesh = new THREE.BatchedMesh(L.parts.length, L.v, L.i, mat);
+      const owners: string[] = [];
+      mesh.castShadow = L.parts[0].p.cast;
+      mesh.receiveShadow = true;
+      mesh.frustumCulled = false; // instances are culled one by one
+      for (const { e, p } of L.parts) {
+        const id = mesh.addInstance(mesh.addGeometry(p.geo));
+        mesh.setMatrixAt(id, e.group.matrixWorld);
+        mesh.setVisibleAt(id, !e.detailed);
+        owners[id] = e.b.id;
+        e.inst.push({ mesh, id });
+      }
+      mesh.userData.pick = (i: number) => (owners[i] ? { kind: 'buildings', id: owners[i] } : null);
+      mesh.userData.role = 'shell';
+      this.batches.push(mesh);
+      this.group.add(mesh);
+    }
+  }
+
+  /** Full detail (storeys, interiors) near the camera or when cut away; the merged outside shell otherwise. */
+  private applyLod() {
+    const cam = this.app.rig.camera.position, c = this.cutaway;
+    const plan = this.app.rig.mode === 'plan';
+    for (const [id, e] of this.entries) {
+      if (!e.shell.length && !e.loose) continue;
+      const cut = !!c && (c.id === '*' || c.id === id);
+      const d = plan ? Infinity : Math.hypot(cam.x - e.b.pos[0], cam.y - e.b.pos[1], cam.z - e.b.pos[2]) - e.radius;
+      const near = cut || d < DETAIL_DIST;
+      if (near === e.detailed) continue;
+      e.detailed = near;
+      e.m.root.visible = near;
+      if (e.loose) e.loose.visible = !near;
+      for (const i of e.inst) i.mesh.setVisibleAt(i.id, !near);
+    }
+  }
+  /** Is this building drawn in full detail (so its furniture is worth drawing)? */
+  isDetailed(id: string) { return this.entries.get(id)?.detailed ?? true; }
 
   private placeEntry(e: Entry) {
     e.group.position.set(e.b.pos[0], e.b.pos[1], e.b.pos[2]);
     e.group.rotation.set(0, e.b.rotY, 0);
     e.group.updateMatrixWorld(true);
+    for (const i of e.inst) i.mesh.setMatrixAt(i.id, e.group.matrixWorld);
   }
 
   private dispose(e: Entry) {
     this.group.remove(e.group);
+    for (const p of e.shell) p.geo.dispose();
+    for (const i of e.inst) i.mesh.setVisibleAt(i.id, false);
+    e.inst = [];
     e.group.traverse((o) => { const m = o as THREE.Mesh; if (m.isMesh && !(m as THREE.InstancedMesh).isInstancedMesh && m.userData.role) m.geometry.dispose(); });
   }
 
@@ -166,6 +276,8 @@ export class BuildingSystem implements System {
       e.m.roof.visible = !on;
       for (const [lvl, g] of e.m.levels) {
         g.visible = !on || lvl <= c!.level;
+        // interior surfaces only cast shadows when the roof is off
+        g.traverse((o) => { if ((o as THREE.Mesh).isMesh && INTERIOR_ROLES.has(o.userData.role)) o.castShadow = on; });
         // the ceiling of the level you're looking into would block the view from above
         g.traverse((o) => { if ((o as THREE.Mesh).isMesh && o.userData.role === 'ceiling') o.visible = !on || lvl < c!.level; });
         // x-ray: exterior walls of the cut level become see-through
@@ -179,14 +291,18 @@ export class BuildingSystem implements System {
       }
       for (const k of ['sails', 'portcullis']) if (e.parts[k]) e.parts[k].visible = !on || k === 'portcullis';
     }
+    this.applyLod();
   }
 
   /** Mesh groups (for walk collision / cutaway queries). */
   get meshRoots(): THREE.Object3D[] { return [...this.entries.values()].map((e) => e.group); }
   entry(id: string) { return this.entries.get(id); }
 
+  private lodT = 0;
   update(dt: number, t: number) {
     setWindowGlow(this.app.env.night);
+    this.lodT -= dt;
+    if (this.lodT <= 0) { this.lodT = 0.2; this.applyLod(); }
     for (const e of this.entries.values()) {
       const p = e.parts;
       if (p.drawbridge) {

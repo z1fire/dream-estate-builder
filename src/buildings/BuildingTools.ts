@@ -7,7 +7,7 @@ import type { BuildingDef, BuildingKind, CurtainWallDef, FloorDef, MaterialKind,
 import { PolylineDraw } from '../editing/PolylineDraw';
 import { Tool, type ToolEvent } from '../editing/Tool';
 import { button, editSlider, h, hint, section, segmented, select, slider, textInput, toast, toggle } from '../ui/dom';
-import { edgeCount, footprint, levelBase, levelInset, totalHeight } from './footprint';
+import { edgeCount, footprint, frontEdge, levelBase, levelInset, totalHeight } from './footprint';
 import { MATERIAL_LABELS } from './materials';
 import { makeBuilding, PRESETS } from './presets';
 import { GATE_WIDTH, segmentNormal, towerRadius } from './CurtainWallSystem';
@@ -308,6 +308,16 @@ export function registerBuildingInspectors(app: App, water: WaterSystem) {
         b.shape === 'rect' ? editSlider('Arcade (covered walk)', 0, 5, 0.1, Number(b.extra.arcade ?? 0), (v) => edit(b.id, (e) => (e.extra.arcade = v < 1 ? 0 : v), 'Arcade'), (m) => (m >= 1 ? ft(m) : 'none')) : null,
         b.shape === 'rect' ? toggle('Backs onto a wall (blank back, lean-to)', !!b.extra.backToWall, (v) => edit(b.id, (e) => { if (v) backOntoWall(e); else e.extra.backToWall = false; }, 'Back onto wall')) : null,
         b.roof === 'lean' ? editSlider('Lean-to rise', 0.5, 8, 0.1, Number(b.extra.roofRise ?? Math.min(4, b.depth * 0.45)), (v) => edit(b.id, (e) => (e.extra.roofRise = v), 'Roof rise'), ft) : null),
+      b.roof === 'eaves' ? null : section('Roof & tower details',
+        b.roof === 'pitched' || b.roof === 'hipped' || b.roof === 'lean' ? editSlider('Dormer windows (per side)', 0, 10, 1, Number(b.extra.dormers ?? 0), (v) => edit(b.id, (e) => (e.extra.dormers = v), 'Dormers'), (n) => (n ? String(n) : 'none')) : null,
+        (b.roof === 'pitched' || b.roof === 'hipped') && b.shape === 'rect' ? select<string>('Ridge', [['auto', 'Along the longer side'], ['x', 'Side to side'], ['z', 'Front to back (gable to the front)']], String(b.extra.ridge ?? 'auto'),
+          (v) => edit(b.id, (e) => { if (v === 'auto') delete e.extra.ridge; else e.extra.ridge = v; }, 'Ridge direction')) : null,
+        b.shape === 'rect' ? toggle('Corner turrets', !!b.extra.turrets, (v) => edit(b.id, (e) => (e.extra.turrets = v), 'Corner turrets')) : null,
+        b.shape === 'rect' ? toggle('Pinnacles', !!b.extra.pinnacles, (v) => edit(b.id, (e) => (e.extra.pinnacles = v), 'Pinnacles')) : null,
+        b.roof === 'conical' ? toggle('Pennant on the spire', typeof b.extra.flag === 'string', (v) => edit(b.id, (e) => (e.extra.flag = v ? '#a8262b' : false), 'Pennant')) : null,
+        toggle('Heraldic banner', typeof b.extra.banner === 'string', (v) => edit(b.id, (e) => (e.extra.banner = v ? '#8e1b1f' : false), 'Banner')),
+        typeof b.extra.banner === 'string' ? select<string>('Banners on', bannerSideOptions(b), String(b.extra.bannerSides ?? frontEdge(b)), (v) => edit(b.id, (e) => (e.extra.bannerSides = v), 'Banner sides')) : null,
+        typeof b.extra.banner === 'string' ? h('label', { class: 'field' }, h('span', { class: 'lbl' }, 'Banner colour'), colorInput(String(b.extra.banner), (v) => edit(b.id, (e) => (e.extra.banner = v), 'Banner colour'))) : null),
       b.roof === 'eaves' || b.kind.startsWith('cn_') ? section('Chinese details',
         editSlider('Roof hip', 0, 1, 0.05, Number(b.extra.hip ?? 1), (v) => edit(b.id, (e) => (e.extra.hip = v), 'Roof hip')),
         toggle('Double eaves', !!b.extra.doubleEave, (v) => edit(b.id, (e) => (e.extra.doubleEave = v), 'Double eaves')),
@@ -398,4 +408,11 @@ function toggleBasement(b: BuildingDef, on: boolean) {
     stairs: [st ? { ...st, id: uid('st'), from: -1 } : { id: uid('st'), kind: b.shape === 'round' ? 'spiral' : 'straight', pos: [-hw + 0.75, -hd + 0.2], rotY: 0, from: -1, width: 1.1 }],
   });
   void levelBase; void edgeCount;
+}
+
+/** Which faces carry heraldic banners: front, front & back, or all round. */
+function bannerSideOptions(b: BuildingDef): [string, string][] {
+  const n = edgeCount(b), f = frontEdge(b);
+  const all = b.shape === 'round' ? [0, 1, 2, 3].map((k) => (f + (k * n) / 4) % n) : [0, 1, 2, 3];
+  return [[String(f), 'Front'], [`${f},${(f + n / 2) % n}`, 'Front & back'], [all.join(','), 'All four sides']];
 }

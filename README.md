@@ -2,7 +2,7 @@
 
 Design your dream estate in the browser, from bare land to the candlesticks in the keep. Start by shaping the terrain, then dig a moat, raise curtain walls and towers, lay out a village and farms, and add herds of animals. Every building can be entered and furnished floor by floor. Build in European medieval or Chinese style, with palace halls, pagodas, moon gates and lotus ponds. When you're done, walk around it all in first person, or ride a horse.
 
-**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estates:** [Ravensmoor Castle](https://z1fire.github.io/dream-estate-builder/?demo) · [Jade Lotus Garden](https://z1fire.github.io/dream-estate-builder/?demo=chinese) · [The Hundred Acre Estate](https://z1fire.github.io/dream-estate-builder/?demo=estate)
+**Live:** https://z1fire.github.io/dream-estate-builder/ · **Demo estates:** [Ravensmoor Castle](https://z1fire.github.io/dream-estate-builder/?demo) · [Jade Lotus Garden](https://z1fire.github.io/dream-estate-builder/?demo=chinese) · [The Hundred Acre Estate](https://z1fire.github.io/dream-estate-builder/?demo=estate) · [The Courtyard Castle](https://z1fire.github.io/dream-estate-builder/?demo=courtyard) (just the castle, lighter on older computers)
 
 ![Ravensmoor, the demo estate](docs/screenshots/hero.jpg)
 
@@ -14,7 +14,9 @@ Design your dream estate in the browser, from bare land to the candlesticks in t
 | ![Gardens and maze](docs/screenshots/gardens.jpg) | ![Plan view](docs/screenshots/plan.jpg) |
 | ![Chinese palace courtyard](docs/screenshots/chinese-palace.jpg) | ![Lotus pond, zigzag bridge and pavilion](docs/screenshots/chinese-garden.jpg) |
 | ![The Hundred Acre Estate: a courtyard castle lined with ranges](docs/screenshots/estate-aerial.jpg) | ![The ceremonial court, with arcaded galleries](docs/screenshots/estate-court.jpg) |
-| ![Stable and workshop ranges against the curtain wall](docs/screenshots/estate-ranges.jpg) | |
+| ![Stable and workshop ranges against the curtain wall](docs/screenshots/estate-ranges.jpg) | ![The Courtyard Castle from the air](docs/screenshots/courtyard-aerial.jpg) |
+| ![The palace: gabled centre, dormered wings and turreted towers over the private garden](docs/screenshots/courtyard-palace.jpg) | ![The Great Gate, stone bridge and lion banners](docs/screenshots/courtyard-gate.jpg) |
+| ![Inside the cloister arcade](docs/screenshots/courtyard-arcade.jpg) | |
 | ![Temple and pagoda](docs/screenshots/chinese-pagoda.jpg) | ![Teahouse street at dusk](docs/screenshots/chinese-street.jpg) |
 | ![A Chinese family home with Period interiors](docs/screenshots/interior-period.jpg) | |
 
@@ -46,7 +48,9 @@ Everything runs in your browser. Your estates autosave to the browser's IndexedD
 - The gatehouse has a portcullis and a drawbridge that animate open and closed. "Dig a moat around these walls" lengthens the drawbridge to span the moat.
 - **Wall ranges**: buildings set against the inside of the curtain wall, the way real castles line their courtyards. Select a wall and click *Line the wall with ranges* to fill every free stretch between the towers, gates and cross walls with lodgings (furnished homes), stables, barracks, storerooms, workshops or halls, choosing the depth, storeys and arcade. Each range has a blank back wall, a lean-to roof tucked under the wall-walk and an arcaded walk facing the courtyard. Any rectangular building you place next to a wall snaps its back against it.
 - The **Hundred Acre Estate** demo (`?demo=estate`, or Estate ▸ Load Hundred Acre Estate demo) is a palace-style courtyard castle inside a moat: an outer service court with stables and workshops, a ceremonial court with a fountain, parterres and arcaded galleries, and a private garden before the palace, all framed by ranges built into the walls. Around it on 100 acres are a rental village by the lake, a tournament ground, farmland with a windmill, horse and cattle pastures, a pond pavilion and woodland trails.
+- The **Courtyard Castle** demo (`?demo=courtyard`, or Estate ▸ Load Courtyard Castle demo) is just the castle from that painting, built to its courtyard plan and much lighter to run: a ten-sided curtain wall in warm stone, a moat with a grassy berm and a stone bridge with gate piers, a gabled gatehouse between two spired towers, then (1) the outer service court with stables, workshops and stores, (2) the ceremonial court with a round plaza, tiered fountain, hedged parterres, statues, cypresses and lanterns, framed by three-storey ranges with dormers and arcades, and (3) the private garden behind an arcaded cloister and gate pavilion, with lawn quadrants, a reflecting pool and blossom trees before the palace. Side gardens lie between the inner ranges and the outer wall.
 - Any building can have a lean-to roof, an arcade (covered walk) along its front, or a blank back wall (Look section).
+- **Roof & tower details** for any building: dormer windows, the ridge turned front-to-back so the gable faces the front, corner turrets (bartizans) with conical caps, stone pinnacles, a pennant flying from the spire, and hanging heraldic banners (a gold lion on any colour) on the front, front and back, or all four sides.
 - Keep, round and square towers, great hall, chapel, barracks, armory and stables, plus the Kenney castle kit pieces, siege engines, banners, torches and a well.
 - Adjustable height, wall thickness, storeys, roof style (conical, pitched, hipped, flat), roof colour, thatch, battlements, chimneys and materials (grey stone, sandstone, whitewash, half-timber, brick).
 
@@ -197,7 +201,7 @@ tests/          Playwright end-to-end tests        docs/      README screenshots
 - **Water** is a stylised approximation, not a fluid simulation. Streams follow the course you draw and always flow downhill; ponds and moats fill to a flat level.
 - **Animal behaviour** is steering, not full pathfinding: animals stay in their pasture and turn away from obstacles.
 - **Buildings** are generated parametrically (rectangular or round footprints), so free-form building shapes aren't supported. Kenney castle kit pieces can be placed for extra detail.
-- **Performance**: graphics quality is picked automatically. Integrated GPUs default to Medium; switch under Layers ▸ Quality if a large estate feels slow.
+- **Performance**: graphics quality is picked automatically. Integrated GPUs default to Medium; switch under Layers ▸ Quality if a large estate feels slow. To keep big estates smooth, buildings away from the camera are drawn as their merged outsides, batched into about one draw call per material for the whole estate. Interiors, stairs and furniture are drawn only near a building or when it is cut away, and distant crop fields are drawn as simple rows. If the Hundred Acre Estate is too heavy for your computer, try the Courtyard Castle demo.
 
 ## Credits
 

@@ -153,7 +153,7 @@ export class WalkController extends Tool {
       if (!g || !g.visible) continue;
       g.traverse((o) => {
         const m = o as THREE.Mesh;
-        if (!m.isMesh || (m as THREE.SkinnedMesh).isSkinnedMesh || (m as THREE.InstancedMesh).isInstancedMesh || !isVisible(m)) return;
+        if (!m.isMesh || (m as THREE.SkinnedMesh).isSkinnedMesh || (m as THREE.InstancedMesh).isInstancedMesh || (m as THREE.BatchedMesh).isBatchedMesh || !isVisible(m)) return;
         if (m.userData.role === 'glass') return;
         if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
         const s = m.geometry.boundingSphere!.clone().applyMatrix4(m.matrixWorld);

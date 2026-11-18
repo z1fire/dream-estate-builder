@@ -38,7 +38,24 @@ function cropModels(crop: CropKind, stage: number): [string, number, number][] /
   return [];
 }
 
-interface FieldEntry { sig: string; group: THREE.Group }
+/** Colour and height of a crop seen from afar (rows drawn as simple ridges). */
+function cropLook(crop: CropKind, stage: number): [string, number] | null {
+  if (stage === 0 || crop === 'vineyard' || crop === 'orchard') return null;
+  if (stage === 1) return ['#86b452', 0.15];
+  switch (crop) {
+    case 'wheat': return stage === 2 ? ['#6f9a3a', 0.55] : ['#d6b04a', 0.85];
+    case 'barley': return stage === 2 ? ['#7da246', 0.5] : ['#cdb35e', 0.75];
+    case 'corn': return stage === 2 ? ['#5c8a32', 1.0] : ['#6d8f35', 1.9];
+    case 'vegetables': return ['#4f8a38', 0.35];
+    case 'pumpkins': return stage === 2 ? ['#4f8a38', 0.35] : ['#b9772f', 0.45];
+    case 'flowers': return ['#8a6bb8', 0.5];
+  }
+  return null;
+}
+/** Fields further than this from the camera show the cheap ridge mesh instead of thousands of plant models. */
+const FIELD_DETAIL_DIST = 110;
+
+interface FieldEntry { sig: string; group: THREE.Group; f: FieldDef; far: THREE.Mesh | null; detail: THREE.Group | null; box: { minX: number; minZ: number; maxX: number; maxZ: number } }
 
 /** Crop fields (planted in rows, growth stages), vineyards and orchards. */
 export class FarmSystem implements System {
@@ -128,18 +145,67 @@ export class FarmSystem implements System {
       if (cur) this.remove(cur);
       const group = new THREE.Group();
       group.userData.pick = { kind: 'fields', id: f.id };
-      this.entries.set(f.id, { sig, group });
+      const far = this.carpet(f);
+      const e: FieldEntry = { sig, group, f, far, detail: null, box: bboxOf(f.points) };
+      this.entries.set(f.id, e);
       this.group.add(group);
-      void this.build(f, group);
+      if (far) group.add(far);
+      else this.ensureDetail(e);
+    }
+    this.lodT = 0;
+  }
+
+  private ensureDetail(e: FieldEntry) {
+    if (e.detail) return;
+    e.detail = new THREE.Group();
+    e.group.add(e.detail);
+    void this.build(e.f, e.detail, e.group);
+  }
+
+  private lodT = 0;
+  update(dt: number) {
+    this.lodT -= dt;
+    if (this.lodT > 0) return;
+    this.lodT = 0.3;
+    const cam = this.app.rig.camera.position;
+    const plan = this.app.rig.mode === 'plan';
+    for (const e of this.entries.values()) {
+      if (!e.far) continue;
+      const dx = Math.max(e.box.minX - cam.x, 0, cam.x - e.box.maxX), dz = Math.max(e.box.minZ - cam.z, 0, cam.z - e.box.maxZ);
+      const dy = cam.y - this.app.terrain.heightAt((e.box.minX + e.box.maxX) / 2, (e.box.minZ + e.box.maxZ) / 2);
+      const near = !plan && Math.hypot(dx, dz, dy) < FIELD_DETAIL_DIST;
+      if (near) this.ensureDetail(e);
+      e.far.visible = !near;
+      if (e.detail) e.detail.visible = near;
     }
   }
+
+  /** Distant look of a row crop: one low ridge per pair of rows, following the ground in 4 m pieces. */
+  private carpet(f: FieldDef): THREE.Mesh | null {
+    const look = cropLook(f.crop, f.stage);
+    if (!look) return null;
+    const spec = CROPS.find((c) => c.id === f.crop) ?? CROPS[0];
+    const rowSp = Math.max(spec.row, 1.6), L = 4;
+    const g = new GeoBuilder();
+    const col = C(look[0]), alt = C(f.crop === 'pumpkins' && f.stage === 3 ? '#4f8a38' : look[0]);
+    let i = 0;
+    for (const { p, row } of this.rows(f, rowSp, L, 0.8, false)) {
+      const y = this.app.terrain.heightAt(p[0], p[1]);
+      g.box(p[0], y + look[1] / 2 - 0.05, p[1], L + 0.05, look[1] + 0.1, rowSp * 0.62, -f.rowAngle, vary((row + i++) % 3 ? col : alt, i, 0.07));
+    }
+    if (!g.vertexCount) return null;
+    const mesh = new THREE.Mesh(g.build(), this.vineMat);
+    mesh.receiveShadow = true;
+    return mesh;
+  }
+
   private remove(e: FieldEntry) {
     this.group.remove(e.group);
     e.group.traverse((o) => { if ((o as THREE.InstancedMesh).isInstancedMesh) (o as THREE.InstancedMesh).dispose(); else if ((o as THREE.Mesh).isMesh) (o as THREE.Mesh).geometry.dispose(); });
   }
 
   /** Planting positions in rows along rowAngle inside the field polygon. */
-  rows(f: FieldDef, rowSp: number, plantSp: number, inset = 0.6): { p: V2; row: number }[] {
+  rows(f: FieldDef, rowSp: number, plantSp: number, inset = 0.6, jitter = true): { p: V2; row: number }[] {
     const out: { p: V2; row: number }[] = [];
     const c = Math.cos(f.rowAngle), s = Math.sin(f.rowAngle);
     const toUV = ([x, z]: V2): V2 => [x * c + z * s, -x * s + z * c];
@@ -151,7 +217,7 @@ export class FarmSystem implements System {
     let row = 0;
     for (let v = b.minZ + rowSp / 2; v < b.maxZ; v += rowSp, row++) {
       for (let u = b.minX + plantSp / 2; u < b.maxX; u += plantSp) {
-        const [x, z] = fromUV(u + (r() - 0.5) * plantSp * 0.25, v + (r() - 0.5) * rowSp * 0.12);
+        const [x, z] = jitter ? fromUV(u + (r() - 0.5) * plantSp * 0.25, v + (r() - 0.5) * rowSp * 0.12) : fromUV(u, v);
         if (!pointInPolygon(x, z, f.points) || idx.nearest(x, z)) continue;
         out.push({ p: [x, z], row });
         if (out.length > 60000) return out;
@@ -160,7 +226,7 @@ export class FarmSystem implements System {
     return out;
   }
 
-  private async build(f: FieldDef, group: THREE.Group) {
+  private async build(f: FieldDef, group: THREE.Group, owner: THREE.Group) {
     const spec = CROPS.find((c) => c.id === f.crop) ?? CROPS[0];
     if (f.crop === 'vineyard') { group.add(this.vineyard(f)); return; }
     const models = cropModels(f.crop, f.stage);
@@ -185,7 +251,7 @@ export class FarmSystem implements System {
         const sub = f.crop === 'orchard' ? list.filter((_, i) => i % 3 === mi) : list;
         if (!sub.length) continue;
         const parts = await this.load(modelIds[mi]);
-        if (!this.entries.has(f.id) || this.entries.get(f.id)!.group !== group) return;
+        if (!this.entries.has(f.id) || this.entries.get(f.id)!.group !== owner) return;
         for (const part of parts) {
           const im = new THREE.InstancedMesh(part.geometry, part.material, sub.length);
           sub.forEach((it, i) => {

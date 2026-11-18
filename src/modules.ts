@@ -78,6 +78,7 @@ export function registerModules(app: App): ModuleHooks & { systems: Systems } {
 
   // --- Phase 4: castle & buildings ---
   const buildings = app.addSystem(new BuildingSystem(app), 'buildings') as BuildingSystem;
+  props.interiorShown = (id) => buildings.isDetailed(id);
   const walls = app.addSystem(new CurtainWallSystem(app), 'buildings') as CurtainWallSystem;
   app.registerTool(new CurtainTool(app));
   for (const g of ['castle', 'village', 'farm', 'chinese'] as const) app.registerTool(new BuildingTool(app, g));
